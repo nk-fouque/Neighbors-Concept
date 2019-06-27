@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+/**
+ * @author francesco.bariatti@irisa.fr
+ */
+
 public class SingletonStopwatchCollection {
     private static Map<Object, Stopwatch> stopwatches = new HashMap<>();
 

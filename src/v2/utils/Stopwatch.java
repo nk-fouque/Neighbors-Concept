@@ -1,5 +1,9 @@
 package v2.utils;
 
+/**
+ * @author francesco.bariatti@irisa.fr
+ */
+
 public class Stopwatch {
     private long startTime = 0;
     private long stopTime = 0;

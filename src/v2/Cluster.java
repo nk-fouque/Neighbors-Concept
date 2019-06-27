@@ -39,35 +39,50 @@ public class Cluster implements Comparable<Cluster> {
     private List<Element>
             removedQueryElements;
 
+    /**
+     * The head of the query */
     public List<Var> getProj() {
         return proj;
     }
 
+    /**
+     * The body of the relaxed Query */
     public List<Element> getRelaxQueryElements() {
         return relaxQueryElements;
     }
 
+    /**
+     * The relaxation distance of this cluster, expressed as the extensional distance */
     public int getRelaxDistance() {
         return relaxDistance;
     }
 
+    /**
+     * The query elements that have yet to be tested in this cluster */
     public List<Element> getAvailableQueryElements() {
         return availableQueryElements;
     }
 
+    /**
+     * The Match-set containing all the answers to the relaxed queries */
     public Table getMapping() {
         return mapping;
     }
 
+    /**
+     * The list containing all answers held by this cluster i.e. not in any cluster with a lower relaxation distance */
     public Table getAnswers() {
         return answers;
     }
 
+    /**
+     * Query elements that have been tested and thrown away/relaxed, to avoid putting them twice */
     public List<Element> getRemovedQueryElements() {
         return removedQueryElements;
     }
 
-    /** Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph */
+    /**
+     * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph */
     public Cluster(Query qry, Model graph){
         this.proj = qry.getProjectVars();
         this.relaxQueryElements = new ArrayList<>();
@@ -100,6 +115,8 @@ public class Cluster implements Comparable<Cluster> {
         this.connectedVars = qry.getProjectVars();
     }
 
+    /**
+     * Creates a cluster with the same values as an other but different Mapping ans Answers */
     public Cluster(Cluster c, Table Me, Table Ae){
         this.proj = new ArrayList<>(c.getProj());
         this.relaxQueryElements=new ArrayList<>();
@@ -122,7 +139,8 @@ public class Cluster implements Comparable<Cluster> {
         return (getRelaxDistance()-other.getRelaxDistance());
     }
 
-    /** Substract an element from the available query elements to mark it as used and adds it to the elements distinctive of this Cluster's neighbors
+    /**
+     * Substract an element from the available query elements to mark it as used and adds it to the elements distinctive of this Cluster's neighbors
      * @param element The Element to be moved
      * @param vars The Jena Variables mentioned to the element
      */
@@ -136,6 +154,9 @@ public class Cluster implements Comparable<Cluster> {
         }
     }
 
+    /**
+     * @param vars A list of Variables
+     * @return true if this cluster is connected to an element mentioning these variables */
     public boolean connected(List<Var> vars){
         boolean connect=false;
         for (Var v : vars){
@@ -147,15 +168,16 @@ public class Cluster implements Comparable<Cluster> {
         return connect;
     }
 
-    /** Substracts an element from the available query elements to mark it as used and increases the relax distance of this Cluster by one
+    /**
+     * Substracts an element from the available query elements to mark it as used and increases the relax distance of this Cluster by one
      * @param element The element to relax
-     * @throws Exception
+     * @throws PartitionException
      */
     public void relax(Element element, CollectionsModel graph, Map<String,Var> keys) throws PartitionException {
         SingletonStopwatchCollection.resume("relax");
         boolean removed = availableQueryElements.remove(element);
         if (!removed) {
-            throw new PartitionException("Could not relax :" + element.toString());
+            throw new PartitionException("Could not relax " + element.toString()+" : Element not found when trying to remove");
         } else {
             List<Element> list = new ArrayList<>();
             if (element instanceof ElementFilter){
@@ -181,20 +203,31 @@ public class Cluster implements Comparable<Cluster> {
         SingletonStopwatchCollection.stop("relax");
     }
 
+    /**
+     * @return true if this cluster has nothing in its answers */
     boolean noAnswers(){
         return (this.getAnswers().size()==0);
     }
 
+    /**
+     * @return The string for the relaxed Query corresponding to this Cluster
+     */
     public String queryString(){
         return ElementUtils.getSelectStringFrom(this.proj,relaxQueryElements);
     }
 
+    /**
+     * @return the mapping as a string formatted by Jena
+     */
     public String mappingString(){
         ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
         ResultSetFormatter.out(baos1,getMapping().toResultSet());
         return baos1.toString();
     }
 
+    /**
+     * @return the answers as a string formatted by Jena
+     */
     public String answersString(){
         ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
         ResultSetFormatter.out(baos2, getAnswers().toResultSet());
@@ -216,6 +249,8 @@ public class Cluster implements Comparable<Cluster> {
         return res;
     }
 
+    /**
+     * @return This cluster's answers as a Java List */
     public List<Node> getAnswersList(){
         Iterator<Binding> iter = answers.rows();
         List<Node> res = new ArrayList<>();
