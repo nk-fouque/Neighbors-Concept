@@ -1,7 +1,12 @@
-package v2.utils;
+package implementation.utils;
 
 import org.apache.jena.graph.Node;
-import org.apache.jena.query.*;
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.impl.ResourceImpl;
@@ -19,21 +24,31 @@ import org.apache.jena.sparql.syntax.ElementFilter;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 public class TableUtils {
     private static Logger logger = Logger.getLogger(TableUtils.class);
 
     /**
-     * @param left
-     * @param right
-     * @return
+     * Uses Jena's iterator join to join two tables
      */
     public static TableN simpleJoin(Table left, Table right) {
 //        System.out.println("Joining : \n"+left+" and \n"+right);
         return new TableN(QueryIterHashJoin.create(left.iterator(null), right.iterator(null), null));
     }
 
+    /**
+     *
+     * @param vars
+     * @param element
+     * @param model
+     * @param mapping
+     * @return
+     */
     public static Table ans(List<Var> vars, Element element, CollectionsModel model, Table mapping) {
         logger.debug("answering : " + element);
         List<Binding> solutionsList = new ArrayList<>();

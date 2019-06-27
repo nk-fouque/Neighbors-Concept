@@ -1,4 +1,4 @@
-package v2.gui.controller;
+package implementation.gui.controller;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -20,9 +20,9 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.sparql.core.Var;
-import v2.Cluster;
-import v2.Partition;
-import v2.gui.NeighborsInterface;
+import implementation.Cluster;
+import implementation.Partition;
+import implementation.gui.NeighborsInterface;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

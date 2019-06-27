@@ -1,13 +1,8 @@
-package v2.utils;
+package implementation.utils;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDFS;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package v2;
+package implementation;
 
 import org.apache.jena.query.Query;
 import org.apache.jena.rdf.model.Model;
@@ -7,9 +7,12 @@ import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import v2.utils.*;
+import implementation.utils.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 public class Partition {
     private static Logger logger = Logger.getLogger(Partition.class);
@@ -17,13 +20,16 @@ public class Partition {
      * Jena Model containing the RDF Graph in which the search must be done
      */
     private CollectionsModel graph;
+
     private Model saturatedGraph;
     /**
      * List of clusters that are still partitionable
      */
     private PriorityQueue<Cluster> clusters;
+
     /**
-     * List of clusters that are not partitionable any further and contain at least one neighbor
+     * List of clusters that are not partitionable any further and contain at least one answer
+     * It's when a cluster is here that it actually represents the actual 'Neighbor concept'
      */
     private List<Cluster> neighbors;
 
@@ -58,8 +64,7 @@ public class Partition {
 
     /**
      * Applies one iteration of the Partition algorithm
-     *
-     * @return false if the algorithm is done, true otherwise
+     * @return false if the partitioning is over, true if it can still be iterated
      */
     public boolean iterate() throws PartitionException {
         SingletonStopwatchCollection.resume("iterate");
@@ -84,7 +89,6 @@ public class Partition {
             List<Element> list = new ArrayList<>(c.getRelaxQueryElements());
             list.add(e);
 
-//            Table ansE = TableUtils.ans(varE, list, saturatedGraph);
 
             SingletonStopwatchCollection.resume("newans");
             Table ansE = TableUtils.ans(varE, e, graph, c.getMapping());
@@ -152,7 +156,6 @@ public class Partition {
 
     /**
      * Applies the Partition algorithm to the end
-     *
      * @return true if the Algorithm went fine, false if something went wrong
      */
     public boolean partitionAlgorithm() {
@@ -183,10 +186,10 @@ public class Partition {
     }
 
     /**
-     * @param uri
-     * @param graph
-     * @param keys
-     * @return
+     * Creates a String for the query representing the node we are searching the neighbors of
+     * If a Query is created from this string and called on the same graph, it should result in the original node
+     * @param uri The uri of the element to be represented
+     * @param graph The graph to represent it in
      */
     public static String initialQueryString(String uri, Model graph, Map<String, Var> keys) {
         List<Var> x = new ArrayList<>();

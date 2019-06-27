@@ -1,4 +1,4 @@
-package v2;
+package implementation;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
@@ -19,7 +19,7 @@ import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import v2.utils.*;
+import implementation.utils.*;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;

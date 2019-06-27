@@ -8,7 +8,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import v2.Cluster;
+import implementation.Cluster;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -14,7 +14,7 @@
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
           prefWidth="900.0"
           fx:id="pane" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="v2.gui.controller.NeighborsController" stylesheets="/v2/gui/view/css/application.css" >
+          fx:controller="implementation.gui.controller.NeighborsController" stylesheets="/implementation/gui/view/css/application.css" >
     <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="SOMETIMES">
         <top>
             <ToolBar>

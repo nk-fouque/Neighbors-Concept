@@ -1,4 +1,4 @@
-package v2.gui;
+package implementation.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +16,9 @@ public class NeighborsInterface extends Application {
     public static void main(String[] args) {
         BasicConfigurator.configure();
         Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
-        Logger.getLogger("v2.Partition").setLevel(Level.INFO);
-        Logger.getLogger("v2.Cluster").setLevel(Level.INFO);
-        Logger.getLogger("v2.utils").setLevel(Level.OFF);
+        Logger.getLogger("implementation.Partition").setLevel(Level.INFO);
+        Logger.getLogger("implementation.Cluster").setLevel(Level.INFO);
+        Logger.getLogger("implementation.utils").setLevel(Level.OFF);
         launch(args);
     }
 

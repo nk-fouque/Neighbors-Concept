@@ -1,4 +1,4 @@
-package v2;
+package implementation;
 
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
@@ -8,7 +8,7 @@ import org.apache.jena.sparql.core.Var;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import v2.utils.SingletonStopwatchCollection;
+import implementation.utils.SingletonStopwatchCollection;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,9 +22,9 @@ public class Main {
         // Logger setup
         BasicConfigurator.configure();
         Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
-        Logger.getLogger("v2.Partition").setLevel(Level.DEBUG);
-        Logger.getLogger("v2.Cluster").setLevel(Level.DEBUG);
-        Logger.getLogger("v2.utils").setLevel(Level.OFF);
+        Logger.getLogger("implementation.Partition").setLevel(Level.DEBUG);
+        Logger.getLogger("implementation.Cluster").setLevel(Level.DEBUG);
+        Logger.getLogger("implementation.utils").setLevel(Level.OFF);
 
         // Loading Model from file
         String filename = "/udd/nfouque/Documents/default_mondial.nt";
