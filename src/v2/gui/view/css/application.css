@@ -1,0 +1,24 @@
+.background{
+    -fx-background-color: #ff00d2,#11ff66,#2244dd;
+    -fx-fill: #ff2222;
+}
+.tool-bar {
+    -fx-background-color: #484848;
+}
+.sparklis-blue{
+    -fx-text-fill: #a5ecff;
+}
+.button{
+    -fx-background-color: #a5ecff;
+    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.7) , 20,0,0,0 );
+    -fx-text-fill: #484848;
+}
+.choice-box{
+    -fx-background-color: #a5ecff;
+    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.7) , 20,0,0,0 );
+    -fx-text-fill: #484848;
+}
+.text-id{
+    -fx-background-color: #ff0000;
+    -fx-fill: #121245;
+}

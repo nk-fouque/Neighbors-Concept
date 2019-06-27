@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.layout.FlowPane?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+          prefWidth="900.0"
+          fx:id="pane" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="v2.gui.controller.NeighborsController" stylesheets="/v2/gui/view/css/application.css" >
+    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="SOMETIMES">
+        <top>
+            <ToolBar>
+                <Button text="Find" fx:id="fileFindButton" />
+                <Label text="RDF File path :" styleClass="sparklis-blue"/>
+                <TextField fx:id="filenameField" />
+                <ChoiceBox fx:id="format" />
+                <Button fx:id="modelLoadButton" />
+            </ToolBar>
+        </top>
+        <center>
+            <ScrollPane styleClass="background">
+                    <Text fx:id="modelText"/>
+            </ScrollPane>
+        </center>
+    </BorderPane>
+    <BorderPane fx:id="partitionResults" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="NEVER" GridPane.vgrow="ALWAYS">
+        <top>
+            <ToolBar>
+                <TextField fx:id="filterSubjectsField"/>
+                <Button text="Filter" fx:id="filterSubjectsButton"/>
+                <ChoiceBox fx:id="subjects"/>
+                <Button text="Search Neighbors" fx:id="partitionButton"/>
+            </ToolBar>
+        </top>
+        <center>
+            <ScrollPane>
+                <Text fx:id="partitionText"/>
+                <Accordion fx:id="partitionAccordion"/>
+            </ScrollPane>
+        </center>
+    </BorderPane>
+
+</GridPane>
