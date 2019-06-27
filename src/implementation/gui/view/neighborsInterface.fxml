@@ -18,7 +18,7 @@
     <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="SOMETIMES">
         <top>
             <ToolBar>
-                <Button text="Find" fx:id="fileFindButton" />
+                <Button text="Browse" fx:id="fileFindButton" />
                 <Label text="RDF File path :" styleClass="sparklis-blue"/>
                 <TextField fx:id="filenameField" />
                 <ChoiceBox fx:id="format" />

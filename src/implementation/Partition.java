@@ -129,12 +129,6 @@ public class Partition {
 //            if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) logger.debug(clusters);
             SingletonStopwatchCollection.stop("reste");
             SingletonStopwatchCollection.stop("iterate");
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("extjoin"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("relax"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
             return true;
         } else {
             if (c.getAvailableQueryElements().size() != 0) {
@@ -144,12 +138,6 @@ public class Partition {
                 neighbors.add(c);
             }
             SingletonStopwatchCollection.stop("iterate");
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("extjoin"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("relax"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
-            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
             return clusters.size() != 0;
         }
     }

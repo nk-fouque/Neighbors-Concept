@@ -15,6 +15,7 @@ in **Jena** A Java library for Semantic Web
 ## Current Version
 ### Content
 * Classes `Partition` and `Cluster` for the partitioning Algorithm
+* Class `Main` performing the algorithm
 ##### `utils` package
 * Classes `ListUtils`, `ElementUtils`, `TableUtils` containing useful static functions 
 respectively for `java.util.List`, `org.apache.jena.sparql.syntax.Element` and `org.apache.jena.sparql.algebra.Table`
@@ -33,3 +34,21 @@ notably in Hashmaps, very useful for their computational speed to avoid using AR
     * `NeighborsController ` : JavaFX controller for the interface
 ### Notes
 * Still some *TODO* flags for noticed discrepancies between the implementation's behavior and its supposed perfect behavior
+## User Documentation
+#### Main Class
+* Every part of the main is explained in comments in the code
+* The lines you might want to change are : 
+  * The one setting up the String `filename` which is the absolute path of the file containing the RDF data
+  * In the one calling `read` change the format to the format of your file (see Jena Documentation for supported formats) 
+  * The one setting up the String `uriTarget` which is the uri of the node you want to find the neighbors of
+  * The few ones at the beginning, defining the log4j logging levels
+  
+#### GUI
+* Execute `implementation.gui.NeighborsInterface.main()`  
+* Find your RDF File
+  * Click on the *Browse* button and find your RDF file in the file explorer      
+  * **or** directly type the absolute path of the file on your system in the text field next to the button  
+* Select the right format for your file
+* Click on *Load RDF File*
+* In the choice box that appears on the right, select the uri of the node you want to find the neighbors of
+  * If there are too many possible nodes, you can narrow it down by typing part of the uri you want in the text field next to the *Filter* Button
