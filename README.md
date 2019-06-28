@@ -1,5 +1,6 @@
-#Neighbors concept algorithm
-##Project
+#Neighbors concept algorithm  
+
+##Project  
 Implement the algorithms described in **Answers Partitioning and Lazy Joins for Efficient QueryRelaxation and Application to Similarity Search** by *Sébastien Ferré*
 in **Jena** A Java library for Semantic Web
 ###Objectives
@@ -32,8 +33,17 @@ notably in Hashmaps, very useful for their computational speed to avoid using AR
     * `css` : All the Stylesheets for the interface
   * `controller` 
     * `NeighborsController ` : JavaFX controller for the interface
+#### Some explanations
+##### 'keys' map
+
+#####
+
 ### Notes
 * Still some *TODO* flags for noticed discrepancies between the implementation's behavior and its supposed perfect behavior
+### Results
+* Works perfectly with any item of royal
+* Works with mondial when limiting one object per predicate per subject in 160s
+  * The only remaining problem factor is the size of the dataset which makes table joins very difficult
 ## User Documentation
 #### Main Class
 * Every part of the main is explained in comments in the code

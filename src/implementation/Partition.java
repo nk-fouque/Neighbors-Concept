@@ -43,7 +43,7 @@ public class Partition {
      */
     public Partition(Query q, Model md, Model mdInf, Map<String, Var> keycodes) {
         graph = new CollectionsModel(md, mdInf);
-        graph.downSizing();
+//        graph.downSizing();
         saturatedGraph = mdInf;
         clusters = new PriorityQueue<>();
         clusters.add(new Cluster(q, md));
@@ -65,6 +65,7 @@ public class Partition {
 
     /**
      * Applies one iteration of the Partition algorithm
+     *
      * @return false if the partitioning is over, true if it can still be iterated
      */
     public boolean iterate() throws PartitionException {
@@ -126,10 +127,16 @@ public class Partition {
             }
 //            else logger.debug("CeOpp eliminated :"+CeOpp); //TODO Decide whether this is relevant
 
-            logger.info(clusters.size() + ":" + neighbors.size()+" - "+c.getRelaxDistance()+c.getAvailableQueryElements().size());
+            logger.info(clusters.size() + ":" + neighbors.size() + " - " + c.getRelaxDistance());
 //            if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) logger.debug(clusters);
             SingletonStopwatchCollection.stop("reste");
             SingletonStopwatchCollection.stop("iterate");
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("extjoin"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("relax"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
             return true;
         } else {
             if (c.getAvailableQueryElements().size() != 0) {
@@ -139,12 +146,19 @@ public class Partition {
                 neighbors.add(c);
             }
             SingletonStopwatchCollection.stop("iterate");
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("extjoin"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("relax"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
+            System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
             return clusters.size() != 0;
         }
     }
 
     /**
      * Applies the Partition algorithm to the end
+     *
      * @return true if the Algorithm went fine, false if something went wrong
      */
     public boolean partitionAlgorithm() {
@@ -177,7 +191,8 @@ public class Partition {
     /**
      * Creates a String for the query representing the node we are searching the neighbors of
      * If a Query is created from this string and called on the same graph, it should result in the original node
-     * @param uri The uri of the element to be represented
+     *
+     * @param uri   The uri of the element to be represented
      * @param graph The graph to represent it in
      */
     public static String initialQueryString(String uri, Model graph, Map<String, Var> keys) {
