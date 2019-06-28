@@ -22,8 +22,8 @@ public class Main {
         // Logger setup
         BasicConfigurator.configure();
         Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
-        Logger.getLogger("implementation.Partition").setLevel(Level.DEBUG);
-        Logger.getLogger("implementation.Cluster").setLevel(Level.DEBUG);
+        Logger.getLogger("implementation.Partition").setLevel(Level.INFO);
+        Logger.getLogger("implementation.Cluster").setLevel(Level.INFO);
         Logger.getLogger("implementation.utils").setLevel(Level.OFF);
 
         // Loading Model from file
@@ -59,6 +59,7 @@ public class Main {
         boolean algoRun = p.partitionAlgorithm();
         if (algoRun) System.out.println(p.toString());
         else System.out.println("Something went Wrong with the partition");
+
 
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));

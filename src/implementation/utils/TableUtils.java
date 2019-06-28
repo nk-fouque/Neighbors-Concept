@@ -86,14 +86,19 @@ public class TableUtils {
                         logger.debug("object connected");
                         Iterator<Binding> iter = mapping.rows();
                         iter.forEachRemaining((b) -> {
-                            RDFNode bindSubject = new ResourceImpl(b.get(var).getURI());
-                            RDFNode bindObject = new ResourceImpl(b.get(objVar).getURI());
-                            if (model.predicates.get(predicate.toString()).get(bindSubject).contains(bindObject)) {
-                                res.addBinding(b);
-                                logger.debug("matched :" + b);
-                            } else {
-                                logger.debug("did not match : " + b);
-                            }
+                            if (b.get(var).isURI()&&b.get(objVar).isURI()) {
+                                RDFNode bindSubject = new ResourceImpl(b.get(var).getURI());
+                                RDFNode bindObject = new ResourceImpl(b.get(objVar).getURI());
+                                if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
+                                    logger.debug("subject in this predicate");
+                                    if (model.predicates.get(predicate.toString()).get(bindSubject).contains(bindObject)) {
+                                        res.addBinding(b);
+                                        logger.debug("matched :" + b);
+                                    } else {
+                                        logger.debug("did not match : " + b);
+                                    }
+                                } else logger.debug("not in this predicate");
+                            } else logger.debug("not uri");
                         });
                     } else { // If the subject is the only connected variable
                         logger.debug("object disconnected");

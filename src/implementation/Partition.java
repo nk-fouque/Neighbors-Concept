@@ -43,6 +43,7 @@ public class Partition {
      */
     public Partition(Query q, Model md, Model mdInf, Map<String, Var> keycodes) {
         graph = new CollectionsModel(md, mdInf);
+        graph.downSizing();
         saturatedGraph = mdInf;
         clusters = new PriorityQueue<>();
         clusters.add(new Cluster(q, md));
@@ -125,7 +126,7 @@ public class Partition {
             }
 //            else logger.debug("CeOpp eliminated :"+CeOpp); //TODO Decide whether this is relevant
 
-            logger.info(clusters.size() + ":" + neighbors.size());
+            logger.info(clusters.size() + ":" + neighbors.size()+" - "+c.getRelaxDistance()+c.getAvailableQueryElements().size());
 //            if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) logger.debug(clusters);
             SingletonStopwatchCollection.stop("reste");
             SingletonStopwatchCollection.stop("iterate");
