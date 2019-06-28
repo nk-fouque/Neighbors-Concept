@@ -26,18 +26,18 @@ public class Main {
         Logger.getLogger("implementation.utils").setLevel(Level.OFF);
 
         // Loading Model from file
-//        String filename = "/udd/nfouque/Documents/default_mondial.nt";
-        String filename = "/udd/nfouque/Documents/royal.ttl";
+        String filename = "/udd/nfouque/Documents/default_mondial.nt";
+//        String filename = "/udd/nfouque/Documents/royal.ttl";
         Model md = ModelFactory.createDefaultModel();
-        md.read(new FileInputStream(filename), null, "TTL");
+        md.read(new FileInputStream(filename), null, "NT");
 //        md.write(System.out,"TURTLE");
 
         Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md);
 //        saturated.write(System.out, "TURTLE");
 
         // Choose node and describe it
-//        String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
-        String uriTarget = "http://example.org/royal/Charlotte";
+        String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
+//        String uriTarget = "http://example.org/royal/Charlotte";
         Map<String, Var> keys = new HashMap<>();
         String QueryString = Partition.initialQueryString(uriTarget, md, keys);
         System.out.println(QueryString);
@@ -67,7 +67,7 @@ public class Main {
 
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("extjoin"));
+//        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("extjoin"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("relax"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));

@@ -116,7 +116,7 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * Creates a cluster with the same values as an other but different Mapping ans Answers */
+     * Creates a cluster with the same values as an other but different Mapping ext Answers */
     public Cluster(Cluster c, Table Me, Table Ae){
         this.proj = new ArrayList<>(c.getProj());
         this.relaxQueryElements=new ArrayList<>();

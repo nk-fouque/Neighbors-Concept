@@ -42,14 +42,15 @@ public class TableUtils {
     }
 
     /**
-     *
-     * @param vars
-     * @param element
-     * @param model
-     * @param mapping
+     * Applies ext(M,e,G)
+     * if e is a filter, ext(M,e,G) is just a selection on M where the filter is satisfied
+     * if e is a triple pattern, ext(M,e,G) := [ M (join) ans(var(e) <-- {e},G) ]
+     * @param mapping The Table representing the mapping M
+     * @param element The Element e
+     * @param model The CollectionsModel containing the graph G
      * @return
      */
-    public static Table ans(List<Var> vars, Element element, CollectionsModel model, Table mapping) {
+    public static Table ext(Table mapping, Element element, CollectionsModel model) {
         logger.debug("answering : " + element);
         List<Binding> solutionsList = new ArrayList<>();
         Table res = new TableN();
@@ -168,6 +169,10 @@ public class TableUtils {
         return res;
     }
 
+    /**
+     * Used to be used in the extension (now calculated by {@link #ext(Table, Element, CollectionsModel)} )
+     * removed because it was very inefficient and it still required a join with he mapping
+     */
     @Deprecated
     public static Table ans(List<Var> vars, List<Element> elements, Model graph) {
         List<QuerySolution> solutionsList;
@@ -187,6 +192,11 @@ public class TableUtils {
         return res;
     }
 
+    /**
+     * Algebric table projection
+     * @param table The table to project
+     * @param vars A list of variables to do the projection on
+     */
     public static TableN projection(Table table, List<Var> vars) {
         TableN res = new TableN();
         QueryIterator iter = table.iterator(null);
@@ -200,6 +210,12 @@ public class TableUtils {
         return removeDuplicates(res);
     }
 
+    /**
+     * Algebric Table difference
+     * @param left
+     * @param right
+     * @return The left table from which all elements appearing in the right table have been removed
+     */
     public static TableN difference(Table left, Table right) {
         TableN res = new TableN();
         Iterator<Binding> iterLeft = left.rows();
@@ -214,7 +230,6 @@ public class TableUtils {
         }
 
         for (Binding b : listLeft) {
-
             if (!listRight.contains(b)) {
                 res.addBinding(b);
             }
@@ -222,6 +237,10 @@ public class TableUtils {
         return res;
     }
 
+    /**
+     * @param table
+     * @return The same Table from which the duplicate lines have been removed
+     */
     public static TableN removeDuplicates(Table table) {
         Set<Binding> temp = new HashSet<>();
         Iterator<Binding> iter = table.rows();

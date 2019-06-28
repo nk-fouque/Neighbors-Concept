@@ -205,7 +205,7 @@ public class ElementUtils {
     }
 
     /**
-     * Like {@link #relaxFilter(ElementFilter, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
+     * Same as {@link #relaxFilter(ElementFilter, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
     public static List<Element> relaxFilter(ElementFilter filter,Model graph,Map<String,Var> keys) {
@@ -229,7 +229,7 @@ public class ElementUtils {
     }
 
     /**
-     * Like {@link #relaxClass(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
+     * Same as {@link #relaxClass(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
     public static List<Element> relaxClass(TriplePath triple, Model graph){
@@ -251,7 +251,7 @@ public class ElementUtils {
     }
 
     /**
-     * Like {@link #relaxProperty(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
+     * Same as {@link #relaxProperty(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
     public static List<Element> relaxProperty(TriplePath triple, Model graph){
@@ -273,7 +273,7 @@ public class ElementUtils {
     }
 
     /**
-     * Like {@link #describeNode(String, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
+     * Same as {@link #describeNode(String, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
     public static List<Element> describeNode(String uri, Model graph, Map<String,Var> varsOccupied) {
