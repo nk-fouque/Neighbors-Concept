@@ -25,7 +25,7 @@ public class Partition {
     /**
      * List of clusters that are still partitionable
      */
-    private PriorityQueue<Cluster> clusters;
+    private ArrayList<Cluster> clusters;
 
     /**
      * List of clusters that are not partitionable any further and contain at least one answer
@@ -45,13 +45,13 @@ public class Partition {
         graph = new CollectionsModel(md, mdInf);
 //        graph.downSizing();
         saturatedGraph = mdInf;
-        clusters = new PriorityQueue<>();
+        clusters = new ArrayList<>();
         clusters.add(new Cluster(q, md));
         neighbors = new ArrayList<>();
         keys = keycodes;
     }
 
-    public PriorityQueue<Cluster> getClusters() {
+    public List<Cluster> getClusters() {
         return clusters;
     }
 
@@ -72,7 +72,7 @@ public class Partition {
         SingletonStopwatchCollection.resume("iterate");
         SingletonStopwatchCollection.resume("connect");
 
-        Cluster c = clusters.poll();
+        Cluster c = clusters.remove(0);
         Element e = null;
         List<Var> varE = null;
         for (Element element : c.getAvailableQueryElements()) {
@@ -92,9 +92,16 @@ public class Partition {
             list.add(e);
 
 
+            Table me = null;
             SingletonStopwatchCollection.resume("newans");
-            Table me = TableUtils.ext(c.getMapping(), e, graph);
-            SingletonStopwatchCollection.stop("newans");
+            try {
+                me = TableUtils.ext(c.getMapping(), e, graph);
+            } catch (OutOfMemoryError err) {
+                clusters.add(c);
+                throw err;
+            } finally {
+                SingletonStopwatchCollection.stop("newans");
+            }
 
 //            SingletonStopwatchCollection.resume("extjoin");
 //            Table me = TableUtils.simpleJoin(c.getMapping(), ansE);
@@ -147,19 +154,25 @@ public class Partition {
     /**
      * Applies the Partition algorithm to the end
      *
-     * @return true if the Algorithm went fine, false if something went wrong
+     * @return TODO
      */
-    public boolean partitionAlgorithm() {
+    public int partitionAlgorithm() {
         boolean run = true;
         while (run) {
             try {
                 run = iterate();
             } catch (PartitionException e) {
                 e.printStackTrace();
-                return false;
+                return -1;
+            } catch (OutOfMemoryError mem){
+                return 1;
             }
         }
-        return true;
+        return 0;
+    }
+
+    public void cut(){
+        this.neighbors.addAll(clusters);
     }
 
     @Override

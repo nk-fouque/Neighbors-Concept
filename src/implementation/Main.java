@@ -50,24 +50,33 @@ public class Main {
 
         // Creation of the Partition
         Partition p = new Partition(q, md, saturated, keys);
-        System.out.println(p.getClusters().peek());
+        System.out.println(p.getClusters().get(0));
         System.out.println("Printing graph"+p.getGraph());
 
         FileWriter writer = new FileWriter("/udd/nfouque/Documents/results.txt");
         // Apply algorithm
         SingletonStopwatchCollection.resume("Main");
-        boolean algoRun = p.partitionAlgorithm();
-        if (algoRun) {
-            System.out.println(p.toString());
-            writer.write(p.toString());
+        int algoRun = p.partitionAlgorithm();
+        switch(algoRun){
+            case 0 : {
+                System.out.println(p.toString());
+                writer.write(p.toString());
+            }
+            case -1 : {
+                System.out.println("Something went Wrong with the partition");
+            }
+            case 1 : {
+                System.out.println("Java Heap went out of memory, anytime algorithm cut");
+                p.cut();
+                System.out.println(p.toString());
+                writer.write(p.toString());
+            }
         }
-        else System.out.println("Something went Wrong with the partition");
         writer.close();
 
 
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
-//        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("extjoin"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("relax"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
