@@ -1,5 +1,6 @@
 package implementation.gui.controller;
 
+import implementation.gui.model.NeighborButton;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
@@ -18,6 +19,7 @@ import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.ResIterator;
+import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.sparql.core.Var;
 import implementation.Cluster;
@@ -33,14 +35,13 @@ import java.util.*;
 
 public class NeighborsController implements Initializable {
 
+
     @FXML
     GridPane pane;
     @FXML
     TextField filenameField;
     @FXML
     Button modelLoadButton;
-    @FXML
-    Text modelText;
     @FXML
     ChoiceBox<String> format;
     @FXML
@@ -59,6 +60,10 @@ public class NeighborsController implements Initializable {
     Button filterSubjectsButton;
     @FXML
     Accordion partitionAccordion;
+    @FXML
+    BorderPane partitionCandidates;
+    @FXML
+    Accordion candidatesAccordion;
 
     private Model md;
 
@@ -107,18 +112,22 @@ public class NeighborsController implements Initializable {
                     md.read(new FileInputStream(filename), null, format.getValue());
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     md.write(System.out,format.getValue());
-                    modelText.setText(baos.toString());
 
                     subjectsList = new ArrayList<>();
                     ResIterator iter = md.listSubjects();
                     while (iter.hasNext()){
                         subjectsList.add(iter.nextResource().getURI());
                     }
-                    subjects.setItems(FXCollections.observableList(subjectsList));
-                    subjects.autosize();
+                    PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
+                    while(!queue.isEmpty()){
+                        candidatesAccordion.getPanes().add(candidateVisual(queue.poll()));
+                    }
                     modelLoaded.setValue(true);
                 } catch (FileNotFoundException e) {
-                    modelText.setText("File not found");
+                    TitledPane err =new TitledPane();
+                    err.setText("File not found");
+                    err.setContent(new Text(e.getMessage()));
+                    candidatesAccordion.getPanes().add(err);
                     e.printStackTrace();
                 }
             }
@@ -128,25 +137,7 @@ public class NeighborsController implements Initializable {
         partitionButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                partitionText.setText("Loading...");
-                Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md);
 
-                String uriTarget = md.expandPrefix(subjects.getValue());
-                Map<String, Var> keys = new HashMap<>();
-                String QueryString = Partition.initialQueryString(uriTarget, md, keys);
-
-                // Printing the result just to show that we find it back
-                Query q = QueryFactory.create(QueryString);
-                QueryExecution qe = QueryExecutionFactory.create(q, saturated);
-                ResultSetFormatter.out(System.out, qe.execSelect(), q);
-
-                // Creation of the Partition
-                partition = new Partition(q, md, saturated, keys);
-                partition.partitionAlgorithm();
-                for(Cluster c : partition.getNeighbors()){
-                    partitionAccordion.getPanes().add(clusterVisual(c));
-                }
-                partitionAccordion.autosize();
             }
         });
 
@@ -154,27 +145,30 @@ public class NeighborsController implements Initializable {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(KeyCode.ENTER)){
-                    filter(filterSubjectsField.getText(),subjects);
+                    filter(filterSubjectsField.getText(),candidatesAccordion);
                 }
             }
         });
         filterSubjectsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                filter(filterSubjectsField.getText(),subjects);
+                filter(filterSubjectsField.getText(),candidatesAccordion);
             }
         });
 
     }
 
-    private void filter(String filter, ChoiceBox<String> filtered){
-        List<String> res = new ArrayList<>();
+    private void filter(String filter, Accordion filtered){
+        filtered.getPanes().clear();
+        List<String> filteredList = new ArrayList<>();
         for (String s : subjectsList){
             if (s.contains(filter)){
-                res.add(s);
+                filteredList.add(s);
             }
         }
-        filtered.setItems(FXCollections.observableList(res));
+        for (String s : filteredList){
+            filtered.getPanes().add(candidateVisual(s));
+        }
     }
 
     public static TitledPane clusterVisual(Cluster c){
@@ -183,8 +177,17 @@ public class NeighborsController implements Initializable {
         BorderPane pane = new BorderPane();
         res.setContent(pane);
         pane.setTop(new Text("Similitude : \n"+c.getRelaxQueryElements().toString().replace(",","\n")));
-        pane.setLeft(new Text("\nNeighbors : \n"+c.getAnswersList().toString()));
+        pane.setLeft(new Text("\nNeighbors : \n"+c.getAnswersList().toString().replace(',','\n')));
         res.autosize();
+        return res;
+    }
+
+    public TitledPane candidateVisual(String uri){
+        TitledPane res =new TitledPane();
+        res.setText(uri);
+        BorderPane pane = new BorderPane();
+        res.setContent(pane);
+        pane.setCenter(new NeighborButton(uri,partitionAccordion,md,partition));
         return res;
     }
 

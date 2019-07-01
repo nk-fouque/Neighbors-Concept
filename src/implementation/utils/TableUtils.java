@@ -159,7 +159,7 @@ public class TableUtils {
                             } else logger.debug("not in this predicate");
                         });
                     } // this should always be true or else there wouldn't be a connected variable
-                    // TODO Same thing
+                    // TODO Same as above
                 }
             }
             for (Binding b : solutionsList) {

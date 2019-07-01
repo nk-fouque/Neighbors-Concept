@@ -10,39 +10,44 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Accordion?>
-<?import javafx.scene.layout.FlowPane?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
           prefWidth="900.0"
           fx:id="pane" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="implementation.gui.controller.NeighborsController" stylesheets="/implementation/gui/view/css/application.css" >
+          fx:controller="implementation.gui.controller.NeighborsController"
+          stylesheets="/implementation/gui/view/css/application.css"
+          styleClass="background">
     <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="SOMETIMES">
         <top>
             <ToolBar>
-                <Button text="Browse" fx:id="fileFindButton" />
+                <Button text="Browse" fx:id="fileFindButton"/>
                 <Label text="RDF File path :" styleClass="sparklis-blue"/>
-                <TextField fx:id="filenameField" />
-                <ChoiceBox fx:id="format" />
-                <Button fx:id="modelLoadButton" />
+                <TextField fx:id="filenameField"/>
+                <ChoiceBox fx:id="format"/>
+                <Button fx:id="modelLoadButton"/>
             </ToolBar>
         </top>
         <center>
-            <ScrollPane styleClass="background">
-                    <Text fx:id="modelText"/>
-            </ScrollPane>
+            <BorderPane fx:id="partitionCandidates">
+                <top>
+                    <ToolBar>
+                        <TextField fx:id="filterSubjectsField"/>
+                        <Button text="Filter" fx:id="filterSubjectsButton"/>
+                        <ChoiceBox fx:id="subjects"/>
+                        <Button text="Search Neighbors" fx:id="partitionButton"/>
+                    </ToolBar>
+                </top>
+                <center>
+                    <ScrollPane>
+                        <Accordion fx:id="candidatesAccordion"/>
+                    </ScrollPane>
+                </center>
+            </BorderPane>
         </center>
     </BorderPane>
-    <BorderPane fx:id="partitionResults" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="NEVER" GridPane.vgrow="ALWAYS">
-        <top>
-            <ToolBar>
-                <TextField fx:id="filterSubjectsField"/>
-                <Button text="Filter" fx:id="filterSubjectsButton"/>
-                <ChoiceBox fx:id="subjects"/>
-                <Button text="Search Neighbors" fx:id="partitionButton"/>
-            </ToolBar>
-        </top>
+    <BorderPane fx:id="partitionResults" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES"
+                GridPane.vgrow="ALWAYS">
         <center>
             <ScrollPane>
-                <Text fx:id="partitionText"/>
                 <Accordion fx:id="partitionAccordion"/>
             </ScrollPane>
         </center>
