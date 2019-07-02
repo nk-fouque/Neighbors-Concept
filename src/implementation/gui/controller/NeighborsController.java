@@ -15,18 +15,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.ResIterator;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.reasoner.ReasonerRegistry;
-import org.apache.jena.sparql.core.Var;
 import implementation.Cluster;
 import implementation.Partition;
 import implementation.gui.NeighborsInterface;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,12 +41,6 @@ public class NeighborsController implements Initializable {
     ChoiceBox<String> format;
     @FXML
     Button fileFindButton;
-    @FXML
-    ChoiceBox<String> subjects;
-    @FXML
-    Button partitionButton;
-    @FXML
-    Text partitionText;
     @FXML
     BorderPane partitionResults;
     @FXML
@@ -85,9 +74,7 @@ public class NeighborsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        pane.prefWidthProperty().setValue(1920);
-        pane.prefHeightProperty().setValue(1080);
-        modelLoadButton.setText("Load RDF File");
+        pane.setPrefSize(1920,1080);
         md = ModelFactory.createDefaultModel();
 
         format.setItems(new SortedList<String>(FXCollections.observableList(formats())));
@@ -110,21 +97,21 @@ public class NeighborsController implements Initializable {
                 String filename = filenameField.getText();
                 try {
                     md.read(new FileInputStream(filename), null, format.getValue());
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    md.write(System.out,format.getValue());
+                    md.write(System.out, format.getValue());
 
                     subjectsList = new ArrayList<>();
                     ResIterator iter = md.listSubjects();
-                    while (iter.hasNext()){
+                    while (iter.hasNext()) {
                         subjectsList.add(iter.nextResource().getURI());
                     }
+                    candidatesAccordion.getPanes().clear();
                     PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
-                    while(!queue.isEmpty()){
-                        candidatesAccordion.getPanes().add(candidateVisual(queue.poll()));
+                    while (!queue.isEmpty()) {
+                        candidatesAccordion.getPanes().add(NeighborsController.this.candidateVisual(queue.poll()));
                     }
                     modelLoaded.setValue(true);
                 } catch (FileNotFoundException e) {
-                    TitledPane err =new TitledPane();
+                    TitledPane err = new TitledPane();
                     err.setText("File not found");
                     err.setContent(new Text(e.getMessage()));
                     candidatesAccordion.getPanes().add(err);
@@ -134,12 +121,6 @@ public class NeighborsController implements Initializable {
         });
 
         partitionResults.visibleProperty().bind(modelLoaded);
-        partitionButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-            }
-        });
 
         filterSubjectsField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -155,6 +136,8 @@ public class NeighborsController implements Initializable {
                 filter(filterSubjectsField.getText(),candidatesAccordion);
             }
         });
+
+        partitionCandidates.autosize();
 
     }
 

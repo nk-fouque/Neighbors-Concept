@@ -121,17 +121,17 @@ public class Partition {
             boolean ceOppEmpty = CeOpp.noAnswers();
             if (!ceEmpty) {
                 clusters.add(Ce);
-                if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) logger.debug("Ce kept :" + Ce);
+                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) logger.trace("Ce kept :" + Ce);
             }
-//            else logger.debug("Ce eliminated :"+Ce); //TODO Decide whether this is relevant
+//            else logger.trace("Ce eliminated :"+Ce); //TODO Decide whether this is relevant
             if (!ceOppEmpty) {
                 clusters.add(CeOpp);
-                if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) logger.debug("CeOpp kept :" + CeOpp);
+                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) logger.trace("CeOpp kept :" + CeOpp);
             }
-//            else logger.debug("CeOpp eliminated :"+CeOpp); //TODO Decide whether this is relevant
+//            else logger.trace("CeOpp eliminated :"+CeOpp); //TODO Decide whether this is relevant
 
             logger.info(clusters.size() + ":" + neighbors.size() + " - " + c.getRelaxDistance());
-//            if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) logger.debug(clusters);
+//            if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) logger.trace(clusters);
             SingletonStopwatchCollection.stop("reste");
             SingletonStopwatchCollection.stop("iterate");
             return true;
@@ -149,8 +149,7 @@ public class Partition {
 
     /**
      * Applies the Partition algorithm to the end
-     *
-     * @return TODO
+     * @return 0 if the algorithm went to the end correctly, 1 if the algorithm encountered a memory limit, -1 if it encountered an unexpected error
      */
     public int partitionAlgorithm() {
         boolean run = true;

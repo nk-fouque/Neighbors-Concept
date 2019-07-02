@@ -10,20 +10,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Accordion?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
-          prefWidth="900.0"
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           fx:id="pane" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="implementation.gui.controller.NeighborsController"
           stylesheets="/implementation/gui/view/css/application.css"
           styleClass="background">
-    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="SOMETIMES">
+    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0">
         <top>
             <ToolBar>
                 <Button text="Browse" fx:id="fileFindButton"/>
                 <Label text="RDF File path :" styleClass="sparklis-blue"/>
                 <TextField fx:id="filenameField"/>
                 <ChoiceBox fx:id="format"/>
-                <Button fx:id="modelLoadButton"/>
+                <Button fx:id="modelLoadButton" text="Load RDF File"/>
             </ToolBar>
         </top>
         <center>
@@ -32,8 +31,6 @@
                     <ToolBar>
                         <TextField fx:id="filterSubjectsField"/>
                         <Button text="Filter" fx:id="filterSubjectsButton"/>
-                        <ChoiceBox fx:id="subjects"/>
-                        <Button text="Search Neighbors" fx:id="partitionButton"/>
                     </ToolBar>
                 </top>
                 <center>

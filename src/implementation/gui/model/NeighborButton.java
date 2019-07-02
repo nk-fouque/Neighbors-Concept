@@ -5,6 +5,7 @@ import implementation.Partition;
 import javafx.event.EventHandler;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
@@ -14,6 +15,7 @@ import org.apache.jena.sparql.core.Var;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 import static implementation.gui.controller.NeighborsController.clusterVisual;
 
@@ -43,9 +45,26 @@ public class NeighborButton extends Button {
 
                 // Creation of the Partition
                 partition = new Partition(q, graph, saturated, keys);
-                partition.partitionAlgorithm();
-                for(Cluster c : partition.getNeighbors()){
-                    resultsContainer.getPanes().add(clusterVisual(c));
+                int algoRun = partition.partitionAlgorithm();
+                switch(algoRun){
+                    case 0 : {
+                        System.out.println(partition.toString());
+                    }
+                    case -1 : {
+                        System.out.println("Something went Wrong with the partition");
+                    }
+                    case 1 : {
+                        System.out.println("Java Heap went out of memory, anytime algorithm cut");
+                        partition.cut();
+                        System.out.println(partition.toString());
+                    }
+                }
+                PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
+                while(!queue.isEmpty()){
+                    Cluster c = queue.poll();
+                    TitledPane cluster = clusterVisual(c);
+                    cluster.prefWidthProperty().bind(resultsContainer.widthProperty());
+                    resultsContainer.getPanes().add(cluster);
                 }
                 resultsContainer.autosize();
             }

@@ -2,14 +2,15 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" line="117" />
-    <bookmark url="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" line="24" />
+    <bookmark url="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" line="26" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Cluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Partition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="73" column="9" lean-forward="true" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+            <state relative-caret-position="485">
+              <caret line="73" column="9" lean-forward="true" selection-start-line="58" selection-start-column="8" selection-end-line="73" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -38,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/Partition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="102" column="60" lean-forward="true" selection-start-line="102" selection-start-column="60" selection-end-line="102" selection-end-column="60" />
+            <state relative-caret-position="333">
+              <caret line="132" column="23" selection-start-line="132" selection-start-column="19" selection-end-line="132" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,48 +64,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Downloads/apache-jena-3.12.0/lib/jena-arq-3.12.0.jar!/org/apache/jena/sparql/expr/nodevalue/NodeValueString.class">
+        <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Downloads/apache-jena-3.12.0/lib/jena-core-3.12.0.jar!/org/apache/jena/graph/Node.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="182" selection-start-line="182" selection-end-line="182" />
-              <folding>
-                <element signature="e#4897#4898#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Downloads/apache-jena-3.12.0/lib/jena-arq-3.12.0.jar!/org/apache/jena/sparql/engine/binding/BindingBase.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/Cluster.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="261">
+              <caret line="109" column="115" lean-forward="true" selection-start-line="109" selection-start-column="115" selection-end-line="109" selection-end-column="115" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2214#2215#0" expanded="true" />
-                <element signature="e#2375#2376#0" expanded="true" />
-                <element signature="e#2405#2406#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="27" lean-forward="true" selection-start-column="27" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="580">
+              <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="17" column="62" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
     </leaf>
@@ -120,8 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>relax</find>
-      <find>isgreat</find>
       <find>isgre</find>
       <find>relaxed</find>
       <find>relaxi</find>
@@ -148,8 +148,10 @@
       <find>Colle</find>
       <find>accor</find>
       <find>auto</find>
-      <find>logger</find>
       <find>peru</find>
+      <find>titled</find>
+      <find>logger</find>
+      <find>info</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -213,14 +215,14 @@
         <option value="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" />
         <option value="$PROJECT_DIR$/src/implementation/gui/view/css/application.css" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" />
-        <option value="$PROJECT_DIR$/src/implementation/Partition.java" />
         <option value="$PROJECT_DIR$/src/implementation/Cluster.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" />
         <option value="$PROJECT_DIR$/src/implementation/Main.java" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" />
+        <option value="$PROJECT_DIR$/src/implementation/Partition.java" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" />
       </list>
     </option>
   </component>
@@ -272,6 +274,14 @@
               <item name="implementation" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="implementation" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
@@ -375,7 +385,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.NeighborsInterface">
     <configuration name="Beginning" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sandbox.Beginning" />
       <module name="Similarity_Search" />
@@ -431,8 +441,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.NeighborsInterface" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.CollectionsModel" />
         <item itemvalue="Application.Beginning" />
       </list>
@@ -479,7 +489,7 @@
       <workItem from="1561634776154" duration="11777000" />
       <workItem from="1561705502881" duration="10041000" />
       <workItem from="1561979468824" duration="11230000" />
-      <workItem from="1562051105910" duration="4539000" />
+      <workItem from="1562051105910" duration="8957000" />
     </task>
     <task id="LOCAL-00001" summary="Completed Javadoc for Cluster.class">
       <created>1561636589113</created>
@@ -537,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1561989676090</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed problems with Literals filtering">
+      <created>1562055724732</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1562055724732</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -573,7 +590,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215821000" />
+    <option name="totallyTimeSpent" value="220239000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -586,6 +603,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28957835" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -595,8 +613,8 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.48448688" weight="0.3299373" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.47295147" visible="true" weight="0.39106584" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.48448688" visible="true" weight="0.3299373" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47295147" weight="0.39106584" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49642006" weight="0.39890283" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -672,7 +690,8 @@
     <MESSAGE value="TableUtils Javadoc" />
     <MESSAGE value="Improved styles" />
     <MESSAGE value="Set up ground for anytime version, OutOfMemory now triggers anytime end" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set up ground for anytime version, OutOfMemory now triggers anytime end" />
+    <MESSAGE value="Fixed problems with Literals filtering" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed problems with Literals filtering" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -804,16 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/utils/SingletonStopwatchCollection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
@@ -871,36 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="11" lean-forward="true" selection-start-line="51" selection-start-column="11" selection-end-line="51" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#260#261#0" expanded="true" />
-            <element signature="e#286#287#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="179" column="96" selection-start-line="179" selection-start-column="96" selection-end-line="179" selection-end-column="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/css/application.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -925,13 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/Downloads/apache-jena-3.12.0/lib/jena-arq-3.12.0.jar!/org/apache/jena/sparql/expr/nodevalue/NodeValueString.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/Cluster.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
@@ -945,6 +917,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/Downloads/apache-jena-3.12.0/lib/jena-arq-3.12.0.jar!/org/apache/jena/sparql/expr/nodevalue/NodeValueString.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/utils/TableUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -955,10 +934,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="17" column="62" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="27" lean-forward="true" selection-start-column="27" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="109" column="115" lean-forward="true" selection-start-line="109" selection-start-column="115" selection-end-line="109" selection-end-column="115" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="73" column="9" lean-forward="true" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+        <state relative-caret-position="485">
+          <caret line="73" column="9" lean-forward="true" selection-start-line="58" selection-start-column="8" selection-end-line="73" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -967,8 +974,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/Partition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="102" column="60" lean-forward="true" selection-start-line="102" selection-start-column="60" selection-end-line="102" selection-end-column="60" />
+        <state relative-caret-position="333">
+          <caret line="132" column="23" selection-start-line="132" selection-start-column="19" selection-end-line="132" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
