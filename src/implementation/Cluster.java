@@ -244,7 +244,7 @@ public class Cluster implements Comparable<Cluster> {
             res += "Connected variables : " + connectedVars + "\n";
         }
         res += "Query :"+queryString()+"\n";
-        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n"+mappingString()+"\n";
+        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n"+mappingString()+"\n";
         res += "Answers :\n"+answersString()+"\n";
         return res;
     }

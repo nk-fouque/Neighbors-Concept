@@ -18,6 +18,7 @@ import org.apache.jena.sparql.engine.binding.*;
 import org.apache.jena.sparql.engine.join.QueryIterHashJoin;
 import org.apache.jena.sparql.expr.E_Equals;
 import org.apache.jena.sparql.expr.Expr;
+import org.apache.jena.sparql.expr.ExprVar;
 import org.apache.jena.sparql.expr.NodeValue;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.sparql.syntax.ElementFilter;
@@ -58,11 +59,12 @@ public class TableUtils {
             logger.debug("is filter");
             Expr expr = ((ElementFilter) element).getExpr();
             if (expr instanceof E_Equals) {
-                Var var = Var.alloc(((E_Equals) expr).getArg1().toString().replace("?", ""));
-                NodeValue node = (NodeValue) ((E_Equals) expr).getArg2();
+                Var var = ((ExprVar)((E_Equals) expr).getArg1()).asVar();
+                Node node = ((NodeValue) ((E_Equals) expr).getArg2()).asNode();
                 Iterator<Binding> iter = mapping.rows();
                 iter.forEachRemaining((b) -> {
-                    if (b.get(var).toString().equals(node.asString())) {
+                    Node bindNode = b.get(var);
+                    if (bindNode.equals(node)) {
                         res.addBinding(b);
                         logger.debug("matched :" + b);
                     } else {

@@ -103,10 +103,6 @@ public class Partition {
                 SingletonStopwatchCollection.stop("newans");
             }
 
-//            SingletonStopwatchCollection.resume("extjoin");
-//            Table me = TableUtils.simpleJoin(c.getMapping(), ansE);
-//            SingletonStopwatchCollection.stop("extjoin");
-
             SingletonStopwatchCollection.resume("projjoin");
             Table piMe = TableUtils.projection(me, c.getProj());
             Table ae = TableUtils.simpleJoin(c.getAnswers(), piMe);
