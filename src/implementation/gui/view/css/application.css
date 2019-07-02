@@ -8,6 +8,7 @@
 
 .sparklis-blue{
     -fx-text-fill: #a5ecff;
+    -fx-text-alignment: center;
 }
 
 .button{
@@ -39,3 +40,7 @@
 }
 
 .scroll-pane > .viewport  { -fx-background-color: #484848; }
+
+.flowpane{
+    -fx-vgap: 15;
+}

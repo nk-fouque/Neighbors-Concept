@@ -21,7 +21,6 @@ public class Partition {
      */
     private CollectionsModel graph;
 
-    private Model saturatedGraph;
     /**
      * List of clusters that are still partitionable
      */
@@ -29,7 +28,7 @@ public class Partition {
 
     /**
      * List of clusters that are not partitionable any further and contain at least one answer
-     * It's when a cluster is here that it actually represents the actual 'Neighbor concept'
+     * It's when a cluster is here that it represents the actual 'Neighbor concept'
      */
     private List<Cluster> neighbors;
 
@@ -44,7 +43,6 @@ public class Partition {
     public Partition(Query q, Model md, Model mdInf, Map<String, Var> keycodes) {
         graph = new CollectionsModel(md, mdInf);
 //        graph.downSizing();
-        saturatedGraph = mdInf;
         clusters = new ArrayList<>();
         clusters.add(new Cluster(q, md));
         neighbors = new ArrayList<>();
@@ -92,7 +90,7 @@ public class Partition {
             list.add(e);
 
 
-            Table me = null;
+            Table me;
             SingletonStopwatchCollection.resume("newans");
             try {
                 me = TableUtils.ext(c.getMapping(), e, graph);
@@ -123,12 +121,12 @@ public class Partition {
                 clusters.add(Ce);
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) logger.trace("Ce kept :" + Ce);
             }
-//            else logger.trace("Ce eliminated :"+Ce); //TODO Decide whether this is relevant
+//            else logger.trace("Ce eliminated :"+Ce);
             if (!ceOppEmpty) {
                 clusters.add(CeOpp);
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) logger.trace("CeOpp kept :" + CeOpp);
             }
-//            else logger.trace("CeOpp eliminated :"+CeOpp); //TODO Decide whether this is relevant
+//            else logger.trace("CeOpp eliminated :"+CeOpp);
 
             logger.info(clusters.size() + ":" + neighbors.size() + " - " + c.getRelaxDistance());
 //            if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) logger.trace(clusters);
@@ -149,6 +147,7 @@ public class Partition {
 
     /**
      * Applies the Partition algorithm to the end
+     *
      * @return 0 if the algorithm went to the end correctly, 1 if the algorithm encountered a memory limit, -1 if it encountered an unexpected error
      */
     public int partitionAlgorithm() {
@@ -156,17 +155,17 @@ public class Partition {
         while (run) {
             try {
                 run = iterate();
+            } catch (OutOfMemoryError mem) {
+                return 1;
             } catch (PartitionException e) {
                 e.printStackTrace();
                 return -1;
-            } catch (OutOfMemoryError mem){
-                return 1;
             }
         }
         return 0;
     }
 
-    public void cut(){
+    public void cut() {
         this.neighbors.addAll(clusters);
     }
 
@@ -174,7 +173,7 @@ public class Partition {
     public String toString() {
         StringBuilder res = new StringBuilder();
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
-            res.append("Keys :\n" + keys.toString() + "\n");
+            res.append("Keys :\n").append(keys.toString()).append("\n");
         }
         res.append("\t\tClusters :\n");
         PriorityQueue<Cluster> queue = new PriorityQueue<>(neighbors);

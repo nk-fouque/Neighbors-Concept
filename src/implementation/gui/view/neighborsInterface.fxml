@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Accordion?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           fx:id="pane" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="implementation.gui.controller.NeighborsController"
@@ -34,8 +36,8 @@
                     </ToolBar>
                 </top>
                 <center>
-                    <ScrollPane>
-                        <Accordion fx:id="candidatesAccordion"/>
+                    <ScrollPane fx:id="scrollPane">
+                        <FlowPane fx:id="candidates"/>
                     </ScrollPane>
                 </center>
             </BorderPane>

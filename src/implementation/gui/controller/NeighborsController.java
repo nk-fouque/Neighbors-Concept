@@ -11,8 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
@@ -53,6 +52,10 @@ public class NeighborsController implements Initializable {
     BorderPane partitionCandidates;
     @FXML
     Accordion candidatesAccordion;
+    @FXML
+    ScrollPane scrollPane;
+    @FXML
+    FlowPane candidates;
 
     private Model md;
 
@@ -61,6 +64,8 @@ public class NeighborsController implements Initializable {
     private SimpleBooleanProperty modelLoaded=new SimpleBooleanProperty(false);
 
     private List<String> subjectsList;
+
+    private SimpleBooleanProperty partitionAvailable =new SimpleBooleanProperty(true);
 
     private List<String> formats(){
         List<String> res = new ArrayList<>();
@@ -104,10 +109,11 @@ public class NeighborsController implements Initializable {
                     while (iter.hasNext()) {
                         subjectsList.add(iter.nextResource().getURI());
                     }
-                    candidatesAccordion.getPanes().clear();
                     PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
                     while (!queue.isEmpty()) {
-                        candidatesAccordion.getPanes().add(NeighborsController.this.candidateVisual(queue.poll()));
+                        BorderPane visual = NeighborsController.this.candidateVisual(queue.poll());
+                        visual.setPrefWidth(candidates.getWidth());
+                        candidates.getChildren().add(visual);
                     }
                     modelLoaded.setValue(true);
                 } catch (FileNotFoundException e) {
@@ -126,31 +132,31 @@ public class NeighborsController implements Initializable {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(KeyCode.ENTER)){
-                    filter(filterSubjectsField.getText(),candidatesAccordion);
+                    filter(filterSubjectsField.getText());
                 }
             }
         });
         filterSubjectsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                filter(filterSubjectsField.getText(),candidatesAccordion);
+                filter(filterSubjectsField.getText());
             }
         });
 
         partitionCandidates.autosize();
-
     }
 
-    private void filter(String filter, Accordion filtered){
-        filtered.getPanes().clear();
+    private void filter(String filter){
+        candidates.getChildren().clear();
         List<String> filteredList = new ArrayList<>();
         for (String s : subjectsList){
             if (s.contains(filter)){
                 filteredList.add(s);
             }
         }
-        for (String s : filteredList){
-            filtered.getPanes().add(candidateVisual(s));
+        PriorityQueue<String> queue = new PriorityQueue<>(filteredList);
+        while (!queue.isEmpty()) {
+            candidates.getChildren().add(candidateVisual(queue.poll()));
         }
     }
 
@@ -165,12 +171,12 @@ public class NeighborsController implements Initializable {
         return res;
     }
 
-    public TitledPane candidateVisual(String uri){
-        TitledPane res =new TitledPane();
-        res.setText(uri);
-        BorderPane pane = new BorderPane();
-        res.setContent(pane);
-        pane.setCenter(new NeighborButton(uri,partitionAccordion,md,partition));
+    public BorderPane candidateVisual(String uri){
+        BorderPane res = new BorderPane();
+        Label text = new Label("  "+uri);
+        text.getStyleClass().add("sparklis-blue");
+        res.setLeft(text);
+        res.setRight(new NeighborButton(uri,partitionAccordion,md,partition,partitionAvailable));
         return res;
     }
 
