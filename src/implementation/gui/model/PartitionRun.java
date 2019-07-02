@@ -2,6 +2,7 @@ package implementation.gui.model;
 
 import implementation.Cluster;
 import implementation.Partition;
+import implementation.utils.PartitionException;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
@@ -24,14 +25,16 @@ public class PartitionRun implements Runnable {
     private String uriTarget;
     private Accordion resultsContainer;
     private BooleanProperty available;
+    private BooleanProperty cut;
 
-    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available){
+    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available,BooleanProperty cut){
         super();
         graph=md;
         uriTarget=uri;
         resultsContainer=container;
         partition=p;
         this.available=available;
+        this.cut=cut;
     }
 
     @Override
@@ -50,20 +53,19 @@ public class PartitionRun implements Runnable {
         // Creation of the Partition
         partition = new Partition(q, graph, saturated, keys);
 
-        int algoRun = partition.partitionAlgorithm();
-        switch(algoRun){
-            case 0 : {
-                System.out.println(partition.toString());
-            }
-            case -1 : {
-                System.out.println("Something went Wrong with the partition");
-            }
-            case 1 : {
-                System.out.println("Java Heap went out of memory, anytime algorithm cut");
-                partition.cut();
-                System.out.println(partition.toString());
+        boolean run = !cut.get();
+
+        while (run){
+            try {
+                run = (!cut.get()) && partition.iterate();
+            } catch (PartitionException e) {
+                e.printStackTrace();
+            } catch (OutOfMemoryError oom){
+                run = false;
             }
         }
+        partition.cut();
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

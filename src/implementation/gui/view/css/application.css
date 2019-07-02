@@ -1,45 +1,43 @@
 .background {
-    -fx-background-color: #484848;
+    -fx-background-color: #ffffff;
 }
 
 .tool-bar {
-    -fx-background-color: #484848;
+    -fx-background-color: #ffffff;
 }
 
 .sparklis-blue{
-    -fx-text-fill: #a5ecff;
+    -fx-text-fill: #484848;
     -fx-text-alignment: center;
 }
 
 .button{
-    -fx-background-color: #a5ecff;
+    -fx-background-color: #484848;
     -fx-effect: innershadow( gaussian , rgba(0,0,0,0.7) , 20,0,0,0 );
-    -fx-text-fill: #484848;
+    -fx-text-fill: #ffffff;
 }
 
 .choice-box{
-    -fx-background-color: #a5ecff;
+    -fx-background-color: #484848;
     -fx-effect: innershadow( gaussian , rgba(0,0,0,0.7) , 20,0,0,0 );
-    -fx-text-fill: #484848;
+    -fx-mark-color : a5ecff;
 }
+
+.choice-box > .label { -fx-text-fill: #ffffff; }
 
 .accordion {
     -fx-background-color: transparent;
 }
 
-.accordion .titled-pane{
-    -fx-text-fill: #a5ecff;
-}
-
 .accordion .titled-pane > .title {
-    -fx-background-color: #484848;
+    -fx-background-color: #cdcdcd;
 }
 
 .accordion .titled-pane > *.content{
     -fx-background-color: white ;
 }
 
-.scroll-pane > .viewport  { -fx-background-color: #484848; }
+.scroll-pane > .viewport  { -fx-background-color: #ffffff; }
 
 .flowpane{
     -fx-vgap: 15;

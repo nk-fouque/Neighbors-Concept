@@ -66,7 +66,7 @@ public class Partition {
      *
      * @return false if the partitioning is over, true if it can still be iterated
      */
-    public boolean iterate() throws PartitionException {
+    public boolean iterate() throws PartitionException, OutOfMemoryError{
         SingletonStopwatchCollection.resume("iterate");
         SingletonStopwatchCollection.resume("connect");
 

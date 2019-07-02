@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
@@ -56,6 +57,10 @@ public class NeighborsController implements Initializable {
     ScrollPane scrollPane;
     @FXML
     FlowPane candidates;
+    @FXML
+    Button cutButton;
+    @FXML
+    Label cutLabel;
 
     private Model md;
 
@@ -66,6 +71,8 @@ public class NeighborsController implements Initializable {
     private List<String> subjectsList;
 
     private SimpleBooleanProperty partitionAvailable =new SimpleBooleanProperty(true);
+
+    private SimpleBooleanProperty anytimeCut =new SimpleBooleanProperty(false);
 
     private List<String> formats(){
         List<String> res = new ArrayList<>();
@@ -112,7 +119,7 @@ public class NeighborsController implements Initializable {
                     PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
                     while (!queue.isEmpty()) {
                         BorderPane visual = NeighborsController.this.candidateVisual(queue.poll());
-                        visual.setPrefWidth(candidates.getWidth());
+                        visual.minWidthProperty().bind((scrollPane.widthProperty()));
                         candidates.getChildren().add(visual);
                     }
                     modelLoaded.setValue(true);
@@ -144,6 +151,18 @@ public class NeighborsController implements Initializable {
         });
 
         partitionCandidates.autosize();
+
+        cutLabel.visibleProperty().bind(anytimeCut);
+        cutLabel.setText("/!\\ Algorithm will stop early, please deactivate before running new partition /!\\");
+        cutButton.setOnMouseClicked(mouseEvent -> {
+            if (!anytimeCut.get()){
+                cutButton.setStyle("-fx-background-color: red");
+                anytimeCut.setValue(true);
+            } else {
+                cutButton.setStyle("-fx-background-color: black");
+                anytimeCut.setValue(false);
+            }
+        });
     }
 
     private void filter(String filter){
@@ -156,13 +175,20 @@ public class NeighborsController implements Initializable {
         }
         PriorityQueue<String> queue = new PriorityQueue<>(filteredList);
         while (!queue.isEmpty()) {
-            candidates.getChildren().add(candidateVisual(queue.poll()));
+            BorderPane visual = NeighborsController.this.candidateVisual(queue.poll());
+            visual.minWidthProperty().bind((scrollPane.widthProperty()));
+            candidates.getChildren().add(visual);
         }
     }
 
     public static TitledPane clusterVisual(Cluster c){
         TitledPane res =new TitledPane();
         res.setText("Extentional Distance : "+c.getRelaxDistance());
+        if (c.getAvailableQueryElements().size()!=0){
+            res.textFillProperty().setValue(Paint.valueOf("#cd7777"));
+        } else {
+            res.textFillProperty().setValue(Paint.valueOf("#484848"));
+        }
         BorderPane pane = new BorderPane();
         res.setContent(pane);
         pane.setTop(new Text("Similitude : \n"+c.getRelaxQueryElements().toString().replace(",","\n")));
@@ -176,7 +202,7 @@ public class NeighborsController implements Initializable {
         Label text = new Label("  "+uri);
         text.getStyleClass().add("sparklis-blue");
         res.setLeft(text);
-        res.setRight(new NeighborButton(uri,partitionAccordion,md,partition,partitionAvailable));
+        res.setRight(new NeighborButton(uri,partitionAccordion,md,partition,partitionAvailable,anytimeCut));
         return res;
     }
 

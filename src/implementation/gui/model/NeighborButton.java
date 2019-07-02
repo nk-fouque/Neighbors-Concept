@@ -23,7 +23,7 @@ import static implementation.gui.controller.NeighborsController.clusterVisual;
 public class NeighborButton extends Button {
     private String uri;
 
-    public NeighborButton(String uri, Accordion resultsContainer, Model md, Partition part, BooleanProperty available){
+    public NeighborButton(String uri, Accordion resultsContainer, Model md, Partition part, BooleanProperty available,BooleanProperty cut){
         super();
         this.uri = uri;
         this.textProperty().setValue("Find neighbors");
@@ -35,7 +35,7 @@ public class NeighborButton extends Button {
                 TitledPane loading = new TitledPane();
                 loading.setText("Loading neighbors for "+uri+" please wait");
                 resultsContainer.getPanes().add(loading);
-                Runnable algo = new PartitionRun(md,uri,resultsContainer,part,available);
+                Runnable algo = new PartitionRun(md,uri,resultsContainer,part,available,cut);
                 Thread thread = new Thread(algo);
                 thread.start();
             }
