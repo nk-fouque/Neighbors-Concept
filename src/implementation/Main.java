@@ -1,5 +1,6 @@
 package implementation;
 
+import org.apache.jena.base.Sys;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -9,10 +10,13 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import implementation.utils.SingletonStopwatchCollection;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
 
@@ -29,7 +33,7 @@ public class Main {
         String filename = "/udd/nfouque/Documents/default_mondial.nt";
 //        String filename = "/udd/nfouque/Documents/royal.ttl";
         Model md = ModelFactory.createDefaultModel();
-        md.read(new FileInputStream(filename), null, "NT");
+        md.read(new FileInputStream(filename), null, "TTL");
 //        md.write(System.out,"TURTLE");
 
         Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md);
@@ -56,7 +60,18 @@ public class Main {
         FileWriter writer = new FileWriter("/udd/nfouque/Documents/results.txt");
         // Apply algorithm
         SingletonStopwatchCollection.resume("Main");
-        int algoRun = p.partitionAlgorithm();
+
+        // Defining Signal Handler for anytime implementation
+        AtomicBoolean cut = new AtomicBoolean(false);
+        SignalHandler handler = sig -> {
+            System.out.println("Captured "+sig.getName());
+            cut.set(true);
+        };
+        Signal.handle(new Signal("INT"), handler);
+
+        // Launching the algorithm
+        int algoRun = p.partitionAlgorithm(cut);
+
         switch (algoRun) {
             case 0: {
                 System.out.println(p.toString());
@@ -66,7 +81,11 @@ public class Main {
                 System.out.println("Something went Wrong with the partition");
             }
             case 1: {
-                System.out.println("Java Heap went out of memory, anytime algorithm cut");
+                System.out.println("Java Heap went out of memory");
+                algoRun++;
+            }
+            case 2: {
+                System.out.println("Anytime algorithm cut");
                 p.cut();
                 System.out.println(p.toString());
                 writer.write(p.toString());

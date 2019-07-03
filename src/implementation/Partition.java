@@ -1,5 +1,6 @@
 package implementation;
 
+import implementation.utils.*;
 import org.apache.jena.query.Query;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.sparql.algebra.Table;
@@ -7,12 +8,15 @@ import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import implementation.utils.*;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Partition {
     private static Logger logger = Logger.getLogger(Partition.class);
@@ -147,13 +151,17 @@ public class Partition {
 
     /**
      * Applies the Partition algorithm to the end
-     *
+     * @param cut AtomicBoolean to observe, when it is set to false, the algorithm stops and cuts
      * @return 0 if the algorithm went to the end correctly, 1 if the algorithm encountered a memory limit, -1 if it encountered an unexpected error
      */
-    public int partitionAlgorithm() {
+    public int partitionAlgorithm(AtomicBoolean cut) {
         boolean run = true;
-        while (run) {
+        boolean stop=false;
+        while (run&&!stop) {
             try {
+                if (cut != null){
+                    stop = cut.get();
+                }
                 run = iterate();
             } catch (OutOfMemoryError mem) {
                 return 1;
@@ -162,7 +170,8 @@ public class Partition {
                 return -1;
             }
         }
-        return 0;
+        if (cut.get()) return 2;
+        else return 0;
     }
 
     public void cut() {
@@ -178,7 +187,7 @@ public class Partition {
         res.append("\t\tClusters :\n");
         PriorityQueue<Cluster> queue = new PriorityQueue<>(neighbors);
         while (!queue.isEmpty()) {
-            res.append(queue.poll().toString()).append("\n\n");
+            res.append(queue.poll().toString(graph)).append("\n\n");
         }
         return res.toString();
     }

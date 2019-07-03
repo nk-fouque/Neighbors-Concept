@@ -22,10 +22,7 @@ import org.apache.log4j.Logger;
 import implementation.utils.*;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Cluster implements Comparable<Cluster> {
     private static Logger logger = Logger.getLogger(Cluster.class);
@@ -265,6 +262,25 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
+     * Same as {@link #toString()} but uses {@link #answersListString(CollectionsModel)} to write answers
+     * @param col
+     * @return
+     */
+    public String toString(CollectionsModel col) {
+        String res = "Extentional Distance : " + relaxDistance + "\n";
+        res += "Elements : " + relaxQueryElements + "\n";
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
+            res += "Debug available: " + availableQueryElements + "\n";
+            res += "Debug removed : " + removedQueryElements + "\n";
+            res += "Connected variables : " + connectedVars + "\n";
+        }
+        res += "Query :" + queryString() + "\n";
+        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mappingString() + "\n";
+        res += "Answers :\n" + answersListString(col) + "\n";
+        return res;
+    }
+
+    /**
      * @return This cluster's answers as a Java List
      */
     public List<Node> getAnswersList() {
@@ -272,6 +288,17 @@ public class Cluster implements Comparable<Cluster> {
         List<Node> res = new ArrayList<>();
         iter.forEachRemaining((Binding b) -> res.add(b.get(Var.alloc("Neighbor"))));
         return res;
+    }
+
+    /**
+     * Not sure if this is useful
+     * @param col The model in which to search prefix mappings
+     * @return
+     */
+    public String answersListString(CollectionsModel col){
+        List<String> res = new ArrayList<>();
+        getAnswersList().forEach(n -> res.add(col.getGraph().shortForm(n.toString())));
+        return res.toString().replace("[","|\t ").replace("]","\t\t|").replaceAll(", ","\t\t|\n|\t");
     }
 
 }
