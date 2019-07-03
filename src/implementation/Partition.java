@@ -97,6 +97,7 @@ public class Partition {
                 me = TableUtils.ext(c.getMapping(), e, graph);
             } catch (OutOfMemoryError err) {
                 clusters.add(c);
+                SingletonStopwatchCollection.stop("iterate");
                 throw err;
             } finally {
                 SingletonStopwatchCollection.stop("newans");
