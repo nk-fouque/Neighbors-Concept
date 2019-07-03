@@ -1,6 +1,5 @@
 package implementation.gui.model;
 
-import implementation.Cluster;
 import implementation.Partition;
 import javafx.beans.property.BooleanProperty;
 import javafx.event.EventHandler;
@@ -8,22 +7,12 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
-import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.reasoner.ReasonerRegistry;
-import org.apache.jena.sparql.core.Var;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
-
-import static implementation.gui.controller.NeighborsController.clusterVisual;
 
 public class NeighborButton extends Button {
     private String uri;
 
-    public NeighborButton(String uri, Accordion resultsContainer, Model md, Partition part, BooleanProperty available,BooleanProperty cut){
+    public NeighborButton(String uri, Accordion resultsContainer, Model md, Partition part, BooleanProperty available, BooleanProperty cut) {
         super();
         this.uri = uri;
         this.textProperty().setValue("Find neighbors");
@@ -33,9 +22,9 @@ public class NeighborButton extends Button {
             public void handle(MouseEvent mouseEvent) {
                 resultsContainer.getPanes().clear();
                 TitledPane loading = new TitledPane();
-                loading.setText("Loading neighbors for "+uri+" please wait");
+                loading.setText("Loading neighbors for " + uri + " please wait");
                 resultsContainer.getPanes().add(loading);
-                Runnable algo = new PartitionRun(md,uri,resultsContainer,part,available,cut);
+                Runnable algo = new PartitionRun(md, uri, resultsContainer, part, available, cut);
                 Thread thread = new Thread(algo);
                 thread.start();
             }

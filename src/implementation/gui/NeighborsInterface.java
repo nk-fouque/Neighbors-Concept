@@ -10,8 +10,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 public class NeighborsInterface extends Application {
-    public static Stage stage = null ;
-    public static Scene scene = null ;
+    public static Stage stage = null;
+    public static Scene scene = null;
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -30,7 +30,7 @@ public class NeighborsInterface extends Application {
         Scene scene = new Scene(root);
         this.scene = scene;
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Neighbors Concept" );
+        primaryStage.setTitle("Neighbors Concept");
         primaryStage.show();
         primaryStage.centerOnScreen();
 

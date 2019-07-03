@@ -6,24 +6,26 @@
     -fx-background-color: #ffffff;
 }
 
-.sparklis-blue{
+.sparklis-blue {
     -fx-text-fill: #484848;
     -fx-text-alignment: center;
 }
 
-.button{
+.button {
     -fx-background-color: #484848;
-    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.7) , 20,0,0,0 );
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 20, 0, 0, 0);
     -fx-text-fill: #ffffff;
 }
 
-.choice-box{
+.choice-box {
     -fx-background-color: #484848;
-    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.7) , 20,0,0,0 );
-    -fx-mark-color : a5ecff;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 20, 0, 0, 0);
+    -fx-mark-color: a5ecff;
 }
 
-.choice-box > .label { -fx-text-fill: #ffffff; }
+.choice-box > .label {
+    -fx-text-fill: #ffffff;
+}
 
 .accordion {
     -fx-background-color: transparent;
@@ -33,12 +35,14 @@
     -fx-background-color: #cdcdcd;
 }
 
-.accordion .titled-pane > *.content{
-    -fx-background-color: white ;
+.accordion .titled-pane > *.content {
+    -fx-background-color: white;
 }
 
-.scroll-pane > .viewport  { -fx-background-color: #ffffff; }
+.scroll-pane > .viewport {
+    -fx-background-color: #ffffff;
+}
 
-.flowpane{
+.flowpane {
     -fx-vgap: 15;
 }

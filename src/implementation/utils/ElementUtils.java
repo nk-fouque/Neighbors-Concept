@@ -2,8 +2,13 @@ package implementation.utils;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
-import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.*;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
@@ -23,17 +28,20 @@ import java.util.Map;
 public class ElementUtils {
     private static Logger logger = Logger.getLogger(ElementUtils.class);
 
-    /** Creates a String for the SPARQL Query given Jena Variables and Elements
-     * @param vars The List of Jena Variables to be put in the head of the Query
+    /**
+     * Creates a String for the SPARQL Query given Jena Variables and Elements
+     *
+     * @param vars     The List of Jena Variables to be put in the head of the Query
      * @param elements The List of Jena Elements to be put in the body of the Query
-     * @return The String for the SPARQL Query */
-    public static String getSelectStringFrom(List<Var> vars, List<Element> elements){
-        StringBuilder queryString= new StringBuilder("SELECT DISTINCT");
-        for (Var v : ListUtils.removeDuplicates(vars)){
+     * @return The String for the SPARQL Query
+     */
+    public static String getSelectStringFrom(List<Var> vars, List<Element> elements) {
+        StringBuilder queryString = new StringBuilder("SELECT DISTINCT");
+        for (Var v : ListUtils.removeDuplicates(vars)) {
             queryString.append(" ").append(v.toString());
         }
         queryString.append(" WHERE {");
-        for (Element element : elements){
+        for (Element element : elements) {
             queryString.append("\n").append(element.toString()).append(".");
         }
         queryString.append("}");
@@ -42,16 +50,19 @@ public class ElementUtils {
 
     /**
      * If the string already has a key associated with it, returns it, else keeps generating random key until it finds one that isn't used
+     *
      * @return The key associated with given uri
      */
-    public static Var varKey(String uri,Map<String,Var> keys){
+    public static Var varKey(String uri, Map<String, Var> keys) {
         Var key;
-        if(keys.containsKey(uri)){
+        if (keys.containsKey(uri)) {
             key = keys.get(uri);
-        }else{
-            do{key = newVar();}
+        } else {
+            do {
+                key = newVar();
+            }
             while (keys.containsKey(key));
-            keys.put(uri,key);
+            keys.put(uri, key);
         }
         return key;
     }
@@ -65,15 +76,14 @@ public class ElementUtils {
     }
 
     /**
-     * @return A list of every variables mentioned by the element that are mentioned to this Cluster
      * @return null if the element is completely disconnected from the Cluster
      */
-    public static List<Var> mentioned(Element element){
+    public static List<Var> mentioned(Element element) {
         List<Var> varE = new ArrayList<>();
         if (element instanceof ElementFilter) {
             varE.addAll(((ElementFilter) element).getExpr().getVarsMentioned());
         } else // if (element instanceof ElementPathBlock)
-            {
+        {
             varE.addAll((new E_Exists(element)).getVarsMentioned());
         }
         return varE;
@@ -81,26 +91,27 @@ public class ElementUtils {
 
     /**
      * Relaxes a filter
+     *
      * @param filter The filter to relax
-     * @param model The model in which to describe what has to be relaxed
-     * @param keys The keys used until now to describe certain uris
+     * @param model  The model in which to describe what has to be relaxed
+     * @param keys   The keys used until now to describe certain uris
      * @return A list of all the new Query elements obtained from relaxing the filter (relax(e))
      */
-    public static List<Element> relaxFilter(ElementFilter filter,CollectionsModel model,Map<String,Var> keys){
+    public static List<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys) {
         ExprFunction f = filter.getExpr().getFunction();
         List<Element> list = new ArrayList<>();
-        if(f instanceof E_Equals){
-            for (Expr expr : f.getArgs()){
-                if (expr instanceof NodeValueNode){
-                    logger.info("Relaxing : "+expr);
-                    list.addAll(ElementUtils.describeNode((expr).toString().replaceAll("<","").replaceAll(">",""),model,keys));
+        if (f instanceof E_Equals) {
+            for (Expr expr : f.getArgs()) {
+                if (expr instanceof NodeValueNode) {
+                    logger.info("Relaxing : " + expr);
+                    list.addAll(ElementUtils.describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model, keys));
                 }
             }
         }
 
-        List<Element> res= new ArrayList<>();
-        for (Element e : list){
-            if (!(e instanceof ElementFilter)){ //TODO For now the algorithm doesn't add new filters, which means it only uses a depth of one to describe the node
+        List<Element> res = new ArrayList<>();
+        for (Element e : list) {
+            if (!(e instanceof ElementFilter)) { //TODO For now the algorithm doesn't add new filters, which means it only uses a depth of one to describe the node
                 res.add(e);
             }
         }
@@ -108,15 +119,15 @@ public class ElementUtils {
     }
 
     /**
-     * @param uri The uri of the Node to be described
-     * @param model The Model to use to describe the Node
+     * @param uri          The uri of the Node to be described
+     * @param model        The Model to use to describe the Node
      * @param varsOccupied The keys used until now to describe certain uris
      * @return A list of Query elements (triple pattern and Filters) describing the Nodes known properties
      */
-    public static List<Element> describeNode(String uri, CollectionsModel model, Map<String,Var> varsOccupied) {
+    public static List<Element> describeNode(String uri, CollectionsModel model, Map<String, Var> varsOccupied) {
         List<Element> res = new ArrayList<>();
-        Map<Property,List<RDFNode>> propertiesFrom = model.triplesSimple.get(uri);
-        if (propertiesFrom!=null) {
+        Map<Property, List<RDFNode>> propertiesFrom = model.triplesSimple.get(uri);
+        if (propertiesFrom != null) {
             for (Property property : propertiesFrom.keySet()) {
                 List<RDFNode> objects = propertiesFrom.get(property);
                 for (RDFNode object : objects) {
@@ -140,64 +151,65 @@ public class ElementUtils {
                 }
             }
         }
-        Map<Property,List<RDFNode>> propertiesTo = model.triplesSimple.get(uri);
-        if (propertiesTo!=null){
-        for(Property property : propertiesTo.keySet()){
-            List<RDFNode> subjects = propertiesTo.get(property);
-            for(RDFNode subject : subjects ){
-                if(!property.equals(RDF.type)) {
-                    Var var;
-                    if (subject.isURIResource()) {
-                        var = varKey(subject.asResource().getURI(), varsOccupied);
-                    } else {
-                        var = varKey(subject.asLiteral().toString(), varsOccupied);
+        Map<Property, List<RDFNode>> propertiesTo = model.triplesSimple.get(uri);
+        if (propertiesTo != null) {
+            for (Property property : propertiesTo.keySet()) {
+                List<RDFNode> subjects = propertiesTo.get(property);
+                for (RDFNode subject : subjects) {
+                    if (!property.equals(RDF.type)) {
+                        Var var;
+                        if (subject.isURIResource()) {
+                            var = varKey(subject.asResource().getURI(), varsOccupied);
+                        } else {
+                            var = varKey(subject.asLiteral().toString(), varsOccupied);
+                        }
+                        ElementPathBlock triple = new ElementPathBlock();
+                        triple.addTriple(Triple.create(var, property.asNode(), varKey(uri, varsOccupied)));
+                        res.add(triple);
+                        ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
+                        res.add(filter);
                     }
-                    ElementPathBlock triple = new ElementPathBlock();
-                    triple.addTriple(Triple.create(var, property.asNode(), varKey(uri, varsOccupied)));
-                    res.add(triple);
-                    ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
-                    res.add(filter);
                 }
             }
-        }
         }
         return res;
     }
 
     /**
      * RDF:type is to be relaxed differently than other properties
+     *
      * @param triple A triple pattern with predicate RDF:type
-     * @param model The model in which to search for successors
+     * @param model  The model in which to search for successors
      * @return A list of all the new Query elements obtained from relaxing the triple pattern (relax(e))
      */
-    public static List<Element> relaxClass(TriplePath triple, CollectionsModel model){
-        logger.info("Relaxing "+triple);
+    public static List<Element> relaxClass(TriplePath triple, CollectionsModel model) {
+        logger.info("Relaxing " + triple);
         List<RDFNode> list = model.subClassOf.get(triple.getObject().toString());
-        logger.info("Subclasses "+model.subClassOf+"Found  :"+list);
+        logger.info("Subclasses " + model.subClassOf + "Found  :" + list);
         List<Element> res = new ArrayList<>();
-        if(list!=null) {
+        if (list != null) {
             for (RDFNode successor : list) {
                 ElementPathBlock pathBlock = new ElementPathBlock();
                 pathBlock.addTriple(Triple.create(triple.getSubject(), triple.getPredicate(), successor.asNode()));
                 res.add(pathBlock);
             }
         }
-        logger.info("Relaxed to "+res);
+        logger.info("Relaxed to " + res);
         return res;
     }
 
     /**
      * @param triple A triple pattern
-     * @param model The model in which to search for successors
+     * @param model  The model in which to search for successors
      * @return A list of all the new Query elements obtained from relaxing the triple pattern (relax(e))
      */
-    public static List<Element> relaxProperty(TriplePath triple, CollectionsModel model){
+    public static List<Element> relaxProperty(TriplePath triple, CollectionsModel model) {
         List<RDFNode> list = model.subPropertyOf.get(triple.getPredicate().toString());
         List<Element> res = new ArrayList<>();
-        if (list!=null){
-            for (RDFNode successor : list){
+        if (list != null) {
+            for (RDFNode successor : list) {
                 ElementPathBlock pathBlock = new ElementPathBlock();
-                pathBlock.addTriple(Triple.create(triple.getSubject(),successor.asNode(),triple.getObject()));
+                pathBlock.addTriple(Triple.create(triple.getSubject(), successor.asNode(), triple.getObject()));
                 res.add(pathBlock);
             }
         }
@@ -205,23 +217,23 @@ public class ElementUtils {
     }
 
     /**
-     * Same as {@link #relaxFilter(ElementFilter, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
+     * @deprecated Same as {@link #relaxFilter(ElementFilter, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
-    public static List<Element> relaxFilter(ElementFilter filter,Model graph,Map<String,Var> keys) {
+    public static List<Element> relaxFilter(ElementFilter filter, Model graph, Map<String, Var> keys) {
         ExprFunction f = filter.getExpr().getFunction();
         List<Element> list = new ArrayList<>();
-        if(f instanceof E_Equals){
-            for (Expr expr : f.getArgs()){
-                if (expr instanceof NodeValueNode){
-                    logger.info("Relaxing : "+expr);
-                    list.addAll(ElementUtils.describeNode(((ExprNode)expr).toString().replaceAll("<","").replaceAll(">",""),graph,keys));
+        if (f instanceof E_Equals) {
+            for (Expr expr : f.getArgs()) {
+                if (expr instanceof NodeValueNode) {
+                    logger.info("Relaxing : " + expr);
+                    list.addAll(ElementUtils.describeNode(((ExprNode) expr).toString().replaceAll("<", "").replaceAll(">", ""), graph, keys));
                 }
             }
         }
-        List<Element> res= new ArrayList<>();
-        for (Element e : list){
-            if (!(e instanceof ElementFilter)){
+        List<Element> res = new ArrayList<>();
+        for (Element e : list) {
+            if (!(e instanceof ElementFilter)) {
                 res.add(e);
             }
         }
@@ -229,54 +241,54 @@ public class ElementUtils {
     }
 
     /**
-     * Same as {@link #relaxClass(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
+     * @deprecated Same as {@link #relaxClass(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
-    public static List<Element> relaxClass(TriplePath triple, Model graph){
-        logger.info("Relaxing :"+triple);
+    public static List<Element> relaxClass(TriplePath triple, Model graph) {
+        logger.info("Relaxing :" + triple);
         List<Element> list = new ArrayList<>();
         String queryString = "SELECT ?s ?p ?o WHERE {" +
-                "?s ?p ?o. FILTER(?s = <" + triple.getObject() + ">). FILTER(?p = <"+ RDFS.subClassOf+">). }";
+                "?s ?p ?o. FILTER(?s = <" + triple.getObject() + ">). FILTER(?p = <" + RDFS.subClassOf + ">). }";
         QueryExecution qeExt = QueryExecutionFactory.create(QueryFactory.create(queryString), graph);
         ResultSet rs = qeExt.execSelect();
-        while (rs.hasNext()){
+        while (rs.hasNext()) {
             Binding b = rs.nextBinding();
             Node successor = b.get(Var.alloc("o"));
             ElementPathBlock pathBlock = new ElementPathBlock();
-            pathBlock.addTriple(Triple.create(triple.getSubject(),RDF.type.asNode(),successor));
+            pathBlock.addTriple(Triple.create(triple.getSubject(), RDF.type.asNode(), successor));
             list.add(pathBlock);
-            logger.info("Relaxed to "+successor);
+            logger.info("Relaxed to " + successor);
         }
         return list;
     }
 
     /**
-     * Same as {@link #relaxProperty(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
+     * @deprecated Same as {@link #relaxProperty(TriplePath, CollectionsModel)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
-    public static List<Element> relaxProperty(TriplePath triple, Model graph){
-        logger.info("Relaxing :"+triple);
+    public static List<Element> relaxProperty(TriplePath triple, Model graph) {
+        logger.info("Relaxing :" + triple);
         List<Element> list = new ArrayList<>();
         String queryString = "SELECT ?s ?p ?o WHERE {" +
-                "?s ?p ?o. FILTER(?s = <" + triple.getPredicate() + ">). FILTER(?p = <"+ RDFS.subPropertyOf+">). }";
+                "?s ?p ?o. FILTER(?s = <" + triple.getPredicate() + ">). FILTER(?p = <" + RDFS.subPropertyOf + ">). }";
         QueryExecution qeExt = QueryExecutionFactory.create(QueryFactory.create(queryString), graph);
         ResultSet rs = qeExt.execSelect();
-        while (rs.hasNext()){
+        while (rs.hasNext()) {
             Binding b = rs.nextBinding();
             Node successor = b.get(Var.alloc("o"));
             ElementPathBlock pathBlock = new ElementPathBlock();
-            pathBlock.addTriple(Triple.create(triple.getSubject(),successor,triple.getObject()));
+            pathBlock.addTriple(Triple.create(triple.getSubject(), successor, triple.getObject()));
             list.add(pathBlock);
-            logger.info("Relaxed to "+successor);
+            logger.info("Relaxed to " + successor);
         }
         return list;
     }
 
     /**
-     * Same as {@link #describeNode(String, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
+     * @deprecated Same as {@link #describeNode(String, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
-    public static List<Element> describeNode(String uri, Model graph, Map<String,Var> varsOccupied) {
+    public static List<Element> describeNode(String uri, Model graph, Map<String, Var> varsOccupied) {
         uri = graph.expandPrefix(uri);
         String queryString = "SELECT ?s ?p ?o WHERE {" +
                 "?s ?p ?o. FILTER(?s = <" + uri + ">).}";
@@ -293,14 +305,14 @@ public class ElementUtils {
 //            logger.debug(subject+" "+property+" "+object);
             if (property.equals(RDF.type.asNode())) {
                 ElementPathBlock element = new ElementPathBlock();
-                element.addTriple(Triple.create(varKey(uri,varsOccupied), property, object));
+                element.addTriple(Triple.create(varKey(uri, varsOccupied), property, object));
                 list.add(element);
             } else {
                 Var var;
                 if (object.isURI()) {
                     var = varKey(object.getURI(), varsOccupied);
                 } else {
-                    var = varKey(object.getLiteral().toString(),varsOccupied);
+                    var = varKey(object.getLiteral().toString(), varsOccupied);
                 }
                 ElementPathBlock triple = new ElementPathBlock();
                 triple.addTriple(Triple.create(varKey(uri, varsOccupied), property, var));
@@ -320,9 +332,9 @@ public class ElementUtils {
             Node property = b.get(Var.alloc("p"));
             Node object = b.get(Var.alloc("o"));
 //            System.out.println(subject+" "+property+" "+object);
-            Var var = varKey(subject.getURI(),varsOccupied);
+            Var var = varKey(subject.getURI(), varsOccupied);
             ElementPathBlock triple = new ElementPathBlock();
-            triple.addTriple(Triple.create(var, property, varKey(uri,varsOccupied)));
+            triple.addTriple(Triple.create(var, property, varKey(uri, varsOccupied)));
             list.add(triple);
             ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject)));
             list.add(filter);

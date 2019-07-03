@@ -27,14 +27,14 @@ public class PartitionRun implements Runnable {
     private BooleanProperty available;
     private BooleanProperty cut;
 
-    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available,BooleanProperty cut){
+    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available, BooleanProperty cut) {
         super();
-        graph=md;
-        uriTarget=uri;
-        resultsContainer=container;
-        partition=p;
-        this.available=available;
-        this.cut=cut;
+        graph = md;
+        uriTarget = uri;
+        resultsContainer = container;
+        partition = p;
+        this.available = available;
+        this.cut = cut;
     }
 
     @Override
@@ -55,12 +55,12 @@ public class PartitionRun implements Runnable {
 
         boolean run = !cut.get();
 
-        while (run){
+        while (run) {
             try {
                 run = (!cut.get()) && partition.iterate();
             } catch (PartitionException e) {
                 e.printStackTrace();
-            } catch (OutOfMemoryError oom){
+            } catch (OutOfMemoryError oom) {
                 run = false;
             }
         }
@@ -73,7 +73,7 @@ public class PartitionRun implements Runnable {
             }
         });
         PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Cluster c = queue.poll();
             TitledPane cluster = clusterVisual(c);
             cluster.prefWidthProperty().bind(resultsContainer.widthProperty());

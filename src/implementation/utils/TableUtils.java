@@ -1,12 +1,7 @@
 package implementation.utils;
 
 import org.apache.jena.graph.Node;
-import org.apache.jena.query.Query;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.impl.ResourceImpl;
@@ -14,7 +9,10 @@ import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.QueryIterator;
-import org.apache.jena.sparql.engine.binding.*;
+import org.apache.jena.sparql.engine.binding.Binding;
+import org.apache.jena.sparql.engine.binding.BindingFactory;
+import org.apache.jena.sparql.engine.binding.BindingHashMap;
+import org.apache.jena.sparql.engine.binding.BindingUtils;
 import org.apache.jena.sparql.engine.join.QueryIterHashJoin;
 import org.apache.jena.sparql.expr.E_Equals;
 import org.apache.jena.sparql.expr.Expr;
@@ -25,11 +23,7 @@ import org.apache.jena.sparql.syntax.ElementFilter;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TableUtils {
     private static Logger logger = Logger.getLogger(TableUtils.class);
@@ -46,9 +40,10 @@ public class TableUtils {
      * Applies ext(M,e,G)
      * if e is a filter, ext(M,e,G) is just a selection on M where the filter is satisfied
      * if e is a triple pattern, ext(M,e,G) := [ M (join) ans(var(e) <-- {e},G) ]
+     *
      * @param mapping The Table representing the mapping M
      * @param element The Element e
-     * @param model The CollectionsModel containing the graph G
+     * @param model   The CollectionsModel containing the graph G
      * @return
      */
     public static Table ext(Table mapping, Element element, CollectionsModel model) {
@@ -59,7 +54,7 @@ public class TableUtils {
             logger.debug("is filter");
             Expr expr = ((ElementFilter) element).getExpr();
             if (expr instanceof E_Equals) {
-                Var var = ((ExprVar)((E_Equals) expr).getArg1()).asVar();
+                Var var = ((ExprVar) ((E_Equals) expr).getArg1()).asVar();
                 Node node = ((NodeValue) ((E_Equals) expr).getArg2()).asNode();
                 Iterator<Binding> iter = mapping.rows();
                 iter.forEachRemaining((b) -> {
@@ -89,7 +84,7 @@ public class TableUtils {
                         logger.debug("object connected");
                         Iterator<Binding> iter = mapping.rows();
                         iter.forEachRemaining((b) -> {
-                            if (b.get(var).isURI()&&b.get(objVar).isURI()) {
+                            if (b.get(var).isURI() && b.get(objVar).isURI()) {
                                 RDFNode bindSubject = new ResourceImpl(b.get(var).getURI());
                                 RDFNode bindObject = new ResourceImpl(b.get(objVar).getURI());
                                 if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
@@ -136,11 +131,11 @@ public class TableUtils {
                                     bind2.add(var, subj.asNode());
                                     res.addBinding(bind2);
                                 }
-                            }else logger.debug("not in this predicate");
+                            } else logger.debug("not in this predicate");
                         });
                     }
                     // No need for else because there has to be at least one that's connected so for now it's always true
-                    //TODO If one day we can relax predicates as filters, this will change
+                    // TODO If one day we can relax predicates as filters, this will change
                 }
             } else {
                 logger.debug("subject is variable");
@@ -156,7 +151,7 @@ public class TableUtils {
                             if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
                                 if (model.predicates.get(predicate.toString()).get(bindSubject).contains(objNode)) {
                                     res.addBinding(b);
-                                    logger.debug("found "+objNode+" in predicates");
+                                    logger.debug("found " + objNode + " in predicates");
                                 }
                             } else logger.debug("not in this predicate");
                         });
@@ -196,8 +191,9 @@ public class TableUtils {
 
     /**
      * Algebric table projection
+     *
      * @param table The table to project
-     * @param vars A list of variables to do the projection on
+     * @param vars  A list of variables to do the projection on
      */
     public static TableN projection(Table table, List<Var> vars) {
         TableN res = new TableN();
@@ -214,6 +210,7 @@ public class TableUtils {
 
     /**
      * Algebric Table difference
+     *
      * @param left
      * @param right
      * @return The left table from which all elements appearing in the right table have been removed

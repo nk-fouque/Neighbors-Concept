@@ -51,21 +51,21 @@ public class Main {
         // Creation of the Partition
         Partition p = new Partition(q, md, saturated, keys);
         System.out.println(p.getClusters().get(0));
-        System.out.println("Printing graph"+p.getGraph());
+        System.out.println("Printing graph" + p.getGraph());
 
         FileWriter writer = new FileWriter("/udd/nfouque/Documents/results.txt");
         // Apply algorithm
         SingletonStopwatchCollection.resume("Main");
         int algoRun = p.partitionAlgorithm();
-        switch(algoRun){
-            case 0 : {
+        switch (algoRun) {
+            case 0: {
                 System.out.println(p.toString());
                 writer.write(p.toString());
             }
-            case -1 : {
+            case -1: {
                 System.out.println("Something went Wrong with the partition");
             }
-            case 1 : {
+            case 1: {
                 System.out.println("Java Heap went out of memory, anytime algorithm cut");
                 p.cut();
                 System.out.println(p.toString());
