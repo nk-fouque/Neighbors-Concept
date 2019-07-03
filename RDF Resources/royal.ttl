@@ -1,0 +1,21 @@
+@prefix : <http://example.org/royal/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+:man rdfs:subClassOf :human.
+:woman rdfs:subClassOf :human.
+:corgi rdfs:subClassOf :dog.
+:human rdfs:subClassOf :living.
+:dog rdfs:subClassOf :living.
+:George a :man ;
+	:parent :William, :Kate .
+:Harry 	a :man ;
+	:parent :Charles, :Diana.
+:William a :man ;
+	:parent :Charles, :Diana.
+:Charles a :man .
+:Charlotte a :woman ;
+	:parent :William, :Kate .
+:Kate a :woman .
+:Diana a :woman .
+:Vulcan a :corgi.
+:Candy a :corgi.

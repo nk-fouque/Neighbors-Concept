@@ -1,14 +1,14 @@
-#Neighbors concept algorithm  
+# Neighbors concept algorithm  
 
-##Project  
+## Project  
 Implement the algorithms described in **Answers Partitioning and Lazy Joins for Efficient QueryRelaxation and Application to Similarity Search** by *Sébastien Ferré*
-in **Jena** A Java library for Semantic Web
-###Objectives
+in **Jena** A Java library for Semantic Web  
+### Objectives
 * Finish implementing the two algorithms
 * Compare the results obtained by the early implementation made using OCaml
 * Make all the necessary accommodations for the patch to be re-usable by other Jena users
 * Create a Demo version, if possible in the form of a Graphical User Interface
-###Resources
+### Resources
 * https://hal.archives-ouvertes.fr/hal-01945454/document : Publication describing the algorithms
 * https://jena.apache.org/documentation/javadoc/jena/ : Jena Documentation for Base RDF Graphs
 * https://jena.apache.org/documentation/javadoc/arq/ : Jena Documentation for ARQ, the SPARQL Engine
@@ -27,16 +27,27 @@ notably in Hashmaps, very useful for their computational speed to avoid using AR
 * Classes `Stopwatch` and `SingleStopwatchCollection` a very simple class of stopwatches to compensate not being able to run Async Profiler on my computer
 ##### `gui` package
 * MVC representation for the Interface Demo
-  * `model` : empty because the actual model is the main class
+  * `model`
+    * `NeighborButton` is a button that triggers the partition for an associated neighbor
+    * `PrtitionRun` is a runnable that applies the partition algorithm in another Thread and prompts the results 
   * `view`
     * `neighborsInterface.fxml` : fxml file for the base ground of the Interface
     * `css` : All the Stylesheets for the interface
   * `controller` 
     * `NeighborsController ` : JavaFX controller for the interface
-#### Some explanations
 ##### 'keys' map
+The algorithm would go infinite if it created a new random variable name every time it introduces a uri as a filter, 
+so instead when a filter is added, the random variable associated with it is put inside a map that will be used if that filter is to be put again
 
-#####
+### Anytime Implementation
+Both implementations use a version that cuts the algorithm in case of OutOfMemoryError or under some action of the user
+  * The Main class intercepts the SIGINT signal, naturally sent by IntelliJ when you click on the stop button (the second time it sends SIGKILL)
+  * The Interface has a Button to stop the algorithm  
+  
+When the algorithm is interrupted, it finishes the current run of `iterate()` and moves every clusters to neighbors. 
+It considers the algorithm over, printing/displaying everything it was supposed to.
+  * In the Main class, the process then stops
+  * In the interface, the process is repeatable, be sure to unselect the Button (or it will stop before the first iteration)
 
 ### Notes
 * Still some *TODO* flags for noticed discrepancies between the implementation's behavior and its supposed perfect behavior
@@ -45,7 +56,7 @@ notably in Hashmaps, very useful for their computational speed to avoid using AR
 * Works with mondial when limiting one object per predicate per subject in 160s
   * The only remaining problem factor is the size of the dataset which makes table joins very difficult
 ## User Documentation
-#### Main Class
+### Main Class
 * Every part of the main is explained in comments in the code
 * The lines you might want to change are : 
   * The one setting up the String `filename` which is the absolute path of the file containing the RDF data
@@ -53,7 +64,7 @@ notably in Hashmaps, very useful for their computational speed to avoid using AR
   * The one setting up the String `uriTarget` which is the uri of the node you want to find the neighbors of
   * The few ones at the beginning, defining the log4j logging levels
   
-#### GUI
+### GUI
 * Execute `implementation.gui.NeighborsInterface.main()`  
 * Find your RDF File
   * Click on the *Browse* button and find your RDF file in the file explorer      
@@ -62,3 +73,4 @@ notably in Hashmaps, very useful for their computational speed to avoid using AR
 * Click on *Load RDF File*
 * In the choice box that appears on the right, select the uri of the node you want to find the neighbors of
   * If there are too many possible nodes, you can narrow it down by typing part of the uri you want in the text field next to the *Filter* Button
+
