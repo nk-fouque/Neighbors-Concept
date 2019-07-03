@@ -1,3 +1,4 @@
+import implementation.Cluster;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.rdf.model.Model;
@@ -8,7 +9,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import implementation.Cluster;
 
 import static org.junit.jupiter.api.Assertions.*;
 

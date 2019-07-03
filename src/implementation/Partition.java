@@ -8,9 +8,6 @@ import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import sun.misc.Signal;
-import sun.misc.SignalHandler;
-
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,10 +9,12 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import org.apache.jena.rdf.model.Model;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class NeighborButton extends Button {
     private String uri;
 
-    public NeighborButton(String uri, Accordion resultsContainer, Model md, Partition part, BooleanProperty available, BooleanProperty cut) {
+    public NeighborButton(String uri, Accordion resultsContainer, Model md, Partition part, BooleanProperty available, AtomicBoolean cut) {
         super();
         this.uri = uri;
         this.textProperty().setValue("Find neighbors");

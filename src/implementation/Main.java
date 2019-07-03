@@ -1,6 +1,6 @@
 package implementation;
 
-import org.apache.jena.base.Sys;
+import implementation.utils.SingletonStopwatchCollection;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -9,11 +9,12 @@ import org.apache.jena.sparql.core.Var;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import implementation.utils.SingletonStopwatchCollection;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;

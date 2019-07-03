@@ -1,5 +1,6 @@
 package implementation;
 
+import implementation.utils.*;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.ResultSetFormatter;
@@ -19,10 +20,12 @@ import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import implementation.utils.*;
 
 import java.io.ByteArrayOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class Cluster implements Comparable<Cluster> {
     private static Logger logger = Logger.getLogger(Cluster.class);

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NeighborsController implements Initializable {
 
@@ -57,8 +58,6 @@ public class NeighborsController implements Initializable {
     @FXML
     BorderPane partitionCandidates;
     @FXML
-    Accordion candidatesAccordion;
-    @FXML
     ScrollPane scrollPane;
     @FXML
     FlowPane candidates;
@@ -77,7 +76,7 @@ public class NeighborsController implements Initializable {
 
     private SimpleBooleanProperty partitionAvailable = new SimpleBooleanProperty(true);
 
-    private SimpleBooleanProperty anytimeCut = new SimpleBooleanProperty(false);
+    private AtomicBoolean anytimeCut = new AtomicBoolean(false);
 
     private List<String> formats() {
         List<String> res = new ArrayList<>();
@@ -113,6 +112,7 @@ public class NeighborsController implements Initializable {
             public void handle(MouseEvent mouseEvent) {
                 String filename = filenameField.getText();
                 try {
+                    candidates.getChildren().clear();
                     md.read(new FileInputStream(filename), null, format.getValue());
                     md.write(System.out, format.getValue());
 
@@ -132,7 +132,7 @@ public class NeighborsController implements Initializable {
                     TitledPane err = new TitledPane();
                     err.setText("File not found");
                     err.setContent(new Text(e.getMessage()));
-                    candidatesAccordion.getPanes().add(err);
+                    candidates.getChildren().add(err);
                     e.printStackTrace();
                 }
             }
@@ -157,15 +157,17 @@ public class NeighborsController implements Initializable {
 
         partitionCandidates.autosize();
 
-        cutLabel.visibleProperty().bind(anytimeCut);
+        cutLabel.setVisible(false);
         cutLabel.setText("/!\\ Algorithm will stop early, please deactivate before running new partition /!\\");
         cutButton.setOnMouseClicked(mouseEvent -> {
             if (!anytimeCut.get()) {
                 cutButton.setStyle("-fx-background-color: red");
-                anytimeCut.setValue(true);
+                anytimeCut.set(true);
+                cutLabel.setVisible(true);
             } else {
                 cutButton.setStyle("-fx-background-color: black");
-                anytimeCut.setValue(false);
+                anytimeCut.set(false);
+                cutLabel.setVisible(false);
             }
         });
     }

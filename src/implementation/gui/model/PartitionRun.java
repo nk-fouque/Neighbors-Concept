@@ -2,7 +2,6 @@ package implementation.gui.model;
 
 import implementation.Cluster;
 import implementation.Partition;
-import implementation.utils.PartitionException;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
@@ -16,6 +15,7 @@ import org.apache.jena.sparql.core.Var;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static implementation.gui.controller.NeighborsController.clusterVisual;
 
@@ -25,9 +25,9 @@ public class PartitionRun implements Runnable {
     private String uriTarget;
     private Accordion resultsContainer;
     private BooleanProperty available;
-    private BooleanProperty cut;
+    private AtomicBoolean cut;
 
-    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available, BooleanProperty cut) {
+    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available, AtomicBoolean cut) {
         super();
         graph = md;
         uriTarget = uri;
@@ -53,43 +53,37 @@ public class PartitionRun implements Runnable {
         // Creation of the Partition
         partition = new Partition(q, graph, saturated, keys);
 
-        boolean run = !cut.get();
-
-        while (run) {
-            try {
-                run = (!cut.get()) && partition.iterate();
-            } catch (PartitionException e) {
-                e.printStackTrace();
-            } catch (OutOfMemoryError oom) {
-                run = false;
-            }
-        }
+        int algoRun = partition.partitionAlgorithm(cut);
         partition.cut();
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                resultsContainer.getPanes().clear();
-            }
-        });
-        PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
-        while (!queue.isEmpty()) {
-            Cluster c = queue.poll();
-            TitledPane cluster = clusterVisual(c);
-            cluster.prefWidthProperty().bind(resultsContainer.widthProperty());
+        if (algoRun>=0) {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    resultsContainer.getPanes().add(cluster);
+                    resultsContainer.getPanes().clear();
                 }
             });
-        }
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                resultsContainer.autosize();
+            PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
+            while (!queue.isEmpty()) {
+                Cluster c = queue.poll();
+                TitledPane cluster = clusterVisual(c);
+                cluster.prefWidthProperty().bind(resultsContainer.widthProperty());
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        resultsContainer.getPanes().add(cluster);
+                    }
+                });
             }
-        });
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    resultsContainer.autosize();
+                }
+            });
+
+        }
         available.setValue(true);
+        Thread.currentThread().interrupt();
     }
 }
