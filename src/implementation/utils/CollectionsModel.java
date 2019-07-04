@@ -8,6 +8,9 @@ import org.apache.jena.vocabulary.RDFS;
 
 import java.util.*;
 
+/**
+ * Shouldn't be useful after the implementation of LazyJoins
+ */
 public class CollectionsModel {
 
     private Model graph;
@@ -27,19 +30,19 @@ public class CollectionsModel {
         StmtIterator iter = mdInf.listStatements();
         iter.forEachRemaining(stmt -> {
             Map<Property, List<RDFNode>> propertiesFrom = triples.computeIfAbsent(stmt.getSubject().toString(), (m) -> new HashMap<>());
-            List thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
+            List<RDFNode> thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyFrom.add(stmt.getObject());
 
             Map<Property, List<RDFNode>> propertiesTo = triplesReversed.computeIfAbsent(stmt.getObject().toString(), (m) -> new HashMap<>());
-            List thatPropertyTo = propertiesTo.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
+            List<RDFNode> thatPropertyTo = propertiesTo.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyTo.add(stmt.getSubject());
 
             Map<RDFNode, List<RDFNode>> properties = predicates.computeIfAbsent(stmt.getPredicate().toString(), (m) -> new HashMap<>());
-            List thatProperty = properties.computeIfAbsent(stmt.getSubject(), (l) -> new ArrayList<>());
+            List<RDFNode> thatProperty = properties.computeIfAbsent(stmt.getSubject(), (l) -> new ArrayList<>());
             thatProperty.add(stmt.getObject());
 
             Map<RDFNode, List<RDFNode>> propertiesReversed = predicatesReversed.computeIfAbsent(stmt.getPredicate().toString(), (m) -> new HashMap<>());
-            List thatPropertyReversed = propertiesReversed.computeIfAbsent(stmt.getObject(), (l) -> new ArrayList<>());
+            List<RDFNode> thatPropertyReversed = propertiesReversed.computeIfAbsent(stmt.getObject(), (l) -> new ArrayList<>());
             thatPropertyReversed.add(stmt.getSubject());
         });
 
@@ -53,7 +56,7 @@ public class CollectionsModel {
                 list.add(stmt.getObject());
             }
             Map<Property, List<RDFNode>> propertiesFrom = triplesSimple.computeIfAbsent(stmt.getSubject().toString(), (m) -> new HashMap<>());
-            List thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
+            List<RDFNode> thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyFrom.add(stmt.getObject());
         });
     }
@@ -69,14 +72,12 @@ public class CollectionsModel {
     /**
      * For debugging purposes, makes the model lighter by assigning only one object to every properties of a subject
      * TODO Remove this function completely
-     *
-     * @return
      */
     public void downSizing() {
         HashMap<String, Map<Property, List<RDFNode>>> triplesDown = new HashMap<>();
         for (String s : triples.keySet()) {
             for (Property p : triples.get(s).keySet()) {
-                List list = Collections.singletonList(triples.get(s).get(p).get(0));
+                List<RDFNode> list = Collections.singletonList(triples.get(s).get(p).get(0));
                 Map<Property, List<RDFNode>> map1 = new HashMap<>();
                 map1.put(p, list);
                 triplesDown.put(s, map1);
@@ -88,7 +89,7 @@ public class CollectionsModel {
         HashMap<String, Map<Property, List<RDFNode>>> triplesSimplesDown = new HashMap<>();
         for (String s : triplesSimple.keySet()) {
             for (Property p : triplesSimple.get(s).keySet()) {
-                List list = Collections.singletonList(triplesSimple.get(s).get(p).get(0));
+                List<RDFNode> list = Collections.singletonList(triplesSimple.get(s).get(p).get(0));
                 Map<Property, List<RDFNode>> map = new HashMap<>();
                 map.put(p, list);
                 triplesSimplesDown.put(s, map);

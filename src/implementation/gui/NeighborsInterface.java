@@ -28,7 +28,7 @@ public class NeighborsInterface extends Application {
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("view/neighborsInterface.fxml"));
         Scene scene = new Scene(root);
-        this.scene = scene;
+        NeighborsInterface.scene = scene;
         primaryStage.setScene(scene);
         primaryStage.setTitle("Neighbors Concept");
         primaryStage.show();

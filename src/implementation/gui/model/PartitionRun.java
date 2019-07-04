@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
+import javafx.scene.text.Text;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -45,43 +46,31 @@ public class PartitionRun implements Runnable {
         Map<String, Var> keys = new HashMap<>();
         String QueryString = Partition.initialQueryString(uriTarget, graph, keys);
 
-        // Printing the result just to show that we find it back
         Query q = QueryFactory.create(QueryString);
         QueryExecution qe = QueryExecutionFactory.create(q, saturated);
         ResultSetFormatter.out(System.out, qe.execSelect(), q);
 
-        // Creation of the Partition
         partition = new Partition(q, graph, saturated, keys);
 
         int algoRun = partition.partitionAlgorithm(cut);
         partition.cut();
 
         if (algoRun>=0) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    resultsContainer.getPanes().clear();
-                }
-            });
+            Platform.runLater(() -> resultsContainer.getPanes().clear());
             PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
                 TitledPane cluster = clusterVisual(c);
                 cluster.prefWidthProperty().bind(resultsContainer.widthProperty());
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        resultsContainer.getPanes().add(cluster);
-                    }
-                });
+                Platform.runLater(() -> resultsContainer.getPanes().add(cluster));
             }
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    resultsContainer.autosize();
-                }
-            });
+            Platform.runLater(() -> resultsContainer.autosize());
 
+        } else {
+            Platform.runLater(() -> resultsContainer.getPanes().clear());
+            TitledPane error = new TitledPane();
+            error.setText("Something went wrong :/");
+            Platform.runLater(() -> resultsContainer.getPanes().add(error));
         }
         available.setValue(true);
         Thread.currentThread().interrupt();

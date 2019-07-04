@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class NeighborButton extends Button {
     private String uri;
 
-    public NeighborButton(String uri, Accordion resultsContainer, Model md, Partition part, BooleanProperty available, AtomicBoolean cut) {
+    public NeighborButton(String uri, Accordion resultsContainer, Model graph, Partition partition, BooleanProperty available, AtomicBoolean cut) {
         super();
         this.uri = uri;
         this.textProperty().setValue("Find neighbors");
@@ -26,7 +26,7 @@ public class NeighborButton extends Button {
                 TitledPane loading = new TitledPane();
                 loading.setText("Loading neighbors for " + uri + " please wait");
                 resultsContainer.getPanes().add(loading);
-                Runnable algo = new PartitionRun(md, uri, resultsContainer, part, available, cut);
+                Runnable algo = new PartitionRun(graph, uri, resultsContainer, partition, available, cut);
                 Thread thread = new Thread(algo);
                 thread.start();
             }

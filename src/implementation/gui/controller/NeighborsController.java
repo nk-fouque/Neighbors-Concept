@@ -3,20 +3,20 @@ package implementation.gui.controller;
 import implementation.Cluster;
 import implementation.Partition;
 import implementation.gui.NeighborsInterface;
+import implementation.gui.model.CopyButton;
 import implementation.gui.model.NeighborButton;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -91,69 +91,56 @@ public class NeighborsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pane.setPrefSize(1920, 1080);
+
         md = ModelFactory.createDefaultModel();
 
         format.setItems(new SortedList<String>(FXCollections.observableList(formats())));
         format.setValue("TURTLE");
 
         final FileChooser fileChooser = new FileChooser();
-        fileFindButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                File file = fileChooser.showOpenDialog(NeighborsInterface.stage);
-                if (file != null) {
-                    filenameField.textProperty().setValue(file.getAbsolutePath());
-                }
+        fileFindButton.setOnMouseClicked(mouseEvent -> {
+            File file = fileChooser.showOpenDialog(NeighborsInterface.stage);
+            if (file != null) {
+                filenameField.textProperty().setValue(file.getAbsolutePath());
             }
         });
 
-        modelLoadButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                String filename = filenameField.getText();
-                try {
-                    candidates.getChildren().clear();
-                    md.read(new FileInputStream(filename), null, format.getValue());
-                    md.write(System.out, format.getValue());
+        modelLoadButton.setOnMouseClicked(mouseEvent -> {
+            String filename = filenameField.getText();
+            try {
+                candidates.getChildren().clear();
+                md.read(new FileInputStream(filename), null, format.getValue());
+                md.write(System.out, format.getValue());
 
-                    subjectsList = new ArrayList<>();
-                    ResIterator iter = md.listSubjects();
-                    while (iter.hasNext()) {
-                        subjectsList.add(iter.nextResource().getURI());
-                    }
-                    PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
-                    while (!queue.isEmpty()) {
-                        BorderPane visual = NeighborsController.this.candidateVisual(queue.poll());
-                        visual.minWidthProperty().bind((scrollPane.widthProperty()));
-                        candidates.getChildren().add(visual);
-                    }
-                    modelLoaded.setValue(true);
-                } catch (FileNotFoundException e) {
-                    TitledPane err = new TitledPane();
-                    err.setText("File not found");
-                    err.setContent(new Text(e.getMessage()));
-                    candidates.getChildren().add(err);
-                    e.printStackTrace();
+                subjectsList = new ArrayList<>();
+                ResIterator iter = md.listSubjects();
+                while (iter.hasNext()) {
+                    subjectsList.add(iter.nextResource().getURI());
                 }
+                PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
+                while (!queue.isEmpty()) {
+                    BorderPane visual = NeighborsController.this.candidateVisual(queue.poll());
+                    visual.minWidthProperty().bind((scrollPane.widthProperty()));
+                    candidates.getChildren().add(visual);
+                }
+                modelLoaded.setValue(true);
+            } catch (FileNotFoundException e) {
+                TitledPane err = new TitledPane();
+                err.setText("File not found");
+                err.setContent(new Text(e.getMessage()));
+                candidates.getChildren().add(err);
+                e.printStackTrace();
             }
         });
 
         partitionResults.visibleProperty().bind(modelLoaded);
 
-        filterSubjectsField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                    filter(filterSubjectsField.getText());
-                }
-            }
-        });
-        filterSubjectsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        filterSubjectsField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 filter(filterSubjectsField.getText());
             }
         });
+        filterSubjectsButton.setOnMouseClicked(mouseEvent -> filter(filterSubjectsField.getText()));
 
         partitionCandidates.autosize();
 
@@ -165,7 +152,7 @@ public class NeighborsController implements Initializable {
                 anytimeCut.set(true);
                 cutLabel.setVisible(true);
             } else {
-                cutButton.setStyle("-fx-background-color: black");
+                cutButton.setStyle("");
                 anytimeCut.set(false);
                 cutLabel.setVisible(false);
             }
@@ -198,8 +185,17 @@ public class NeighborsController implements Initializable {
         }
         BorderPane pane = new BorderPane();
         res.setContent(pane);
-        pane.setTop(new Text("Similitude : \n" + c.getRelaxQueryElements().toString().replace(",", "\n")));
-        pane.setLeft(new Text("\nNeighbors : \n" + c.getAnswersList().toString().replace(',', '\n')));
+
+        Text similitude = new Text("Similitude : \n" + c.getRelaxQueryElements().toString().replace(",", "\n"));
+
+        Text neighbors = new Text("\nNeighbors : \n" + c.getAnswersList().toString().replace(',', '\n'));
+
+        VBox texts = new VBox();
+        texts.getChildren().addAll(similitude,neighbors);
+        pane.setLeft(texts);
+
+        pane.setRight(new CopyButton(texts));
+
         res.autosize();
         return res;
     }

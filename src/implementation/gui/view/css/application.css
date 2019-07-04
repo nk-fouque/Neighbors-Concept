@@ -16,6 +16,11 @@
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 20, 0, 0, 0);
     -fx-text-fill: #ffffff;
 }
+.button:pressed {
+    -fx-background-color: red;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 20, 0, 0, 0);
+    -fx-text-fill: #ffffff;
+}
 
 .choice-box {
     -fx-background-color: #484848;
