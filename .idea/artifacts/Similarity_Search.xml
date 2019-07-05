@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Similarity_Search">
+    <output-path>$PROJECT_DIR$/out/artifacts/Similarity_Search</output-path>
+    <root id="root">
+      <element id="archive" name="Similarity_Search.jar">
+        <element id="module-output" name="Similarity_Search" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+          <element id="library" level="project" name="javafx-sdk-11.0" />
+        </element>
+        <element id="library" level="project" name="javafx-sdk-11.0" />
+        <element id="library" level="project" name="lib" />
+      </element>
+      <element id="library" level="project" name="javafx-sdk-11.0" />
+    </root>
+  </artifact>
+</component>

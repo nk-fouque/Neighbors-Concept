@@ -10,13 +10,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-public class ClusterVisualizer extends TitledPane {
+public class VisualCluster extends TitledPane {
     private Cluster cluster;
 
-    public ClusterVisualizer(Cluster c,CollectionsModel md){
+    public VisualCluster(Cluster c, CollectionsModel md){
         super();
         cluster=c;
-        this.setText("Extensional distance : "+c.getExtensionDistance()+"\tIntensional distance : "+c.getRelaxQueryElements().size());
+        this.setText("Extensional distance : "+c.getExtensionDistance());
         if (c.getAvailableQueryElements().size() != 0) {
             this.textFillProperty().setValue(Paint.valueOf("#cd7777"));
         } else {
@@ -38,7 +38,7 @@ public class ClusterVisualizer extends TitledPane {
         VBox gadgets = new VBox();
         CopyButton copy = new CopyButton(texts);
         Label extensional = new Label("Extensional distance : "+c.getExtensionDistance());
-        Label intensional = new Label("Intensional distance : "+c.getRelaxQueryElements().size());
+        Label intensional = new Label("Intensional similitude : "+c.getRelaxQueryElements().size());
         Label relax = new Label("Number of relaxations : "+c.getRelaxDistance());
         gadgets.getChildren().addAll(copy,extensional,intensional,relax);
         gadgets.autosize();

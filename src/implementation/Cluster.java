@@ -258,6 +258,69 @@ public class Cluster implements Comparable<Cluster> {
         return baos2.toString();
     }
 
+    @Override
+    public String toString() {
+        String res = "Extentional Distance : " + relaxDistance + "\n";
+        res += "Elements : " + relaxQueryElements + "\n";
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
+            res += "Debug available: " + availableQueryElements + "\n";
+            res += "Debug removed : " + removedQueryElements + "\n";
+            res += "Connected variables : " + connectedVars + "\n";
+        }
+        res += "Query :" + queryString() + "\n";
+        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mappingString() + "\n";
+        res += "Answers :\n" + answersString() + "\n";
+        return res;
+    }
+
+    /**
+     * Same as {@link #toString()} but uses {@link #answersListString(CollectionsModel)} to write answers
+     * More efficient because it doesn't use a ResultSet
+     *
+     * @param colMd the model to use for prefixes
+     * @return
+     */
+    public String toString(CollectionsModel colMd) {
+        String res = "Number of relaxation : " + relaxDistance + "\n";
+        res += "Elements : " + relaxQueryElements + "\n";
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
+            res += "Debug available: " + availableQueryElements + "\n";
+            res += "Debug removed : " + removedQueryElements + "\n";
+            res += "Connected variables : " + connectedVars + "\n";
+        }
+        res += "Query :" + queryString() + "\n";
+        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mappingString() + "\n";
+        res += "Answers :\n" + answersListString(colMd) + "\n";
+        return res;
+    }
+
+    /**
+     * @return This cluster's answers as a Java List
+     */
+    public List<Node> getAnswersList() {
+        Iterator<Binding> iter = answers.rows();
+        List<Node> res = new ArrayList<>();
+        iter.forEachRemaining((Binding b) -> res.add(b.get(Var.alloc("Neighbor"))));
+        return res;
+    }
+
+    /**
+     * Not sure if this is useful
+     *
+     * @param colMd The model in which to search prefix mappings
+     * @return
+     */
+    public String answersListString(CollectionsModel colMd) {
+        List<String> res = new ArrayList<>();
+        getAnswersList().forEach(n -> res.add(colMd.getGraph().shortForm(n.toString())));
+        return res.toString().replace("[", "").replace("]", "").replaceAll(", ", "\n");
+    }
+
+    /**
+     *
+     * @param colMd
+     * @return
+     */
     public String relaxQueryElementsString(CollectionsModel colMd) {
         List<String[]> pathBlocks = new ArrayList<>();
         Map<String, String> filters = new HashMap<>();
@@ -300,63 +363,6 @@ public class Cluster implements Comparable<Cluster> {
             res.add(s);
         }
         return res.toString().replace("[", "").replace("]", "").replaceAll(", ", "\n");
-    }
-
-    @Override
-    public String toString() {
-        String res = "Extentional Distance : " + relaxDistance + "\n";
-        res += "Elements : " + relaxQueryElements + "\n";
-        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
-            res += "Debug available: " + availableQueryElements + "\n";
-            res += "Debug removed : " + removedQueryElements + "\n";
-            res += "Connected variables : " + connectedVars + "\n";
-        }
-        res += "Query :" + queryString() + "\n";
-        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mappingString() + "\n";
-        res += "Answers :\n" + answersString() + "\n";
-        return res;
-    }
-
-    /**
-     * Same as {@link #toString()} but uses {@link #answersListString(CollectionsModel)} to write answers
-     *
-     * @param col
-     * @return
-     */
-    public String toString(CollectionsModel col) {
-        String res = "Number of relaxation : " + relaxDistance + "\n";
-        res += "Elements : " + relaxQueryElements + "\n";
-        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
-            res += "Debug available: " + availableQueryElements + "\n";
-            res += "Debug removed : " + removedQueryElements + "\n";
-            res += "Connected variables : " + connectedVars + "\n";
-        }
-        res += "Query :" + queryString() + "\n";
-        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mappingString() + "\n";
-        res += "Answers :\n" + answersListString(col) + "\n";
-        return res;
-    }
-
-    /**
-     * @return This cluster's answers as a Java List
-     */
-    public List<Node> getAnswersList() {
-        Iterator<Binding> iter = answers.rows();
-        List<Node> res = new ArrayList<>();
-        iter.forEachRemaining((Binding b) -> res.add(b.get(Var.alloc("Neighbor"))));
-        return res;
-    }
-
-    /**
-     * Not sure if this is useful
-     *
-     * @param col The model in which to search prefix mappings
-     * @return
-     */
-    public String answersListString(CollectionsModel col) {
-        List<String> res = new ArrayList<>();
-        getAnswersList().forEach(n -> res.add(col.getGraph().shortForm(n.toString())));
-        return res.toString().replace("[", "|\t").replace("]", "\t\t|").replaceAll(", ", "\t\t|\n|\t");
     }
 
 }

@@ -104,9 +104,18 @@ public class Partition {
             }
 
             SingletonStopwatchCollection.resume("projjoin");
-            Table piMe = TableUtils.projection(me, c.getProj());
-            Table ae = TableUtils.simpleJoin(c.getAnswers(), piMe);
-            SingletonStopwatchCollection.stop("projjoin");
+            Table piMe = null;
+            Table ae = null;
+            try {
+                piMe = TableUtils.projection(me, c.getProj());
+                ae = TableUtils.simpleJoin(c.getAnswers(), piMe);
+            } catch (OutOfMemoryError err) {
+                clusters.add(c);
+                SingletonStopwatchCollection.stop("iterate");
+                throw err;
+            } finally {
+                SingletonStopwatchCollection.stop("projjoin");
+            }
             int extensionDistance = piMe.size();
 
 

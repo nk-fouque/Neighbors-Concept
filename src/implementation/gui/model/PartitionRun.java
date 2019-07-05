@@ -6,10 +6,6 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -62,7 +58,7 @@ public class PartitionRun implements Runnable {
             PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
-                TitledPane cluster = new ClusterVisualizer(c,partition.getGraph());
+                TitledPane cluster = new VisualCluster(c,partition.getGraph());
                 Platform.runLater(() -> resultsContainer.getPanes().add(cluster));
             }
             Platform.runLater(() -> resultsContainer.autosize());

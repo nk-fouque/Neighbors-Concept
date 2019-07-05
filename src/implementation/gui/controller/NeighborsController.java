@@ -5,6 +5,7 @@ import implementation.Partition;
 import implementation.gui.NeighborsInterface;
 import implementation.gui.model.CopyButton;
 import implementation.gui.model.NeighborButton;
+import implementation.gui.model.VisualCandidate;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
@@ -187,11 +188,8 @@ public class NeighborsController implements Initializable {
     }
 
     public BorderPane candidateVisual(String uri) {
-        BorderPane res = new BorderPane();
-        Label text = new Label("  " + uri);
-        text.getStyleClass().add("sparklis-blue");
-        res.setLeft(text);
-        res.setRight(new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut));
+        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut);
+        VisualCandidate res = new VisualCandidate(uri,md,button);
         return res;
     }
 
