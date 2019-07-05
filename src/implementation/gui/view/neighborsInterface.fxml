@@ -23,6 +23,7 @@
                     <ToolBar>
                         <TextField fx:id="filterSubjectsField"/>
                         <Button text="Filter" fx:id="filterSubjectsButton"/>
+                        <CheckBox fx:id="caseSensBox" text="Case Sensitive"/>
                     </ToolBar>
                 </top>
                 <center>

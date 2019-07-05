@@ -6,6 +6,9 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
@@ -17,8 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import static implementation.gui.controller.NeighborsController.clusterVisual;
 
 public class PartitionRun implements Runnable {
     private Model graph;
@@ -37,6 +38,7 @@ public class PartitionRun implements Runnable {
         this.available = available;
         this.cut = cut;
     }
+
 
     @Override
     public void run() {
@@ -60,8 +62,7 @@ public class PartitionRun implements Runnable {
             PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
-                TitledPane cluster = clusterVisual(c);
-                cluster.prefWidthProperty().bind(resultsContainer.widthProperty());
+                TitledPane cluster = new ClusterVisualizer(c,partition.getGraph());
                 Platform.runLater(() -> resultsContainer.getPanes().add(cluster));
             }
             Platform.runLater(() -> resultsContainer.autosize());

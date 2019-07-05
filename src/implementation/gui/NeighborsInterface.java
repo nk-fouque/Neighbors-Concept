@@ -1,6 +1,8 @@
 package implementation.gui;
 
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import org.apache.log4j.Logger;
 public class NeighborsInterface extends Application {
     public static Stage stage = null;
     public static Scene scene = null;
+    public static BooleanProperty exit = new SimpleBooleanProperty(false);
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -33,6 +36,9 @@ public class NeighborsInterface extends Application {
         primaryStage.setTitle("Neighbors Concept");
         primaryStage.show();
         primaryStage.centerOnScreen();
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            exit.setValue(true);
+        });
 
     }
 }

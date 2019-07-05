@@ -39,7 +39,6 @@ class ClusterTest {
         assertNotNull(c);
         assertEquals(2,c.getProj().size());
         assertTrue(c.getRelaxQueryElements().isEmpty());
-        assertEquals(0,c.getRelaxDistance());
         assertEquals(1,c.getAvailableQueryElements().size());
         assertEquals(md,c.getMapping());
         assertEquals(md,c.getAnswers());

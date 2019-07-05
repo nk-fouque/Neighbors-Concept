@@ -107,12 +107,13 @@ public class Partition {
             Table piMe = TableUtils.projection(me, c.getProj());
             Table ae = TableUtils.simpleJoin(c.getAnswers(), piMe);
             SingletonStopwatchCollection.stop("projjoin");
+            int extensionDistance = piMe.size();
 
 
-            Cluster Ce = new Cluster(c, me, ae);
+            Cluster Ce = new Cluster(c, me, ae,extensionDistance);
             Ce.move(e, varE);
 
-            Cluster CeOpp = new Cluster(c, c.getMapping(), TableUtils.difference(c.getAnswers(), ae));
+            Cluster CeOpp = new Cluster(c, c.getMapping(), TableUtils.difference(c.getAnswers(), ae),c.getExtensionDistance());
             CeOpp.relax(e, graph, keys);
 
 
@@ -162,6 +163,7 @@ public class Partition {
                 }
                 run = iterate();
             } catch (OutOfMemoryError mem) {
+                mem.printStackTrace();
                 return 1;
             } catch (PartitionException e) {
                 e.printStackTrace();

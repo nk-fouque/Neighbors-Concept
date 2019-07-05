@@ -13,6 +13,10 @@ import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
 import org.apache.jena.sparql.engine.binding.BindingFactory;
+import org.apache.jena.sparql.expr.E_Equals;
+import org.apache.jena.sparql.expr.Expr;
+import org.apache.jena.sparql.expr.ExprVar;
+import org.apache.jena.sparql.expr.NodeValue;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.sparql.syntax.ElementFilter;
 import org.apache.jena.sparql.syntax.ElementGroup;
@@ -22,10 +26,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Cluster implements Comparable<Cluster> {
     private static Logger logger = Logger.getLogger(Cluster.class);
@@ -38,6 +39,7 @@ public class Cluster implements Comparable<Cluster> {
     private List<Var> connectedVars;
     private List<Element>
             removedQueryElements;
+    private int extensionDistance;
 
     /**
      * The head of the query
@@ -88,6 +90,10 @@ public class Cluster implements Comparable<Cluster> {
         return removedQueryElements;
     }
 
+    public int getExtensionDistance() {
+        return extensionDistance;
+    }
+
     /**
      * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph
      */
@@ -113,8 +119,10 @@ public class Cluster implements Comparable<Cluster> {
         this.removedQueryElements = new ArrayList<>();
         this.mapping = new TableN();
         this.answers = new TableN();
+        extensionDistance = 0;
         ResIterator data = graph.listSubjects();
         data.forEachRemaining((Resource resource) -> {
+            extensionDistance++;
             for (Var var : getProj()) {
                 mapping.addBinding(BindingFactory.binding(var, resource.asNode()));
                 answers.addBinding(BindingFactory.binding(var, resource.asNode()));
@@ -126,7 +134,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates a cluster with the same values as an other but different Mapping ext Answers
      */
-    public Cluster(Cluster c, Table Me, Table Ae) {
+    public Cluster(Cluster c, Table Me, Table Ae, int extensionDistance) {
         this.proj = new ArrayList<>(c.getProj());
         this.relaxQueryElements = new ArrayList<>();
         this.relaxQueryElements.addAll(c.getRelaxQueryElements());
@@ -137,6 +145,7 @@ public class Cluster implements Comparable<Cluster> {
         this.removedQueryElements.addAll(c.getRemovedQueryElements());
         this.mapping = Me;
         this.answers = Ae;
+        this.extensionDistance = extensionDistance;
         this.connectedVars = new ArrayList<>();
         this.connectedVars.addAll(c.connectedVars);
         connectedVars = ListUtils.removeDuplicates(connectedVars);
@@ -146,7 +155,7 @@ public class Cluster implements Comparable<Cluster> {
      * @return the difference between this Cluster's relax distance and the other Cluster
      */
     public int compareTo(Cluster other) {
-        return (getRelaxDistance() - other.getRelaxDistance());
+        return (getExtensionDistance() - other.getExtensionDistance());
     }
 
     /**
@@ -249,6 +258,50 @@ public class Cluster implements Comparable<Cluster> {
         return baos2.toString();
     }
 
+    public String relaxQueryElementsString(CollectionsModel colMd) {
+        List<String[]> pathBlocks = new ArrayList<>();
+        Map<String, String> filters = new HashMap<>();
+        for (Element e : relaxQueryElements) {
+            if (e instanceof ElementPathBlock) {
+                TriplePath t = ((ElementPathBlock)e).getPattern().get(0);
+                String s0 = colMd.getGraph().shortForm(t.getSubject().toString().replaceAll(">","").replaceAll("<",""));
+                String s1 = colMd.getGraph().shortForm(t.getPredicate().toString().replaceAll(">","").replaceAll("<",""));
+                String s2 = colMd.getGraph().shortForm(t.getObject().toString().replaceAll(">","").replaceAll("<",""));
+                pathBlocks.add(new String[]{s0,s1,s2});
+            } else if (e instanceof ElementFilter) {
+                Expr expr = ((ElementFilter) e).getExpr();
+                if (expr instanceof E_Equals) {
+                    String var = (((E_Equals) expr).getArg1()).toString();
+                    String node = (((E_Equals) expr).getArg2()).toString().replaceAll(">","").replaceAll("<","");
+                    filters.put(var,colMd.getGraph().shortForm(node));
+                }
+            }
+        }
+        List<String> res = new ArrayList<>();
+        for (String[] strings : pathBlocks){
+            String s = "";
+            if (filters.containsKey(strings[0])){
+                s += filters.get(strings[0]);
+            } else {
+                s += strings[0];
+            }
+            s += " ";
+            if (filters.containsKey(strings[1])){
+                s += filters.get(strings[1]);
+            } else {
+                s += strings[1];
+            }
+            s += " ";
+            if (filters.containsKey(strings[2])){
+                s += filters.get(strings[2]);
+            } else {
+                s += strings[2];
+            }
+            res.add(s);
+        }
+        return res.toString().replace("[", "").replace("]", "").replaceAll(", ", "\n");
+    }
+
     @Override
     public String toString() {
         String res = "Extentional Distance : " + relaxDistance + "\n";
@@ -266,11 +319,12 @@ public class Cluster implements Comparable<Cluster> {
 
     /**
      * Same as {@link #toString()} but uses {@link #answersListString(CollectionsModel)} to write answers
+     *
      * @param col
      * @return
      */
     public String toString(CollectionsModel col) {
-        String res = "Extentional Distance : " + relaxDistance + "\n";
+        String res = "Number of relaxation : " + relaxDistance + "\n";
         res += "Elements : " + relaxQueryElements + "\n";
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
             res += "Debug available: " + availableQueryElements + "\n";
@@ -295,13 +349,14 @@ public class Cluster implements Comparable<Cluster> {
 
     /**
      * Not sure if this is useful
+     *
      * @param col The model in which to search prefix mappings
      * @return
      */
-    public String answersListString(CollectionsModel col){
+    public String answersListString(CollectionsModel col) {
         List<String> res = new ArrayList<>();
         getAnswersList().forEach(n -> res.add(col.getGraph().shortForm(n.toString())));
-        return res.toString().replace("[","|\t ").replace("]","\t\t|").replaceAll(", ","\t\t|\n|\t");
+        return res.toString().replace("[", "|\t").replace("]", "\t\t|").replaceAll(", ", "\t\t|\n|\t");
     }
 
 }

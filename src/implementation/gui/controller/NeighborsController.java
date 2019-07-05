@@ -6,6 +6,7 @@ import implementation.gui.NeighborsInterface;
 import implementation.gui.model.CopyButton;
 import implementation.gui.model.NeighborButton;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -65,6 +66,8 @@ public class NeighborsController implements Initializable {
     Button cutButton;
     @FXML
     Label cutLabel;
+    @FXML
+    CheckBox caseSensBox;
 
     private Model md;
 
@@ -109,6 +112,7 @@ public class NeighborsController implements Initializable {
             String filename = filenameField.getText();
             try {
                 candidates.getChildren().clear();
+                md.removeAll();
                 md.read(new FileInputStream(filename), null, format.getValue());
                 md.write(System.out, format.getValue());
 
@@ -157,13 +161,20 @@ public class NeighborsController implements Initializable {
                 cutLabel.setVisible(false);
             }
         });
+
+        NeighborsInterface.exit.addListener(changeListener -> {
+            if (NeighborsInterface.exit.get()) anytimeCut.set(true);
+        });
     }
 
     private void filter(String filter) {
         candidates.getChildren().clear();
         List<String> filteredList = new ArrayList<>();
+        if (!caseSensBox.isSelected()) filter = filter.toLowerCase();
         for (String s : subjectsList) {
-            if (s.contains(filter)) {
+            String s2 = "";
+            if (!caseSensBox.isSelected()) s2 = s.toLowerCase();
+            if (s2.contains(filter)) {
                 filteredList.add(s);
             }
         }
@@ -173,31 +184,6 @@ public class NeighborsController implements Initializable {
             visual.minWidthProperty().bind((scrollPane.widthProperty()));
             candidates.getChildren().add(visual);
         }
-    }
-
-    public static TitledPane clusterVisual(Cluster c) {
-        TitledPane res = new TitledPane();
-        res.setText("Extentional Distance : " + c.getRelaxDistance());
-        if (c.getAvailableQueryElements().size() != 0) {
-            res.textFillProperty().setValue(Paint.valueOf("#cd7777"));
-        } else {
-            res.textFillProperty().setValue(Paint.valueOf("#484848"));
-        }
-        BorderPane pane = new BorderPane();
-        res.setContent(pane);
-
-        Text similitude = new Text("Similitude : \n" + c.getRelaxQueryElements().toString().replace(",", "\n"));
-
-        Text neighbors = new Text("\nNeighbors : \n" + c.getAnswersList().toString().replace(',', '\n'));
-
-        VBox texts = new VBox();
-        texts.getChildren().addAll(similitude,neighbors);
-        pane.setLeft(texts);
-
-        pane.setRight(new CopyButton(texts));
-
-        res.autosize();
-        return res;
     }
 
     public BorderPane candidateVisual(String uri) {

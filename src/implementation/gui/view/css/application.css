@@ -25,7 +25,7 @@
 .choice-box {
     -fx-background-color: #484848;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 20, 0, 0, 0);
-    -fx-mark-color: a5ecff;
+    -fx-mark-color: #550000;
 }
 
 .choice-box > .label {
