@@ -15,8 +15,6 @@ import org.apache.jena.sparql.engine.binding.Binding;
 import org.apache.jena.sparql.engine.binding.BindingFactory;
 import org.apache.jena.sparql.expr.E_Equals;
 import org.apache.jena.sparql.expr.Expr;
-import org.apache.jena.sparql.expr.ExprVar;
-import org.apache.jena.sparql.expr.NodeValue;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.sparql.syntax.ElementFilter;
 import org.apache.jena.sparql.syntax.ElementGroup;
@@ -317,7 +315,6 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     *
      * @param colMd
      * @return
      */
@@ -326,36 +323,36 @@ public class Cluster implements Comparable<Cluster> {
         Map<String, String> filters = new HashMap<>();
         for (Element e : relaxQueryElements) {
             if (e instanceof ElementPathBlock) {
-                TriplePath t = ((ElementPathBlock)e).getPattern().get(0);
-                String s0 = colMd.getGraph().shortForm(t.getSubject().toString().replaceAll(">","").replaceAll("<",""));
-                String s1 = colMd.getGraph().shortForm(t.getPredicate().toString().replaceAll(">","").replaceAll("<",""));
-                String s2 = colMd.getGraph().shortForm(t.getObject().toString().replaceAll(">","").replaceAll("<",""));
-                pathBlocks.add(new String[]{s0,s1,s2});
+                TriplePath t = ((ElementPathBlock) e).getPattern().get(0);
+                String s0 = colMd.getGraph().shortForm(t.getSubject().toString().replaceAll(">", "").replaceAll("<", ""));
+                String s1 = colMd.getGraph().shortForm(t.getPredicate().toString().replaceAll(">", "").replaceAll("<", ""));
+                String s2 = colMd.getGraph().shortForm(t.getObject().toString().replaceAll(">", "").replaceAll("<", ""));
+                pathBlocks.add(new String[]{s0, s1, s2});
             } else if (e instanceof ElementFilter) {
                 Expr expr = ((ElementFilter) e).getExpr();
                 if (expr instanceof E_Equals) {
                     String var = (((E_Equals) expr).getArg1()).toString();
-                    String node = (((E_Equals) expr).getArg2()).toString().replaceAll(">","").replaceAll("<","");
-                    filters.put(var,colMd.getGraph().shortForm(node));
+                    String node = (((E_Equals) expr).getArg2()).toString().replaceAll(">", "").replaceAll("<", "");
+                    filters.put(var, colMd.getGraph().shortForm(node));
                 }
             }
         }
         List<String> res = new ArrayList<>();
-        for (String[] strings : pathBlocks){
+        for (String[] strings : pathBlocks) {
             String s = "";
-            if (filters.containsKey(strings[0])){
+            if (filters.containsKey(strings[0])) {
                 s += filters.get(strings[0]);
             } else {
                 s += strings[0];
             }
             s += " ";
-            if (filters.containsKey(strings[1])){
+            if (filters.containsKey(strings[1])) {
                 s += filters.get(strings[1]);
             } else {
                 s += strings[1];
             }
             s += " ";
-            if (filters.containsKey(strings[2])){
+            if (filters.containsKey(strings[2])) {
                 s += filters.get(strings[2]);
             } else {
                 s += strings[2];

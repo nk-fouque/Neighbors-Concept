@@ -1,25 +1,19 @@
 package implementation.gui.controller;
 
-import implementation.Cluster;
 import implementation.Partition;
 import implementation.gui.NeighborsInterface;
-import implementation.gui.model.CopyButton;
 import implementation.gui.model.NeighborButton;
 import implementation.gui.model.VisualCandidate;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
@@ -189,7 +183,7 @@ public class NeighborsController implements Initializable {
 
     public BorderPane candidateVisual(String uri) {
         NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut);
-        VisualCandidate res = new VisualCandidate(uri,md,button);
+        VisualCandidate res = new VisualCandidate(uri, md, button);
         return res;
     }
 

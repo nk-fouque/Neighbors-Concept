@@ -119,10 +119,10 @@ public class Partition {
             int extensionDistance = piMe.size();
 
 
-            Cluster Ce = new Cluster(c, me, ae,extensionDistance);
+            Cluster Ce = new Cluster(c, me, ae, extensionDistance);
             Ce.move(e, varE);
 
-            Cluster CeOpp = new Cluster(c, c.getMapping(), TableUtils.difference(c.getAnswers(), ae),c.getExtensionDistance());
+            Cluster CeOpp = new Cluster(c, c.getMapping(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
             CeOpp.relax(e, graph, keys);
 
 
@@ -159,15 +159,16 @@ public class Partition {
 
     /**
      * Applies the Partition algorithm to the end
+     *
      * @param cut AtomicBoolean to observe, when it is set to false, the algorithm stops and cuts
      * @return 0 if the algorithm went to the end correctly, 1 if the algorithm encountered a memory limit, -1 if it encountered an unexpected error
      */
     public int partitionAlgorithm(AtomicBoolean cut) {
         boolean run = true;
-        boolean stop=false;
-        while (run&&!stop) {
+        boolean stop = false;
+        while (run && !stop) {
             try {
-                if (cut != null){
+                if (cut != null) {
                     stop = cut.get();
                 }
                 run = iterate();

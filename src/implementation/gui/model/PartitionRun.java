@@ -53,12 +53,12 @@ public class PartitionRun implements Runnable {
         int algoRun = partition.partitionAlgorithm(cut);
         partition.cut();
 
-        if (algoRun>=0) {
+        if (algoRun >= 0) {
             Platform.runLater(() -> resultsContainer.getPanes().clear());
             PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
-                TitledPane cluster = new VisualCluster(c,partition.getGraph());
+                TitledPane cluster = new VisualCluster(c, partition.getGraph());
                 Platform.runLater(() -> resultsContainer.getPanes().add(cluster));
             }
             Platform.runLater(() -> resultsContainer.autosize());
