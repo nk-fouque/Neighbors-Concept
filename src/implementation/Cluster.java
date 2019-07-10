@@ -330,7 +330,8 @@ public class Cluster implements Comparable<Cluster> {
                 String s1 = colMd.getGraph().shortForm(t.getPredicate().toString()
                         .replaceAll(">", "")
                         .replaceAll("<", ""))
-                        .replaceAll("rdf:type","a");
+                        .replaceAll("rdf:type","a")
+                        .replaceAll("http://www.w3.org/1999/02/22-rdf-syntax-ns#type","a");
                 String s2 = colMd.getGraph().shortForm(t.getObject().toString()
                         .replaceAll(">", "")
                         .replaceAll("<", ""));

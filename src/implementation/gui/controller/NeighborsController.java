@@ -4,6 +4,7 @@ import implementation.Partition;
 import implementation.gui.NeighborsInterface;
 import implementation.gui.model.NeighborButton;
 import implementation.gui.model.VisualCandidate;
+import implementation.gui.model.VisualPrefixes;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
@@ -63,6 +64,8 @@ public class NeighborsController implements Initializable {
     Label cutLabel;
     @FXML
     CheckBox caseSensBox;
+    @FXML
+    TitledPane prefixPane;
 
     private Model md;
 
@@ -122,6 +125,7 @@ public class NeighborsController implements Initializable {
                     visual.minWidthProperty().bind((scrollPane.widthProperty()));
                     candidates.getChildren().add(visual);
                 }
+                partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(),modelLoaded));
                 modelLoaded.setValue(true);
             } catch (FileNotFoundException e) {
                 TitledPane err = new TitledPane();

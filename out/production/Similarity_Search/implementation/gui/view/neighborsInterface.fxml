@@ -18,7 +18,7 @@
             </ToolBar>
         </top>
         <center>
-            <BorderPane fx:id="partitionCandidates">
+            <BorderPane>
                 <top>
                     <ToolBar>
                         <TextField fx:id="filterSubjectsField"/>
@@ -27,9 +27,13 @@
                     </ToolBar>
                 </top>
                 <center>
-                    <ScrollPane fx:id="scrollPane">
-                        <FlowPane fx:id="candidates"/>
-                    </ScrollPane>
+                    <BorderPane fx:id="partitionCandidates">
+                        <center>
+                            <ScrollPane fx:id="scrollPane">
+                                <FlowPane fx:id="candidates"/>
+                            </ScrollPane>
+                        </center>
+                    </BorderPane>
                 </center>
             </BorderPane>
         </center>
