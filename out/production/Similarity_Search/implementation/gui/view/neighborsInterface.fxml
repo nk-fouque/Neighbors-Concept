@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          fx:id="pane" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="implementation.gui.controller.NeighborsController"
+          stylesheets="/implementation/gui/view/css/application.css"
+          styleClass="background">
+    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <top>
+            <ToolBar>
+                <Button text="Browse" fx:id="fileFindButton"/>
+                <Label text="RDF File path :" styleClass="grey"/>
+                <TextField fx:id="filenameField"/>
+                <ChoiceBox fx:id="format"/>
+                <Button fx:id="modelLoadButton" text="Load RDF File"/>
+            </ToolBar>
+        </top>
+        <center>
+            <BorderPane fx:id="partitionCandidates">
+                <top>
+                    <ToolBar>
+                        <TextField fx:id="filterSubjectsField"/>
+                        <Button text="Filter" fx:id="filterSubjectsButton"/>
+                        <CheckBox fx:id="caseSensBox" text="Case Sensitive"/>
+                    </ToolBar>
+                </top>
+                <center>
+                    <ScrollPane fx:id="scrollPane">
+                        <FlowPane fx:id="candidates"/>
+                    </ScrollPane>
+                </center>
+            </BorderPane>
+        </center>
+    </BorderPane>
+    <BorderPane fx:id="partitionResults" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES"
+                GridPane.vgrow="ALWAYS">
+        <top>
+            <ToolBar>
+                <Button fx:id="cutButton" text="Interrupt Partition"/>
+                <Label fx:id="cutLabel"/>
+            </ToolBar>
+        </top>
+        <center>
+            <ScrollPane>
+                <Accordion fx:id="partitionAccordion"/>
+            </ScrollPane>
+        </center>
+    </BorderPane>
+
+</GridPane>
