@@ -324,9 +324,16 @@ public class Cluster implements Comparable<Cluster> {
         for (Element e : relaxQueryElements) {
             if (e instanceof ElementPathBlock) {
                 TriplePath t = ((ElementPathBlock) e).getPattern().get(0);
-                String s0 = colMd.getGraph().shortForm(t.getSubject().toString().replaceAll(">", "").replaceAll("<", ""));
-                String s1 = colMd.getGraph().shortForm(t.getPredicate().toString().replaceAll(">", "").replaceAll("<", ""));
-                String s2 = colMd.getGraph().shortForm(t.getObject().toString().replaceAll(">", "").replaceAll("<", ""));
+                String s0 = colMd.getGraph().shortForm(t.getSubject().toString()
+                        .replaceAll(">", "")
+                        .replaceAll("<", ""));
+                String s1 = colMd.getGraph().shortForm(t.getPredicate().toString()
+                        .replaceAll(">", "")
+                        .replaceAll("<", ""))
+                        .replaceAll("rdf:type","a");
+                String s2 = colMd.getGraph().shortForm(t.getObject().toString()
+                        .replaceAll(">", "")
+                        .replaceAll("<", ""));
                 pathBlocks.add(new String[]{s0, s1, s2});
             } else if (e instanceof ElementFilter) {
                 Expr expr = ((ElementFilter) e).getExpr();
@@ -359,7 +366,10 @@ public class Cluster implements Comparable<Cluster> {
             }
             res.add(s);
         }
-        return res.toString().replace("[", "").replace("]", "").replaceAll(", ", "\n");
+        return res.toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replaceAll(", ", "\n");
     }
 
 }
