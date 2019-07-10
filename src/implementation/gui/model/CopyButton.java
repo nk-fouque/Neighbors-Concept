@@ -3,24 +3,22 @@ package implementation.gui.model;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class CopyButton extends Button{
+public class CopyButton extends Button {
     private VBox copyTarget;
 
-    public CopyButton(VBox texts){
+    public CopyButton(VBox texts) {
         super("Copy to clipboard");
         copyTarget = texts;
 
         this.setOnMouseClicked(mouseEvent -> {
             StringBuilder copy = new StringBuilder();
-            for (Node n : copyTarget.getChildren()){
-                if (n instanceof Text){
+            for (Node n : copyTarget.getChildren()) {
+                if (n instanceof Text) {
                     copy.append(((Text) n).getText());
                 }
             }

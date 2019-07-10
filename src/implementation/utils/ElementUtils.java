@@ -112,7 +112,7 @@ public class ElementUtils {
         List<Element> res = new ArrayList<>();
         for (Element e : list) {
             if (!(e instanceof ElementFilter)) { //TODO For now the algorithm doesn't add new filters, which means it only uses a depth of one to describe the node
-                                                    // This if can be easily commented but further extends runtime
+                // This if can be easily commented but further extends runtime
                 res.add(e);
             }
         }

@@ -1,17 +1,22 @@
 <component name="ArtifactManager">
   <artifact type="javafx" name="Similarity_Search">
     <output-path>$PROJECT_DIR$/out/artifacts/Similarity_Search</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="implementation.gui.NeighborsInterface" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
     <root id="root">
       <element id="archive" name="Similarity_Search.jar">
         <element id="module-output" name="Similarity_Search" />
-        <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-          <element id="library" level="project" name="javafx-sdk-11.0" />
-        </element>
-        <element id="library" level="project" name="javafx-sdk-11.0" />
-        <element id="library" level="project" name="lib" />
       </element>
-      <element id="library" level="project" name="javafx-sdk-11.0" />
+      <element id="library" level="project" name="javafx-sdk-12.0.1" />
+      <element id="library" level="project" name="Jena" />
     </root>
   </artifact>
 </component>

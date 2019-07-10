@@ -65,7 +65,7 @@ public class Main {
         // Defining Signal Handler for anytime implementation
         AtomicBoolean cut = new AtomicBoolean(false);
         SignalHandler handler = sig -> {
-            System.out.println("Captured "+sig.getName());
+            System.out.println("Captured " + sig.getName());
             cut.set(true);
         };
         Signal.handle(new Signal("INT"), handler);

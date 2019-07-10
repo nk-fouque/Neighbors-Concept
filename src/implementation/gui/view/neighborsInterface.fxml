@@ -11,7 +11,7 @@
         <top>
             <ToolBar>
                 <Button text="Browse" fx:id="fileFindButton"/>
-                <Label text="RDF File path :" styleClass="sparklis-blue"/>
+                <Label text="RDF File path :" styleClass="grey"/>
                 <TextField fx:id="filenameField"/>
                 <ChoiceBox fx:id="format"/>
                 <Button fx:id="modelLoadButton" text="Load RDF File"/>
