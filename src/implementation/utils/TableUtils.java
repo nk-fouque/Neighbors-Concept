@@ -37,159 +37,6 @@ public class TableUtils {
     }
 
     /**
-     * Applies ext(M,e,G)
-     * if e is a filter, ext(M,e,G) is just a selection on M where the filter is satisfied
-     * if e is a triple pattern, ext(M,e,G) := [ M (join) ans(var(e) <-- {e},G) ]
-     *
-     * @param mapping The Table representing the mapping M
-     * @param element The Element e
-     * @param model   The CollectionsModel containing the graph G
-     * @return
-     */
-    public static Table ext(Table mapping, Element element, CollectionsModel model) {
-        logger.debug("answering : " + element);
-        List<Binding> solutionsList = new ArrayList<>();
-        Table res = new TableN();
-        if (element instanceof ElementFilter) {
-            logger.debug("is filter");
-            Expr expr = ((ElementFilter) element).getExpr();
-            if (expr instanceof E_Equals) {
-                Var var = ((ExprVar) ((E_Equals) expr).getArg1()).asVar();
-                Node node = ((NodeValue) ((E_Equals) expr).getArg2()).asNode();
-                Iterator<Binding> iter = mapping.rows();
-                iter.forEachRemaining((b) -> {
-                    Node bindNode = b.get(var);
-                    if (bindNode.equals(node)) {
-                        res.addBinding(b);
-                        logger.debug("matched :" + b);
-                    } else {
-                        logger.debug("did not match : " + b);
-                    }
-                });
-            }
-        } else if (element instanceof ElementPathBlock) {
-            logger.debug("is pathblock");
-            Var var = (Var) ((ElementPathBlock) element).getPattern().get(0).getSubject();
-            // Subject is always a variable because triples are obtained from describeNode
-            Node predicate = ((ElementPathBlock) element).getPattern().get(0).getPredicate();
-            Node object = ((ElementPathBlock) element).getPattern().get(0).getObject();
-            logger.debug("predicate : " + predicate);
-            if (object.isVariable()) {
-                logger.debug("against variable");
-                // Object can be something other than a Variable if we are describing classes by their members and subclasses
-                Var objVar = (Var) object;
-                if (mapping.getVars().contains(var)) {
-                    logger.debug("subject connected");
-                    if (mapping.getVars().contains(objVar)) {
-                        logger.debug("object connected");
-                        Iterator<Binding> iter = mapping.rows();
-                        iter.forEachRemaining((b) -> {
-                            if (b.get(var).isURI() && b.get(objVar).isURI()) {
-                                RDFNode bindSubject = new ResourceImpl(b.get(var).getURI());
-                                RDFNode bindObject = new ResourceImpl(b.get(objVar).getURI());
-                                if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
-                                    logger.debug("subject in this predicate");
-                                    if (model.predicates.get(predicate.toString()).get(bindSubject).contains(bindObject)) {
-                                        res.addBinding(b);
-                                        logger.debug("matched :" + b);
-                                    } else {
-                                        logger.debug("did not match : " + b);
-                                    }
-                                } else logger.debug("not in this predicate");
-                            } else logger.debug("not uri");
-                        });
-                    } else { // If the subject is the only connected variable
-                        logger.debug("object disconnected");
-                        Iterator<Binding> iter = mapping.rows();
-                        iter.forEachRemaining((b) -> {
-                            RDFNode bindSubject = new ResourceImpl(b.get(var).getURI());
-                            logger.debug("found " + bindSubject + " at " + var + " in " + b);
-                            if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
-                                logger.debug("subject in this predicate");
-                                for (RDFNode obj : model.predicates.get(predicate.toString()).get(bindSubject)) {
-                                    logger.debug("found " + obj);
-                                    BindingHashMap bind2 = new BindingHashMap(b);
-                                    bind2.add(objVar, obj.asNode());
-                                    logger.debug("new binding : " + bind2);
-                                    res.addBinding(bind2);
-                                }
-                            } else logger.debug("not in this predicate");
-                        });
-                    }
-                } else { // If the object is the only connected variable
-                    logger.debug("subject disconnected");
-                    if (mapping.getVars().contains(objVar)) {
-                        logger.debug("object connected");
-                        Iterator<Binding> iter = mapping.rows();
-                        iter.forEachRemaining((b) -> {
-                            RDFNode bindObject = new ResourceImpl(b.get(objVar).getURI());
-                            logger.debug("found " + bindObject + " at " + objVar + " in " + b);
-                            if (model.predicatesReversed.get(predicate.toString()).keySet().contains(bindObject)) {
-                                for (RDFNode subj : model.predicatesReversed.get(predicate.toString()).get(bindObject)) {
-                                    logger.debug("found " + subj);
-                                    BindingHashMap bind2 = new BindingHashMap(b);
-                                    bind2.add(var, subj.asNode());
-                                    res.addBinding(bind2);
-                                }
-                            } else logger.debug("not in this predicate");
-                        });
-                    }
-                    // No need for else because there has to be at least one that's connected so for now it's always true
-                    // TODO If one day we can relax predicates as filters, this will change
-                }
-            } else {
-                logger.debug("subject is variable");
-                if (object.isURI()) {
-                    logger.debug("object is uri");
-                    RDFNode objNode = new ResourceImpl(object.getURI());
-                    if (mapping.getVars().contains(var)) {
-                        logger.debug(var + " connected");
-                        Iterator<Binding> iter = mapping.rows();
-                        iter.forEachRemaining((b) -> {
-                            RDFNode bindSubject = new ResourceImpl(b.get(var).getURI());
-                            logger.debug("found " + bindSubject + " at " + var + " in " + b);
-                            if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
-                                if (model.predicates.get(predicate.toString()).get(bindSubject).contains(objNode)) {
-                                    res.addBinding(b);
-                                    logger.debug("found " + objNode + " in predicates");
-                                }
-                            } else logger.debug("not in this predicate");
-                        });
-                    } // this should always be true or else there wouldn't be a connected variable
-                    // TODO Same as above
-                }
-            }
-            for (Binding b : solutionsList) {
-                res.addBinding(b);
-            }
-        }
-        return res;
-    }
-
-    /**
-     * Used to be used in the extension (now calculated by {@link #ext(Table, Element, CollectionsModel)} )
-     * removed because it was very inefficient and it still required a join with he mapping
-     */
-    @Deprecated
-    public static Table ans(List<Var> vars, List<Element> elements, Model graph) {
-        List<QuerySolution> solutionsList;
-        Table res = new TableN();
-        SingletonStopwatchCollection.resume("querying");
-        String queryString = ElementUtils.getSelectStringFrom(vars, elements);
-        logger.info(queryString);
-        Query qAnsE = QueryFactory.create(queryString);
-        ResultSet resultSet = QueryExecutionFactory.create(qAnsE, graph).execSelect();
-        SingletonStopwatchCollection.stop("querying");
-        SingletonStopwatchCollection.resume("formatting");
-        solutionsList = ResultSetFormatter.toList(resultSet);
-        for (QuerySolution qs : solutionsList) {
-            res.addBinding(BindingUtils.asBinding(qs));
-        }
-        SingletonStopwatchCollection.stop("formatting");
-        return res;
-    }
-
-    /**
      * Algebric table projection
      *
      * @param table The table to project
@@ -253,4 +100,131 @@ public class TableUtils {
         return res;
     }
 
+    /**
+     * Applies ext(M,e,G)
+     * if e is a filter, ext(M,e,G) is just a selection on M where the filter is satisfied
+     * if e is a triple pattern, ext(M,e,G) := [ M (join) ans(var(e) <-- {e},G) ]
+     *
+     * @param mapping The Table representing the mapping M
+     * @param element The Element e
+     * @param model   The CollectionsModel containing the graph G
+     * @return
+     * @deprecated Less efficient than a {@link ElementUtils#ans(Element, CollectionsModel)} combines with a {@link #simpleJoin(Table, Table)} so useless, but it took me so much time to write this that I do'nt have the heart to delete it
+     */
+    @Deprecated
+    public static Table ext(Table mapping, Element element, CollectionsModel model) {
+        logger.debug("answering : " + element);
+        Table res = new TableN();
+        if (element instanceof ElementFilter) {
+            logger.debug("is filter");
+            Expr expr = ((ElementFilter) element).getExpr();
+            if (expr instanceof E_Equals) {
+                Var var = ((ExprVar) ((E_Equals) expr).getArg1()).asVar();
+                Node node = ((NodeValue) ((E_Equals) expr).getArg2()).asNode();
+                Iterator<Binding> iter = mapping.rows();
+                iter.forEachRemaining((b) -> {
+                    Node bindNode = b.get(var);
+                    if (bindNode.equals(node)) {
+                        res.addBinding(b);
+                        logger.debug("matched :" + b);
+                    } else {
+                        logger.debug("did not match : " + b);
+                    }
+                });
+            }
+        } else if (element instanceof ElementPathBlock) {
+            logger.debug("is pathblock");
+            Var subjVar = (Var) ((ElementPathBlock) element).getPattern().get(0).getSubject();
+            // Subject is always a variable because triples are obtained from describeNode
+            Node predicate = ((ElementPathBlock) element).getPattern().get(0).getPredicate();
+            Node object = ((ElementPathBlock) element).getPattern().get(0).getObject();
+            logger.debug("predicate : " + predicate);
+            if (object.isVariable()) {
+            // Object can be something other than a Variable if we are describing classes by their members and subclasses
+                logger.debug("against variable");
+                Var objVar = (Var) object;
+                if (mapping.getVars().contains(subjVar)) {
+                    logger.debug("subject connected");
+                    if (mapping.getVars().contains(objVar)) {
+                        logger.debug("object connected");
+                        Iterator<Binding> iter = mapping.rows();
+                        iter.forEachRemaining((b) -> {
+                            if (b.get(subjVar).isURI() && b.get(objVar).isURI()) {
+                                RDFNode bindSubject = new ResourceImpl(b.get(subjVar).getURI());
+                                RDFNode bindObject = new ResourceImpl(b.get(objVar).getURI());
+                                if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
+                                    logger.debug("subject in this predicate");
+                                    if (model.predicates.get(predicate.toString()).get(bindSubject).contains(bindObject)) {
+                                        res.addBinding(b);
+                                        logger.debug("matched :" + b);
+                                    } else {
+                                        logger.debug("did not match : " + b);
+                                    }
+                                } else logger.debug("not in this predicate");
+                            } else logger.debug("not uri");
+                        });
+                    } else { // If the subject is the only connected variable
+                        logger.debug("object disconnected");
+                        Iterator<Binding> iter = mapping.rows();
+                        iter.forEachRemaining((b) -> {
+                            RDFNode bindSubject = new ResourceImpl(b.get(subjVar).getURI());
+                            logger.debug("found " + bindSubject + " at " + subjVar + " in " + b);
+                            if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
+                                logger.debug("subject in this predicate");
+                                for (RDFNode obj : model.predicates.get(predicate.toString()).get(bindSubject)) {
+                                    logger.debug("found " + obj);
+                                    BindingHashMap bind2 = new BindingHashMap(b);
+                                    bind2.add(objVar, obj.asNode());
+                                    logger.debug("new binding : " + bind2);
+                                    res.addBinding(bind2);
+                                }
+                            } else logger.debug("not in this predicate");
+                        });
+                    }
+                } else { // If the object is the only connected variable
+                    logger.debug("subject disconnected");
+                    if (mapping.getVars().contains(objVar)) {
+                        logger.debug("object connected");
+                        Iterator<Binding> iter = mapping.rows();
+                        iter.forEachRemaining((b) -> {
+                            RDFNode bindObject = new ResourceImpl(b.get(objVar).getURI());
+                            logger.debug("found " + bindObject + " at " + objVar + " in " + b);
+                            if (model.predicatesReversed.get(predicate.toString()).keySet().contains(bindObject)) {
+                                for (RDFNode subj : model.predicatesReversed.get(predicate.toString()).get(bindObject)) {
+                                    logger.debug("found " + subj);
+                                    BindingHashMap bind2 = new BindingHashMap(b);
+                                    bind2.add(subjVar, subj.asNode());
+                                    res.addBinding(bind2);
+                                }
+                            } else logger.debug("not in this predicate");
+                        });
+                    }
+                    // No need for else because there has to be at least one that's connected so for now it's always true
+                    // TODO If one day we can relax predicates as filters, this will change
+                }
+            } else {
+                logger.debug("object is not variable");
+                if (object.isURI()) {
+                    logger.debug("object is uri");
+                    RDFNode objNode = new ResourceImpl(object.getURI());
+                    if (mapping.getVars().contains(subjVar)) {
+                        logger.debug(subjVar + " connected");
+                        Iterator<Binding> iter = mapping.rows();
+                        iter.forEachRemaining((b) -> {
+                            RDFNode bindSubject = new ResourceImpl(b.get(subjVar).getURI());
+                            logger.debug("found " + bindSubject + " at " + subjVar + " in " + b);
+                            if (model.predicates.get(predicate.toString()).keySet().contains(bindSubject)) {
+                                if (model.predicates.get(predicate.toString()).get(bindSubject).contains(objNode)) {
+                                    res.addBinding(b);
+                                    logger.debug("found " + objNode + " in predicates");
+                                }
+                            } else logger.debug("not in this predicate");
+                        });
+                    } // this should always be true or else there wouldn't be a connected variable
+                    // TODO Same as above
+                }
+            }
+        }
+        return res;
+    }
 }

@@ -2,16 +2,18 @@ package implementation.utils;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
-import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.impl.ResourceImpl;
+import org.apache.jena.sparql.algebra.Table;
+import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
+import org.apache.jena.sparql.engine.binding.BindingHashMap;
+import org.apache.jena.sparql.engine.binding.BindingUtils;
 import org.apache.jena.sparql.expr.*;
 import org.apache.jena.sparql.expr.nodevalue.NodeValueNode;
 import org.apache.jena.sparql.syntax.Element;
@@ -218,6 +220,60 @@ public class ElementUtils {
     }
 
     /**
+     * TODO
+     * @param element
+     * @param colMd
+     * @return
+     */
+    public static Table ans(Element element,CollectionsModel colMd){
+        logger.debug("answering :"+element);
+        List<Binding> solutionsList = new ArrayList<>();
+        Table res = new TableN();
+        if(element instanceof ElementFilter){
+            logger.debug("is filter");
+            Expr expr = ((ElementFilter) element).getExpr();
+            if (expr instanceof E_Equals) {
+                Var var = ((ExprVar) ((E_Equals) expr).getArg1()).asVar();
+                Node node = ((NodeValue) ((E_Equals) expr).getArg2()).asNode();
+                BindingHashMap bind = new BindingHashMap();
+                bind.add(var,node);
+                res.addBinding(bind);
+            }
+        } else if (element instanceof ElementPathBlock){
+            logger.debug("is pathblock");
+            Var subjVar = (Var) ((ElementPathBlock) element).getPattern().get(0).getSubject();
+            // Subject is always a variable because triples are obtained from describeNode
+            Node predicate = ((ElementPathBlock) element).getPattern().get(0).getPredicate();
+            Node object = ((ElementPathBlock) element).getPattern().get(0).getObject();
+            logger.debug("predicate : " + predicate);
+            if (object.isVariable()) {
+                // Object can be something other than a Variable if we are describing classes by their members and subclasses
+                Var objVar = (Var) object;
+                logger.debug("against variable");
+                for(RDFNode subj : colMd.predicates.get(predicate.toString()).keySet()){
+                    for (RDFNode obj : colMd.predicates.get(predicate.toString()).get(subj)){
+                        BindingHashMap bind = new BindingHashMap();
+                        bind.add(subjVar,subj.asNode());
+                        bind.add(objVar,obj.asNode());
+                        res.addBinding(bind);
+                    }
+                }
+            } else {
+                if (object.isURI()) {
+                    logger.debug("object is uri");
+                    RDFNode objNode = new ResourceImpl(object.getURI());
+                    for(RDFNode subj : colMd.predicatesReversed.get(predicate.toString()).get(objNode)){
+                        BindingHashMap bind = new BindingHashMap();
+                        bind.add(subjVar,subj.asNode());
+                        res.addBinding(bind);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
      * @deprecated Same as {@link #relaxFilter(ElementFilter, CollectionsModel, Map)} but very inefficient because it uses an ARQ query
      */
     @Deprecated
@@ -341,5 +397,28 @@ public class ElementUtils {
             list.add(filter);
         }
         return list;
+    }
+
+    /**
+     * Used to be used in the extension (now calculated by {@link TableUtils#ext(Table, Element, CollectionsModel)} )
+     * removed because it was very inefficient and it still required a join with he mapping
+     */
+    @Deprecated
+    public static Table ans(List<Var> vars, List<Element> elements, Model graph) {
+        List<QuerySolution> solutionsList;
+        Table res = new TableN();
+        SingletonStopwatchCollection.resume("querying");
+        String queryString = getSelectStringFrom(vars, elements);
+        logger.info(queryString);
+        Query qAnsE = QueryFactory.create(queryString);
+        ResultSet resultSet = QueryExecutionFactory.create(qAnsE, graph).execSelect();
+        SingletonStopwatchCollection.stop("querying");
+        SingletonStopwatchCollection.resume("formatting");
+        solutionsList = ResultSetFormatter.toList(resultSet);
+        for (QuerySolution qs : solutionsList) {
+            res.addBinding(BindingUtils.asBinding(qs));
+        }
+        SingletonStopwatchCollection.stop("formatting");
+        return res;
     }
 }

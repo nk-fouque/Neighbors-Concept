@@ -6,19 +6,25 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" line="129" />
+    <bookmark url="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" line="131" />
     <bookmark url="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" line="16" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="Jar building">
-      <change afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java" afterDir="false" />
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="Visualizing Prefix list">
+      <change afterPath="$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeRoot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/implementation/utils/CutPlanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Similarity_Search_jar/Similarity_Search.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Similarity_Search_jar/Similarity_Search.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Cluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Cluster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Partition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/ElementUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/ElementUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/TableUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/TableUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Cluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Partition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,11 +41,70 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-68">
-              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state relative-caret-position="400">
+              <caret line="74" column="52" selection-start-line="74" selection-start-column="52" selection-end-line="74" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/utils/CutPlanner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/Downloads/jdk-12.0.1_linux-x64_bin/jdk-12.0.1/lib/src.zip!/java.base/java/util/Collections.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="5397" selection-start-line="5397" selection-end-line="5397" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="757">
+              <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#995#996#0" expanded="true" />
+                <element signature="e#1031#1032#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeRoot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="621">
+              <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/Cluster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2053">
+              <caret line="28" column="53" lean-forward="true" selection-start-line="28" selection-start-column="53" selection-end-line="29" selection-end-column="67" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -47,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/Partition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="767">
-              <caret line="118" column="48" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="48" />
+            <state relative-caret-position="85">
+              <caret line="96" column="85" lean-forward="true" selection-start-line="96" selection-start-column="85" selection-end-line="96" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,31 +122,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
+        <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="127" column="96" lean-forward="true" selection-start-line="127" selection-start-column="96" selection-end-line="127" selection-end-column="96" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/PartitionRun.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="52" column="56" lean-forward="true" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+            <state relative-caret-position="3086">
+              <caret line="422" column="5" selection-start-line="422" selection-start-column="5" selection-end-line="422" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -90,56 +134,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
+        <entry file="file://$PROJECT_DIR$/src/implementation/utils/TableUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/Cluster.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="346" column="9" lean-forward="true" selection-start-line="346" selection-start-column="9" selection-end-line="346" selection-end-column="9" />
+            <state relative-caret-position="241">
+              <caret line="114" column="24" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="23" column="69" selection-start-line="23" selection-start-column="69" selection-end-line="23" selection-end-column="69" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/CopyButton.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="53" lean-forward="true" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/css/application.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -157,7 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SingletonStopwatchCollection</find>
       <find>isgreaterorequal</find>
       <find>Relax distance</find>
       <find>rela</find>
@@ -187,6 +187,7 @@
       <find>e_eq</find>
       <find>replacea</find>
       <find>logger</find>
+      <find>solutionsList</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -221,13 +222,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/v2/TableUtils.java" />
-        <option value="$PROJECT_DIR$/src/v2/utils/ListUtils.java" />
-        <option value="$PROJECT_DIR$/src/v2/utils/a.java" />
-        <option value="$PROJECT_DIR$/src/v2/exceptions/PartitionException.java" />
-        <option value="$PROJECT_DIR$/src/v2/InterfaceController.java" />
-        <option value="$PROJECT_DIR$/src/v2/gui/neighbors.fxml" />
-        <option value="$PROJECT_DIR$/src/v2/gui/Neighbors.java" />
         <option value="$PROJECT_DIR$/src/v2/gui/model/ClusterVisual.java" />
         <option value="$PROJECT_DIR$/src/v2/gui/model/NeighborsModel.java" />
         <option value="$PROJECT_DIR$/src/v2/utils/MyModel.java" />
@@ -252,26 +246,33 @@
         <option value="$PROJECT_DIR$/src/implementation/utils/RandomString.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/SingletonStopwatchCollection.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/Stopwatch.java" />
-        <option value="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" />
-        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/CopyButton.java" />
-        <option value="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" />
         <option value="$PROJECT_DIR$/tests/ClusterTest.java" />
-        <option value="$PROJECT_DIR$/src/implementation/Partition.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/visualCandidate.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/ClusterVisualizer.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/view/css/application.css" />
-        <option value="$PROJECT_DIR$/src/implementation/Cluster.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/PartitionRun.java" />
+        <option value="$PROJECT_DIR$/src/implementation/MatchTreeNode.java" />
+        <option value="$PROJECT_DIR$/src/implementation/MatchTreeRoot.java" />
+        <option value="$PROJECT_DIR$/src/implementation/Cluster.java" />
+        <option value="$PROJECT_DIR$/src/implementation/matchTrees/LazyJoin.java" />
+        <option value="$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeRoot.java" />
+        <option value="$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeNode.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/CutProgrammer.java" />
+        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
+        <option value="$PROJECT_DIR$/src/implementation/Partition.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/CutPlanner.java" />
       </list>
     </option>
   </component>
@@ -295,7 +296,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -362,12 +362,27 @@
             </path>
             <path>
               <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="implementation" type="462c0819:PsiDirectoryNode" />
+              <item name="matchTrees" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="implementation" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -393,18 +408,18 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Markdown" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="implementation.utils.TableUtils" />
+      <recent name="implementation.utils.ElementUtils" />
       <recent name="implementation.gui.model.PartitionRun" />
       <recent name="v2.gui.controller.NeighborsController" />
       <recent name="v2.Main" />
-      <recent name="v2.utils.ElementUtils" />
-      <recent name="v2.utils.ListUtils" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="v2.utils" />
@@ -431,7 +446,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.NeighborsInterface">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Beginning" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sandbox.Beginning" />
       <module name="Similarity_Search" />
@@ -465,6 +480,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MatchTreeRoot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="implementation.matchTrees.MatchTreeRoot" />
+      <module name="Similarity_Search" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="implementation.matchTrees.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NeighborsInterface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="implementation.gui.NeighborsInterface" />
       <module name="Similarity_Search" />
@@ -484,14 +512,15 @@
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.NeighborsInterface" />
       <item itemvalue="Application.MainInterface" />
+      <item itemvalue="Application.MatchTreeRoot" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.NeighborsInterface" />
-        <item itemvalue="Application.MainInterface" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Beginning" />
         <item itemvalue="Application.NeighborsInterface" />
+        <item itemvalue="Application.MatchTreeRoot" />
+        <item itemvalue="Application.MainInterface" />
+        <item itemvalue="Application.Beginning" />
       </list>
     </recent_temporary>
   </component>
@@ -547,7 +576,9 @@
       <workItem from="1562656641384" duration="211000" />
       <workItem from="1562658295905" duration="2092000" />
       <workItem from="1562671791410" duration="8000" />
-      <workItem from="1562744754292" duration="3719000" />
+      <workItem from="1562744754292" duration="4359000" />
+      <workItem from="1562766132839" duration="3865000" />
+      <workItem from="1562918921170" duration="13116000" />
     </task>
     <task id="LOCAL-00001" summary="Completed Javadoc for Cluster.class">
       <created>1561636589113</created>
@@ -710,7 +741,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562745799582</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Visualizing Prefix list">
+      <created>1562748501730</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1562748501730</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -746,7 +784,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="291392000" />
+    <option name="totallyTimeSpent" value="309013000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -761,7 +799,7 @@
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31702465" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32259348" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -770,7 +808,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4840891" weight="0.3299373" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47016707" visible="true" weight="0.39106584" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.47016707" visible="true" weight="0.39106584" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49602228" weight="0.39890283" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -794,7 +832,7 @@
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32975337" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31742242" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32259348" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -812,7 +850,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4988067" weight="0.3299373" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4984089" weight="0.3299373" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.52983296" side_tool="true" visible="true" weight="0.39106584" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.52983296" side_tool="true" weight="0.39106584" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.47613364" weight="0.3299373" />
       <window_info anchor="bottom" id="Profiler" order="13" sideWeight="0.49960223" weight="0.32994527" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -895,7 +933,8 @@
     <MESSAGE value="rdf:type management" />
     <MESSAGE value="Reformatting" />
     <MESSAGE value="Jar building files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jar building files" />
+    <MESSAGE value="Visualizing Prefix list" />
+    <option name="LAST_COMMIT_MESSAGE" value="Visualizing Prefix list" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$Main.ic" NAME="Main Coverage Results" MODIFIED="1561385313536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -918,20 +957,6 @@
     </SUITE>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ClusterAlgebric.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/module-info.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#182#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/Partition.java" />
-    <entry file="file://$PROJECT_DIR$/src/v1/Cluster.java" />
-    <entry file="file://$PROJECT_DIR$/src/v1/Tools.java" />
     <entry file="file://$PROJECT_DIR$/src/sandbox/Beginning.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -1092,16 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/TableUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="204" column="20" selection-start-line="204" selection-start-column="20" selection-end-line="204" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/production/Similarity_Search/META-INF/MANIFEST.MF" />
     <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
     <entry file="file://$PROJECT_DIR$/src/implementation/gui/MainInterface.java" />
@@ -1133,10 +1148,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="793">
-          <caret line="97" column="96" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="96" />
+        <state relative-caret-position="493">
+          <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="23" column="69" selection-start-line="23" selection-start-column="69" selection-end-line="23" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1150,10 +1173,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/Cluster.java">
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="346" column="9" lean-forward="true" selection-start-line="346" selection-start-column="9" selection-end-line="346" selection-end-column="9" />
+        <state relative-caret-position="425">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/PartitionRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="52" column="56" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1613">
+          <caret line="127" column="96" selection-start-line="127" selection-start-column="96" selection-end-line="127" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/CopyButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/matchTrees/LazyJoin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="5" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="36" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="757">
+          <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#995#996#0" expanded="true" />
+            <element signature="e#1031#1032#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeRoot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1162,70 +1244,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/Partition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="118" column="48" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="48" />
+        <state relative-caret-position="85">
+          <caret line="96" column="85" lean-forward="true" selection-start-line="96" selection-start-column="85" selection-end-line="96" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/TableUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="114" column="24" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3086">
+          <caret line="422" column="5" selection-start-line="422" selection-start-column="5" selection-end-line="422" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/Cluster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2053">
+          <caret line="28" column="53" lean-forward="true" selection-start-line="28" selection-start-column="53" selection-end-line="29" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Downloads/jdk-12.0.1_linux-x64_bin/jdk-12.0.1/lib/src.zip!/java.base/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="5397" selection-start-line="5397" selection-end-line="5397" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/CutPlanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="23" column="69" selection-start-line="23" selection-start-column="69" selection-end-line="23" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/CopyButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="53" lean-forward="true" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="127" column="96" lean-forward="true" selection-start-line="127" selection-start-column="96" selection-end-line="127" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/PartitionRun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="52" column="56" lean-forward="true" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+        <state relative-caret-position="400">
+          <caret line="74" column="52" selection-start-line="74" selection-start-column="52" selection-end-line="74" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
