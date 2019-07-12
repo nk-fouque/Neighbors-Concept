@@ -35,12 +35,12 @@ public class Cluster implements Comparable<Cluster> {
     private Table mapping;
     private Table answers;
     private List<Var> connectedVars;
-    private List<Element>
-            removedQueryElements;
+    private List<Element> removedQueryElements;
     private int extensionDistance;
 
     /**
      * The head of the query
+     * Normally only one variable but represented as a list for theoretical use as a query head
      */
     public List<Var> getProj() {
         return proj;
@@ -115,17 +115,19 @@ public class Cluster implements Comparable<Cluster> {
         }
         availableQueryElements = ListUtils.removeDuplicates(availableQueryElements);
         this.removedQueryElements = new ArrayList<>();
-        this.mapping = new TableN();
-        this.answers = new TableN();
+        Table map = new TableN();
+        Table ans = new TableN();
         extensionDistance = 0;
         ResIterator data = graph.listSubjects();
         data.forEachRemaining((Resource resource) -> {
             extensionDistance++;
             for (Var var : getProj()) {
-                mapping.addBinding(BindingFactory.binding(var, resource.asNode()));
-                answers.addBinding(BindingFactory.binding(var, resource.asNode()));
+                map.addBinding(BindingFactory.binding(var, resource.asNode()));
+                ans.addBinding(BindingFactory.binding(var, resource.asNode()));
             }
         });
+        mapping = map;
+        answers = ans;
         this.connectedVars = qry.getProjectVars();
     }
 

@@ -1,5 +1,6 @@
 package implementation;
 
+import implementation.utils.CutPlanner;
 import implementation.utils.SingletonStopwatchCollection;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
@@ -71,6 +72,8 @@ public class Main {
         Signal.handle(new Signal("INT"), handler);
 
         // Launching the algorithm
+        Thread thread = new Thread(new CutPlanner(10,cut));
+        thread.start();
         int algoRun = p.partitionAlgorithm(cut);
 
         switch (algoRun) {
