@@ -1,7 +1,10 @@
 package implementation;
 
+import implementation.matchTrees.MatchTreeRoot;
 import implementation.utils.*;
 import org.apache.jena.query.Query;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.core.Var;
@@ -9,6 +12,7 @@ import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +49,7 @@ public class Partition {
         graph = new CollectionsModel(md, mdInf);
 //        graph.downSizing();
         clusters = new ArrayList<>();
-        clusters.add(new Cluster(q, md));
+        clusters.add(new Cluster(q, graph));
         neighbors = new ArrayList<>();
         keys = keycodes;
     }
@@ -91,10 +95,10 @@ public class Partition {
             list.add(e);
 
 
-            Table me;
+            MatchTreeRoot me = new MatchTreeRoot(c.getMatchTree());
             SingletonStopwatchCollection.resume("newans");
             try {
-                me = TableUtils.simpleJoin(c.getMapping(),ElementUtils.ans(e,graph));
+                me = me.lazyJoin(e,graph,c.getConnectedVars());
             } catch (OutOfMemoryError err) {
                 clusters.add(c);
                 SingletonStopwatchCollection.stop("iterate");
@@ -107,8 +111,19 @@ public class Partition {
             Table piMe = null;
             Table ae = null;
             try {
-                piMe = TableUtils.projection(me, c.getProj());
+                piMe = TableUtils.projection(me.getMatchSet(), c.getProj());
+                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())){
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ResultSet rs = piMe.toResultSet();
+                    ResultSetFormatter.out(baos,rs);
+                    logger.trace(baos.toString());
+                };
                 ae = TableUtils.simpleJoin(c.getAnswers(), piMe);
+                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())){
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ResultSetFormatter.out(baos,ae.toResultSet());
+                    logger.trace(baos.toString());
+                };
             } catch (OutOfMemoryError err) {
                 clusters.add(c);
                 SingletonStopwatchCollection.stop("iterate");
@@ -119,14 +134,14 @@ public class Partition {
             int extensionDistance = piMe.size();
 
 
+            SingletonStopwatchCollection.resume("reste");
             Cluster Ce = new Cluster(c, me, ae, extensionDistance);
             Ce.move(e, varE);
 
-            Cluster CeOpp = new Cluster(c, c.getMapping(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
+            Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
             CeOpp.relax(e, graph, keys);
 
 
-            SingletonStopwatchCollection.resume("reste");
             boolean ceEmpty = Ce.noAnswers();
             boolean ceOppEmpty = CeOpp.noAnswers();
             if (!ceEmpty) {

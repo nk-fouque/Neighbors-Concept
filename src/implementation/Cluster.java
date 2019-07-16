@@ -1,5 +1,6 @@
 package implementation;
 
+import implementation.matchTrees.MatchTreeRoot;
 import implementation.utils.*;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
@@ -32,7 +33,7 @@ public class Cluster implements Comparable<Cluster> {
     private List<Element> relaxQueryElements;
     private int relaxDistance;
     private List<Element> availableQueryElements;
-    private Table mapping;
+    private MatchTreeRoot mapping;
     private Table answers;
     private List<Var> connectedVars;
     private List<Element> removedQueryElements;
@@ -70,8 +71,8 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * The Match-set containing all the answers to the relaxed queries
      */
-    public Table getMapping() {
-        return mapping;
+    public Table getMatchSet() {
+        return mapping.getMatchSet();
     }
 
     /**
@@ -92,10 +93,22 @@ public class Cluster implements Comparable<Cluster> {
         return extensionDistance;
     }
 
+    public List<Var> getConnectedVars() {
+        return connectedVars;
+    }
+
+    /**
+     * TODO
+     * @return
+     */
+    public MatchTreeRoot getMatchTree() {
+        return mapping;
+    }
+
     /**
      * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph
      */
-    public Cluster(Query qry, Model graph) {
+    public Cluster(Query qry, CollectionsModel graph) {
         this.proj = qry.getProjectVars();
         this.relaxQueryElements = new ArrayList<>();
         this.relaxDistance = 0;
@@ -115,26 +128,16 @@ public class Cluster implements Comparable<Cluster> {
         }
         availableQueryElements = ListUtils.removeDuplicates(availableQueryElements);
         this.removedQueryElements = new ArrayList<>();
-        Table map = new TableN();
-        Table ans = new TableN();
         extensionDistance = 0;
-        ResIterator data = graph.listSubjects();
-        data.forEachRemaining((Resource resource) -> {
-            extensionDistance++;
-            for (Var var : getProj()) {
-                map.addBinding(BindingFactory.binding(var, resource.asNode()));
-                ans.addBinding(BindingFactory.binding(var, resource.asNode()));
-            }
-        });
-        mapping = map;
-        answers = ans;
+        mapping = new MatchTreeRoot(getProj(),graph);
+        answers = mapping.getMatchSet();
         this.connectedVars = qry.getProjectVars();
     }
 
     /**
      * Creates a cluster with the same values as an other but different Mapping ext Answers
      */
-    public Cluster(Cluster c, Table Me, Table Ae, int extensionDistance) {
+    public Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance) {
         this.proj = new ArrayList<>(c.getProj());
         this.relaxQueryElements = new ArrayList<>();
         this.relaxQueryElements.addAll(c.getRelaxQueryElements());
@@ -204,7 +207,7 @@ public class Cluster implements Comparable<Cluster> {
             List<Element> list = new ArrayList<>();
             if (element instanceof ElementFilter) {
                 ElementFilter e = (ElementFilter) element;
-                list = ElementUtils.relaxFilter(e, graph, keys);
+//                list = ElementUtils.relaxFilter(e, graph, keys);  // Leave commented for description depth 1, uncommented for depth = 2
             } else {
                 ElementPathBlock e = (ElementPathBlock) element;
                 TriplePath t = e.getPattern().get(0);
@@ -245,7 +248,7 @@ public class Cluster implements Comparable<Cluster> {
     @Deprecated
     public String mappingString() {
         ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
-        ResultSetFormatter.out(baos1, getMapping().toResultSet());
+        ResultSetFormatter.out(baos1, getMatchSet().toResultSet());
         return baos1.toString();
     }
 
@@ -282,6 +285,7 @@ public class Cluster implements Comparable<Cluster> {
      */
     public String toString(CollectionsModel colMd) {
         String res = "Number of relaxation : " + relaxDistance + "\n";
+        res += "Extensional Distance : " + extensionDistance + "\n";
         res += "Elements : " + relaxQueryElements + "\n";
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
             res += "Debug available: " + availableQueryElements + "\n";
@@ -289,7 +293,7 @@ public class Cluster implements Comparable<Cluster> {
             res += "Connected variables : " + connectedVars + "\n";
         }
         res += "Query :" + queryString() + "\n";
-        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mappingString() + "\n";
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mapping.toString() + "\n";
         res += "Answers :\n" + answersListString(colMd) + "\n";
         return res;
     }
