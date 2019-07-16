@@ -23,6 +23,7 @@ public class CollectionsModel {
     Map<String, Map<RDFNode, List<RDFNode>>> predicatesReversed = new HashMap<>();
 
     Map<String, Map<Property, List<RDFNode>>> triplesSimple = new HashMap<>();
+    Map<String, Map<Property, List<RDFNode>>> triplesSimpleReversed = new HashMap<>();
 
     public CollectionsModel(Model md, Model mdInf) {
         graph = md;
@@ -58,6 +59,9 @@ public class CollectionsModel {
             Map<Property, List<RDFNode>> propertiesFrom = triplesSimple.computeIfAbsent(stmt.getSubject().toString(), (m) -> new HashMap<>());
             List<RDFNode> thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyFrom.add(stmt.getObject());
+            Map<Property, List<RDFNode>> propertiesTo = triplesSimpleReversed.computeIfAbsent(stmt.getObject().toString(), (m) -> new HashMap<>());
+            List<RDFNode> thatPropertyTo = propertiesTo.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
+            thatPropertyTo.add(stmt.getSubject());
         });
     }
 
@@ -124,6 +128,7 @@ public class CollectionsModel {
     @Override
     public String toString() {
         return (subClassOf + "\n\n" + subPropertyOf + "\n\n" + triples + "\n\n" + triplesReversed +
-                "\n\n" + predicates + "\n\n" + predicatesReversed);
+                "\n\n" + predicates + "\n\n" + predicatesReversed +
+                "\n\n" + triplesSimple + "\n\n" + triplesSimpleReversed);
     }
 }

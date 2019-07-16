@@ -48,9 +48,11 @@ public class TableUtils {
         Binding b;
         while (iter.hasNext()) {
             b = iter.nextBinding();
+            BindingHashMap bind = new BindingHashMap();
             for (Var var : vars) {
-                res.addBinding(BindingFactory.binding(var, b.get(var)));
+                bind.add(var,b.get(var));
             }
+            res.addBinding(bind);
         }
         return removeDuplicates(res);
     }

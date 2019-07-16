@@ -107,8 +107,12 @@ public class ElementUtils {
                 if (expr instanceof NodeValueNode) {
                     logger.info("Relaxing : " + expr);
                     list.addAll(ElementUtils.describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model, keys));
+                } else {
+                    logger.info(expr+" not NodeValueNode");
                 }
             }
+        } else {
+            logger.info(f+" not E_Equals");
         }
 
         List<Element> res = new ArrayList<>();
@@ -118,6 +122,7 @@ public class ElementUtils {
                 res.add(e);
             }
         }
+        logger.info("relaxed to "+res);
         return res;
     }
 
@@ -154,7 +159,7 @@ public class ElementUtils {
                 }
             }
         }
-        Map<Property, List<RDFNode>> propertiesTo = model.triplesSimple.get(uri);
+        Map<Property, List<RDFNode>> propertiesTo = model.triplesSimpleReversed.get(uri);
         if (propertiesTo != null) {
             for (Property property : propertiesTo.keySet()) {
                 List<RDFNode> subjects = propertiesTo.get(property);
