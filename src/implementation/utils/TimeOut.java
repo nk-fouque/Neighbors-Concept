@@ -2,11 +2,11 @@ package implementation.utils;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CutPlanner implements Runnable {
+public class TimeOut implements Runnable {
     private long millis;
     private AtomicBoolean cut;
 
-    public CutPlanner(int seconds, AtomicBoolean cut){
+    public TimeOut(AtomicBoolean cut, int seconds){
         millis = seconds*1000;
         this.cut = cut;
     }
