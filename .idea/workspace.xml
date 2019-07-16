@@ -10,21 +10,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" line="16" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="New way of working extension, more efficient">
-      <change afterPath="$PROJECT_DIR$/src/implementation/matchTrees/LazyJoin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeRoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Cluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Cluster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Partition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/ElementUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/ElementUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/TableUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/TableUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Similarity_Search/ClusterTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Cluster.java" afterDir="false" />
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/implementation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Partition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ClusterTest.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+            <state relative-caret-position="-399">
+              <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/Partition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+            <state relative-caret-position="451">
+              <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -283,8 +271,8 @@
         <option value="$PROJECT_DIR$/src/implementation/matchTrees/MatchTreeNode.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/Timer.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/AlgorithmTimer.java" />
-        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
         <option value="$PROJECT_DIR$/src/implementation/Partition.java" />
+        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
       </list>
     </option>
   </component>
@@ -595,7 +583,7 @@
       <workItem from="1562918921170" duration="21213000" />
       <workItem from="1563175097890" duration="1174000" />
       <workItem from="1563261522796" duration="10419000" />
-      <workItem from="1563275821635" duration="12668000" />
+      <workItem from="1563275821635" duration="13633000" />
     </task>
     <task id="LOCAL-00001" summary="Completed Javadoc for Cluster.class">
       <created>1561636589113</created>
@@ -793,7 +781,21 @@
       <option name="project" value="LOCAL" />
       <updated>1563289974304</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Implemented Match-trees">
+      <created>1563290056035</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1563290056035</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Compilation results">
+      <created>1563290073803</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1563290073803</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -829,7 +831,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="341371000" />
+    <option name="totallyTimeSpent" value="342336000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -842,8 +844,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33094668" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33094668" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -852,7 +855,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4840891" weight="0.3299373" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47016707" visible="true" weight="0.39106584" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.47016707" visible="true" weight="0.39106584" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49602228" weight="0.39890283" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -954,7 +957,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="ElementUtils Javadoc" />
     <MESSAGE value="TableUtils Javadoc" />
     <MESSAGE value="Improved styles" />
     <MESSAGE value="Set up ground for anytime version, OutOfMemory now triggers anytime end" />
@@ -979,7 +981,8 @@
     <MESSAGE value="Change functioning of timeouts,&#10;Created a static logger setup,&#10;OutOfMemoryError second management" />
     <MESSAGE value="Fixed problem with describeNode and projection" />
     <MESSAGE value="Implemented Match-trees" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Match-trees" />
+    <MESSAGE value="Compilation results" />
+    <option name="LAST_COMMIT_MESSAGE" value="Compilation results" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$Main.ic" NAME="Main Coverage Results" MODIFIED="1561385313536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -1333,20 +1336,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/implementation/Partition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+        <state relative-caret-position="451">
+          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/Partition.java">
+    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+        <state relative-caret-position="-399">
+          <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

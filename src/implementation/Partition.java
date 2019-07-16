@@ -3,6 +3,7 @@ package implementation;
 import implementation.matchTrees.MatchTreeRoot;
 import implementation.utils.*;
 import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
@@ -13,10 +14,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Partition {
@@ -44,7 +42,9 @@ public class Partition {
      *
      * @param q  Jena Query describing the Node we are trying to find the neighbors of
      * @param md Jena Model containing the RDF Graph in which the search must be done
+     * @deprecated TODO
      */
+    @Deprecated
     public Partition(Query q, Model md, Model mdInf, Map<String, Var> keycodes) {
         graph = new CollectionsModel(md, mdInf);
 //        graph.downSizing();
@@ -52,6 +52,17 @@ public class Partition {
         clusters.add(new Cluster(q, graph));
         neighbors = new ArrayList<>();
         keys = keycodes;
+    }
+
+    public Partition(CollectionsModel colMd,String uriTarget){
+        graph = colMd;
+        keys = new HashMap<>();
+
+        String querySting = initialQueryString(uriTarget,colMd,keys);
+        Query q = QueryFactory.create(querySting);
+        clusters=new ArrayList<>();
+        clusters.add(new Cluster(q,colMd));
+        neighbors=new ArrayList<>();
     }
 
     public List<Cluster> getClusters() {
@@ -224,12 +235,24 @@ public class Partition {
      * @param uri   The uri of the element to be represented
      * @param graph The graph to represent it in
      */
+    @Deprecated
     public static String initialQueryString(String uri, Model graph, Map<String, Var> keys) {
         List<Var> x = new ArrayList<>();
         Var neighbor = Var.alloc("Neighbor");
         keys.put(uri, neighbor);
         x.add(neighbor);
         String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, graph, keys));
+        return res;
+    }
+
+    public String initialQueryString(String uri,CollectionsModel colMd,Map<String,Var> keys){
+        Var neighbor = Var.alloc("Neighbor");
+        keys.put(uri, neighbor);
+
+        List<Var> x = new ArrayList<>();
+        x.add(neighbor);
+
+        String res = ElementUtils.getSelectStringFrom(x,ElementUtils.describeNode(uri,colMd,keys));
         return res;
     }
 

@@ -1,6 +1,7 @@
 package implementation;
 
 import implementation.utils.AlgorithmTimer;
+import implementation.utils.CollectionsModel;
 import implementation.utils.SingletonStopwatchCollection;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
@@ -37,10 +38,25 @@ public class Main {
                 Logger.getLogger("implementation.Partition").setLevel(Level.INFO);
                 Logger.getLogger("implementation.Cluster").setLevel(Level.INFO);
                 Logger.getLogger("implementation.utils").setLevel(Level.OFF);
-                Logger.getLogger("implementation.matchTrees.MatchTreeNode").setLevel(Level.DEBUG);
+                Logger.getLogger("implementation.matchTrees.MatchTreeNode").setLevel(Level.OFF);
             }
         }
+    }
 
+    public static CollectionsModel loadModelFromFile(String filename,String format,boolean verbose) throws IOException{
+        Model md = ModelFactory.createDefaultModel();
+        md.read(new FileInputStream(filename),null,format);
+        if(verbose){
+            md.write(System.out,"TURTLE");
+        }
+
+        Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md);
+        if(verbose) {
+            saturated.write(System.out, "TURTLE");
+        }
+
+        CollectionsModel res = new CollectionsModel(md,saturated);
+        return res;
     }
 
     public static void main(String[] args) throws IOException {
@@ -51,28 +67,13 @@ public class Main {
         // Loading Model from file
         String filename = "/udd/nfouque/Documents/default_mondial.nt";
 //        String filename = "/udd/nfouque/Documents/royal.ttl";
-        Model md = ModelFactory.createDefaultModel();
-        md.read(new FileInputStream(filename), null, "TTL");
-//        md.write(System.out,"TURTLE");
+        CollectionsModel model = loadModelFromFile(filename,"TTL",false);
 
-        Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md);
-//        saturated.write(System.out, "TURTLE");
-
-        // Choose node and describe it
+        // Choose node
         String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
 //        String uriTarget = "http://example.org/royal/Charlotte";
-        Map<String, Var> keys = new HashMap<>();
-        String QueryString = Partition.initialQueryString(uriTarget, md, keys);
-        System.out.println(QueryString);
 
-        // Printing the result just to show that we find it back
-        Query q = QueryFactory.create(QueryString);
-        QueryExecution qe = QueryExecutionFactory.create(q, md);
-        ResultSetFormatter.out(System.out, qe.execSelect(), q);
-        System.out.println("\n\n");
-
-        // Creation of the Partition
-        Partition p = new Partition(q, md, saturated, keys);
+        Partition p = new Partition(model,uriTarget);
         System.out.println(p.getClusters().get(0));
         System.out.println("Printing graph" + p.getGraph());
 
@@ -89,7 +90,7 @@ public class Main {
         Signal.handle(new Signal("INT"), handler);
 
         // Launching the algorithm
-        AlgorithmTimer.planTimeOut(cut,120);
+        AlgorithmTimer.planTimeOut(cut,15);
         int algoRun = p.partitionAlgorithm(cut);
 
         switch (algoRun) {
@@ -115,7 +116,7 @@ public class Main {
                     System.out.println(results);
                     writer.write(results);
                 } catch (OutOfMemoryError err){
-                    System.out.println("Could not recover results, a timeout is needed");
+                    System.out.println("Could not recover results, allocate more heap size or use a timeout");
                 }
             }
         }
