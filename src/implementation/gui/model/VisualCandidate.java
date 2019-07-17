@@ -8,7 +8,6 @@ public class VisualCandidate extends BorderPane {
     public VisualCandidate(String uri, Model md, NeighborButton button) {
         super();
         Label text = new Label("  " + md.shortForm(uri));
-        text.getStyleClass().add("sparklis-blue");
         setLeft(text);
         setRight(button);
     }

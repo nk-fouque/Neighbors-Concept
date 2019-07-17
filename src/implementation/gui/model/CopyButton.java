@@ -29,7 +29,7 @@ public class CopyButton extends Button {
             Thread thread = new Thread(() -> {
                 Platform.runLater(() -> this.setText("Copied !"));
                 try {
-                    Thread.currentThread().sleep(800);
+                    Thread.sleep(800);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

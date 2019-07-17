@@ -61,9 +61,9 @@ public class MatchTreeNode {
         return children;
     }
 
-    public String elementString(){
-        if(element == null){
-            return ("T("+D.toString()+")");
+    public String elementString() {
+        if (element == null) {
+            return ("T(" + D.toString() + ")");
         } else {
             return element.toString();
         }
@@ -71,26 +71,18 @@ public class MatchTreeNode {
 
     public String toString(int tab) {
         StringBuilder res = new StringBuilder();
-        for(int i = 0;i<tab;i++){
-            res.append("\t");
-        }
-        res.append("[Element : "+elementString());
+        res.append("\t".repeat(Math.max(0, tab)));
+        res.append("[Element : ").append(elementString());
         res.append("\n");
-        for(int i = 0;i<=tab;i++){
-            res.append("\t");
-        }
+        res.append("\t".repeat(Math.max(0, tab + 1)));
         res.append("Children : ");
-        for(MatchTreeNode nc : children){
+        for (MatchTreeNode nc : children) {
             res.append("\n");
-            for(int i = 0;i<=tab;i++){
-                res.append("\t");
-            }
-            res.append(nc.toString(tab+1));
+            res.append("\t".repeat(Math.max(0, tab + 1)));
+            res.append(nc.toString(tab + 1));
         }
         res.append("\n");
-        for(int i = 0;i<=tab;i++){
-            res.append("\t");
-        }
+        res.append("\t".repeat(Math.max(0, tab + 1)));
         res.append("]");
         return res.toString();
     }
@@ -98,7 +90,7 @@ public class MatchTreeNode {
     public MatchTreeNode() {
     }
 
-    public MatchTreeNode(Element element,CollectionsModel colmd,List<Var> varPprime){
+    public MatchTreeNode(Element element, CollectionsModel colmd, List<Var> varPprime) {
         children = new ArrayList<>();
 
         this.element = element;
@@ -106,7 +98,7 @@ public class MatchTreeNode {
         D = new ArrayList<>(varE);
         D.removeAll(varPprime);
 
-        matchSet = ElementUtils.ans(this.element,colmd);
+        matchSet = ElementUtils.ans(this.element, colmd);
         domM = new ArrayList<>(varE);
         delta = new ArrayList<>(varE);
         delta.retainAll(varPprime);
@@ -115,7 +107,7 @@ public class MatchTreeNode {
         inserted = false;
     }
 
-    public MatchTreeNode(MatchTreeNode other){
+    public MatchTreeNode(MatchTreeNode other) {
         children = new ArrayList<>(other.getChildren());
         element = other.getElement();
         varE = new ArrayList<>(other.getVarE());
@@ -126,21 +118,21 @@ public class MatchTreeNode {
         inserted = other.inserted;
     }
 
-    public void insert(){
+    public void insert() {
         inserted = true;
     }
 
-    public boolean inserted(){
+    public boolean inserted() {
         return this.inserted;
     }
 
-    public void replace(MatchTreeNode child, MatchTreeNode other){
+    public void replace(MatchTreeNode child, MatchTreeNode other) {
         this.children.remove(child);
         this.children.add(other);
     }
 
     public LazyJoin lazyJoin(MatchTreeRoot tree, MatchTreeNode node) {
-        logger.debug("trying "+node.elementString()+" under "+elementString());
+        logger.debug("trying " + node.elementString() + " under " + elementString());
         ArrayList<Var> deltaplus = new ArrayList<>();
         ArrayList<Var> deltaminus = new ArrayList<>();
         MatchTreeNode copy = new MatchTreeNode(this);
@@ -150,45 +142,41 @@ public class MatchTreeNode {
             logger.debug("recur in");
             LazyJoin recur = nc.lazyJoin(tree, node);
             logger.debug("recur out");
-            copy.replace(nc,recur.copy);
+            copy.replace(nc, recur.copy);
             deltaplus.addAll(recur.deltaplus);
             ListUtils.removeDuplicates(deltaplus);
             deltaminus.addAll(recur.deltaminus);
             ListUtils.removeDuplicates(deltaminus);
-            if (recur.modified) { //TODO Determine how to know if DeltaC or Mc was modified
+            if (recur.modified) {
                 logger.debug("modified");
-                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())){
+                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ResultSet rs = recur.copy.matchSet.toResultSet();
-                    ResultSetFormatter.out(baos,rs);
+                    ResultSetFormatter.out(baos, rs);
                     logger.trace(baos.toString());
-                };
+                }
                 logger.debug("proj");
-                Table proj = TableUtils.projection(recur.copy.matchSet,recur.copy.delta);
+                Table proj = TableUtils.projection(recur.copy.matchSet, recur.copy.delta);
                 logger.debug("join");
-                copy.matchSet=TableUtils.simpleJoin(matchSet,proj);
+                copy.matchSet = TableUtils.simpleJoin(matchSet, proj);
                 logger.debug("joined");
                 modified = true;
             }
         }
         if (!Collections.disjoint(this.D, node.delta)) {
-            logger.debug(node.elementString()+" connected to "+elementString());
+            logger.debug(node.elementString() + " connected to " + elementString());
             if (!node.inserted()) {
-                logger.debug("inserting "+node.elementString()+" under "+elementString());
+                logger.debug("inserting " + node.elementString() + " under " + elementString());
                 List<Var> addminus = new ArrayList<>(node.delta);
                 addminus.removeAll(this.D);
                 addminus.removeAll(deltaminus);
                 deltaminus.addAll(addminus);
-                try {
-                    logger.debug("proj");
-                    Table proj = TableUtils.projection(node.matchSet, node.delta);
-                    logger.debug("join");
-                    copy.matchSet = TableUtils.simpleJoin(matchSet, proj);
-                } catch(OutOfMemoryError err){
-                    copy = null;
-                    System.gc();
-                    throw err;
-                }
+
+                logger.debug("proj");
+                Table proj = TableUtils.projection(node.matchSet, node.delta);
+
+                logger.debug("join");
+                copy.matchSet = TableUtils.simpleJoin(matchSet, proj);
 
                 node.insert();
                 copy.children.add(node);
@@ -205,12 +193,12 @@ public class MatchTreeNode {
         deltaplus.removeAll(deltaminus);
         deltaminus.removeAll(deltaplus);
 
-        if(!copy.delta.containsAll(deltaplus)) {
+        if (!copy.delta.containsAll(deltaplus)) {
             copy.delta.addAll(deltaplus);
             modified = true;
         }
 
-        if(!copy.delta.containsAll(deltaminus)) {
+        if (!copy.delta.containsAll(deltaminus)) {
             copy.delta.addAll(deltaminus);
             modified = true;
         }
@@ -218,10 +206,10 @@ public class MatchTreeNode {
         LazyJoin res;
         if (modified) {
             logger.debug("returning modified");
-            res = new LazyJoin(copy, deltaplus, deltaminus,true);
+            res = new LazyJoin(copy, deltaplus, deltaminus, true);
         } else {
             logger.debug("returning unchanged");
-            res = new LazyJoin(this,deltaplus,deltaminus,false);
+            res = new LazyJoin(this, deltaplus, deltaminus, false);
         }
         return res;
     }

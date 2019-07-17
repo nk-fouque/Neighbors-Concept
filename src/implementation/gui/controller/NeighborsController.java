@@ -95,7 +95,7 @@ public class NeighborsController implements Initializable {
 
         md = ModelFactory.createDefaultModel();
 
-        format.setItems(new SortedList<String>(FXCollections.observableList(formats())));
+        format.setItems(new SortedList<>(FXCollections.observableList(formats())));
         format.setValue("TURTLE");
 
         final FileChooser fileChooser = new FileChooser();
@@ -125,7 +125,7 @@ public class NeighborsController implements Initializable {
                     visual.minWidthProperty().bind((scrollPane.widthProperty()));
                     candidates.getChildren().add(visual);
                 }
-                partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(),modelLoaded));
+                partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded));
                 modelLoaded.setValue(true);
             } catch (FileNotFoundException e) {
                 TitledPane err = new TitledPane();

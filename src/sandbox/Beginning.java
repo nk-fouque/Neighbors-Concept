@@ -9,15 +9,15 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 public class Beginning {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         BasicConfigurator.configure();
         Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
 
         Model md = ModelFactory.createDefaultModel();
         md.createResource("http://rien")
-                .addProperty(RDFS.label,"Test");
+                .addProperty(RDFS.label, "Test");
         md.createResource("http://presque.rien")
-                .addProperty(RDFS.label,"Test2");
+                .addProperty(RDFS.label, "Test2");
         md.write(System.out, "TTL");
         System.out.println(md.size());
 
@@ -33,10 +33,9 @@ public class Beginning {
         */
 
         Query qry = QueryFactory.create("SELECT ?x WHERE {}");
-        QueryExecution qe = QueryExecutionFactory.create(qry,md);
+        QueryExecution qe = QueryExecutionFactory.create(qry, md);
         ResultSet res = qe.execSelect();
-        ResultSetFormatter.out(System.out,res);
-
+        ResultSetFormatter.out(System.out, res);
 
 
 //        ResultSetFormatter.out(System.out,res,qry);

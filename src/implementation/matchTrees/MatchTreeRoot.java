@@ -32,7 +32,7 @@ import java.util.List;
 public class MatchTreeRoot extends MatchTreeNode {
     public static Logger logger = Logger.getLogger(MatchTreeNode.class);
 
-    public MatchTreeRoot(List<Var> top, CollectionsModel colMd){
+    public MatchTreeRoot(List<Var> top, CollectionsModel colMd) {
         super();
         element = null;
         varE = new ArrayList<>();
@@ -53,9 +53,9 @@ public class MatchTreeRoot extends MatchTreeNode {
         children = new ArrayList<>();
     }
 
-    public MatchTreeRoot(MatchTreeNode other){
+    public MatchTreeRoot(MatchTreeNode other) {
         super();
-        element =null;
+        element = null;
         varE = new ArrayList<>();
         D = new ArrayList<>(other.getD());
 
@@ -72,29 +72,16 @@ public class MatchTreeRoot extends MatchTreeNode {
         return super.toString(0);
     }
 
-    public Table getMatchSet(){
+    public Table getMatchSet() {
         return matchSet;
     }
 
-    public MatchTreeRoot lazyJoin(Element element,CollectionsModel colMd,List<Var> varPprime){
-        MatchTreeNode newnode = new MatchTreeNode(element,colMd,varPprime);
+    public MatchTreeRoot lazyJoin(Element element, CollectionsModel colMd, List<Var> varPprime) {
+        MatchTreeNode newnode = new MatchTreeNode(element, colMd, varPprime);
 //        ResultSetFormatter.out(System.out,newnode.matchSet.toResultSet());
-        LazyJoin res = this.lazyJoin(this,newnode);
+        LazyJoin res = this.lazyJoin(this, newnode);
         return new MatchTreeRoot(res.copy);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -112,25 +99,24 @@ public class MatchTreeRoot extends MatchTreeNode {
 
         Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md);
 //        saturated.write(System.out, "TURTLE");
-        CollectionsModel colmd = new CollectionsModel(md,saturated);
-
+        CollectionsModel colmd = new CollectionsModel(md, saturated);
 
 
         List<Var> top = new ArrayList<>(Collections.singletonList(Var.alloc("person")));
-        MatchTreeRoot root = new MatchTreeRoot(top,colmd);
+        MatchTreeRoot root = new MatchTreeRoot(top, colmd);
 
 
         ElementPathBlock el1 = new ElementPathBlock();
-        el1.addTriple(new Triple(Var.alloc("person"), new ResourceImpl("http://example.org/royal/parent").asNode(),Var.alloc("parent").asNode()));
+        el1.addTriple(new Triple(Var.alloc("person"), new ResourceImpl("http://example.org/royal/parent").asNode(), Var.alloc("parent").asNode()));
 
-        root.lazyJoin(el1,colmd,top);
-        ResultSetFormatter.out(System.out,root.matchSet.toResultSet());
+        root.lazyJoin(el1, colmd, top);
+        ResultSetFormatter.out(System.out, root.matchSet.toResultSet());
         top.add(Var.alloc("parent"));
 
-        ElementFilter el2 = new ElementFilter(new E_Equals(new ExprVar(Var.alloc("parent")),new NodeValueNode(new ResourceImpl("http://example.org/royal/Kate").asNode())));
+        ElementFilter el2 = new ElementFilter(new E_Equals(new ExprVar(Var.alloc("parent")), new NodeValueNode(new ResourceImpl("http://example.org/royal/Kate").asNode())));
 
-        root.lazyJoin(el2,colmd,top);
-        ResultSetFormatter.out(System.out,root.matchSet.toResultSet());
+        root.lazyJoin(el2, colmd, top);
+        ResultSetFormatter.out(System.out, root.matchSet.toResultSet());
 
     }
 }

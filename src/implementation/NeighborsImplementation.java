@@ -51,12 +51,12 @@ public class NeighborsImplementation {
         return res;
     }
 
-    public static void planTimeOut(AtomicBoolean cut, int seconds){
+    public static void planTimeOut(AtomicBoolean cut, int seconds) {
         Thread thread = new Thread(new TimeOut(cut, seconds));
         thread.start();
     }
 
-    public static SignalHandler interruptCutter(AtomicBoolean cut){
+    public static SignalHandler interruptCutter(AtomicBoolean cut) {
         SignalHandler handler = sig -> {
             System.out.println("Captured " + sig.getName());
             cut.set(true);

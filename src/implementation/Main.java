@@ -1,7 +1,7 @@
 package implementation;
 
 import implementation.utils.CollectionsModel;
-import implementation.utils.SingletonStopwatchCollection;
+import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.log4j.BasicConfigurator;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
@@ -46,7 +46,7 @@ public class Main {
         SingletonStopwatchCollection.resume("Main");
 
         // Launching the algorithm
-        NeighborsImplementation.planTimeOut(cut, 150);
+        NeighborsImplementation.planTimeOut(cut, 120);
         int algoRun = p.partitionAlgorithm(cut);
 
         // Processing results

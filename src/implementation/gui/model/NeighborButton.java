@@ -19,17 +19,14 @@ public class NeighborButton extends Button {
         this.uri = uri;
         this.textProperty().setValue("Find neighbors");
         this.visibleProperty().bind(available);
-        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                resultsContainer.getPanes().clear();
-                TitledPane loading = new TitledPane();
-                loading.setText("Loading neighbors for " + uri + " please wait");
-                resultsContainer.getPanes().add(loading);
-                Runnable algo = new PartitionRun(graph, uri, resultsContainer, partition, available, cut);
-                Thread thread = new Thread(algo);
-                thread.start();
-            }
+        this.setOnMouseClicked(mouseEvent -> {
+            resultsContainer.getPanes().clear();
+            TitledPane loading = new TitledPane();
+            loading.setText("Loading neighbors for " + uri + " please wait");
+            resultsContainer.getPanes().add(loading);
+            Runnable algo = new PartitionRun(graph, uri, resultsContainer, partition, available, cut);
+            Thread thread = new Thread(algo);
+            thread.start();
         });
     }
 

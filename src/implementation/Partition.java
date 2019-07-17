@@ -1,12 +1,15 @@
 package implementation;
 
 import implementation.matchTrees.MatchTreeRoot;
-import implementation.utils.*;
+import implementation.utils.CollectionsModel;
+import implementation.utils.ElementUtils;
+import implementation.utils.PartitionException;
+import implementation.utils.TableUtils;
+import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
-import org.apache.jena.rdf.model.Model;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.syntax.Element;
@@ -37,32 +40,15 @@ public class Partition {
 
     private Map<String, Var> keys;
 
-    /**
-     * Initialize the Partition Structure
-     *
-     * @param q  Jena Query describing the Node we are trying to find the neighbors of
-     * @param md Jena Model containing the RDF Graph in which the search must be done
-     * @deprecated TODO
-     */
-    @Deprecated
-    public Partition(Query q, Model md, Model mdInf, Map<String, Var> keycodes) {
-        graph = new CollectionsModel(md, mdInf);
-//        graph.downSizing();
-        clusters = new ArrayList<>();
-        clusters.add(new Cluster(q, graph));
-        neighbors = new ArrayList<>();
-        keys = keycodes;
-    }
-
-    public Partition(CollectionsModel colMd,String uriTarget){
+    public Partition(CollectionsModel colMd, String uriTarget) {
         graph = colMd;
         keys = new HashMap<>();
 
-        String querySting = initialQueryString(uriTarget,colMd,keys);
+        String querySting = initialQueryString(uriTarget, colMd, keys);
         Query q = QueryFactory.create(querySting);
-        clusters=new ArrayList<>();
-        clusters.add(new Cluster(q,colMd));
-        neighbors=new ArrayList<>();
+        clusters = new ArrayList<>();
+        clusters.add(new Cluster(q, colMd));
+        neighbors = new ArrayList<>();
     }
 
     public List<Cluster> getClusters() {
@@ -109,7 +95,7 @@ public class Partition {
             MatchTreeRoot me = new MatchTreeRoot(c.getMatchTree());
             SingletonStopwatchCollection.resume("newans");
             try {
-                me = me.lazyJoin(e,graph,c.getConnectedVars());
+                me = me.lazyJoin(e, graph, c.getConnectedVars());
             } catch (OutOfMemoryError err) {
                 clusters.add(c);
                 SingletonStopwatchCollection.stop("iterate");
@@ -119,22 +105,22 @@ public class Partition {
             }
 
             SingletonStopwatchCollection.resume("projjoin");
-            Table piMe = null;
-            Table ae = null;
+            Table piMe;
+            Table ae;
             try {
                 piMe = TableUtils.projection(me.getMatchSet(), c.getProj());
-                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())){
+                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ResultSet rs = piMe.toResultSet();
-                    ResultSetFormatter.out(baos,rs);
+                    ResultSetFormatter.out(baos, rs);
                     logger.trace(baos.toString());
-                };
+                }
                 ae = TableUtils.simpleJoin(c.getAnswers(), piMe);
-                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())){
+                if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ResultSetFormatter.out(baos,ae.toResultSet());
+                    ResultSetFormatter.out(baos, ae.toResultSet());
                     logger.trace(baos.toString());
-                };
+                }
             } catch (OutOfMemoryError err) {
                 clusters.add(c);
                 SingletonStopwatchCollection.stop("iterate");
@@ -194,9 +180,6 @@ public class Partition {
         boolean stop = false;
         while (run && !stop) {
             try {
-                if (cut != null) {
-                    stop = cut.get();
-                }
                 run = iterate();
             } catch (OutOfMemoryError mem) {
                 mem.printStackTrace();
@@ -204,6 +187,9 @@ public class Partition {
             } catch (PartitionException e) {
                 e.printStackTrace();
                 return -1;
+            }
+            if (cut != null) {
+                stop = cut.get();
             }
         }
         if (cut.get()) return 2;
@@ -228,31 +214,14 @@ public class Partition {
         return res.toString();
     }
 
-    /**
-     * Creates a String for the query representing the node we are searching the neighbors of
-     * If a Query is created from this string and called on the same graph, it should result in the original node
-     *
-     * @param uri   The uri of the element to be represented
-     * @param graph The graph to represent it in
-     */
-    @Deprecated
-    public static String initialQueryString(String uri, Model graph, Map<String, Var> keys) {
-        List<Var> x = new ArrayList<>();
-        Var neighbor = Var.alloc("Neighbor");
-        keys.put(uri, neighbor);
-        x.add(neighbor);
-        String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, graph, keys));
-        return res;
-    }
-
-    public String initialQueryString(String uri,CollectionsModel colMd,Map<String,Var> keys){
+    public String initialQueryString(String uri, CollectionsModel colMd, Map<String, Var> keys) {
         Var neighbor = Var.alloc("Neighbor");
         keys.put(uri, neighbor);
 
         List<Var> x = new ArrayList<>();
         x.add(neighbor);
 
-        String res = ElementUtils.getSelectStringFrom(x,ElementUtils.describeNode(uri,colMd,keys));
+        String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, colMd, keys));
         return res;
     }
 

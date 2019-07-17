@@ -2,18 +2,14 @@ package implementation;
 
 import implementation.matchTrees.MatchTreeRoot;
 import implementation.utils.*;
+import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.ResultSetFormatter;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ResIterator;
-import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.sparql.algebra.Table;
-import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
-import org.apache.jena.sparql.engine.binding.BindingFactory;
 import org.apache.jena.sparql.expr.E_Equals;
 import org.apache.jena.sparql.expr.Expr;
 import org.apache.jena.sparql.syntax.Element;
@@ -99,6 +95,7 @@ public class Cluster implements Comparable<Cluster> {
 
     /**
      * TODO
+     *
      * @return
      */
     public MatchTreeRoot getMatchTree() {
@@ -129,7 +126,7 @@ public class Cluster implements Comparable<Cluster> {
         availableQueryElements = ListUtils.removeDuplicates(availableQueryElements);
         this.removedQueryElements = new ArrayList<>();
         extensionDistance = 0;
-        mapping = new MatchTreeRoot(getProj(),graph);
+        mapping = new MatchTreeRoot(getProj(), graph);
         answers = mapping.getMatchSet();
         this.connectedVars = qry.getProjectVars();
     }
@@ -242,17 +239,6 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * @return the mapping as a string formatted by Jena
-     * @deprecated Usually the mappings are way to big for output streams
-     */
-    @Deprecated
-    public String mappingString() {
-        ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
-        ResultSetFormatter.out(baos1, getMatchSet().toResultSet());
-        return baos1.toString();
-    }
-
-    /**
      * @return the answers as a string formatted by Jena
      */
     public String answersString() {
@@ -271,7 +257,7 @@ public class Cluster implements Comparable<Cluster> {
             res += "Connected variables : " + connectedVars + "\n";
         }
         res += "Query :" + queryString() + "\n";
-        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mappingString() + "\n";
+        if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mapping.toString() + "\n";
         res += "Answers :\n" + answersString() + "\n";
         return res;
     }
@@ -336,8 +322,8 @@ public class Cluster implements Comparable<Cluster> {
                 String s1 = colMd.getGraph().shortForm(t.getPredicate().toString()
                         .replaceAll(">", "")
                         .replaceAll("<", ""))
-                        .replaceAll("rdf:type","a")
-                        .replaceAll("http://www.w3.org/1999/02/22-rdf-syntax-ns#type","a");
+                        .replaceAll("rdf:type", "a")
+                        .replaceAll("http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "a");
                 String s2 = colMd.getGraph().shortForm(t.getObject().toString()
                         .replaceAll(">", "")
                         .replaceAll("<", ""));

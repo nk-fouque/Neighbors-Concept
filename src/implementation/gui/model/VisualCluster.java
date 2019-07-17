@@ -46,8 +46,8 @@ public class VisualCluster extends TitledPane {
         // Whole Pane
         box.getChildren().add(texts);
         box.getChildren().add(gadgets);
-        box.setMargin(texts, new Insets(10));
-        box.setMargin(gadgets, new Insets(10));
+        HBox.setMargin(texts, new Insets(10));
+        HBox.setMargin(gadgets, new Insets(10));
         box.autosize();
 
         this.autosize();

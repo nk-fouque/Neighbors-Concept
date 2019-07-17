@@ -6,8 +6,8 @@ public class TimeOut implements Runnable {
     private long millis;
     private AtomicBoolean cut;
 
-    public TimeOut(AtomicBoolean cut, int seconds){
-        millis = seconds*1000;
+    public TimeOut(AtomicBoolean cut, int seconds) {
+        millis = seconds * 1000;
         this.cut = cut;
     }
 
@@ -18,7 +18,7 @@ public class TimeOut implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Stop");
+        System.out.println("Timeout");
         cut.set(true);
         Thread.currentThread().interrupt();
     }

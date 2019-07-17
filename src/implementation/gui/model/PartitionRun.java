@@ -1,11 +1,14 @@
 package implementation.gui.model;
 
 import implementation.Cluster;
+import implementation.NeighborsImplementation;
 import implementation.Partition;
+import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
+import javafx.scene.text.Text;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -41,14 +44,9 @@ public class PartitionRun implements Runnable {
         available.setValue(false);
         Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), graph);
 
-        Map<String, Var> keys = new HashMap<>();
-        String QueryString = Partition.initialQueryString(uriTarget, graph, keys);
+        CollectionsModel colMd = new CollectionsModel(graph,saturated);
 
-        Query q = QueryFactory.create(QueryString);
-        QueryExecution qe = QueryExecutionFactory.create(q, saturated);
-        ResultSetFormatter.out(System.out, qe.execSelect(), q);
-
-        partition = new Partition(q, graph, saturated, keys);
+        partition = new Partition(colMd,uriTarget);
 
         int algoRun = partition.partitionAlgorithm(cut);
         partition.cut();
@@ -62,11 +60,11 @@ public class PartitionRun implements Runnable {
                 Platform.runLater(() -> resultsContainer.getPanes().add(cluster));
             }
             Platform.runLater(() -> resultsContainer.autosize());
-
         } else {
             Platform.runLater(() -> resultsContainer.getPanes().clear());
             TitledPane error = new TitledPane();
             error.setText("Something went wrong :/");
+            error.setContent(new Text("Error details in Java Console"));
             Platform.runLater(() -> resultsContainer.getPanes().add(error));
         }
         available.setValue(true);

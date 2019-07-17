@@ -1,5 +1,6 @@
 package implementation.gui;
 
+import implementation.NeighborsImplementation;
 import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -18,10 +19,7 @@ public class NeighborsInterface extends Application {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
-        Logger.getLogger("implementation.Partition").setLevel(Level.INFO);
-        Logger.getLogger("implementation.Cluster").setLevel(Level.INFO);
-        Logger.getLogger("implementation.utils").setLevel(Level.OFF);
+        NeighborsImplementation.myLogsLevels("silent");
         launch(args);
     }
 
