@@ -10,33 +10,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" line="16" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Cluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Cluster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Partition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/NeighborsInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/NeighborsInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/CopyButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/CopyButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/NeighborButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/NeighborButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/NeighborButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/NeighborButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/PartitionRun.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCandidate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCandidate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/ElementUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/ElementUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/SingletonStopwatchCollection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/Stopwatch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/TableUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/TableUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/sandbox/Beginning.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/sandbox/Beginning.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/PartitionRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,11 +38,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="44" column="21" lean-forward="true" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+            <state relative-caret-position="782">
+              <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2078#2079#0" expanded="true" />
+                <element signature="e#2074#2075#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -550,6 +524,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.NeighborsImplementation" />
       <item itemvalue="Application.Beginning" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.NeighborsInterface" />
@@ -624,7 +599,7 @@
       <workItem from="1563175097890" duration="1174000" />
       <workItem from="1563261522796" duration="10419000" />
       <workItem from="1563275821635" duration="13859000" />
-      <workItem from="1563348164349" duration="10194000" />
+      <workItem from="1563348164349" duration="10452000" />
     </task>
     <task id="LOCAL-00001" summary="Completed Javadoc for Cluster.class">
       <created>1561636589113</created>
@@ -857,7 +832,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563352475138</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Moved some GUI methods in back threads&#10;Implemented Time Limit in Interface">
+      <created>1563358592043</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1563358592043</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -893,7 +875,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="352756000" />
+    <option name="totallyTimeSpent" value="353014000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -916,7 +898,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4840891" weight="0.3299373" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.47016707" visible="true" weight="0.39106584" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47016707" weight="0.39106584" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49602228" weight="0.39890283" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1018,7 +1000,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Adapted interface to anytime version" />
     <MESSAGE value="Improved Interface with thread" />
     <MESSAGE value="Implemented anytime cut in interface" />
     <MESSAGE value="Reformatting Code" />
@@ -1043,7 +1024,8 @@
     <MESSAGE value="Finished moving basic main parts in separate static functions" />
     <MESSAGE value="Removed all deprecated inefficient functions" />
     <MESSAGE value="Removed all deprecated inefficient functions and major code cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed all deprecated inefficient functions and major code cleanup" />
+    <MESSAGE value="Moved some GUI methods in back threads&#10;Implemented Time Limit in Interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved some GUI methods in back threads&#10;Implemented Time Limit in Interface" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$Main.ic" NAME="Main Coverage Results" MODIFIED="1561385313536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -1424,11 +1406,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="44" column="21" lean-forward="true" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+        <state relative-caret-position="782">
+          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2078#2079#0" expanded="true" />
+            <element signature="e#2074#2075#0" expanded="true" />
           </folding>
         </state>
       </provider>
