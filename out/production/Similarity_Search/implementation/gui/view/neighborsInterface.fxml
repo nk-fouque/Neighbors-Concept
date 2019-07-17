@@ -42,14 +42,26 @@
                 GridPane.vgrow="ALWAYS">
         <top>
             <ToolBar>
-                <Button fx:id="cutButton" text="Interrupt Partition"/>
-                <Label fx:id="cutLabel"/>
+                <Label text="Time limit :" />
+                <Spinner fx:id="timeLimit" min="0" max="3600" initialValue="0" editable="true"/>
+                <Label text=" seconds"/>
+                <Label text="(0 = no time limit)"/>
             </ToolBar>
         </top>
         <center>
-            <ScrollPane>
-                <Accordion fx:id="partitionAccordion"/>
-            </ScrollPane>
+            <BorderPane>
+                <top>
+                    <ToolBar>
+                        <Button fx:id="cutButton" text="Interrupt Partition"/>
+                        <Label fx:id="cutLabel"/>
+                    </ToolBar>
+                </top>
+                <center>
+                    <ScrollPane>
+                        <Accordion fx:id="partitionAccordion"/>
+                    </ScrollPane>
+                </center>
+            </BorderPane>
         </center>
     </BorderPane>
 

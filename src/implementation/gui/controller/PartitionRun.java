@@ -1,22 +1,18 @@
-package implementation.gui.model;
+package implementation.gui.controller;
 
 import implementation.Cluster;
-import implementation.NeighborsImplementation;
 import implementation.Partition;
+import implementation.gui.model.VisualCluster;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
-import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.reasoner.ReasonerRegistry;
-import org.apache.jena.sparql.core.Var;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -28,7 +24,9 @@ public class PartitionRun implements Runnable {
     private BooleanProperty available;
     private AtomicBoolean cut;
 
-    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available, AtomicBoolean cut) {
+    private NeighborsController mainController;
+
+    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available, AtomicBoolean cut,NeighborsController controller) {
         super();
         graph = md;
         uriTarget = uri;
@@ -36,17 +34,17 @@ public class PartitionRun implements Runnable {
         partition = p;
         this.available = available;
         this.cut = cut;
+        mainController = controller;
     }
-
 
     @Override
     public void run() {
         available.setValue(false);
         Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), graph);
 
-        CollectionsModel colMd = new CollectionsModel(graph,saturated);
+        CollectionsModel colMd = new CollectionsModel(graph, saturated);
 
-        partition = new Partition(colMd,uriTarget);
+        partition = new Partition(colMd, uriTarget);
 
         int algoRun = partition.partitionAlgorithm(cut);
         partition.cut();
@@ -68,6 +66,7 @@ public class PartitionRun implements Runnable {
             Platform.runLater(() -> resultsContainer.getPanes().add(error));
         }
         available.setValue(true);
+        mainController.cutDeactivate();
         Thread.currentThread().interrupt();
     }
 }

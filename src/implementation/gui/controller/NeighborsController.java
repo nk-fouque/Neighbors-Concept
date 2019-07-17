@@ -36,36 +36,41 @@ public class NeighborsController implements Initializable {
 
     @FXML
     GridPane pane;
-    @FXML
-    TextField filenameField;
-    @FXML
-    Button modelLoadButton;
-    @FXML
-    ChoiceBox<String> format;
+
     @FXML
     Button fileFindButton;
     @FXML
-    BorderPane partitionResults;
+    TextField filenameField;
+    @FXML
+    ChoiceBox<String> format;
+    @FXML
+    Button modelLoadButton;
+
     @FXML
     TextField filterSubjectsField;
     @FXML
     Button filterSubjectsButton;
     @FXML
-    Accordion partitionAccordion;
+    CheckBox caseSensBox;
+
     @FXML
     BorderPane partitionCandidates;
     @FXML
     ScrollPane scrollPane;
     @FXML
     FlowPane candidates;
+
+    @FXML
+    BorderPane partitionResults;
+    @FXML
+    Accordion partitionAccordion;
+
+    @FXML
+    Spinner<Integer> timeLimit;
     @FXML
     Button cutButton;
     @FXML
     Label cutLabel;
-    @FXML
-    CheckBox caseSensBox;
-    @FXML
-    TitledPane prefixPane;
 
     private Model md;
 
@@ -106,34 +111,16 @@ public class NeighborsController implements Initializable {
             }
         });
 
+        subjectsList = new ArrayList<>();
         modelLoadButton.setOnMouseClicked(mouseEvent -> {
             String filename = filenameField.getText();
-            try {
-                candidates.getChildren().clear();
-                md.removeAll();
-                md.read(new FileInputStream(filename), null, format.getValue());
-                md.write(System.out, format.getValue());
-
-                subjectsList = new ArrayList<>();
-                ResIterator iter = md.listSubjects();
-                while (iter.hasNext()) {
-                    subjectsList.add(iter.nextResource().getURI());
-                }
-                PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
-                while (!queue.isEmpty()) {
-                    BorderPane visual = NeighborsController.this.candidateVisual(queue.poll());
-                    visual.minWidthProperty().bind((scrollPane.widthProperty()));
-                    candidates.getChildren().add(visual);
-                }
-                partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded));
-                modelLoaded.setValue(true);
-            } catch (FileNotFoundException e) {
-                TitledPane err = new TitledPane();
-                err.setText("File not found");
-                err.setContent(new Text(e.getMessage()));
-                candidates.getChildren().add(err);
-                e.printStackTrace();
-            }
+            ModelLoad loader = new ModelLoad(filename,format.getValue(),md,this,subjectsList,modelLoaded);
+            Thread load = new Thread(loader);
+            Label modelState = new Label();
+            modelState.textProperty().bindBidirectional(loader.stateProperty());
+            partitionCandidates.setTop(new ToolBar(modelState));
+            candidates.getChildren().clear();
+            load.start();
         });
 
         partitionResults.visibleProperty().bind(modelLoaded);
@@ -151,13 +138,9 @@ public class NeighborsController implements Initializable {
         cutLabel.setText("/!\\ Algorithm will stop early, please deactivate before running new partition /!\\");
         cutButton.setOnMouseClicked(mouseEvent -> {
             if (!anytimeCut.get()) {
-                cutButton.setStyle("-fx-background-color: red");
-                anytimeCut.set(true);
-                cutLabel.setVisible(true);
+                cutActivate();
             } else {
-                cutButton.setStyle("");
-                anytimeCut.set(false);
-                cutLabel.setVisible(false);
+                cutDeactivate();
             }
         });
 
@@ -186,9 +169,22 @@ public class NeighborsController implements Initializable {
     }
 
     public BorderPane candidateVisual(String uri) {
-        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut);
+        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut,this,timeLimit.getValue());
         VisualCandidate res = new VisualCandidate(uri, md, button);
         return res;
+    }
+
+    public void cutActivate(){
+        anytimeCut.set(true);
+
+        cutButton.setStyle("-fx-background-color: red");
+        cutLabel.setVisible(true);
+    }
+    public void cutDeactivate(){
+        anytimeCut.set(false);
+
+        cutButton.setStyle("");
+        cutLabel.setVisible(false);
     }
 
 }
