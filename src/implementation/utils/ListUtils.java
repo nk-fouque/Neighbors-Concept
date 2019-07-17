@@ -4,7 +4,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+
 public class ListUtils {
+    /**
+     * https://www.geeksforgeeks.org/how-to-remove-duplicates-from-arraylist-in-java/
+     */
     public static <T> List<T> removeDuplicates(List<T> list) {
 
         // Create a new LinkedHashSet

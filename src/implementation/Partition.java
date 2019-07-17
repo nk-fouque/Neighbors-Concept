@@ -1,6 +1,6 @@
 package implementation;
 
-import implementation.matchTrees.MatchTreeRoot;
+import implementation.matchTree.MatchTreeRoot;
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
 import implementation.utils.PartitionException;
@@ -20,6 +20,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author nfouque
+ */
 public class Partition {
     private static Logger logger = Logger.getLogger(Partition.class);
     /**
@@ -38,30 +41,51 @@ public class Partition {
      */
     private List<Cluster> neighbors;
 
+    /**
+     * To avoid adding multiple filters leading to the same entity, the Partition stores each uri and the variable that has been used to represent it
+     */
     private Map<String, Var> keys;
 
-    public Partition(CollectionsModel colMd, String uriTarget) {
-        graph = colMd;
-        keys = new HashMap<>();
-
-        String querySting = initialQueryString(uriTarget, colMd, keys);
-        Query q = QueryFactory.create(querySting);
-        clusters = new ArrayList<>();
-        clusters.add(new Cluster(q, colMd));
-        neighbors = new ArrayList<>();
-    }
-
+    /**
+     * @return A list containing all the clusters that are still partitionable
+     * Should always be empty at the end of the algorithm
+     */
     public List<Cluster> getClusters() {
         return clusters;
     }
 
+    /**
+     * @return A list containing all the neighbors concepts, cluster that have been fully partitioned
+     */
     public List<Cluster> getNeighbors() {
         return neighbors;
     }
 
+    /**
+     * The RDF model used by this partition
+     *
+     * @see CollectionsModel
+     */
     public CollectionsModel getGraph() {
         return graph;
     }
+
+    /**
+     * @param colMd     A preexisting CollectionsModel in which to describe the node and search for its neighbors
+     * @param uriTarget The full length uri of the node to describe
+     */
+    public Partition(CollectionsModel colMd, String uriTarget) {
+        graph = colMd;
+        keys = new HashMap<>();
+
+        String querySting = initialQueryString(uriTarget, colMd);
+        Query q = QueryFactory.create(querySting);
+        clusters = new ArrayList<>();
+        clusters.add(new Cluster(q, colMd));
+
+        neighbors = new ArrayList<>();
+    }
+
 
     /**
      * Applies one iteration of the Partition algorithm
@@ -206,7 +230,7 @@ public class Partition {
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
             res.append("Keys :\n").append(keys.toString()).append("\n");
         }
-        res.append("\t\tClusters :\n");
+        res.append("\t\t" + neighbors.size() + " Clusters :\n");
         PriorityQueue<Cluster> queue = new PriorityQueue<>(neighbors);
         while (!queue.isEmpty()) {
             res.append(queue.poll().toString(graph)).append("\n\n");
@@ -214,7 +238,12 @@ public class Partition {
         return res.toString();
     }
 
-    public String initialQueryString(String uri, CollectionsModel colMd, Map<String, Var> keys) {
+    /**
+     * @param uri   The full length uri of the node to describe
+     * @param colMd The CollectionsModel in which to describe the node
+     * @return A String in the form of a SPARQL Query that "describes" the node (i.e. looks to return the exact same object)
+     */
+    public String initialQueryString(String uri, CollectionsModel colMd) {
         Var neighbor = Var.alloc("Neighbor");
         keys.put(uri, neighbor);
 

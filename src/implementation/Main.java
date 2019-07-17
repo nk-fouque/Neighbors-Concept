@@ -1,6 +1,7 @@
 package implementation;
 
 import implementation.utils.CollectionsModel;
+import implementation.utils.TimeOut;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.log4j.BasicConfigurator;
 import sun.misc.Signal;
@@ -10,6 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author nfouque
+ */
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -46,7 +50,7 @@ public class Main {
         SingletonStopwatchCollection.resume("Main");
 
         // Launching the algorithm
-        NeighborsImplementation.planTimeOut(cut, 120);
+        TimeOut.planTimeOut(cut, 120);
         int algoRun = p.partitionAlgorithm(cut);
 
         // Processing results

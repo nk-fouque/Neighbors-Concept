@@ -1,6 +1,6 @@
 package implementation;
 
-import implementation.matchTrees.MatchTreeRoot;
+import implementation.matchTree.MatchTreeRoot;
 import implementation.utils.*;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.graph.Node;
@@ -23,6 +23,9 @@ import org.apache.log4j.Logger;
 import java.io.ByteArrayOutputStream;
 import java.util.*;
 
+/**
+ * @author nfouque
+ */
 public class Cluster implements Comparable<Cluster> {
     private static Logger logger = Logger.getLogger(Cluster.class);
     private List<Var> proj;
@@ -51,7 +54,7 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * The relaxation distance of this cluster, expressed as the extensional distance
+     * The number of relaxation done to obtain this cluster
      */
     public int getRelaxDistance() {
         return relaxDistance;
@@ -65,7 +68,7 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * The Match-set containing all the answers to the relaxed queries
+     * The Match-set containing all the answers to the relaxed query
      */
     public Table getMatchSet() {
         return mapping.getMatchSet();
@@ -85,18 +88,23 @@ public class Cluster implements Comparable<Cluster> {
         return removedQueryElements;
     }
 
+    /**
+     * The size of the extension of this Cluster's query (i.e. the number of answers
+     */
     public int getExtensionDistance() {
         return extensionDistance;
     }
 
+    /**
+     * The Variables that are connected to this Cluster
+     */
     public List<Var> getConnectedVars() {
         return connectedVars;
     }
 
     /**
-     * TODO
-     *
-     * @return
+     * This Cluster's Match-Tree
+     * @see implementation.matchTree.MatchTreeNode
      */
     public MatchTreeRoot getMatchTree() {
         return mapping;
@@ -307,7 +315,7 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * @param colMd
+     * @param colMd The CollectionsModel in which to search prefix mappings
      * @return
      */
     public String relaxQueryElementsString(CollectionsModel colMd) {

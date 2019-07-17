@@ -10,7 +10,11 @@ import org.apache.jena.sparql.engine.join.QueryIterHashJoin;
 import org.apache.log4j.Logger;
 
 import java.util.*;
-
+/**
+ * Several static methods to do various things with Jena {@link Table}
+ *
+ * @author nfouque
+ */
 public class TableUtils {
     private static Logger logger = Logger.getLogger(TableUtils.class);
 
@@ -72,7 +76,7 @@ public class TableUtils {
     }
 
     /**
-     * @param table
+     * @param table The Table you want to remove duplicate lines from
      * @return The same Table from which the duplicate lines have been removed
      */
     public static TableN removeDuplicates(Table table) {

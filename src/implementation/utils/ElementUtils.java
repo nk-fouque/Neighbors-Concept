@@ -23,6 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Several static methods to do various things with Jena {@link Element}
+ *
+ * @author nfouque
+ */
 public class ElementUtils {
     private static Logger logger = Logger.getLogger(ElementUtils.class);
 
@@ -222,11 +227,12 @@ public class ElementUtils {
     }
 
     /**
-     * TODO
+     * Simulates answering a to a Query containing a single Element
      *
-     * @param element
-     * @param colMd
-     * @return
+     * @param element The element to answer
+     * @param colMd   The graph to answer the element in
+     * @return The match-set of the query
+     * @see Table#toResultSet()
      */
     public static Table ans(Element element, CollectionsModel colMd) {
         logger.debug("answering :" + element);

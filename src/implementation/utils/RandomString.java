@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * @author user erickson on Stack Overflow
+ * @author user erickson on StackOverflow
  * https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
  */
 

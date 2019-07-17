@@ -12,12 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * A representation of an RDF Graph using several {@link HashMap} to accelerate accesses
  *
+ * @author nfouque
  */
 public class CollectionsModel {
 
     private Model graph;
     private Model saturatedGraph;
+
     Map<String, List<RDFNode>> subClassOf = new HashMap<>();
     Map<String, List<RDFNode>> subPropertyOf = new HashMap<>();
     Map<String, Map<Property, List<RDFNode>>> triples = new HashMap<>();
@@ -68,12 +71,11 @@ public class CollectionsModel {
         });
     }
 
+    /**
+     * @return The RDF Graph in its Jena {@link Model} form
+     */
     public Model getGraph() {
         return graph;
-    }
-
-    public Model getSaturatedGraph() {
-        return saturatedGraph;
     }
 
     @Override
