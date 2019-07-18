@@ -79,7 +79,10 @@ public class NeighborsController implements Initializable {
 
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
 
-    private List<String> formats() {
+    /**
+     * @return List of Jena supported RDF formats
+     */
+    private static List<String> formats() {
         List<String> res = new ArrayList<>();
         res.add("TURTLE");
         res.add("NTRIPLES");
@@ -144,6 +147,10 @@ public class NeighborsController implements Initializable {
         });
     }
 
+    /**
+     * Only shows subjects with a certain text in them
+     * @param filter the string that must be present in the results
+     */
     private void filter(String filter) {
         candidates.getChildren().clear();
         List<String> filteredList = new ArrayList<>();
@@ -163,18 +170,29 @@ public class NeighborsController implements Initializable {
         }
     }
 
+    /**
+     * @param uri The uri of the Node we want to represnet in the CandidateVisual
+     * @return A Border pane with the uri on the left and a button on the right
+     */
     public BorderPane candidateVisual(String uri) {
         NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut,this,timeLimit.getValue());
         VisualCandidate res = new VisualCandidate(uri, md, button);
         return res;
     }
 
+    /**
+     * Changes everything that needs to be changed when the algorithm stopper is activated
+     */
     public void cutActivate(){
         anytimeCut.set(true);
 
         cutButton.setStyle("-fx-background-color: red");
         cutLabel.setVisible(true);
     }
+
+    /**
+     * Changes everything that needs to be changed when the algorithm stopper is deactivated
+     */
     public void cutDeactivate(){
         anytimeCut.set(false);
 
