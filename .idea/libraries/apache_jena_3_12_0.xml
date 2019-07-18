@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Jena">
+  <library name="apache-jena-3.12.0">
     <CLASSES>
       <root url="file://$USER_HOME$/Downloads/apache-jena-3.12.0/lib" />
     </CLASSES>

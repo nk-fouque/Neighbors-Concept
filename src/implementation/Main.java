@@ -28,8 +28,9 @@ public class Main {
 
         // Loading Model from file
         String filename = "/udd/nfouque/Documents/default_mondial.nt";
+        String format = "TTL";
 //        String filename = "/udd/nfouque/Documents/royal.ttl";
-        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, "TTL", false);
+        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
 
         // Choose node
         String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
