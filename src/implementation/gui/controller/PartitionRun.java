@@ -20,15 +20,45 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Runnable for back thread running the Partition Algorithm
  */
 public class PartitionRun implements Runnable {
+    /**
+     * RDF Model stored in the controller
+     */
     private Model graph;
+    /**
+     * The Partition stored by the controller
+     */
     private Partition partition;
+    /**
+     * The (full) uri of the node to apply similarity search
+     */
     private String uriTarget;
+    /**
+     * Accordion to put the resulting clusters in
+     */
     private Accordion resultsContainer;
+    /**
+     * Boolean property to indicate that no other partition should be run at the same time
+     */
     private BooleanProperty available;
+    /**
+     * Atomic Boolean to be watched by the algorithm for anytime function
+     */
     private AtomicBoolean cut;
-
+    /**
+     * The controller the algorithm has been called from
+     */
     private NeighborsController mainController;
 
+    /**
+     * Base Constructor
+     * @param md @see {@link #graph}
+     * @param uri @see {@link #uriTarget}
+     * @param container @see {@link #resultsContainer}
+     * @param p @see {@link #partition}
+     * @param available @see {@link #available}
+     * @param cut @see {@link #cut}
+     * @param controller @see {@link #mainController}
+     */
     public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available, AtomicBoolean cut,NeighborsController controller) {
         super();
         graph = md;

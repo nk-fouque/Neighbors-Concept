@@ -8,7 +8,13 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * A Button linked to a cluster to copy its results to clipboard
+ */
 public class CopyButton extends Button {
+    /**
+     * VBox containing the information to copy
+     */
     private VBox copyTarget;
 
     public CopyButton(VBox texts) {

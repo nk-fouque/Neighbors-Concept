@@ -11,7 +11,13 @@ import org.apache.jena.rdf.model.Model;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * A Button linked to a uri to start the Similarity Search on it
+ */
 public class NeighborButton extends Button {
+    /**
+     * The (full) uri of the node to apply the Partition algorithm on
+     */
     private String uri;
 
     public NeighborButton(String uri, Accordion resultsContainer, Model graph, Partition partition, BooleanProperty available, AtomicBoolean cut, NeighborsController controller,int timeLimit) {

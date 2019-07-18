@@ -6,6 +6,9 @@ import javafx.scene.text.Text;
 
 import java.util.Map;
 
+/**
+ * TitledPane Summarizing the PrefixMapping
+ */
 public class VisualPrefixes extends TitledPane {
     public VisualPrefixes(Map<String, String> prefixes, BooleanProperty visible) {
         super();
