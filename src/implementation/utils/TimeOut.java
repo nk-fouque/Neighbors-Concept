@@ -24,9 +24,9 @@ public class TimeOut implements Runnable {
      * @param cut The AtomicBoolean that should be set to true
      * @param seconds The time to wait in seconds
      */
-    public static void planTimeOut(AtomicBoolean cut, int seconds) {
+    public static Thread planTimeOut(AtomicBoolean cut, int seconds) {
         Thread thread = new Thread(new TimeOut(cut, seconds));
-        thread.start();
+        return thread;
     }
 
     @Override

@@ -10,6 +10,7 @@ import sun.misc.SignalHandler;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -75,9 +76,12 @@ public class NeighborsImplementation {
      * @param interrupted the AtomicBoolean to set true
      * @return a generic SignalHandler
      */
-    public static SignalHandler interruptCutter(AtomicBoolean interrupted) {
+    public static SignalHandler interruptCutter(AtomicBoolean interrupted, Collection<Thread> toInterrupt) {
         SignalHandler handler = sig -> {
             System.out.println("Captured " + sig.getName());
+            for(Thread thread : toInterrupt){
+                thread.interrupt();
+            }
             interrupted.set(true);
         };
         return handler;

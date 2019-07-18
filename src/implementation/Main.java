@@ -10,6 +10,7 @@ import sun.misc.SignalHandler;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -42,16 +43,18 @@ public class Main {
         // Preparing file export
         FileWriter writer = new FileWriter("/udd/nfouque/Documents/results.txt");
 
-        // Defining Signal Handler for anytime implementation
         AtomicBoolean cut = new AtomicBoolean(false);
-        SignalHandler handler = NeighborsImplementation.interruptCutter(cut);
+        //Defining Timeout for anytime implementation
+        Thread timer = TimeOut.planTimeOut(cut, 120);
+        timer.start();
+        // Defining Signal Handler for anytime implementation
+        SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
         Signal.handle(new Signal("INT"), handler);
 
         // Starting main Stopwatch
         SingletonStopwatchCollection.resume("Main");
 
         // Launching the algorithm
-        TimeOut.planTimeOut(cut, 120);
         int algoRun = p.partitionAlgorithm(cut);
 
         // Processing results
@@ -92,6 +95,8 @@ public class Main {
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("connect"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projjoin"));
+
+        Thread.currentThread().interrupt();
 
     }
 }

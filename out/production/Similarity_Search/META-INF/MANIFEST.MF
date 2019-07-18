@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: implementation.gui.NeighborsInterface
+Main-Class: implementation.Main
 
