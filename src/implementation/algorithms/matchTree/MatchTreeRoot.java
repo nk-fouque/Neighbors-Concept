@@ -1,4 +1,4 @@
-package implementation.matchTree;
+package implementation.algorithms.matchTree;
 
 import implementation.utils.CollectionsModel;
 import org.apache.jena.rdf.model.ResIterator;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * The root node of a match-tree
  *
- * @author nfouque
+ * @author nk-fouque
  */
 public class MatchTreeRoot extends MatchTreeNode {
     public static Logger logger = Logger.getLogger(MatchTreeNode.class);

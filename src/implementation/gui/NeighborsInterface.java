@@ -15,6 +15,9 @@ public class NeighborsInterface extends Application {
     public static Scene scene = null;
     public static BooleanProperty exit = new SimpleBooleanProperty(false);
 
+    /**
+     * Classical JavaFX setup with added configurators for Jena and Partition Algorithm
+     */
     public static void main(String[] args) {
         BasicConfigurator.configure();
         NeighborsImplementation.myLogsLevels("silent");

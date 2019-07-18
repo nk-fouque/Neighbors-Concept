@@ -1,6 +1,6 @@
 package implementation.gui.model;
 
-import implementation.Partition;
+import implementation.algorithms.Partition;
 import implementation.gui.controller.NeighborsController;
 import implementation.gui.controller.PartitionRun;
 import javafx.beans.property.BooleanProperty;

@@ -28,18 +28,18 @@ public class NeighborsImplementation {
         switch (level) {
             case "verbous": {
                 Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
-                Logger.getLogger("implementation.Partition").setLevel(Level.DEBUG);
-                Logger.getLogger("implementation.Cluster").setLevel(Level.DEBUG);
+                Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.DEBUG);
+                Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.DEBUG);
                 Logger.getLogger("implementation.utils").setLevel(Level.INFO);
-                Logger.getLogger("implementation.matchTree.MatchTreeNode").setLevel(Level.TRACE);
+                Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.TRACE);
                 break;
             }
             case "silent": {
                 Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
-                Logger.getLogger("implementation.Partition").setLevel(Level.INFO);
-                Logger.getLogger("implementation.Cluster").setLevel(Level.INFO);
+                Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.INFO);
+                Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.INFO);
                 Logger.getLogger("implementation.utils").setLevel(Level.OFF);
-                Logger.getLogger("implementation.matchTree.MatchTreeNode").setLevel(Level.OFF);
+                Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.OFF);
             }
         }
     }

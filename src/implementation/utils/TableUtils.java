@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * Several static methods to do various things with Jena {@link Table}
  *
- * @author nfouque
+ * @author nk-fouque
  */
 public class TableUtils {
     private static Logger logger = Logger.getLogger(TableUtils.class);

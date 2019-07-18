@@ -1,7 +1,7 @@
 package implementation.gui.controller;
 
-import implementation.Cluster;
-import implementation.Partition;
+import implementation.algorithms.Cluster;
+import implementation.algorithms.Partition;
 import implementation.gui.model.VisualCluster;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
@@ -16,6 +16,9 @@ import org.apache.jena.reasoner.ReasonerRegistry;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Runnable for back thread running the Partition Algorithm
+ */
 public class PartitionRun implements Runnable {
     private Model graph;
     private Partition partition;

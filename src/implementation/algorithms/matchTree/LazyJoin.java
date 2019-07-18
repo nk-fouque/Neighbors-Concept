@@ -1,13 +1,13 @@
-package implementation.matchTree;
+package implementation.algorithms.matchTree;
 
 import org.apache.jena.sparql.core.Var;
 
 import java.util.ArrayList;
 
 /**
- * Object to encapsulate every useful attributes for the Lazy Joins algorithm
+ * Object to encapsulate every useful attributes for the Lazy Joins algorithm recursion
  *
- * @author nfouque
+ * @author nk-fouque
  */
 public class LazyJoin {
     MatchTreeNode copy;

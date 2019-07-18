@@ -1,5 +1,6 @@
 package implementation;
 
+import implementation.algorithms.Partition;
 import implementation.utils.CollectionsModel;
 import implementation.utils.TimeOut;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * @author nfouque
+ * @author nk-fouque
  */
 public class Main {
 

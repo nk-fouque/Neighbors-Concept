@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Runnable to set an AtomicBoolean to true after a certain amount of time
  * To be tested by anytime algorithms to know if they should stop running
  *
- * @author nfouque
+ * @author nk-fouque
  */
 public class TimeOut implements Runnable {
     private long millis;

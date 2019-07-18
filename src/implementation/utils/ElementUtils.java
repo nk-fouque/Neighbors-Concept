@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Several static methods to do various things with Jena {@link Element}
  *
- * @author nfouque
+ * @author nk-fouque
  */
 public class ElementUtils {
     private static Logger logger = Logger.getLogger(ElementUtils.class);

@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * A representation of an RDF Graph using several {@link HashMap} to accelerate accesses
  *
- * @author nfouque
+ * @author nk-fouque
  */
 public class CollectionsModel {
 

@@ -1,6 +1,6 @@
-package implementation;
+package implementation.algorithms;
 
-import implementation.matchTree.MatchTreeRoot;
+import implementation.algorithms.matchTree.MatchTreeRoot;
 import implementation.utils.*;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.graph.Node;
@@ -24,7 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 /**
- * @author nfouque
+ * @author nk-fouque
  */
 public class Cluster implements Comparable<Cluster> {
     private static Logger logger = Logger.getLogger(Cluster.class);
@@ -104,7 +104,7 @@ public class Cluster implements Comparable<Cluster> {
 
     /**
      * This Cluster's Match-Tree
-     * @see implementation.matchTree.MatchTreeNode
+     * @see implementation.algorithms.matchTree.MatchTreeNode
      */
     public MatchTreeRoot getMatchTree() {
         return mapping;

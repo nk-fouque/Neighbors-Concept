@@ -1,6 +1,6 @@
 package implementation.gui.model;
 
-import implementation.Cluster;
+import implementation.algorithms.Cluster;
 import implementation.utils.CollectionsModel;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;

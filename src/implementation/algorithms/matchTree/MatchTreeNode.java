@@ -1,4 +1,4 @@
-package implementation.matchTree;
+package implementation.algorithms.matchTree;
 
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
@@ -22,7 +22,7 @@ import java.util.List;
  * See the article for the exact mathematical definitions of the attributes and behavior of the algorithm
  * https://hal.archives-ouvertes.fr/hal-01945454/document Ch.6
  *
- * @author nfouque
+ * @author nk-fouque
  */
 public class MatchTreeNode {
     private static Logger logger = Logger.getLogger(MatchTreeNode.class);

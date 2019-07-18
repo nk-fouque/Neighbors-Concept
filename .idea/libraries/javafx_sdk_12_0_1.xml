@@ -3,7 +3,9 @@
     <CLASSES>
       <root url="file://$USER_HOME$/Downloads/javafx-sdk-12.0.1/lib" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="https://docs.oracle.com/javase/8/javafx/api/index.html" />
+    </JAVADOC>
     <NATIVE>
       <root url="file://$USER_HOME$/Downloads/javafx-sdk-12.0.1/lib" />
     </NATIVE>

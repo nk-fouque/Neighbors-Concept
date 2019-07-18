@@ -1,10 +1,9 @@
 package implementation.gui.controller;
 
-import implementation.Partition;
+import implementation.algorithms.Partition;
 import implementation.gui.NeighborsInterface;
 import implementation.gui.model.NeighborButton;
 import implementation.gui.model.VisualCandidate;
-import implementation.gui.model.VisualPrefixes;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
@@ -15,15 +14,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.ResIterator;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

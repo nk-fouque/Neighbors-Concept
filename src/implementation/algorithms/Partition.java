@@ -1,6 +1,6 @@
-package implementation;
+package implementation.algorithms;
 
-import implementation.matchTree.MatchTreeRoot;
+import implementation.algorithms.matchTree.MatchTreeRoot;
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
 import implementation.utils.PartitionException;
@@ -21,7 +21,9 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * @author nfouque
+ * Class for the first algorithm described in the article
+ *
+ * @author nk-fouque
  */
 public class Partition {
     private static Logger logger = Logger.getLogger(Partition.class);
