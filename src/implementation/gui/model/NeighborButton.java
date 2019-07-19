@@ -20,7 +20,7 @@ public class NeighborButton extends Button {
      */
     private String uri;
 
-    public NeighborButton(String uri, Accordion resultsContainer, Model graph, Partition partition, BooleanProperty available, AtomicBoolean cut, NeighborsController controller,int timeLimit) {
+    public NeighborButton(String uri, Accordion resultsContainer, Model graph, Partition partition, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, int timeLimit) {
         super();
         this.uri = uri;
         this.textProperty().setValue("Find neighbors");
@@ -32,21 +32,21 @@ public class NeighborButton extends Button {
             resultsContainer.getPanes().add(loading);
             Runnable algo = new PartitionRun(graph, uri, resultsContainer, partition, available, cut, controller);
             Thread thread = new Thread(algo);
-            if (timeLimit>0){
-                Thread timeOut= timeOut(timeLimit,controller,thread);
+            if (timeLimit > 0) {
+                Thread timeOut = timeOut(timeLimit, controller, thread);
                 timeOut.start();
             }
             thread.start();
         });
     }
 
-    private Thread timeOut(int timeLimit,NeighborsController controller,Thread thread){
+    private Thread timeOut(int timeLimit, NeighborsController controller, Thread thread) {
         Thread res = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(timeLimit*1000);
-                    if (!thread.isInterrupted()){
+                    Thread.sleep(timeLimit * 1000);
+                    if (!thread.isInterrupted()) {
                         controller.cutActivate();
                     }
                 } catch (InterruptedException e) {

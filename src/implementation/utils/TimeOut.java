@@ -21,7 +21,7 @@ public class TimeOut implements Runnable {
      * Starts a thread that will wait a certain time before setting a boolean to true
      * Said boolean can then be used by algorithms to check if they should stop
      *
-     * @param cut The AtomicBoolean that should be set to true
+     * @param cut     The AtomicBoolean that should be set to true
      * @param seconds The time to wait in seconds
      */
     public static Thread planTimeOut(AtomicBoolean cut, int seconds) {

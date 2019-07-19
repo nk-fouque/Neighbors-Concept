@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Static methods for a basic implementation
+ *
  * @see Main#main(String[])
  */
 public class NeighborsImplementation {
@@ -49,8 +50,8 @@ public class NeighborsImplementation {
      * Creates a {@link CollectionsModel} from a file
      *
      * @param filename The absolute path of the file on the system
-     * @param format The format the file is written in, see Jena documentation for supported formats
-     * @param verbose Whether the models should be printed on console after loading
+     * @param format   The format the file is written in, see Jena documentation for supported formats
+     * @param verbose  Whether the models should be printed on console after loading
      * @return
      * @throws IOException
      */
@@ -79,7 +80,7 @@ public class NeighborsImplementation {
     public static SignalHandler interruptCutter(AtomicBoolean interrupted, Collection<Thread> toInterrupt) {
         SignalHandler handler = sig -> {
             System.out.println("Captured " + sig.getName());
-            for(Thread thread : toInterrupt){
+            for (Thread thread : toInterrupt) {
                 thread.interrupt();
             }
             interrupted.set(true);

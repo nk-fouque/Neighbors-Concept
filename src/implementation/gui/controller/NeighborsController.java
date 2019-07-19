@@ -112,7 +112,7 @@ public class NeighborsController implements Initializable {
         subjectsList = new ArrayList<>();
         modelLoadButton.setOnMouseClicked(mouseEvent -> {
             String filename = filenameField.getText();
-            ModelLoad loader = new ModelLoad(filename,format.getValue(),md,this,subjectsList,modelLoaded);
+            ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded);
             Thread load = new Thread(loader);
             Label modelState = new Label();
             modelState.textProperty().bindBidirectional(loader.stateProperty());
@@ -149,6 +149,7 @@ public class NeighborsController implements Initializable {
 
     /**
      * Only shows subjects with a certain text in them
+     *
      * @param filter the string that must be present in the results
      */
     private void filter(String filter) {
@@ -175,7 +176,7 @@ public class NeighborsController implements Initializable {
      * @return A Border pane with the uri on the left and a button on the right
      */
     public BorderPane candidateVisual(String uri) {
-        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut,this,timeLimit.getValue());
+        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partition, partitionAvailable, anytimeCut, this, timeLimit.getValue());
         VisualCandidate res = new VisualCandidate(uri, md, button);
         return res;
     }
@@ -183,7 +184,7 @@ public class NeighborsController implements Initializable {
     /**
      * Changes everything that needs to be changed when the algorithm stopper is activated
      */
-    public void cutActivate(){
+    public void cutActivate() {
         anytimeCut.set(true);
 
         cutButton.setStyle("-fx-background-color: red");
@@ -193,7 +194,7 @@ public class NeighborsController implements Initializable {
     /**
      * Changes everything that needs to be changed when the algorithm stopper is deactivated
      */
-    public void cutDeactivate(){
+    public void cutDeactivate() {
         anytimeCut.set(false);
 
         cutButton.setStyle("");

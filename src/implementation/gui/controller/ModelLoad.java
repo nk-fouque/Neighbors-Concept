@@ -60,12 +60,13 @@ public class ModelLoad implements Runnable {
 
     /**
      * Base constructor
+     *
      * @param filename The absolute path of the RDF file on the system
-     * @param format The format of the RDF file as a Jena-understandable string
-     * @param md The Model to be modified inside the Controller
-     * @param origin The Controller the loader has been called by
+     * @param format   The format of the RDF file as a Jena-understandable string
+     * @param md       The Model to be modified inside the Controller
+     * @param origin   The Controller the loader has been called by
      * @param subjects The list of subjects stored in the controller
-     * @param loaded Property used by the controller to know if a controller has been loaded
+     * @param loaded   Property used by the controller to know if a controller has been loaded
      */
     public ModelLoad(String filename, String format, Model md, NeighborsController origin, List<String> subjects, BooleanProperty loaded) {
         super();
@@ -75,7 +76,7 @@ public class ModelLoad implements Runnable {
         this.subjectsList = subjects;
         this.modelLoaded = loaded;
         state = new SimpleStringProperty("");
-        controller=origin;
+        controller = origin;
     }
 
     /**
@@ -108,10 +109,10 @@ public class ModelLoad implements Runnable {
             while (!queue.isEmpty()) {
                 String uri = queue.poll();
                 BorderPane visual = controller.candidateVisual(uri);
-                Platform.runLater(() ->visual.minWidthProperty().bind((controller.scrollPane.widthProperty())));
-                Platform.runLater(() ->controller.candidates.getChildren().add(visual));
+                Platform.runLater(() -> visual.minWidthProperty().bind((controller.scrollPane.widthProperty())));
+                Platform.runLater(() -> controller.candidates.getChildren().add(visual));
             }
-            Platform.runLater(() ->controller.partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded)));
+            Platform.runLater(() -> controller.partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded)));
 
             Platform.runLater(() -> state.setValue("Model Loaded"));
             modelLoaded.setValue(true);

@@ -1,7 +1,10 @@
 package implementation.algorithms;
 
 import implementation.algorithms.matchTree.MatchTreeRoot;
-import implementation.utils.*;
+import implementation.utils.CollectionsModel;
+import implementation.utils.ElementUtils;
+import implementation.utils.ListUtils;
+import implementation.utils.PartitionException;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
@@ -104,6 +107,7 @@ public class Cluster implements Comparable<Cluster> {
 
     /**
      * This Cluster's Match-Tree
+     *
      * @see implementation.algorithms.matchTree.MatchTreeNode
      */
     public MatchTreeRoot getMatchTree() {
@@ -133,9 +137,9 @@ public class Cluster implements Comparable<Cluster> {
         }
         availableQueryElements = ListUtils.removeDuplicates(availableQueryElements);
         this.removedQueryElements = new ArrayList<>();
-        extensionDistance = 0;
         mapping = new MatchTreeRoot(getProj(), graph);
         answers = mapping.getMatchSet();
+        extensionDistance = answers.size();
         this.connectedVars = qry.getProjectVars();
     }
 

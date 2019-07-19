@@ -10,6 +10,7 @@ import org.apache.jena.sparql.engine.join.QueryIterHashJoin;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+
 /**
  * Several static methods to do various things with Jena {@link Table}
  *
