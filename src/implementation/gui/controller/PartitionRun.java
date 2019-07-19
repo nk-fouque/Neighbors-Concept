@@ -1,12 +1,13 @@
 package implementation.gui.controller;
 
 import implementation.algorithms.Cluster;
-import implementation.algorithms.Partition;
+import implementation.gui.model.ObservablePartition;
 import implementation.gui.model.VisualCluster;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
@@ -27,7 +28,7 @@ public class PartitionRun implements Runnable {
     /**
      * The Partition stored by the controller
      */
-    private Partition partition;
+    private ObservablePartition partition;
     /**
      * The (full) uri of the node to apply similarity search
      */
@@ -49,26 +50,27 @@ public class PartitionRun implements Runnable {
      */
     private NeighborsController mainController;
 
+    private TitledPane loadingPane;
+
     /**
      * Base Constructor
      *
      * @param md         @see {@link #graph}
      * @param uri        @see {@link #uriTarget}
      * @param container  @see {@link #resultsContainer}
-     * @param p          @see {@link #partition}
      * @param available  @see {@link #available}
      * @param cut        @see {@link #cut}
      * @param controller @see {@link #mainController}
      */
-    public PartitionRun(Model md, String uri, Accordion container, Partition p, BooleanProperty available, AtomicBoolean cut, NeighborsController controller) {
+    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane) {
         super();
         graph = md;
         uriTarget = uri;
         resultsContainer = container;
-        partition = p;
         this.available = available;
         this.cut = cut;
         mainController = controller;
+        this.loadingPane = loadingPane;
     }
 
     @Override
@@ -78,7 +80,12 @@ public class PartitionRun implements Runnable {
 
         CollectionsModel colMd = new CollectionsModel(graph, saturated);
 
-        partition = new Partition(colMd, uriTarget);
+        partition = new ObservablePartition(colMd, uriTarget);
+
+        Label loadingState = new Label();
+        loadingState.textProperty().bind(partition.stateProperty());
+        Platform.runLater(() -> loadingPane.setContent(loadingState));
+        Platform.runLater(() -> loadingPane.setExpanded(true));
 
         int algoRun = partition.partitionAlgorithm(cut);
         partition.cut();

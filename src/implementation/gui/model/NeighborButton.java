@@ -1,6 +1,5 @@
 package implementation.gui.model;
 
-import implementation.algorithms.Partition;
 import implementation.gui.controller.NeighborsController;
 import implementation.gui.controller.PartitionRun;
 import javafx.beans.property.BooleanProperty;
@@ -20,7 +19,7 @@ public class NeighborButton extends Button {
      */
     private String uri;
 
-    public NeighborButton(String uri, Accordion resultsContainer, Model graph, Partition partition, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, int timeLimit) {
+    public NeighborButton(String uri, Accordion resultsContainer, Model graph, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, int timeLimit) {
         super();
         this.uri = uri;
         this.textProperty().setValue("Find neighbors");
@@ -30,7 +29,7 @@ public class NeighborButton extends Button {
             TitledPane loading = new TitledPane();
             loading.setText("Loading neighbors for " + uri + " please wait");
             resultsContainer.getPanes().add(loading);
-            Runnable algo = new PartitionRun(graph, uri, resultsContainer, partition, available, cut, controller);
+            Runnable algo = new PartitionRun(graph, uri, resultsContainer, available, cut, controller, loading);
             Thread thread = new Thread(algo);
             if (timeLimit > 0) {
                 Thread timeOut = timeOut(timeLimit, controller, thread);

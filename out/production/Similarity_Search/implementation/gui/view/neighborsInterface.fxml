@@ -42,7 +42,7 @@
                 GridPane.vgrow="ALWAYS">
         <top>
             <ToolBar>
-                <Label text="Time limit :" />
+                <Label text="Time limit :"/>
                 <Spinner fx:id="timeLimit" min="0" max="3600" initialValue="0" editable="true"/>
                 <Label text=" seconds"/>
                 <Label text="(0 = no time limit)"/>
