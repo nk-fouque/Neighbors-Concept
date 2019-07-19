@@ -78,7 +78,7 @@ public class NeighborsController implements Initializable {
 
     private List<String> subjectsList;
 
-    private BooleanProperty partitionAvailable = new SimpleBooleanProperty(true);
+    BooleanProperty partitionAvailable = new SimpleBooleanProperty(false);
 
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
 
@@ -115,6 +115,7 @@ public class NeighborsController implements Initializable {
         subjectsList = new ArrayList<>();
         modelLoadButton.setOnMouseClicked(mouseEvent -> {
             String filename = filenameField.getText();
+            modelLoaded.setValue(false);
             ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded);
             Thread load = new Thread(loader);
             Label modelState = new Label();
@@ -131,12 +132,16 @@ public class NeighborsController implements Initializable {
                 filter(filterSubjectsField.getText());
             }
         });
+        filterSubjectsField.disableProperty().bind(modelLoaded.not());
         filterSubjectsButton.setOnMouseClicked(mouseEvent -> filter(filterSubjectsField.getText()));
+        filterSubjectsButton.disableProperty().bind(modelLoaded.not());
+        caseSensBox.disableProperty().bind(modelLoaded.not());
 
         partitionCandidates.autosize();
 
         cutLabel.setVisible(false);
         cutLabel.setText("/!\\ Algorithm will stop early, please deactivate before running new partition /!\\");
+        cutButton.disableProperty().bind(partitionAvailable);
         cutButton.setOnMouseClicked(mouseEvent -> {
             if (!anytimeCut.get()) {
                 cutActivate();
@@ -188,10 +193,12 @@ public class NeighborsController implements Initializable {
      * Changes everything that needs to be changed when the algorithm stopper is activated
      */
     public void cutActivate() {
-        anytimeCut.set(true);
+        if (!partitionAvailable.getValue()) {
+            anytimeCut.set(true);
 
-        cutButton.setStyle("-fx-background-color: red");
-        cutLabel.setVisible(true);
+            cutButton.setStyle("-fx-background-color: red");
+            cutLabel.setVisible(true);
+        }
     }
 
     /**

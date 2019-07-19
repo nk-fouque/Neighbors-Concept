@@ -72,6 +72,7 @@ public class Main {
             case 1: {
                 System.out.println("Java Heap went out of memory");
                 algoRun++;
+
                 break;
             }
             case 2: {
@@ -97,6 +98,7 @@ public class Main {
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("connect"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projjoin"));
 
+        timer.interrupt();
         Thread.currentThread().interrupt();
 
     }

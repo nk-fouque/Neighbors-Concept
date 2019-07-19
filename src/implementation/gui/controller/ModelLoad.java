@@ -115,7 +115,8 @@ public class ModelLoad implements Runnable {
             Platform.runLater(() -> controller.partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded)));
 
             Platform.runLater(() -> state.setValue("Model Loaded"));
-            modelLoaded.setValue(true);
+            Platform.runLater(() -> modelLoaded.setValue(true));
+            Platform.runLater(() -> controller.partitionAvailable.setValue(true));
 
         } catch (FileNotFoundException e) {
             TitledPane err = new TitledPane();

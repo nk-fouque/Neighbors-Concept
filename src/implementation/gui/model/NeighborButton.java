@@ -45,9 +45,7 @@ public class NeighborButton extends Button {
             public void run() {
                 try {
                     Thread.sleep(timeLimit * 1000);
-                    if (!thread.isInterrupted()) {
-                        controller.cutActivate();
-                    }
+                    controller.cutActivate();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

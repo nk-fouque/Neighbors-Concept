@@ -167,7 +167,9 @@ public class Cluster implements Comparable<Cluster> {
      * @return the difference between this Cluster's relax distance and the other Cluster
      */
     public int compareTo(Cluster other) {
-        return (getExtensionDistance() - other.getExtensionDistance());
+        int res = (getExtensionDistance() - other.getExtensionDistance());
+        if (res == 0) res =getRelaxDistance() - other.getRelaxDistance();
+        return res;
     }
 
     /**
