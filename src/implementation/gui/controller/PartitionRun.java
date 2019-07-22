@@ -52,6 +52,8 @@ public class PartitionRun implements Runnable {
 
     private TitledPane loadingPane;
 
+    private int depth;
+
     /**
      * Base Constructor
      *
@@ -62,7 +64,7 @@ public class PartitionRun implements Runnable {
      * @param cut        {@link #cut}
      * @param controller {@link #mainController}
      */
-    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane) {
+    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane,int descriptionDepth) {
         super();
         graph = md;
         uriTarget = uri;
@@ -71,6 +73,7 @@ public class PartitionRun implements Runnable {
         this.cut = cut;
         mainController = controller;
         this.loadingPane = loadingPane;
+        depth = descriptionDepth;
     }
 
     @Override
@@ -80,7 +83,7 @@ public class PartitionRun implements Runnable {
 
         CollectionsModel colMd = new CollectionsModel(graph, saturated);
 
-        partition = new ObservablePartition(colMd, uriTarget);
+        partition = new ObservablePartition(colMd, uriTarget,depth);
 
         Label loadingState = new Label();
         loadingState.textProperty().bind(partition.stateProperty());

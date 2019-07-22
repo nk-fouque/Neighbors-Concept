@@ -16,8 +16,8 @@ public class ObservablePartition extends Partition {
      * @param colMd     A preexisting CollectionsModel in which to describe the node and search for its neighbors
      * @param uriTarget The full length uri of the node to describe
      */
-    public ObservablePartition(CollectionsModel colMd, String uriTarget) {
-        super(colMd, uriTarget);
+    public ObservablePartition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
+        super(colMd, uriTarget,descriptionDepth);
         nbClusters = 1;
         state = new SimpleStringProperty();
     }

@@ -48,6 +48,8 @@ public class Partition {
      */
     private Map<String, Var> keys;
 
+    private int depth;
+
     /**
      * @return A list containing all the clusters that are still partitionable
      * Should always be empty at the end of the algorithm
@@ -76,7 +78,7 @@ public class Partition {
      * @param colMd     A preexisting CollectionsModel in which to describe the node and search for its neighbors
      * @param uriTarget The full length uri of the node to describe
      */
-    public Partition(CollectionsModel colMd, String uriTarget) {
+    public Partition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
         graph = colMd;
         keys = new HashMap<>();
 
@@ -86,6 +88,8 @@ public class Partition {
         clusters.add(new Cluster(q, colMd));
 
         neighbors = new ArrayList<>();
+
+        depth = descriptionDepth;
     }
 
 
@@ -162,7 +166,7 @@ public class Partition {
             Ce.move(e, varE);
 
             Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
-            CeOpp.relax(e, graph, keys);
+            CeOpp.relax(e, graph, keys,depth);
 
 
             boolean ceEmpty = Ce.noAnswers();
@@ -185,7 +189,7 @@ public class Partition {
             return true;
         } else {
             if (c.getAvailableQueryElements().size() != 0) {
-                c.relax(c.getAvailableQueryElements().get(0), graph, keys);
+                c.relax(c.getAvailableQueryElements().get(0), graph, keys, depth);
                 clusters.add(c);
             } else if (c.getRelaxQueryElements().size() != 0) {
                 neighbors.add(c);

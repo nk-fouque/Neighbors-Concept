@@ -5,9 +5,7 @@ import implementation.gui.NeighborsInterface;
 import implementation.gui.model.NeighborButton;
 import implementation.gui.model.VisualCandidate;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -81,6 +79,8 @@ public class NeighborsController implements Initializable {
     BooleanProperty partitionAvailable = new SimpleBooleanProperty(false);
 
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
+
+    private int descriptionDepth = 1;
 
     /**
      * @return List of Jena supported RDF formats
@@ -184,7 +184,7 @@ public class NeighborsController implements Initializable {
      * @return A Border pane with the uri on the left and a button on the right
      */
     public BorderPane candidateVisual(String uri) {
-        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partitionAvailable, anytimeCut, this, timeLimit.getValue());
+        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partitionAvailable, anytimeCut, this, timeLimit.getValue(),descriptionDepth);
         VisualCandidate res = new VisualCandidate(uri, md, button);
         return res;
     }

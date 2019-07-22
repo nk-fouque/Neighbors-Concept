@@ -37,7 +37,7 @@ public class Main {
 //        String uriTarget = "http://example.org/royal/Charlotte";
 
         // Preparing Partition
-        Partition p = new Partition(model, uriTarget);
+        Partition p = new Partition(model, uriTarget,1);
 //        System.out.println(p.getClusters().get(0));
 //        System.out.println("Printing graph" + model);
 
@@ -92,7 +92,6 @@ public class Main {
 
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("relax"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("connect"));
