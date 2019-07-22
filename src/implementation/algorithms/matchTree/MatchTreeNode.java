@@ -4,6 +4,7 @@ import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
 import implementation.utils.ListUtils;
 import implementation.utils.TableUtils;
+import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.algebra.Table;
@@ -203,11 +204,13 @@ public class MatchTreeNode {
             logger.debug("recur in");
             LazyJoin recur = nc.lazyJoin(tree, node);
             logger.debug("recur out");
+            SingletonStopwatchCollection.resume("copy children");
             copy.replace(nc, recur.copy);
             deltaplus.addAll(recur.deltaplus);
             ListUtils.removeDuplicates(deltaplus);
             deltaminus.addAll(recur.deltaminus);
             ListUtils.removeDuplicates(deltaminus);
+            SingletonStopwatchCollection.stop("copy children");
             if (recur.modified) {
                 logger.debug("modified");
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {

@@ -3,6 +3,7 @@ package implementation;
 import implementation.algorithms.Partition;
 import implementation.utils.CollectionsModel;
 import implementation.utils.TimeOut;
+import implementation.utils.profiling.CallCounterCollection;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.log4j.BasicConfigurator;
 import sun.misc.Signal;
@@ -46,7 +47,7 @@ public class Main {
 
         AtomicBoolean cut = new AtomicBoolean(false);
         //Defining Timeout for anytime implementation
-        Thread timer = TimeOut.planTimeOut(cut, 120);
+        Thread timer = TimeOut.planTimeOut(cut, 300);
         timer.start();
         // Defining Signal Handler for anytime implementation
         SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
@@ -96,6 +97,12 @@ public class Main {
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("connect"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projjoin"));
+
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("join")+" : "+ CallCounterCollection.getCallCount("join"));
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projection")+" : "+ CallCounterCollection.getCallCount("projection"));
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("duplicates")+" : "+ CallCounterCollection.getCallCount("duplicates"));
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("difference")+" : "+ CallCounterCollection.getCallCount("difference"));
+
 
         timer.interrupt();
         Thread.currentThread().interrupt();

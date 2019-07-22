@@ -1,5 +1,7 @@
 package implementation.utils;
 
+import implementation.utils.profiling.CallCounterCollection;
+import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.Var;
@@ -23,8 +25,12 @@ public class TableUtils {
      * Uses Jena's iterator join to join two tables
      */
     public static TableN simpleJoin(Table left, Table right) {
+        CallCounterCollection.call("join");
+        SingletonStopwatchCollection.resume("join");
 //        System.out.println("Joining : \n"+left+" and \n"+right);
-        return new TableN(QueryIterHashJoin.create(left.iterator(null), right.iterator(null), null));
+        TableN res = new TableN(QueryIterHashJoin.create(left.iterator(null), right.iterator(null), null));
+        SingletonStopwatchCollection.stop("join");
+        return res;
     }
 
     /**
@@ -34,6 +40,8 @@ public class TableUtils {
      * @param vars  A list of variables to do the projection on
      */
     public static TableN projection(Table table, List<Var> vars) {
+        CallCounterCollection.call("projection");
+        SingletonStopwatchCollection.resume("projection");
         TableN res = new TableN();
         QueryIterator iter = table.iterator(null);
         Binding b;
@@ -45,6 +53,7 @@ public class TableUtils {
             }
             res.addBinding(bind);
         }
+        SingletonStopwatchCollection.stop("projection");
         return removeDuplicates(res);
     }
 
@@ -56,6 +65,8 @@ public class TableUtils {
      * @return The left table from which all elements appearing in the right table have been removed
      */
     public static TableN difference(Table left, Table right) {
+        CallCounterCollection.call("difference");
+        SingletonStopwatchCollection.resume("difference");
         TableN res = new TableN();
         Iterator<Binding> iterLeft = left.rows();
         List<Binding> listLeft = new ArrayList<>();
@@ -73,6 +84,7 @@ public class TableUtils {
                 res.addBinding(b);
             }
         }
+        SingletonStopwatchCollection.stop("difference");
         return res;
     }
 
@@ -81,6 +93,7 @@ public class TableUtils {
      * @return The same Table from which the duplicate lines have been removed
      */
     public static TableN removeDuplicates(Table table) {
+        SingletonStopwatchCollection.resume("duplicates");
         Set<Binding> temp = new HashSet<>();
         Iterator<Binding> iter = table.rows();
         while (iter.hasNext()) {
@@ -90,6 +103,7 @@ public class TableUtils {
         for (Binding b : temp) {
             res.addBinding(b);
         }
+        SingletonStopwatchCollection.stop("duplicates");
         return res;
     }
 }

@@ -120,6 +120,7 @@ public class ElementUtils {
         for (Element e : list) {
             if (!(e instanceof ElementFilter)) {
                 if (descriptionDepth > 2){
+                    // TODO For now any number>2 = infinite
                     res.add(e);
                 }
             }
