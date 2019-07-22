@@ -15,8 +15,11 @@ import javafx.scene.text.Text;
  */
 public class VisualCluster extends TitledPane {
 
+    private Cluster cluster;
+
     public VisualCluster(Cluster c, CollectionsModel md) {
         super();
+        cluster = c;
         this.setText("Extensional distance : " + c.getExtensionDistance());
         if (c.getAvailableQueryElements().size() != 0) {
             this.textFillProperty().setValue(Paint.valueOf("#cd7777"));

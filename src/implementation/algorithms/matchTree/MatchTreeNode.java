@@ -156,7 +156,7 @@ public class MatchTreeNode {
         element = other.getElement();
         varE = new ArrayList<>(other.getVarE());
         D = new ArrayList<>(other.getD());
-        matchSet = new TableN(other.getMatchSet().iterator(null));
+        matchSet = other.getMatchSet();
         delta = new ArrayList<>(other.getDelta());
         inserted = other.inserted;
     }
@@ -197,20 +197,20 @@ public class MatchTreeNode {
         logger.debug("trying " + node.elementString() + " under " + elementString());
         ArrayList<Var> deltaplus = new ArrayList<>();
         ArrayList<Var> deltaminus = new ArrayList<>();
+        SingletonStopwatchCollection.resume("copy self");
         MatchTreeNode copy = new MatchTreeNode(this);
+        SingletonStopwatchCollection.stop("copy self");
         boolean modified = false;
 
         for (MatchTreeNode nc : children) {
             logger.debug("recur in");
             LazyJoin recur = nc.lazyJoin(tree, node);
             logger.debug("recur out");
-            SingletonStopwatchCollection.resume("copy children");
             copy.replace(nc, recur.copy);
             deltaplus.addAll(recur.deltaplus);
             ListUtils.removeDuplicates(deltaplus);
             deltaminus.addAll(recur.deltaminus);
             ListUtils.removeDuplicates(deltaminus);
-            SingletonStopwatchCollection.stop("copy children");
             if (recur.modified) {
                 logger.debug("modified");
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
@@ -219,22 +219,29 @@ public class MatchTreeNode {
                     ResultSetFormatter.out(baos, rs);
                     logger.trace(baos.toString());
                 }
+                int rowsBefore = copy.matchSet.size();
+                int colsBefore = copy.matchSet.getVars().size();
                 logger.debug("proj");
                 Table proj = TableUtils.projection(recur.copy.matchSet, recur.copy.delta);
                 logger.debug("join");
                 copy.matchSet = TableUtils.simpleJoin(matchSet, proj);
                 logger.debug("joined");
-                modified = true;
+                int rowsAfter = copy.matchSet.size();
+                int colsAfter = copy.matchSet.getVars().size();
+                modified = (!(rowsBefore==rowsAfter && colsBefore == colsAfter));
             }
         }
         if (!Collections.disjoint(this.D, node.delta)) {
             logger.debug(node.elementString() + " connected to " + elementString());
             if (!node.isInserted()) {
                 logger.debug("inserting " + node.elementString() + " under " + elementString());
+
+
                 List<Var> addminus = new ArrayList<>(node.delta);
                 addminus.removeAll(this.D);
                 addminus.removeAll(deltaminus);
                 deltaminus.addAll(addminus);
+
 
                 logger.debug("proj");
                 Table proj = TableUtils.projection(node.matchSet, node.delta);
@@ -252,9 +259,11 @@ public class MatchTreeNode {
                 addplus.removeAll(deltaplus);
                 deltaplus.addAll(addplus);
             }
+        } else {
         }
 
         deltaplus.removeAll(deltaminus);
+
         deltaminus.removeAll(deltaplus);
 
         if (!copy.delta.containsAll(deltaplus)) {
@@ -268,13 +277,10 @@ public class MatchTreeNode {
         }
 
         LazyJoin res;
-        if (modified) {
-            logger.debug("returning modified");
-            res = new LazyJoin(copy, deltaplus, deltaminus, true);
-        } else {
-            logger.debug("returning unchanged");
-            res = new LazyJoin(this, deltaplus, deltaminus, false);
-        }
+        logger.debug("returning modified");
+
+        res = new LazyJoin(copy, deltaplus, deltaminus, modified);
+
         return res;
     }
 }

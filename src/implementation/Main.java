@@ -29,8 +29,8 @@ public class Main {
 
         // Loading Model from file
         String filename = "/udd/nfouque/Documents/default_mondial.nt";
-        String format = "TTL";
 //        String filename = "/udd/nfouque/Documents/royal.ttl";
+        String format = "TTL";
         CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
 
         // Choose node
@@ -38,7 +38,7 @@ public class Main {
 //        String uriTarget = "http://example.org/royal/Charlotte";
 
         // Preparing Partition
-        Partition p = new Partition(model, uriTarget,1);
+        Partition p = new Partition(model, uriTarget, 1);
 //        System.out.println(p.getClusters().get(0));
 //        System.out.println("Printing graph" + model);
 
@@ -47,8 +47,8 @@ public class Main {
 
         AtomicBoolean cut = new AtomicBoolean(false);
         //Defining Timeout for anytime implementation
-        Thread timer = TimeOut.planTimeOut(cut, 300);
-        timer.start();
+        Thread timer = TimeOut.planTimeOut(cut, 30);
+//        timer.start();
         // Defining Signal Handler for anytime implementation
         SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
         Signal.handle(new Signal("INT"), handler);
@@ -71,7 +71,7 @@ public class Main {
                 break;
             }
             case 1: {
-                System.out.println("Java Heap went out of memory");
+                System.out.println("Java Heap went out of memory after "+SingletonStopwatchCollection.getElapsedSeconds("Main")+"s");
                 algoRun++;
 
                 break;
@@ -84,7 +84,7 @@ public class Main {
                     System.out.println(results);
                     writer.write(results);
                 } catch (OutOfMemoryError err) {
-                    System.out.println("Could not recover results, allocate more heap size or use a timeout");
+                    System.out.println("Could not recover results, allocate more heap size or use (shorter) timeout");
                 }
             }
         }
@@ -92,16 +92,17 @@ public class Main {
         writer.close();
 
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("Main"));
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate"));
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("iterate") + " : " + CallCounterCollection.getCallCount("iterate"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("reste"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("newans"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("connect"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projjoin"));
 
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("join")+" : "+ CallCounterCollection.getCallCount("join"));
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projection")+" : "+ CallCounterCollection.getCallCount("projection"));
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("duplicates")+" : "+ CallCounterCollection.getCallCount("duplicates"));
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("difference")+" : "+ CallCounterCollection.getCallCount("difference"));
+        System.out.println("\n"+SingletonStopwatchCollection.getElapsedMilliseconds("lazyjoin"));
+
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("join") + " : " + CallCounterCollection.getCallCount("join"));
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projection") + " : " + CallCounterCollection.getCallCount("projection"));
+        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("difference") + " : " + CallCounterCollection.getCallCount("difference"));
 
 
         timer.interrupt();

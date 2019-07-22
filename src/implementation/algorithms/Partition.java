@@ -5,6 +5,7 @@ import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
 import implementation.utils.PartitionException;
 import implementation.utils.TableUtils;
+import implementation.utils.profiling.CallCounterCollection;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryFactory;
@@ -101,6 +102,7 @@ public class Partition {
     public boolean iterate() throws PartitionException, OutOfMemoryError {
         SingletonStopwatchCollection.resume("iterate");
         SingletonStopwatchCollection.resume("connect");
+        CallCounterCollection.call("iterate");
 
         Cluster c = clusters.remove(0);
         Element e = null;
@@ -188,12 +190,7 @@ public class Partition {
             SingletonStopwatchCollection.stop("iterate");
             return true;
         } else {
-            if (c.getAvailableQueryElements().size() != 0) {
-                c.relax(c.getAvailableQueryElements().get(0), graph, keys, depth);
-                clusters.add(c);
-            } else if (c.getRelaxQueryElements().size() != 0) {
-                neighbors.add(c);
-            }
+            neighbors.add(c);
             SingletonStopwatchCollection.stop("iterate");
             return clusters.size() != 0;
         }

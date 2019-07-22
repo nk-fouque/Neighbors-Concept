@@ -39,22 +39,29 @@ public class TableUtils {
      * @param table The table to project
      * @param vars  A list of variables to do the projection on
      */
-    public static TableN projection(Table table, List<Var> vars) {
+    public static Table projection(Table table, List<Var> vars) {
         CallCounterCollection.call("projection");
         SingletonStopwatchCollection.resume("projection");
-        TableN res = new TableN();
-        QueryIterator iter = table.iterator(null);
-        Binding b;
-        while (iter.hasNext()) {
-            b = iter.nextBinding();
-            BindingHashMap bind = new BindingHashMap();
-            for (Var var : vars) {
-                bind.add(var, b.get(var));
+        Table res;
+        if(vars.containsAll(table.getVars())){
+            res = table;
+        } else {
+            res = new TableN();
+            Iterator<Binding> iter = table.rows();
+            Set<Binding> temp = new HashSet<>();
+            Binding b;
+            while (iter.hasNext()) {
+                b = iter.next();
+                BindingHashMap bind = new BindingHashMap();
+                for (Var var : vars) {
+                    bind.add(var, b.get(var));
+                }
+                temp.add(bind);
             }
-            res.addBinding(bind);
+            temp.forEach(res::addBinding);
         }
         SingletonStopwatchCollection.stop("projection");
-        return removeDuplicates(res);
+        return (res);
     }
 
     /**
@@ -93,7 +100,6 @@ public class TableUtils {
      * @return The same Table from which the duplicate lines have been removed
      */
     public static TableN removeDuplicates(Table table) {
-        SingletonStopwatchCollection.resume("duplicates");
         Set<Binding> temp = new HashSet<>();
         Iterator<Binding> iter = table.rows();
         while (iter.hasNext()) {
@@ -103,7 +109,6 @@ public class TableUtils {
         for (Binding b : temp) {
             res.addBinding(b);
         }
-        SingletonStopwatchCollection.stop("duplicates");
         return res;
     }
 }
