@@ -55,12 +55,12 @@ public class PartitionRun implements Runnable {
     /**
      * Base Constructor
      *
-     * @param md         @see {@link #graph}
-     * @param uri        @see {@link #uriTarget}
-     * @param container  @see {@link #resultsContainer}
-     * @param available  @see {@link #available}
-     * @param cut        @see {@link #cut}
-     * @param controller @see {@link #mainController}
+     * @param md         {@link #graph}
+     * @param uri        {@link #uriTarget}
+     * @param container  {@link #resultsContainer}
+     * @param available  {@link #available}
+     * @param cut        {@link #cut}
+     * @param controller {@link #mainController}
      */
     public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane) {
         super();
