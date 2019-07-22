@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"implementation"},{"l":"implementation.algorithms"},{"l":"implementation.algorithms.matchTree"},{"l":"implementation.gui"},{"l":"implementation.gui.controller"},{"l":"implementation.gui.model"},{"l":"implementation.utils"},{"l":"implementation.utils.profiling.stopwatches"}]
