@@ -100,7 +100,7 @@ public class ElementUtils {
      * @param keys   The keys used until now to describe certain uris
      * @return A list of all the new Query elements obtained from relaxing the filter (relax(e))
      */
-    public static List<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys) {
+    public static List<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys,int descriptionDepth) {
         ExprFunction f = filter.getExpr().getFunction();
         List<Element> list = new ArrayList<>();
         if (f instanceof E_Equals) {
@@ -119,9 +119,9 @@ public class ElementUtils {
         List<Element> res = new ArrayList<>();
         for (Element e : list) {
             if (!(e instanceof ElementFilter)) {
-                // As such the algorithm doesn't add new filters, which means it only adds one to the description depth of the node
-                // This if can be easily commented but further extends runtime
-                res.add(e);
+                if (descriptionDepth > 2){
+                    res.add(e);
+                }
             }
         }
         logger.info("relaxed to " + res);

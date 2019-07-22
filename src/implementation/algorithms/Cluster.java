@@ -219,7 +219,7 @@ public class Cluster implements Comparable<Cluster> {
                 ElementFilter e = (ElementFilter) element;
                 if(descriptionDepth>1){
 
-                    list = ElementUtils.relaxFilter(e, graph, keys);
+                    list = ElementUtils.relaxFilter(e, graph, keys,descriptionDepth);
                 }
 
             } else {
