@@ -140,7 +140,7 @@ public class Partition {
             Table piMe;
             Table ae;
             try {
-                piMe = TableUtils.projection(me.getMatchSet(), c.getProj());
+                piMe = me.getMatchSet();
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ResultSet rs = piMe.toResultSet();
@@ -170,7 +170,6 @@ public class Partition {
             Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
             CeOpp.relax(e, graph, keys,depth);
 
-
             boolean ceEmpty = Ce.noAnswers();
             boolean ceOppEmpty = CeOpp.noAnswers();
             if (!ceEmpty) {
@@ -192,7 +191,7 @@ public class Partition {
         } else {
             neighbors.add(c);
             SingletonStopwatchCollection.stop("iterate");
-            return clusters.size() != 0;
+            return (clusters.size() != 0);
         }
     }
 

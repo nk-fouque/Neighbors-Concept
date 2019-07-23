@@ -2,6 +2,7 @@ package implementation.gui.model;
 
 import implementation.algorithms.Cluster;
 import implementation.utils.CollectionsModel;
+import implementation.utils.ElementUtils;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -9,6 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import org.apache.jena.sparql.syntax.Element;
+
+import java.util.List;
 
 /**
  * TitledPane Tailored to a Cluster
@@ -21,11 +25,22 @@ public class VisualCluster extends TitledPane {
         super();
         cluster = c;
         this.setText("Extensional distance : " + c.getExtensionDistance());
-        if (c.getAvailableQueryElements().size() != 0) {
-            this.textFillProperty().setValue(Paint.valueOf("#cd7777"));
-        } else {
-            this.textFillProperty().setValue(Paint.valueOf("#484848"));
+        List<Element> remaining = c.getAvailableQueryElements();
+        boolean finished = true;
+        if (remaining.size() != 0) {
+            for (Element e : remaining) {
+                if (c.connected(ElementUtils.mentioned(e))) {
+                    finished = false;
+                    break;
+                }
+            }
         }
+
+        if (finished)
+            this.textFillProperty().setValue(Paint.valueOf("#484848"));
+        else
+            this.textFillProperty().setValue(Paint.valueOf("#cd7777"));
+
 
         // A HBox containing several VBox is like a BorderPane but it's better in case more information become useful and we need more columns
         HBox box = new HBox();

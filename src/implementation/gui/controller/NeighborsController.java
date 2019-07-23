@@ -67,6 +67,8 @@ public class NeighborsController implements Initializable {
     Button cutButton;
     @FXML
     Label cutLabel;
+    @FXML
+    Label finalState;
 
     private Model md;
 
@@ -81,6 +83,8 @@ public class NeighborsController implements Initializable {
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
 
     private int descriptionDepth = 1;
+
+
 
     /**
      * @return List of Jena supported RDF formats
@@ -140,7 +144,7 @@ public class NeighborsController implements Initializable {
         partitionCandidates.autosize();
 
         cutLabel.setVisible(false);
-        cutLabel.setText("/!\\ Algorithm will stop early, please deactivate before running new partition /!\\");
+        cutLabel.setText("/!\\ Algorithm will stop early /!\\");
         cutButton.disableProperty().bind(partitionAvailable);
         cutButton.setOnMouseClicked(mouseEvent -> {
             if (!anytimeCut.get()) {
@@ -149,6 +153,8 @@ public class NeighborsController implements Initializable {
                 cutDeactivate();
             }
         });
+
+        finalState.visibleProperty().bind(partitionAvailable);
 
         NeighborsInterface.exit.addListener(changeListener -> {
             if (NeighborsInterface.exit.get()) anytimeCut.set(true);

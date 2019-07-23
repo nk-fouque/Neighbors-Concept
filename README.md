@@ -13,7 +13,10 @@ in **Jena** A Java library for Semantic Web
 * https://jena.apache.org/documentation/javadoc/jena/ : Jena Documentation for Base RDF Graphs
 * https://jena.apache.org/documentation/javadoc/arq/ : Jena Documentation for ARQ, the SPARQL Engine
 * https://openjfx.io/javadoc/12/ : JavaFX Documentation
-## Current Version
+## Current Version  
+Javadoc at https://nk-fouque.github.io/Neighbors-Concept/  
+Run run_interface.sh to open interface
+
 ### Content
 * Class `Main` 
 * Class `NeighborsImplementation` for some static function useful to `Main`
@@ -42,13 +45,15 @@ It considers the algorithm over, printing/displaying everything it was supposed 
   * In the interface, the process can be launched for another node
 #### TimeOut
 The Main class uses a back thread that cuts the algorithm after a certain amount of time  
+  
 The Interface has a field to select a time limit for the algorithm (also done in a back thread), 
 this limit cannot be set after starting the algorithm, the user will have to use the interrupt button
 ### Notes
 ### Results
 * Works perfectly with any item of royal
-* Works with mondial on most items
-   * Countries' neighbors can generally be obtained under 2 minutes but certain keep the algorithm running for too long, a timer is advised for such items
+* Works with mondial
+   * Works to the end with any item when maximum heap size is 4096Mb
+   * Small freezes when the heap space is redefined, if startup heap space and maximum heap space are different
 ## User Documentation
 ### Redistributable
 Jena and JavaFX are not included in this repository.  

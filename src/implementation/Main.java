@@ -34,6 +34,7 @@ public class Main {
         CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
 
         // Choose node
+//        String uriTarget = "http://www.semwebtech.org/mondial/10/sea/PacificOcean/";
         String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
 //        String uriTarget = "http://example.org/royal/Charlotte";
 
@@ -73,7 +74,6 @@ public class Main {
             case 1: {
                 System.out.println("Java Heap went out of memory after "+SingletonStopwatchCollection.getElapsedSeconds("Main")+"s");
                 algoRun++;
-
                 break;
             }
             case 2: {
@@ -100,10 +100,9 @@ public class Main {
 
         System.out.println("\n"+SingletonStopwatchCollection.getElapsedMilliseconds("lazyjoin"));
 
-        System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("join") + " : " + CallCounterCollection.getCallCount("join"));
+        System.out.println("\n"+SingletonStopwatchCollection.getElapsedMilliseconds("join") + " : " + CallCounterCollection.getCallCount("join"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projection") + " : " + CallCounterCollection.getCallCount("projection"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("difference") + " : " + CallCounterCollection.getCallCount("difference"));
-
 
         timer.interrupt();
         Thread.currentThread().interrupt();

@@ -78,6 +78,7 @@ public class PartitionRun implements Runnable {
 
     @Override
     public void run() {
+
         available.setValue(false);
         Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), graph);
 
@@ -87,6 +88,7 @@ public class PartitionRun implements Runnable {
 
         Label loadingState = new Label();
         loadingState.textProperty().bind(partition.stateProperty());
+        mainController.finalState.textProperty().bind(partition.getNbNeighbors());
         Platform.runLater(() -> loadingPane.setContent(loadingState));
         Platform.runLater(() -> loadingPane.setExpanded(true));
 

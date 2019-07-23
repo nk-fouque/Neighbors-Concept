@@ -9,7 +9,9 @@ import javafx.beans.property.StringProperty;
 
 public class ObservablePartition extends Partition {
 
-    private int nbClusters;
+    private int clusterSize;
+    private int answerSize;
+    StringProperty nbNeighbors;
     StringProperty state;
 
     /**
@@ -17,19 +19,26 @@ public class ObservablePartition extends Partition {
      * @param uriTarget The full length uri of the node to describe
      */
     public ObservablePartition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
-        super(colMd, uriTarget,descriptionDepth);
-        nbClusters = 1;
+        super(colMd, uriTarget, descriptionDepth);
+        clusterSize = 1;
         state = new SimpleStringProperty();
+        nbNeighbors = new SimpleStringProperty();
     }
 
     @Override
     public boolean iterate() throws PartitionException, OutOfMemoryError {
         boolean res = super.iterate();
-        int size = getClusters().size();
-        if (size != nbClusters) {
-            nbClusters = getClusters().size();
+        if ((getClusters().size() != clusterSize) || (getNeighbors().size() != answerSize)) {
+            clusterSize = getClusters().size();
+            answerSize = getNeighbors().size();
+            int totalSize = clusterSize + answerSize;
             Platform.runLater(() ->
-                    state.setValue(nbClusters + " clusters found")
+                    state.setValue(totalSize + " clusters found: " + clusterSize + " processing, " + answerSize + " ready.")
+            );
+        }
+        if (!res) {
+            Platform.runLater(() ->
+                    nbNeighbors.setValue(answerSize + " Clusters found")
             );
         }
         return res;
@@ -38,5 +47,9 @@ public class ObservablePartition extends Partition {
 
     public StringProperty stateProperty() {
         return state;
+    }
+
+    public StringProperty getNbNeighbors() {
+        return nbNeighbors;
     }
 }

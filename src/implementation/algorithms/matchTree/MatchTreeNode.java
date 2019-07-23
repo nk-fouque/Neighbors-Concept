@@ -144,7 +144,6 @@ public class MatchTreeNode {
         delta = new ArrayList<>(varE);
         delta.retainAll(varPprime);
 
-
         inserted = false;
     }
 
@@ -154,8 +153,8 @@ public class MatchTreeNode {
     public MatchTreeNode(MatchTreeNode other) {
         children = new ArrayList<>(other.getChildren());
         element = other.getElement();
-        varE = new ArrayList<>(other.getVarE());
-        D = new ArrayList<>(other.getD());
+        varE = other.getVarE();
+        D = other.getD();
         matchSet = other.getMatchSet();
         delta = new ArrayList<>(other.getDelta());
         inserted = other.inserted;
@@ -242,7 +241,6 @@ public class MatchTreeNode {
                 addminus.removeAll(deltaminus);
                 deltaminus.addAll(addminus);
 
-
                 logger.debug("proj");
                 Table proj = TableUtils.projection(node.matchSet, node.delta);
 
@@ -259,7 +257,6 @@ public class MatchTreeNode {
                 addplus.removeAll(deltaplus);
                 deltaplus.addAll(addplus);
             }
-        } else {
         }
 
         deltaplus.removeAll(deltaminus);
@@ -276,10 +273,7 @@ public class MatchTreeNode {
             modified = true;
         }
 
-        LazyJoin res;
-        logger.debug("returning modified");
-
-        res = new LazyJoin(copy, deltaplus, deltaminus, modified);
+        LazyJoin res = new LazyJoin(copy, deltaplus, deltaminus, modified);
 
         return res;
     }

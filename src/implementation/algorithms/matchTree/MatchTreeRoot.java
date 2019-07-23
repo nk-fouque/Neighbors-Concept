@@ -57,7 +57,7 @@ public class MatchTreeRoot extends MatchTreeNode {
         super();
         element = null;
         varE = new ArrayList<>();
-        D = new ArrayList<>(other.getD());
+        D = other.getD();
 
         matchSet = other.getMatchSet();
         delta = new ArrayList<>(other.getDelta());

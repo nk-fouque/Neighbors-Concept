@@ -54,6 +54,7 @@
                     <ToolBar>
                         <Button fx:id="cutButton" text="Interrupt Partition"/>
                         <Label fx:id="cutLabel"/>
+                        <Label fx:id="finalState" />
                     </ToolBar>
                 </top>
                 <center>
