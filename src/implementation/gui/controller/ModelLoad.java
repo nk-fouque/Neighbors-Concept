@@ -129,7 +129,7 @@ public class ModelLoad implements Runnable {
             e.printStackTrace();
         } catch (RiotException e) {
             TitledPane err = new TitledPane();
-            err.setText("Invalid file");
+            err.setText("Problem while parsing file");
             err.setContent(new Text(e.getMessage()));
             Platform.runLater(() -> controller.candidates.getChildren().add(err));
             e.printStackTrace();

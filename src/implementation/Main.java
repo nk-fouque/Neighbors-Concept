@@ -28,8 +28,8 @@ public class Main {
         NeighborsImplementation.myLogsLevels("silent");
 
         // Loading Model from file
-        String filename = "/udd/nfouque/Documents/default_mondial.nt";
-//        String filename = "/udd/nfouque/Documents/royal.ttl";
+        String filename = "/home/Similarity_Search/RDF_Resources/default_mondial.ttl";
+//        String filename = "/home/Similarity_Search/RDF_Resources/royal.ttl";
         String format = "TTL";
         CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
 
