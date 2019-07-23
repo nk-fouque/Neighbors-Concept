@@ -86,15 +86,14 @@ public class PartitionRun implements Runnable {
     public void run() {
 
         available.setValue(false);
-        Model saturated = ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), graph);
 
-        CollectionsModel colMd = new CollectionsModel(graph, saturated);
+        CollectionsModel colMd = mainController.colMd;
 
         partition = new ObservablePartition(colMd, uriTarget,depth);
 
         Label loadingState = new Label();
         loadingState.textProperty().bind(partition.stateProperty());
-        mainController.finalState.textProperty().bind(partition.getNbNeighbors());
+        Platform.runLater(() -> mainController.finalState.textProperty().bind(partition.getNbNeighbors()));
         Platform.runLater(() -> loadingPane.setContent(loadingState));
         Platform.runLater(() -> loadingPane.setExpanded(true));
 

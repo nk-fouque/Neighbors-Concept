@@ -73,7 +73,7 @@ public class VisualGraphNode {
 
     protected class DetailsButton extends Button {
         protected DetailsButton(String uri, TextField filter) {
-            super("Set filter to" + uri);
+            super("Set filter to " + uri);
             setOnMouseClicked(mouseEvent -> {
                 Platform.runLater(() -> filter.setText(uri));
             });

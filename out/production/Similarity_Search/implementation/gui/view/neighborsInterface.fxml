@@ -7,7 +7,7 @@
           fx:controller="implementation.gui.controller.NeighborsController"
           stylesheets="/implementation/gui/view/css/application.css"
           styleClass="background">
-    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="NEVER">
         <top>
             <ToolBar>
                 <Button text="Browse" fx:id="fileFindButton"/>
@@ -38,8 +38,7 @@
             </BorderPane>
         </center>
     </BorderPane>
-    <BorderPane fx:id="partitionResults" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES"
-                GridPane.vgrow="ALWAYS">
+    <BorderPane fx:id="partitionResults" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
         <top>
             <ToolBar>
                 <Label text="Time limit :"/>

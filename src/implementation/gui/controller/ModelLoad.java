@@ -1,6 +1,7 @@
 package implementation.gui.controller;
 
 import implementation.gui.model.VisualPrefixes;
+import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ResIterator;
+import org.apache.jena.riot.RiotException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -104,6 +106,7 @@ public class ModelLoad implements Runnable {
                 subjectsList.add(iter.nextResource().getURI());
             }
             PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
+            controller.colMd = new CollectionsModel(md,null);
 
             Platform.runLater(() -> state.setValue("Building Visuals"));
             while (!queue.isEmpty()) {
@@ -121,6 +124,12 @@ public class ModelLoad implements Runnable {
         } catch (FileNotFoundException e) {
             TitledPane err = new TitledPane();
             err.setText("File not found");
+            err.setContent(new Text(e.getMessage()));
+            Platform.runLater(() -> controller.candidates.getChildren().add(err));
+            e.printStackTrace();
+        } catch (RiotException e) {
+            TitledPane err = new TitledPane();
+            err.setText("Invalid file");
             err.setContent(new Text(e.getMessage()));
             Platform.runLater(() -> controller.candidates.getChildren().add(err));
             e.printStackTrace();

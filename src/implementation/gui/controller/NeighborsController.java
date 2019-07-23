@@ -4,6 +4,7 @@ import implementation.algorithms.Partition;
 import implementation.gui.NeighborsInterface;
 import implementation.gui.model.NeighborButton;
 import implementation.gui.model.VisualCandidate;
+import implementation.utils.CollectionsModel;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -72,6 +73,8 @@ public class NeighborsController implements Initializable {
 
     private Model md;
 
+    public CollectionsModel colMd;
+
     private Partition partition;
 
     private BooleanProperty modelLoaded = new SimpleBooleanProperty(false);
@@ -117,6 +120,7 @@ public class NeighborsController implements Initializable {
 
         subjectsList = new ArrayList<>();
         modelLoadButton.setOnMouseClicked(mouseEvent -> {
+            filterSubjectsField.setText("");
             String filename = filenameField.getText();
             modelLoaded.setValue(false);
             ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded);
@@ -135,12 +139,11 @@ public class NeighborsController implements Initializable {
                 filter(filterSubjectsField.getText());
             }
         });
+        filterSubjectsField.prefWidthProperty().setValue(300);
         filterSubjectsField.disableProperty().bind(modelLoaded.not());
         filterSubjectsButton.setOnMouseClicked(mouseEvent -> filter(filterSubjectsField.getText()));
         filterSubjectsButton.disableProperty().bind(modelLoaded.not());
         caseSensBox.disableProperty().bind(modelLoaded.not());
-
-        partitionCandidates.autosize();
 
         cutLabel.setVisible(false);
         cutLabel.setText("/!\\ Algorithm will stop early /!\\");
@@ -170,9 +173,17 @@ public class NeighborsController implements Initializable {
         List<String> filteredList = new ArrayList<>();
         if (!caseSensBox.isSelected()) filter = filter.toLowerCase();
         for (String s : subjectsList) {
-            String s2 = "";
-            if (!caseSensBox.isSelected()) s2 = s.toLowerCase();
-            if (s2.contains(filter)) {
+            String s2;
+            String s3;
+            if (!caseSensBox.isSelected()) {
+                s2 = s.toLowerCase();
+                s3 = colMd.getGraph().shortForm(s).toLowerCase();
+            }
+            else {
+                s2  = s;
+                s3 = colMd.getGraph().shortForm(s);
+            }
+            if (s2.contains(filter) || s3.contains(filter)) {
                 filteredList.add(s);
             }
         }
@@ -190,7 +201,7 @@ public class NeighborsController implements Initializable {
      */
     public BorderPane candidateVisual(String uri) {
         NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partitionAvailable, anytimeCut, this, timeLimit.getValue(),descriptionDepth);
-        VisualCandidate res = new VisualCandidate(uri, md, button);
+        VisualCandidate res = new VisualCandidate(uri, colMd, button,filterSubjectsField);
         return res;
     }
 
