@@ -5,7 +5,7 @@ import org.apache.jena.sparql.core.Var;
 import java.util.ArrayList;
 
 /**
- * Object to encapsulate every useful attributes for the Lazy Joins algorithm recursion
+ * Simple Object to encapsulate every useful attributes for the Lazy Joins algorithm recursion
  *
  * @author nk-fouque
  */

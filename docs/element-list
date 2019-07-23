@@ -5,4 +5,5 @@ implementation.gui
 implementation.gui.controller
 implementation.gui.model
 implementation.utils
+implementation.utils.profiling
 implementation.utils.profiling.stopwatches

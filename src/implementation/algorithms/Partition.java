@@ -49,6 +49,9 @@ public class Partition {
      */
     private Map<String, Var> keys;
 
+    /**
+     * The depth of description
+     */
     private int depth;
 
     /**
@@ -76,8 +79,10 @@ public class Partition {
     }
 
     /**
-     * @param colMd     A preexisting CollectionsModel in which to describe the node and search for its neighbors
-     * @param uriTarget The full length uri of the node to describe
+     * @param colMd            A preexisting CollectionsModel in which to describe the node and search for its neighbors
+     * @param uriTarget        The full length uri of the node to describe
+     * @param descriptionDepth The depth of initial node description
+     *                         (for now any number n>2 makes it pseudo-infinite and at some point the whole graph becomes a description of your node)
      */
     public Partition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
         graph = colMd;
@@ -168,7 +173,7 @@ public class Partition {
             Ce.move(e, varE);
 
             Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
-            CeOpp.relax(e, graph, keys,depth);
+            CeOpp.relax(e, graph, keys, depth);
 
             boolean ceEmpty = Ce.noAnswers();
             boolean ceOppEmpty = CeOpp.noAnswers();

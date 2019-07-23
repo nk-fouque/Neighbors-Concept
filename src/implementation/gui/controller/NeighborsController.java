@@ -82,9 +82,8 @@ public class NeighborsController implements Initializable {
 
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
 
+    //TODO Make this a setting in the interface
     private int descriptionDepth = 1;
-
-
 
     /**
      * @return List of Jena supported RDF formats

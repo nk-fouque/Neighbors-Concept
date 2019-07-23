@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class VisualCluster extends TitledPane {
 
+    /**
+     * The final cluster resulting in this answer
+     * TODO : Get more informations from the cluster
+     */
     private Cluster cluster;
 
     public VisualCluster(Cluster c, CollectionsModel md) {

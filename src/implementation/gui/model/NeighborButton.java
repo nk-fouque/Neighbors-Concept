@@ -12,6 +12,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A Button linked to a uri to start the Similarity Search on it
+ *
+ * TODO : Ultimately, this should just change a parameter somewhere and the partition will be run by something else
  */
 public class NeighborButton extends Button {
     /**

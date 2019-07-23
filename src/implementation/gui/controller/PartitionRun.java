@@ -50,8 +50,14 @@ public class PartitionRun implements Runnable {
      */
     private NeighborsController mainController;
 
+    /**
+     * The pane to write loading informations in
+     */
     private TitledPane loadingPane;
 
+    /**
+     * The depth for the partition
+     */
     private int depth;
 
     /**

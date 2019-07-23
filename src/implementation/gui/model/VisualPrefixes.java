@@ -10,6 +10,7 @@ import java.util.Map;
  * TitledPane Summarizing the PrefixMapping
  */
 public class VisualPrefixes extends TitledPane {
+
     public VisualPrefixes(Map<String, String> prefixes, BooleanProperty visible) {
         super();
         this.visibleProperty().bind(visible);

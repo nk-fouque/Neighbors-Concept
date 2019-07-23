@@ -324,7 +324,6 @@ public class Cluster implements Comparable<Cluster> {
 
     /**
      * @param colMd The CollectionsModel in which to search prefix mappings
-     * @return
      */
     public String relaxQueryElementsString(CollectionsModel colMd) {
         List<String[]> pathBlocks = new ArrayList<>();

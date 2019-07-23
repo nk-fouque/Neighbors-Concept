@@ -7,6 +7,9 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Partition with some observable properties for the interface
+ */
 public class ObservablePartition extends Partition {
 
     private int clusterSize;

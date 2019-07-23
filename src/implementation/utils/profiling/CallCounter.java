@@ -1,5 +1,8 @@
 package implementation.utils.profiling;
 
+/**
+ * @author nk-fouque
+ */
 public class CallCounter {
 
     private String function;
@@ -11,6 +14,9 @@ public class CallCounter {
         count = 0;
     }
 
+    /**
+     * Increases call count by one
+     */
     public void call(){
         count++;
     }
