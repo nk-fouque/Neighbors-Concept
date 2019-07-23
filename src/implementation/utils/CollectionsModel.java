@@ -1,15 +1,10 @@
 package implementation.utils;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.RDFS;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A representation of an RDF Graph using several {@link HashMap} to accelerate accesses
@@ -21,20 +16,25 @@ public class CollectionsModel {
     private Model graph;
     private Model saturatedGraph;
 
-    Map<String, List<RDFNode>> subClassOf = new HashMap<>();
-    Map<String, List<RDFNode>> subPropertyOf = new HashMap<>();
-    Map<String, Map<Property, List<RDFNode>>> triples = new HashMap<>();
-    Map<String, Map<Property, List<RDFNode>>> triplesReversed = new HashMap<>();
-    Map<String, Map<RDFNode, List<RDFNode>>> predicates = new HashMap<>();
-    Map<String, Map<RDFNode, List<RDFNode>>> predicatesReversed = new HashMap<>();
+    private Map<String, List<RDFNode>> subClassOf = new HashMap<>();
+    private Map<String, List<RDFNode>> subPropertyOf = new HashMap<>();
+    private Map<String, Map<Property, List<RDFNode>>> triples = new HashMap<>();
+    private Map<String, Map<Property, List<RDFNode>>> triplesReversed = new HashMap<>();
+    private Map<String, Map<RDFNode, List<RDFNode>>> predicates = new HashMap<>();
+    private Map<String, Map<RDFNode, List<RDFNode>>> predicatesReversed = new HashMap<>();
 
-    Map<String, Map<Property, List<RDFNode>>> triplesSimple = new HashMap<>();
-    Map<String, Map<Property, List<RDFNode>>> triplesSimpleReversed = new HashMap<>();
+    private Map<String, Map<Property, List<RDFNode>>> triplesSimple = new HashMap<>();
+    private Map<String, Map<Property, List<RDFNode>>> triplesSimpleReversed = new HashMap<>();
 
+    /**
+     * @param md    The model to get informations from
+     * @param mdInf If set to null, will use the basic inference reasoner to expand it
+     */
     public CollectionsModel(Model md, Model mdInf) {
         graph = md;
-        saturatedGraph = mdInf;
-        StmtIterator iter = mdInf.listStatements();
+        saturatedGraph = Objects.requireNonNullElseGet(mdInf, () -> ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md));
+
+        StmtIterator iter = saturatedGraph.listStatements();
         iter.forEachRemaining(stmt -> {
             Map<Property, List<RDFNode>> propertiesFrom = triples.computeIfAbsent(stmt.getSubject().toString(), (m) -> new HashMap<>());
             List<RDFNode> thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
@@ -53,7 +53,7 @@ public class CollectionsModel {
             thatPropertyReversed.add(stmt.getSubject());
         });
 
-        iter = md.listStatements();
+        iter = graph.listStatements();
         iter.forEachRemaining(stmt -> {
             if (stmt.getPredicate().equals(RDFS.subClassOf)) {
                 List<RDFNode> list = subClassOf.computeIfAbsent(stmt.getSubject().toString(), (l) -> new ArrayList<>());
@@ -83,5 +83,37 @@ public class CollectionsModel {
         return (subClassOf + "\n\n" + subPropertyOf + "\n\n" + triples + "\n\n" + triplesReversed +
                 "\n\n" + predicates + "\n\n" + predicatesReversed +
                 "\n\n" + triplesSimple + "\n\n" + triplesSimpleReversed);
+    }
+
+    public Map<String, List<RDFNode>> getSubClassOf() {
+        return subClassOf;
+    }
+
+    public Map<String, List<RDFNode>> getSubPropertyOf() {
+        return subPropertyOf;
+    }
+
+    public Map<String, Map<Property, List<RDFNode>>> getTriples() {
+        return triples;
+    }
+
+    public Map<String, Map<Property, List<RDFNode>>> getTriplesReversed() {
+        return triplesReversed;
+    }
+
+    public Map<String, Map<RDFNode, List<RDFNode>>> getPredicates() {
+        return predicates;
+    }
+
+    public Map<String, Map<RDFNode, List<RDFNode>>> getPredicatesReversed() {
+        return predicatesReversed;
+    }
+
+    public Map<String, Map<Property, List<RDFNode>>> getTriplesSimple() {
+        return triplesSimple;
+    }
+
+    public Map<String, Map<Property, List<RDFNode>>> getTriplesSimpleReversed() {
+        return triplesSimpleReversed;
     }
 }

@@ -137,7 +137,7 @@ public class ElementUtils {
      */
     public static List<Element> describeNode(String uri, CollectionsModel model, Map<String, Var> varsOccupied) {
         List<Element> res = new ArrayList<>();
-        Map<Property, List<RDFNode>> propertiesFrom = model.triplesSimple.get(uri);
+        Map<Property, List<RDFNode>> propertiesFrom = model.getTriplesSimple().get(uri);
         if (propertiesFrom != null) {
             for (Property property : propertiesFrom.keySet()) {
                 List<RDFNode> objects = propertiesFrom.get(property);
@@ -162,7 +162,7 @@ public class ElementUtils {
                 }
             }
         }
-        Map<Property, List<RDFNode>> propertiesTo = model.triplesSimpleReversed.get(uri);
+        Map<Property, List<RDFNode>> propertiesTo = model.getTriplesSimpleReversed().get(uri);
         if (propertiesTo != null) {
             for (Property property : propertiesTo.keySet()) {
                 List<RDFNode> subjects = propertiesTo.get(property);
@@ -195,8 +195,8 @@ public class ElementUtils {
      */
     public static List<Element> relaxClass(TriplePath triple, CollectionsModel model) {
         logger.info("Relaxing " + triple);
-        List<RDFNode> list = model.subClassOf.get(triple.getObject().toString());
-        logger.info("Subclasses " + model.subClassOf + "Found  :" + list);
+        List<RDFNode> list = model.getSubClassOf().get(triple.getObject().toString());
+        logger.info("Subclasses " + model.getSubClassOf() + "Found  :" + list);
         List<Element> res = new ArrayList<>();
         if (list != null) {
             for (RDFNode successor : list) {
@@ -215,7 +215,7 @@ public class ElementUtils {
      * @return A list of all the new Query elements obtained from relaxing the triple pattern (relax(e))
      */
     public static List<Element> relaxProperty(TriplePath triple, CollectionsModel model) {
-        List<RDFNode> list = model.subPropertyOf.get(triple.getPredicate().toString());
+        List<RDFNode> list = model.getSubPropertyOf().get(triple.getPredicate().toString());
         List<Element> res = new ArrayList<>();
         if (list != null) {
             for (RDFNode successor : list) {
@@ -260,8 +260,8 @@ public class ElementUtils {
                 // Object can be something other than a Variable if we are describing classes by their members and subclasses
                 Var objVar = (Var) object;
                 logger.debug("against variable");
-                for (RDFNode subj : colMd.predicates.get(predicate.toString()).keySet()) {
-                    for (RDFNode obj : colMd.predicates.get(predicate.toString()).get(subj)) {
+                for (RDFNode subj : colMd.getPredicates().get(predicate.toString()).keySet()) {
+                    for (RDFNode obj : colMd.getPredicates().get(predicate.toString()).get(subj)) {
                         BindingHashMap bind = new BindingHashMap();
                         bind.add(subjVar, subj.asNode());
                         bind.add(objVar, obj.asNode());
@@ -272,7 +272,7 @@ public class ElementUtils {
                 if (object.isURI()) {
                     logger.debug("object is uri");
                     RDFNode objNode = new ResourceImpl(object.getURI());
-                    for (RDFNode subj : colMd.predicatesReversed.get(predicate.toString()).get(objNode)) {
+                    for (RDFNode subj : colMd.getPredicatesReversed().get(predicate.toString()).get(objNode)) {
                         BindingHashMap bind = new BindingHashMap();
                         bind.add(subjVar, subj.asNode());
                         res.addBinding(bind);
