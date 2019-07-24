@@ -4,6 +4,7 @@ import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.impl.ResourceImpl;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.algebra.table.TableN;
@@ -237,49 +238,55 @@ public class ElementUtils {
      */
     public static Table ans(Element element, CollectionsModel colMd) {
         logger.debug("answering :" + element);
-        List<Binding> solutionsList = new ArrayList<>();
-        Table res = new TableN();
-        if (element instanceof ElementFilter) {
-            logger.debug("is filter");
-            Expr expr = ((ElementFilter) element).getExpr();
-            if (expr instanceof E_Equals) {
-                Var var = ((ExprVar) (((E_Equals) expr).getArg1())).asVar();
-                Node node = ((NodeValue) (((E_Equals) expr).getArg2())).asNode();
-                BindingHashMap bind = new BindingHashMap();
-                bind.add(var, node);
-                res.addBinding(bind);
-            }
-        } else if (element instanceof ElementPathBlock) {
-            logger.debug("is pathblock");
-            Var subjVar = (Var) ((ElementPathBlock) element).getPattern().get(0).getSubject();
-            // Subject is always a variable because triples are obtained from describeNode
-            Node predicate = ((ElementPathBlock) element).getPattern().get(0).getPredicate();
-            Node object = ((ElementPathBlock) element).getPattern().get(0).getObject();
-            logger.debug("predicate : " + predicate);
-            if (object.isVariable()) {
-                // Object can be something other than a Variable if we are describing classes by their members and subclasses
-                Var objVar = (Var) object;
-                logger.debug("against variable");
-                for (RDFNode subj : colMd.getPredicates().get(predicate.toString()).keySet()) {
-                    for (RDFNode obj : colMd.getPredicates().get(predicate.toString()).get(subj)) {
-                        BindingHashMap bind = new BindingHashMap();
-                        bind.add(subjVar, subj.asNode());
-                        bind.add(objVar, obj.asNode());
-                        res.addBinding(bind);
+        Table res = colMd.ans(element);
+        if (res != null){
+            return res;
+        } else {
+            List<Binding> solutionsList = new ArrayList<>();
+            res = new TableN();
+            if (element instanceof ElementFilter) {
+                logger.debug("is filter");
+                Expr expr = ((ElementFilter) element).getExpr();
+                if (expr instanceof E_Equals) {
+                    Var var = ((ExprVar) (((E_Equals) expr).getArg1())).asVar();
+                    Node node = ((NodeValue) (((E_Equals) expr).getArg2())).asNode();
+                    BindingHashMap bind = new BindingHashMap();
+                    bind.add(var, node);
+                    res.addBinding(bind);
+                }
+            } else if (element instanceof ElementPathBlock) {
+                logger.debug("is pathblock");
+                Var subjVar = (Var) ((ElementPathBlock) element).getPattern().get(0).getSubject();
+                // Subject is always a variable because triples are obtained from describeNode
+                Node predicate = ((ElementPathBlock) element).getPattern().get(0).getPredicate();
+                Node object = ((ElementPathBlock) element).getPattern().get(0).getObject();
+                logger.debug("predicate : " + predicate);
+                if (object.isVariable()) {
+                    // Object can be something other than a Variable if we are describing classes by their members and subclasses
+                    Var objVar = (Var) object;
+                    logger.debug("against variable");
+                    for (RDFNode subj : colMd.getPredicates().get(predicate.toString()).keySet()) {
+                        for (RDFNode obj : colMd.getPredicates().get(predicate.toString()).get(subj)) {
+                            BindingHashMap bind = new BindingHashMap();
+                            bind.add(subjVar, subj.asNode());
+                            bind.add(objVar, obj.asNode());
+                            res.addBinding(bind);
+                        }
+                    }
+                } else {
+                    if (object.isURI()) {
+                        logger.debug("object is uri");
+                        RDFNode objNode = new ResourceImpl(object.getURI());
+                        for (RDFNode subj : colMd.getPredicatesReversed().get(predicate.toString()).get(objNode)) {
+                            BindingHashMap bind = new BindingHashMap();
+                            bind.add(subjVar, subj.asNode());
+                            res.addBinding(bind);
+                        }
                     }
                 }
-            } else {
-                if (object.isURI()) {
-                    logger.debug("object is uri");
-                    RDFNode objNode = new ResourceImpl(object.getURI());
-                    for (RDFNode subj : colMd.getPredicatesReversed().get(predicate.toString()).get(objNode)) {
-                        BindingHashMap bind = new BindingHashMap();
-                        bind.add(subjVar, subj.asNode());
-                        res.addBinding(bind);
-                    }
-                }
             }
+            colMd.addAns(element,res);
+            return res;
         }
-        return res;
     }
 }

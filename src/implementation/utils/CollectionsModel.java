@@ -2,6 +2,8 @@ package implementation.utils;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.reasoner.ReasonerRegistry;
+import org.apache.jena.sparql.algebra.Table;
+import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.vocabulary.RDFS;
 
 import java.util.*;
@@ -25,6 +27,8 @@ public class CollectionsModel {
 
     private Map<String, Map<Property, List<RDFNode>>> triplesSimple = new HashMap<>();
     private Map<String, Map<Property, List<RDFNode>>> triplesSimpleReversed = new HashMap<>();
+
+    private Map<Element, Table> ans = new HashMap<>();
 
     /**
      * @param md    The model to get informations from
@@ -69,6 +73,16 @@ public class CollectionsModel {
             List<RDFNode> thatPropertyTo = propertiesTo.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyTo.add(stmt.getSubject());
         });
+    }
+
+    public Table ans(Element element){
+        Table res = ans.getOrDefault(element, null);
+        return res;
+    }
+
+    public boolean addAns(Element element,Table table){
+        ans.put(element,table);
+        return true;
     }
 
     /**
