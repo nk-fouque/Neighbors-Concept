@@ -34,8 +34,8 @@ public class Main {
         CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
 
         // Choose node
-//        String uriTarget = "http://www.semwebtech.org/mondial/10/sea/PacificOcean/";
-        String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
+        String uriTarget = "http://www.semwebtech.org/mondial/10/sea/PacificOcean/";
+//        String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
 //        String uriTarget = "http://example.org/royal/Charlotte";
 
         // Preparing Partition

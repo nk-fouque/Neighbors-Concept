@@ -1,4 +1,3 @@
 jdk=/home/jdk-12.0.1_linux-x64_bin/jdk-12.0.1
 jena=/home/apache-jena-3.12.0
 javafx=/home/javafx-sdk-12.0.1
-heapsize=4096M

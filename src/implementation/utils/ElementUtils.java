@@ -2,15 +2,13 @@ package implementation.utils;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.ResIterator;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.impl.PropertyImpl;
 import org.apache.jena.rdf.model.impl.ResourceImpl;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
-import org.apache.jena.sparql.engine.binding.Binding;
 import org.apache.jena.sparql.engine.binding.BindingHashMap;
 import org.apache.jena.sparql.expr.*;
 import org.apache.jena.sparql.expr.nodevalue.NodeValueNode;
@@ -101,14 +99,14 @@ public class ElementUtils {
      * @param keys   The keys used until now to describe certain uris
      * @return A list of all the new Query elements obtained from relaxing the filter (relax(e))
      */
-    public static List<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys,int descriptionDepth) {
+    public static List<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys, int descriptionDepth) {
         ExprFunction f = filter.getExpr().getFunction();
         List<Element> list = new ArrayList<>();
         if (f instanceof E_Equals) {
             for (Expr expr : f.getArgs()) {
                 if (expr instanceof NodeValueNode) {
                     logger.info("Relaxing : " + expr);
-                    list.addAll(ElementUtils.describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model, keys));
+                    list.addAll(describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model, keys));
                 } else {
                     logger.info(expr + " not NodeValueNode");
                 }
@@ -120,7 +118,7 @@ public class ElementUtils {
         List<Element> res = new ArrayList<>();
         for (Element e : list) {
             if (!(e instanceof ElementFilter)) {
-                if (descriptionDepth > 2){
+                if (descriptionDepth > 2) {
                     // TODO For now any number>2 = infinite
                     res.add(e);
                 }
@@ -137,38 +135,36 @@ public class ElementUtils {
      * @return A list of Query elements (triple pattern and Filters) describing the Nodes known properties
      */
     public static List<Element> describeNode(String uri, CollectionsModel model, Map<String, Var> varsOccupied) {
-        List<Element> res = new ArrayList<>();
-        Map<Property, List<RDFNode>> propertiesFrom = model.getTriplesSimple().get(uri);
-        if (propertiesFrom != null) {
-            for (Property property : propertiesFrom.keySet()) {
-                List<RDFNode> objects = propertiesFrom.get(property);
-                for (RDFNode object : objects) {
-                    if (property.equals(RDF.type)) {
-                        ElementPathBlock pathBlock = new ElementPathBlock();
-                        pathBlock.addTriple(Triple.create(varKey(uri, varsOccupied), property.asNode(), object.asNode()));
-                        res.add(pathBlock);
-                    } else {
-                        Var var;
-                        if (object.isURIResource()) {
-                            var = varKey(object.asResource().getURI(), varsOccupied);
-                        } else {
-                            var = varKey(object.asLiteral().toString(), varsOccupied);
-                        }
-                        ElementPathBlock triple = new ElementPathBlock();
-                        triple.addTriple(Triple.create(varKey(uri, varsOccupied), property.asNode(), var));
-                        res.add(triple);
-                        ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(object.asNode())));
-                        res.add(filter);
-                    }
+        final List<Element> res = new ArrayList<>();
+        Resource node = new ResourceImpl(uri);
+        StmtIterator triplesFrom = model.triplesFrom(node);
+        triplesFrom.forEachRemaining(statement -> {
+            Property property = statement.getPredicate();
+            RDFNode object = statement.getObject();
+            if (property.equals(RDF.type)) {
+                ElementPathBlock pathBlock = new ElementPathBlock();
+                pathBlock.addTriple(Triple.create(varKey(uri, varsOccupied), property.asNode(), object.asNode()));
+                res.add(pathBlock);
+            } else {
+                Var var;
+                if (object.isURIResource()) {
+                    var = varKey(object.asResource().getURI(), varsOccupied);
+                } else {
+                    var = varKey(object.asLiteral().toString(), varsOccupied);
                 }
+                ElementPathBlock triple = new ElementPathBlock();
+                triple.addTriple(Triple.create(varKey(uri, varsOccupied), property.asNode(), var));
+                res.add(triple);
+                ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(object.asNode())));
+                res.add(filter);
             }
-        }
-        Map<Property, List<RDFNode>> propertiesTo = model.getTriplesSimpleReversed().get(uri);
-        if (propertiesTo != null) {
-            for (Property property : propertiesTo.keySet()) {
-                List<RDFNode> subjects = propertiesTo.get(property);
-                for (RDFNode subject : subjects) {
-                    if (!property.equals(RDF.type)) {
+        });
+
+        StmtIterator triplesTo = model.triplesTo(node);
+        triplesTo.forEachRemaining(statement -> {
+            Resource subject = statement.getSubject();
+            Property property = statement.getPredicate();
+            if (!property.equals(RDF.type)) {
                         Var var;
                         if (subject.isURIResource()) {
                             var = varKey(subject.asResource().getURI(), varsOccupied);
@@ -181,9 +177,7 @@ public class ElementUtils {
                         ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
                         res.add(filter);
                     }
-                }
-            }
-        }
+        });
         return res;
     }
 
@@ -196,16 +190,13 @@ public class ElementUtils {
      */
     public static List<Element> relaxClass(TriplePath triple, CollectionsModel model) {
         logger.info("Relaxing " + triple);
-        List<RDFNode> list = model.getSubClassOf().get(triple.getObject().toString());
-        logger.info("Subclasses " + model.getSubClassOf() + "Found  :" + list);
+        ResIterator iter = model.subClassesOf(triple.getObject());
         List<Element> res = new ArrayList<>();
-        if (list != null) {
-            for (RDFNode successor : list) {
-                ElementPathBlock pathBlock = new ElementPathBlock();
-                pathBlock.addTriple(Triple.create(triple.getSubject(), triple.getPredicate(), successor.asNode()));
-                res.add(pathBlock);
-            }
-        }
+        iter.forEachRemaining(resource -> {
+            ElementPathBlock pathBlock = new ElementPathBlock();
+            pathBlock.addTriple(Triple.create(triple.getSubject(), RDF.type.asNode(), resource.asNode()));
+            res.add(pathBlock);
+        });
         logger.info("Relaxed to " + res);
         return res;
     }
@@ -216,15 +207,13 @@ public class ElementUtils {
      * @return A list of all the new Query elements obtained from relaxing the triple pattern (relax(e))
      */
     public static List<Element> relaxProperty(TriplePath triple, CollectionsModel model) {
-        List<RDFNode> list = model.getSubPropertyOf().get(triple.getPredicate().toString());
+        ResIterator iter = model.subPropertiesOf(triple.getPredicate());
         List<Element> res = new ArrayList<>();
-        if (list != null) {
-            for (RDFNode successor : list) {
-                ElementPathBlock pathBlock = new ElementPathBlock();
-                pathBlock.addTriple(Triple.create(triple.getSubject(), successor.asNode(), triple.getObject()));
-                res.add(pathBlock);
-            }
-        }
+        iter.forEachRemaining(resource -> {
+            ElementPathBlock pathBlock = new ElementPathBlock();
+            pathBlock.addTriple(Triple.create(triple.getSubject(), resource.asNode(), triple.getObject()));
+            res.add(pathBlock);
+        });
         return res;
     }
 
@@ -232,18 +221,17 @@ public class ElementUtils {
      * Simulates answering a to a Query containing a single Element
      *
      * @param element The element to answer
-     * @param colMd   The graph to answer the element in
+     * @param model   The graph to answer the element in
      * @return The match-set of the query
      * @see Table#toResultSet()
      */
-    public static Table ans(Element element, CollectionsModel colMd) {
+    public static Table ans(Element element, CollectionsModel model) {
         logger.debug("answering :" + element);
-        Table res = colMd.ans(element);
-        if (res != null){
-            return res;
+        Table knownAns = model.ans(element);
+        if (knownAns != null) {
+            return knownAns;
         } else {
-            List<Binding> solutionsList = new ArrayList<>();
-            res = new TableN();
+            final Table res = new TableN();
             if (element instanceof ElementFilter) {
                 logger.debug("is filter");
                 Expr expr = ((ElementFilter) element).getExpr();
@@ -258,35 +246,38 @@ public class ElementUtils {
                 logger.debug("is pathblock");
                 Var subjVar = (Var) ((ElementPathBlock) element).getPattern().get(0).getSubject();
                 // Subject is always a variable because triples are obtained from describeNode
-                Node predicate = ((ElementPathBlock) element).getPattern().get(0).getPredicate();
+                Property predicate = new PropertyImpl(((ElementPathBlock) element).getPattern().get(0).getPredicate().toString());
                 Node object = ((ElementPathBlock) element).getPattern().get(0).getObject();
                 logger.debug("predicate : " + predicate);
                 if (object.isVariable()) {
                     // Object can be something other than a Variable if we are describing classes by their members and subclasses
                     Var objVar = (Var) object;
                     logger.debug("against variable");
-                    for (RDFNode subj : colMd.getPredicates().get(predicate.toString()).keySet()) {
-                        for (RDFNode obj : colMd.getPredicates().get(predicate.toString()).get(subj)) {
+                    ResIterator iterSubj = model.getSaturatedGraph().listSubjectsWithProperty(predicate);
+
+                    iterSubj.forEachRemaining(subj -> {
+                        NodeIterator iterobj = model.getGraph().listObjectsOfProperty(subj, predicate);
+                        iterobj.forEachRemaining(obj -> {
                             BindingHashMap bind = new BindingHashMap();
                             bind.add(subjVar, subj.asNode());
                             bind.add(objVar, obj.asNode());
                             res.addBinding(bind);
-                        }
-                    }
-                } else {
-                    if (object.isURI()) {
-                        logger.debug("object is uri");
-                        RDFNode objNode = new ResourceImpl(object.getURI());
-                        for (RDFNode subj : colMd.getPredicatesReversed().get(predicate.toString()).get(objNode)) {
-                            BindingHashMap bind = new BindingHashMap();
-                            bind.add(subjVar, subj.asNode());
-                            res.addBinding(bind);
-                        }
-                    }
+                        });
+                    });
+                } else if (object.isURI()) {
+                    logger.debug("object is uri");
+                    RDFNode objNode = new ResourceImpl(object.getURI());
+                    ResIterator iterSubj = model.getSaturatedGraph().listSubjectsWithProperty(predicate, objNode);
+                    iterSubj.forEachRemaining(subj -> {
+                        BindingHashMap bind = new BindingHashMap();
+                        bind.add(subjVar, subj.asNode());
+                        res.addBinding(bind);
+                    });
                 }
             }
-            colMd.addAns(element,res);
+            model.addAns(element, res);
             return res;
         }
     }
 }
+
