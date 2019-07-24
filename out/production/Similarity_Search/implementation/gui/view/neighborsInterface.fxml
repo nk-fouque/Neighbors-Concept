@@ -24,6 +24,7 @@
                         <TextField fx:id="filterSubjectsField"/>
                         <Button text="Filter" fx:id="filterSubjectsButton"/>
                         <CheckBox fx:id="caseSensBox" text="Case Sensitive"/>
+                        <CheckBox fx:id="safemodeBox" text="Safe Mode"/>
                     </ToolBar>
                 </top>
                 <center>
@@ -53,7 +54,7 @@
                     <ToolBar>
                         <Button fx:id="cutButton" text="Interrupt Partition"/>
                         <Label fx:id="cutLabel"/>
-                        <Label fx:id="finalState" />
+                        <Label fx:id="finalState"/>
                     </ToolBar>
                 </top>
                 <center>

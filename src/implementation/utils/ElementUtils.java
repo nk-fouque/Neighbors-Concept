@@ -51,34 +51,7 @@ public class ElementUtils {
     }
 
     /**
-     * If the string already has a key associated with it, returns it, else keeps generating random key until it finds one that isn't used
-     *
-     * @return The key associated with given uri
-     */
-    public static Var varKey(String uri, Map<String, Var> keys) {
-        Var key;
-        if (keys.containsKey(uri)) {
-            key = keys.get(uri);
-        } else {
-            do {
-                key = newVar();
-            }
-            while (keys.containsValue(key));
-            keys.put(uri, key);
-        }
-        return key;
-    }
-
-    /**
-     * @return a Var with a random name
-     */
-    private static Var newVar() {
-        String varName = new RandomString(8).nextString();
-        return Var.alloc(Var.alloc(varName));
-    }
-
-    /**
-     * @return null if the element is completely disconnected from the Cluster
+     * @return The variables used in this element
      */
     public static Set<Var> mentioned(Element element) {
         Set<Var> varE = new HashSet<>();
@@ -96,17 +69,16 @@ public class ElementUtils {
      *
      * @param filter The filter to relax
      * @param model  The model in which to describe what has to be relaxed
-     * @param keys   The keys used until now to describe certain uris
      * @return A list of all the new Query elements obtained from relaxing the filter (relax(e))
      */
-    public static Set<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys, int descriptionDepth) {
+    public static Set<Element> relaxFilter(ElementFilter filter, CollectionsModel model, int descriptionDepth) {
         ExprFunction f = filter.getExpr().getFunction();
         Set<Element> list = new HashSet<>();
         if (f instanceof E_Equals) {
             for (Expr expr : f.getArgs()) {
                 if (expr instanceof NodeValueNode) {
                     logger.info("Relaxing : " + expr);
-                    list.addAll(describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model, keys));
+                    list.addAll(describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model));
                 } else {
                     logger.info(expr + " not NodeValueNode");
                 }
@@ -131,10 +103,9 @@ public class ElementUtils {
     /**
      * @param uri          The uri of the Node to be described
      * @param model        The Model to use to describe the Node
-     * @param varsOccupied The keys used until now to describe certain uris
      * @return A list of Query elements (triple pattern and Filters) describing the Nodes known properties
      */
-    public static Set<Element> describeNode(String uri, CollectionsModel model, Map<String, Var> varsOccupied) {
+    public static Set<Element> describeNode(String uri, CollectionsModel model) {
         final Set<Element> res = new HashSet<>();
         Resource node = new ResourceImpl(uri);
         StmtIterator triplesFrom = model.triplesFrom(node);
@@ -143,17 +114,17 @@ public class ElementUtils {
             RDFNode object = statement.getObject();
             if (property.equals(RDF.type)) {
                 ElementPathBlock pathBlock = new ElementPathBlock();
-                pathBlock.addTriple(Triple.create(varKey(uri, varsOccupied), property.asNode(), object.asNode()));
+                pathBlock.addTriple(Triple.create(model.varKey(uri), property.asNode(), object.asNode()));
                 res.add(pathBlock);
             } else {
                 Var var;
                 if (object.isURIResource()) {
-                    var = varKey(object.asResource().getURI(), varsOccupied);
+                    var = model.varKey(object.asResource().getURI());
                 } else {
-                    var = varKey(object.asLiteral().toString(), varsOccupied);
+                    var = model.varKey(object.asLiteral().toString());
                 }
                 ElementPathBlock triple = new ElementPathBlock();
-                triple.addTriple(Triple.create(varKey(uri, varsOccupied), property.asNode(), var));
+                triple.addTriple(Triple.create(model.varKey(uri), property.asNode(), var));
                 res.add(triple);
                 ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(object.asNode())));
                 res.add(filter);
@@ -167,12 +138,12 @@ public class ElementUtils {
             if (!property.equals(RDF.type)) {
                 Var var;
                 if (subject.isURIResource()) {
-                    var = varKey(subject.asResource().getURI(), varsOccupied);
+                    var = model.varKey(subject.asResource().getURI());
                 } else {
-                    var = varKey(subject.asLiteral().toString(), varsOccupied);
+                    var = model.varKey(subject.asLiteral().toString());
                 }
                 ElementPathBlock triple = new ElementPathBlock();
-                triple.addTriple(Triple.create(var, property.asNode(), varKey(uri, varsOccupied)));
+                triple.addTriple(Triple.create(var, property.asNode(), model.varKey(uri)));
                 res.add(triple);
                 ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
                 res.add(filter);

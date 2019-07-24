@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.impl.ResourceImpl;
 import org.apache.jena.rdf.model.impl.SelectorImpl;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.sparql.algebra.Table;
+import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.vocabulary.RDFS;
 
@@ -25,6 +26,8 @@ public class CollectionsModel {
     private Map<String, Map<Property, List<RDFNode>>> triplesSimpleReversed = new HashMap<>();
 
     private Map<Element, Table> ans = new HashMap<>();
+    private Map<String, Var> keys = new HashMap<>();
+    private int nextKey = 1;
 
     /**
      * @param md    The model to get informations from
@@ -36,23 +39,13 @@ public class CollectionsModel {
 
         StmtIterator iter = graph.listStatements();
         iter.forEachRemaining(stmt -> {
-            Map<Property, List<RDFNode>> propertiesFrom = triplesSimple.computeIfAbsent(stmt.getSubject().toString(), (m) -> new HashMap<>());
+            Map<Property, List<RDFNode>> propertiesFrom = triplesSimple.computeIfAbsent(stmt.getSubject().toString(), m -> new HashMap<>());
             List<RDFNode> thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyFrom.add(stmt.getObject());
-            Map<Property, List<RDFNode>> propertiesTo = triplesSimpleReversed.computeIfAbsent(stmt.getObject().toString(), (m) -> new HashMap<>());
+            Map<Property, List<RDFNode>> propertiesTo = triplesSimpleReversed.computeIfAbsent(stmt.getObject().toString(), m -> new HashMap<>());
             List<RDFNode> thatPropertyTo = propertiesTo.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyTo.add(stmt.getSubject());
         });
-    }
-
-    public Table ans(Element element) {
-        Table res = ans.getOrDefault(element, null);
-        return res;
-    }
-
-    public boolean addAns(Element element, Table table) {
-        ans.put(element, table);
-        return true;
     }
 
     /**
@@ -62,35 +55,51 @@ public class CollectionsModel {
         return graph;
     }
 
+    /**
+     * @return The RDF Graph with applied inference reasoning
+     */
     public Model getSaturatedGraph() {
         return saturatedGraph;
     }
 
-    @Override
-    public String toString() {
-        return ("\n\n" + triplesSimple + "\n\n" + triplesSimpleReversed);
+    /**
+     * @return An iterator on resources that are subclasses of the one in parameter
+     */
+    public ResIterator subClassesOf(Node node) {
+        return getGraph().listSubjectsWithProperty(RDFS.subClassOf, new ResourceImpl(node.toString()));
     }
 
-    public ResIterator subClassesOf(Node object) {
-        return getGraph().listSubjectsWithProperty(RDFS.subClassOf, new ResourceImpl(object.toString()));
+    /**
+     * @return An iterator on resources that are subproperties of the one in parameter
+     */
+    public ResIterator subPropertiesOf(Node node) {
+        return getGraph().listSubjectsWithProperty(RDFS.subPropertyOf, new ResourceImpl(node.toString()));
     }
 
-    public ResIterator subPropertiesOf(Node property) {
-        return getGraph().listSubjectsWithProperty(RDFS.subPropertyOf, new ResourceImpl(property.toString()));
-    }
-
+    /**
+     * @return An iterator on Statements that have the one in parameter as subject
+     */
     public StmtIterator triplesFrom(Resource resource) {
         return getSaturatedGraph().listStatements(new SelectorImpl(resource, null, (RDFNode) null));
     }
 
+    /**
+     * @return An iterator on Statements that have the one in parameter as object
+     */
     public StmtIterator triplesTo(RDFNode node) {
         return getSaturatedGraph().listStatements(new SelectorImpl(null, null, node));
     }
 
+    /**
+     * Same as {@link #triplesFrom(Resource)} but without inference reasoning
+     */
     public StmtIterator simpleTriplesFrom(Resource resource) {
         return getGraph().listStatements(new SelectorImpl(resource, null, (RDFNode) null));
     }
 
+    /**
+     * Same as {@link #triplesTo(RDFNode)} (Resource)} but without inference reasoning
+     */
     public StmtIterator simpleTriplesTo(RDFNode node) {
         return getGraph().listStatements(new SelectorImpl(null, null, node));
     }
@@ -102,4 +111,40 @@ public class CollectionsModel {
     public Map<String, Map<Property, List<RDFNode>>> getTriplesSimpleReversed() {
         return triplesSimpleReversed;
     }
+
+    /**
+     * @param element
+     * @return All the answers to a query containing the element as only selector
+     */
+    public Table ans(Element element) {
+        Table res = ans.getOrDefault(element, null);
+        return res;
+    }
+
+    /**
+     * Adds an element and the corresponding table of answers to the model
+     */
+    public void addAns(Element element, Table table) {
+        ans.put(element, table);
+    }
+
+    public Map<String, Var> getKeys() {
+        return keys;
+    }
+
+    public Var varKey(String uri){
+        if (keys.containsKey(uri)){
+            return keys.get(uri);
+        } else {
+            Var key = keys.computeIfAbsent(uri,var -> Var.alloc("x"+nextKey));
+            nextKey++;
+            return key;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return ("\n\n" + triplesSimple + "\n\n" + triplesSimpleReversed);
+    }
+
 }

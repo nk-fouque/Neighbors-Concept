@@ -45,11 +45,6 @@ public class Partition {
     private List<Cluster> neighbors;
 
     /**
-     * To avoid adding multiple filters leading to the same entity, the Partition stores each uri and the variable that has been used to represent it
-     */
-    private Map<String, Var> keys;
-
-    /**
      * The depth of description
      */
     private int depth;
@@ -86,7 +81,6 @@ public class Partition {
      */
     public Partition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
         graph = colMd;
-        keys = new HashMap<>();
 
         String querySting = initialQueryString(uriTarget, colMd);
         Query q = QueryFactory.create(querySting);
@@ -173,7 +167,7 @@ public class Partition {
             Ce.move(e, varE);
 
             Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
-            CeOpp.relax(e, graph, keys, depth);
+            CeOpp.relax(e, graph, depth);
 
             boolean ceEmpty = Ce.noAnswers();
             boolean ceOppEmpty = CeOpp.noAnswers();
@@ -235,7 +229,7 @@ public class Partition {
     public String toString() {
         StringBuilder res = new StringBuilder();
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
-            res.append("Keys :\n").append(keys.toString()).append("\n");
+            res.append("Keys :\n").append(graph.getKeys()).append("\n");
         }
         res.append("\t\t" + neighbors.size() + " Clusters :\n");
         PriorityQueue<Cluster> queue = new PriorityQueue<>(neighbors);
@@ -252,12 +246,12 @@ public class Partition {
      */
     public String initialQueryString(String uri, CollectionsModel colMd) {
         Var neighbor = Var.alloc("Neighbor");
-        keys.put(uri, neighbor);
+        graph.getKeys().put(uri, neighbor);
 
         Set<Var> x = new HashSet<>();
         x.add(neighbor);
 
-        String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, colMd, keys));
+        String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, colMd));
         return res;
     }
 

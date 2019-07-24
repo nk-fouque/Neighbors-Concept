@@ -204,7 +204,7 @@ public class Cluster implements Comparable<Cluster> {
      * @param element The element to relax
      * @throws PartitionException
      */
-    public void relax(Element element, CollectionsModel graph, Map<String, Var> keys, int descriptionDepth) throws PartitionException {
+    public void relax(Element element, CollectionsModel graph, int descriptionDepth) throws PartitionException {
         boolean removed = availableQueryElements.remove(element);
         if (!removed) {
             throw new PartitionException("Could not relax " + element.toString() + " : Element not found when trying to remove");
@@ -214,7 +214,7 @@ public class Cluster implements Comparable<Cluster> {
                 ElementFilter e = (ElementFilter) element;
                 if (descriptionDepth > 1) {
 
-                    list = ElementUtils.relaxFilter(e, graph, keys, descriptionDepth);
+                    list = ElementUtils.relaxFilter(e, graph, descriptionDepth);
                 }
 
             } else {
