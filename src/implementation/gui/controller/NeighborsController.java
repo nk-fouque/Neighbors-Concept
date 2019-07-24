@@ -71,6 +71,11 @@ public class NeighborsController implements Initializable {
     @FXML
     Label finalState;
 
+    @FXML
+    TextField selectedNodeField;
+    @FXML
+    Button partitionButton;
+
     private Model md;
 
     public CollectionsModel colMd;
@@ -84,6 +89,8 @@ public class NeighborsController implements Initializable {
     BooleanProperty partitionAvailable = new SimpleBooleanProperty(false);
 
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
+
+
 
     //TODO Make this a setting in the interface
     private int descriptionDepth = 1;

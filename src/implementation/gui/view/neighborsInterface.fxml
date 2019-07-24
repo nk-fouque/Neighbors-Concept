@@ -57,9 +57,18 @@
                     </ToolBar>
                 </top>
                 <center>
-                    <ScrollPane>
-                        <Accordion fx:id="partitionAccordion"/>
-                    </ScrollPane>
+                    <BorderPane>
+                        <top>
+                            <Label text="Node selected for Similarity search : "/>
+                            <TextField editable="false" fx:id="selectedNodeField"/>
+                            <Button fx:id="partitionButton"/>
+                        </top>
+                        <center>
+                            <ScrollPane>
+                                <Accordion fx:id="partitionAccordion"/>
+                            </ScrollPane>
+                        </center>
+                    </BorderPane>
                 </center>
             </BorderPane>
         </center>

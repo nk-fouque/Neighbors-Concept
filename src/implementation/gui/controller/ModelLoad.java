@@ -22,6 +22,7 @@ import java.util.PriorityQueue;
 
 /**
  * Runnable for back thread loading the Model, to avoid unresponsive interface during the loading
+ * TODO : It is unreasonable to prompt the entire list, should not prompt anything and wait for a filter
  *
  * @author nk-fouque
  */
@@ -92,7 +93,7 @@ public class ModelLoad implements Runnable {
     public void run() {
         try {
             ObservableList<Node> children = controller.candidates.getChildren();
-            Platform.runLater(() -> children.clear());
+            Platform.runLater(children::clear);
 
             Platform.runLater(() -> state.setValue("Reading File"));
             md.removeAll();

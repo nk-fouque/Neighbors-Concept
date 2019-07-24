@@ -3,6 +3,8 @@ package implementation.gui.model;
 import implementation.gui.controller.NeighborsController;
 import implementation.gui.controller.PartitionRun;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
@@ -19,19 +21,19 @@ public class NeighborButton extends Button {
     /**
      * The (full) uri of the node to apply the Partition algorithm on
      */
-    private String uri;
+    public StringProperty uri;
 
     public NeighborButton(String uri, Accordion resultsContainer, Model graph, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, int timeLimit, int descriptionDepth) {
         super();
-        this.uri = uri;
+        this.uri = new SimpleStringProperty(uri);
         this.textProperty().setValue("Find neighbors");
         this.visibleProperty().bind(available);
         this.setOnMouseClicked(mouseEvent -> {
             resultsContainer.getPanes().clear();
             TitledPane loading = new TitledPane();
-            loading.setText("Loading neighbors for " + uri + " please wait");
+            loading.setText("Loading neighbors for " + this.uri.get() + " please wait");
             resultsContainer.getPanes().add(loading);
-            Runnable algo = new PartitionRun(graph, uri, resultsContainer, available, cut, controller, loading,descriptionDepth);
+            Runnable algo = new PartitionRun(graph, this.uri.get(), resultsContainer, available, cut, controller, loading,descriptionDepth);
             Thread thread = new Thread(algo);
             if (timeLimit > 0) {
                 Thread timeOut = timeOut(timeLimit, controller, thread);
@@ -56,7 +58,7 @@ public class NeighborButton extends Button {
         return res;
     }
 
-    public String getUri() {
+    public StringProperty getUri() {
         return uri;
     }
 }
