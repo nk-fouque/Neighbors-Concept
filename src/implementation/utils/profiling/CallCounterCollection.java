@@ -10,9 +10,10 @@ public class CallCounterCollection {
 
     /**
      * Increments the call count of the function in parameter, creates a new counter if not already done
+     *
      * @param functionName
      */
-    public static void call(String functionName){
+    public static void call(String functionName) {
         counters.putIfAbsent(functionName, new CallCounter(functionName));
         counters.get(functionName).call();
     }
@@ -20,8 +21,8 @@ public class CallCounterCollection {
     /**
      * @return The number of time the function in parameter has been called
      */
-    public static int getCallCount(String functionName){
-        CallCounter counter = counters.getOrDefault(functionName,new CallCounter(functionName));
+    public static int getCallCount(String functionName) {
+        CallCounter counter = counters.getOrDefault(functionName, new CallCounter(functionName));
         return counter.getCount();
     }
 }

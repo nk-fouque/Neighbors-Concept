@@ -11,8 +11,8 @@ import org.apache.jena.sparql.engine.binding.BindingFactory;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The root node of a match-tree
@@ -28,11 +28,11 @@ public class MatchTreeRoot extends MatchTreeNode {
      * @param top   A list with the variables to be returned in the answer, in the basic implementation, only one Var is relevant here
      * @param colMd The RDF Graph to work in
      */
-    public MatchTreeRoot(List<Var> top, CollectionsModel colMd) {
+    public MatchTreeRoot(Set<Var> top, CollectionsModel colMd) {
         super();
         element = null;
-        varE = new ArrayList<>();
-        D = new ArrayList<>(top);
+        varE = new HashSet<>();
+        D = new HashSet<>(top);
 
         Table init = new TableN();
         ResIterator data = colMd.getGraph().listSubjects();
@@ -43,9 +43,9 @@ public class MatchTreeRoot extends MatchTreeNode {
         });
         matchSet = init;
 
-        delta = new ArrayList<>(top);
+        delta = new HashSet<>(top);
 
-        children = new ArrayList<>();
+        children = new HashSet<>();
     }
 
     /**
@@ -56,13 +56,13 @@ public class MatchTreeRoot extends MatchTreeNode {
     public MatchTreeRoot(MatchTreeNode other) {
         super();
         element = null;
-        varE = new ArrayList<>();
+        varE = new HashSet<>();
         D = other.getD();
 
         matchSet = other.getMatchSet();
-        delta = new ArrayList<>(other.getDelta());
+        delta = new HashSet<>(other.getDelta());
 
-        children = new ArrayList<>(other.getChildren());
+        children = new HashSet<>(other.getChildren());
 
     }
 
@@ -87,7 +87,7 @@ public class MatchTreeRoot extends MatchTreeNode {
      * @return A copy of this tree with the new element
      * @see MatchTreeNode#lazyJoin(MatchTreeRoot, MatchTreeNode)
      */
-    public MatchTreeRoot lazyJoin(Element element, CollectionsModel colMd, List<Var> varPprime) {
+    public MatchTreeRoot lazyJoin(Element element, CollectionsModel colMd, Set<Var> varPprime) {
         MatchTreeNode newnode = new MatchTreeNode(element, colMd, varPprime);
 //        ResultSetFormatter.out(System.out,newnode.matchSet.toResultSet());
         SingletonStopwatchCollection.resume("lazyjoin");

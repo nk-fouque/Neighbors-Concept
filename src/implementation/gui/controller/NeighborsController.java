@@ -91,7 +91,6 @@ public class NeighborsController implements Initializable {
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
 
 
-
     //TODO Make this a setting in the interface
     private int descriptionDepth = 1;
 
@@ -185,9 +184,8 @@ public class NeighborsController implements Initializable {
             if (!caseSensBox.isSelected()) {
                 s2 = s.toLowerCase();
                 s3 = colMd.getGraph().shortForm(s).toLowerCase();
-            }
-            else {
-                s2  = s;
+            } else {
+                s2 = s;
                 s3 = colMd.getGraph().shortForm(s);
             }
             if (s2.contains(filter) || s3.contains(filter)) {
@@ -207,8 +205,8 @@ public class NeighborsController implements Initializable {
      * @return A Border pane with the uri on the left and a button on the right
      */
     public BorderPane candidateVisual(String uri) {
-        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partitionAvailable, anytimeCut, this, timeLimit.getValue(),descriptionDepth);
-        VisualCandidate res = new VisualCandidate(uri, colMd, button,filterSubjectsField);
+        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partitionAvailable, anytimeCut, this, timeLimit.getValue(), descriptionDepth);
+        VisualCandidate res = new VisualCandidate(uri, colMd, button, filterSubjectsField);
         return res;
     }
 

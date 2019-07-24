@@ -111,7 +111,7 @@ public class Partition {
 
         Cluster c = clusters.remove(0);
         Element e = null;
-        List<Var> varE = null;
+        Set<Var> varE = null;
         for (Element element : c.getAvailableQueryElements()) {
             varE = ElementUtils.mentioned(element);
             if (c.connected(varE)) {
@@ -254,7 +254,7 @@ public class Partition {
         Var neighbor = Var.alloc("Neighbor");
         keys.put(uri, neighbor);
 
-        List<Var> x = new ArrayList<>();
+        Set<Var> x = new HashSet<>();
         x.add(neighbor);
 
         String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, colMd, keys));

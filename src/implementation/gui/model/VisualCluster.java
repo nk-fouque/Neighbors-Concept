@@ -17,7 +17,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import org.apache.jena.sparql.syntax.Element;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * TitledPane Tailored to a Cluster
@@ -34,7 +34,7 @@ public class VisualCluster extends TitledPane {
         super();
         cluster = c;
         this.setText("Extensional distance : " + c.getExtensionDistance());
-        List<Element> remaining = c.getAvailableQueryElements();
+        Set<Element> remaining = c.getAvailableQueryElements();
         boolean finished = true;
         if (remaining.size() != 0) {
             for (Element e : remaining) {

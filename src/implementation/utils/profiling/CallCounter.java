@@ -9,7 +9,7 @@ public class CallCounter {
 
     private int count;
 
-    public CallCounter(String functionName){
+    public CallCounter(String functionName) {
         function = functionName;
         count = 0;
     }
@@ -17,7 +17,7 @@ public class CallCounter {
     /**
      * Increases call count by one
      */
-    public void call(){
+    public void call() {
         count++;
     }
 

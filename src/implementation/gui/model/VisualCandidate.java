@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 public class VisualCandidate extends BorderPane {
     private BooleanProperty detailsOnScreen = new SimpleBooleanProperty(false);
 
-    public VisualCandidate(String uri, CollectionsModel colMd, NeighborButton button,TextField textField) {
+    public VisualCandidate(String uri, CollectionsModel colMd, NeighborButton button, TextField textField) {
         super();
         Label text = new Label(colMd.getGraph().shortForm(uri));
         BorderPane topPane = new BorderPane();
@@ -30,8 +30,8 @@ public class VisualCandidate extends BorderPane {
         setTop(topPane);
 
         detailsButton.setOnMouseClicked(mouseEvent -> {
-            if (!detailsOnScreen.getValue()){
-                this.promptDetails(detailsButton,uri,colMd,textField);
+            if (!detailsOnScreen.getValue()) {
+                this.promptDetails(detailsButton, uri, colMd, textField);
             } else {
                 this.clearDetails(detailsButton);
             }
@@ -42,9 +42,9 @@ public class VisualCandidate extends BorderPane {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
-    private void promptDetails(Button details, String uri, CollectionsModel colMd, TextField textField){
+    private void promptDetails(Button details, String uri, CollectionsModel colMd, TextField textField) {
         Thread thread = new Thread(() -> {
-            VisualGraphNode visualDetails = new VisualGraphNode(uri,colMd,textField);
+            VisualGraphNode visualDetails = new VisualGraphNode(uri, colMd, textField);
             Platform.runLater(() -> setCenter(visualDetails.predicatesFrom));
             Platform.runLater(() -> setBottom(visualDetails.predicatesTo));
             Platform.runLater(() -> details.setText("Less Details"));
@@ -54,7 +54,7 @@ public class VisualCandidate extends BorderPane {
         thread.start();
     }
 
-    private void clearDetails(Button details){
+    private void clearDetails(Button details) {
         Platform.runLater(() -> setCenter(null));
         Platform.runLater(() -> setBottom(null));
         Platform.runLater(() -> details.setText("More Details"));

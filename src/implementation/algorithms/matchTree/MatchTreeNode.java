@@ -2,22 +2,20 @@ package implementation.algorithms.matchTree;
 
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
-import implementation.utils.ListUtils;
 import implementation.utils.TableUtils;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.algebra.Table;
-import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * See the article for the exact mathematical definitions of the attributes and behavior of the algorithm
@@ -29,13 +27,13 @@ public class MatchTreeNode {
     private static Logger logger = Logger.getLogger(MatchTreeNode.class);
 
     Element element;
-    List<Var> varE;
-    List<Var> D;
+    Set<Var> varE;
+    Set<Var> D;
 
     Table matchSet;
-    List<Var> delta;
+    Set<Var> delta;
 
-    List<MatchTreeNode> children;
+    Set<MatchTreeNode> children;
 
     boolean inserted;
 
@@ -49,14 +47,14 @@ public class MatchTreeNode {
     /**
      * var(e) : the variables mentioned by e
      */
-    public List<Var> getVarE() {
+    public Set<Var> getVarE() {
         return varE;
     }
 
     /**
      * D : the set of variable introduced by e
      */
-    public List<Var> getD() {
+    public Set<Var> getD() {
         return D;
     }
 
@@ -70,14 +68,14 @@ public class MatchTreeNode {
     /**
      * Δ : the sub-domain of variables useful to this node's parent
      */
-    public List<Var> getDelta() {
+    public Set<Var> getDelta() {
         return delta;
     }
 
     /**
      * The nodes under this node
      */
-    public List<MatchTreeNode> getChildren() {
+    public Set<MatchTreeNode> getChildren() {
         return children;
     }
 
@@ -132,16 +130,16 @@ public class MatchTreeNode {
      * @param colmd     The graph to work in
      * @param varPprime The variables already defined in the cluster
      */
-    public MatchTreeNode(Element element, CollectionsModel colmd, List<Var> varPprime) {
-        children = new ArrayList<>();
+    public MatchTreeNode(Element element, CollectionsModel colmd, Set<Var> varPprime) {
+        children = new HashSet<>();
 
         this.element = element;
         varE = ElementUtils.mentioned(element);
-        D = new ArrayList<>(varE);
+        D = new HashSet<>(varE);
         D.removeAll(varPprime);
 
         matchSet = ElementUtils.ans(this.element, colmd);
-        delta = new ArrayList<>(varE);
+        delta = new HashSet<>(varE);
         delta.retainAll(varPprime);
 
         inserted = false;
@@ -151,12 +149,12 @@ public class MatchTreeNode {
      * Constructor by copy
      */
     public MatchTreeNode(MatchTreeNode other) {
-        children = new ArrayList<>(other.getChildren());
+        children = new HashSet<>(other.getChildren());
         element = other.getElement();
         varE = other.getVarE();
         D = other.getD();
         matchSet = other.getMatchSet();
-        delta = new ArrayList<>(other.getDelta());
+        delta = new HashSet<>(other.getDelta());
         inserted = other.inserted;
     }
 
@@ -190,12 +188,11 @@ public class MatchTreeNode {
      *
      * @param tree T : The match-tree we are working in
      * @param node n* : The node to insert
-     * @return
      */
     public LazyJoin lazyJoin(MatchTreeRoot tree, MatchTreeNode node) {
         logger.debug("trying " + node.elementString() + " under " + elementString());
-        ArrayList<Var> deltaplus = new ArrayList<>();
-        ArrayList<Var> deltaminus = new ArrayList<>();
+        HashSet<Var> deltaplus = new HashSet<>();
+        HashSet<Var> deltaminus = new HashSet<>();
         SingletonStopwatchCollection.resume("copy self");
         MatchTreeNode copy = new MatchTreeNode(this);
         SingletonStopwatchCollection.stop("copy self");
@@ -207,9 +204,7 @@ public class MatchTreeNode {
             logger.debug("recur out");
             copy.replace(nc, recur.copy);
             deltaplus.addAll(recur.deltaplus);
-            ListUtils.removeDuplicates(deltaplus);
             deltaminus.addAll(recur.deltaminus);
-            ListUtils.removeDuplicates(deltaminus);
             if (recur.modified) {
                 logger.debug("modified");
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
@@ -227,7 +222,7 @@ public class MatchTreeNode {
                 logger.debug("joined");
                 int rowsAfter = copy.matchSet.size();
                 int colsAfter = copy.matchSet.getVars().size();
-                modified = (!(rowsBefore==rowsAfter && colsBefore == colsAfter));
+                modified = (!(rowsBefore == rowsAfter && colsBefore == colsAfter));
             }
         }
         if (!Collections.disjoint(this.D, node.delta)) {
@@ -236,7 +231,7 @@ public class MatchTreeNode {
                 logger.debug("inserting " + node.elementString() + " under " + elementString());
 
 
-                List<Var> addminus = new ArrayList<>(node.delta);
+                Set<Var> addminus = new HashSet<>(node.delta);
                 addminus.removeAll(this.D);
                 addminus.removeAll(deltaminus);
                 deltaminus.addAll(addminus);
@@ -252,7 +247,7 @@ public class MatchTreeNode {
                 modified = true;
             } else {
                 logger.debug("isInserted elsewhere, adding plus");
-                List<Var> addplus = new ArrayList<>(node.delta);
+                Set<Var> addplus = new HashSet<>(node.delta);
                 addplus.retainAll(this.D);
                 addplus.removeAll(deltaplus);
                 deltaplus.addAll(addplus);

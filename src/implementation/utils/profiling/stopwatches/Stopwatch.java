@@ -4,8 +4,7 @@ package implementation.utils.profiling.stopwatches;
  * @author francesco.bariatti@irisa.fr
  */
 
-public class Stopwatch
-{
+public class Stopwatch {
     private long startTime = 0;
     private long stopTime = 0;
     private boolean isRunning = false;
@@ -14,8 +13,7 @@ public class Stopwatch
      * Start the stopwatch.
      * Only a stopped stopwatch can be started.
      */
-    public void start()
-    {
+    public void start() {
         if (isRunning)
             throw new RuntimeException("Trying to start a running stopwatch");
 
@@ -28,8 +26,7 @@ public class Stopwatch
      * Stop the stopwatch and store elapsed time.
      * Only a running stopwatch can be stopped.
      */
-    public void stop()
-    {
+    public void stop() {
         if (!isRunning)
             throw new RuntimeException("Trying to stop a non-running stopwatch");
 
@@ -42,8 +39,7 @@ public class Stopwatch
      * If the stopwatch has never been started, it is equivalent to start().
      * Only a stopped stopwatch can be resumed.
      */
-    public void resume()
-    {
+    public void resume() {
         if (isRunning)
             throw new RuntimeException("Trying to resume a running stopwatch");
 
@@ -56,8 +52,7 @@ public class Stopwatch
      * Stop and restart the stopwatch.
      * Only a running stopwatch can be restarted.
      */
-    public void restart()
-    {
+    public void restart() {
         stop();
         start();
     }
@@ -65,8 +60,7 @@ public class Stopwatch
     /**
      * @return Whether the stopwatch is running.
      */
-    public boolean isRunning()
-    {
+    public boolean isRunning() {
         return isRunning;
     }
 
@@ -74,8 +68,7 @@ public class Stopwatch
      * If the stopwatch is running: return elapsed time since the stopwatch has been started.
      * If the stopwatch is stopped: return time for which the stopwatch has been running.
      */
-    public long getElapsedNanoseconds()
-    {
+    public long getElapsedNanoseconds() {
         if (isRunning)
             return System.nanoTime() - startTime;
         else
@@ -85,16 +78,14 @@ public class Stopwatch
     /**
      * @return Same as {@link #getElapsedNanoseconds}, but the time is in milliseconds.
      */
-    public long getElapsedMilliseconds()
-    {
+    public long getElapsedMilliseconds() {
         return getElapsedNanoseconds() / 1000000;
     }
 
     /**
      * @return Same as {@link #getElapsedNanoseconds}, but the time is in seconds.
      */
-    public long getElapsedSeconds()
-    {
+    public long getElapsedSeconds() {
         return getElapsedNanoseconds() / 1000000000;
     }
 }

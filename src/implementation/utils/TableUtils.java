@@ -5,13 +5,14 @@ import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.Var;
-import org.apache.jena.sparql.engine.QueryIterator;
 import org.apache.jena.sparql.engine.binding.Binding;
 import org.apache.jena.sparql.engine.binding.BindingHashMap;
 import org.apache.jena.sparql.engine.join.QueryIterHashJoin;
 import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Several static methods to do various things with Jena {@link Table}
@@ -39,11 +40,11 @@ public class TableUtils {
      * @param table The table to project
      * @param vars  A list of variables to do the projection on
      */
-    public static Table projection(Table table, List<Var> vars) {
+    public static Table projection(Table table, Set<Var> vars) {
         CallCounterCollection.call("projection");
         SingletonStopwatchCollection.resume("projection");
         Table res;
-        if(vars.containsAll(table.getVars())){
+        if (vars.containsAll(table.getVars())) {
             res = table;
         } else {
             res = new TableN();
@@ -65,10 +66,8 @@ public class TableUtils {
     }
 
     /**
-     * Algebric Table difference
+     * Algebraic Table difference
      *
-     * @param left
-     * @param right
      * @return The left table from which all elements appearing in the right table have been removed
      */
     public static TableN difference(Table left, Table right) {
@@ -76,21 +75,18 @@ public class TableUtils {
         SingletonStopwatchCollection.resume("difference");
         TableN res = new TableN();
         Iterator<Binding> iterLeft = left.rows();
-        List<Binding> listLeft = new ArrayList<>();
-        while (iterLeft.hasNext()) {
-            listLeft.add(iterLeft.next());
-        }
+
         Iterator<Binding> iterRight = right.rows();
-        List<Binding> listRight = new ArrayList<>();
+        Set<Binding> listRight = new HashSet<>();
         while (iterRight.hasNext()) {
             listRight.add(iterRight.next());
         }
 
-        for (Binding b : listLeft) {
+        iterLeft.forEachRemaining(b -> {
             if (!listRight.contains(b)) {
                 res.addBinding(b);
             }
-        }
+        });
         SingletonStopwatchCollection.stop("difference");
         return res;
     }

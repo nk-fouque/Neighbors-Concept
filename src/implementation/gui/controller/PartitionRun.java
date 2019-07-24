@@ -11,8 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.reasoner.ReasonerRegistry;
 
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -70,7 +68,7 @@ public class PartitionRun implements Runnable {
      * @param cut        {@link #cut}
      * @param controller {@link #mainController}
      */
-    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane,int descriptionDepth) {
+    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane, int descriptionDepth) {
         super();
         graph = md;
         uriTarget = uri;
@@ -89,7 +87,7 @@ public class PartitionRun implements Runnable {
 
         CollectionsModel colMd = mainController.colMd;
 
-        partition = new ObservablePartition(colMd, uriTarget,depth);
+        partition = new ObservablePartition(colMd, uriTarget, depth);
 
         Label loadingState = new Label();
         loadingState.textProperty().bind(partition.stateProperty());

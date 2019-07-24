@@ -107,7 +107,7 @@ public class ModelLoad implements Runnable {
                 subjectsList.add(iter.nextResource().getURI());
             }
             PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
-            controller.colMd = new CollectionsModel(md,null);
+            controller.colMd = new CollectionsModel(md, null);
 
             Platform.runLater(() -> state.setValue("Building Visuals"));
             while (!queue.isEmpty()) {

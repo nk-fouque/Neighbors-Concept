@@ -45,13 +45,13 @@ public class CollectionsModel {
         });
     }
 
-    public Table ans(Element element){
+    public Table ans(Element element) {
         Table res = ans.getOrDefault(element, null);
         return res;
     }
 
-    public boolean addAns(Element element,Table table){
-        ans.put(element,table);
+    public boolean addAns(Element element, Table table) {
+        ans.put(element, table);
         return true;
     }
 
@@ -88,11 +88,11 @@ public class CollectionsModel {
     }
 
     public StmtIterator simpleTriplesFrom(Resource resource) {
-        return getSaturatedGraph().listStatements(new SelectorImpl(resource, null, (RDFNode) null));
+        return getGraph().listStatements(new SelectorImpl(resource, null, (RDFNode) null));
     }
 
     public StmtIterator simpleTriplesTo(RDFNode node) {
-        return getSaturatedGraph().listStatements(new SelectorImpl(null, null, node));
+        return getGraph().listStatements(new SelectorImpl(null, null, node));
     }
 
     public Map<String, Map<Property, List<RDFNode>>> getTriplesSimple() {

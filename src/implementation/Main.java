@@ -72,8 +72,7 @@ public class Main {
                 break;
             }
             case 1: {
-                System.out.println("Java Heap went out of memory after "+SingletonStopwatchCollection.getElapsedSeconds("Main")+"s");
-                algoRun++;
+                System.out.println("Java Heap went out of memory after " + SingletonStopwatchCollection.getElapsedSeconds("Main") + "s");
                 break;
             }
             case 2: {
@@ -98,9 +97,9 @@ public class Main {
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("connect"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projjoin"));
 
-        System.out.println("\n"+SingletonStopwatchCollection.getElapsedMilliseconds("lazyjoin"));
+        System.out.println("\n" + SingletonStopwatchCollection.getElapsedMilliseconds("lazyjoin"));
 
-        System.out.println("\n"+SingletonStopwatchCollection.getElapsedMilliseconds("join") + " : " + CallCounterCollection.getCallCount("join"));
+        System.out.println("\n" + SingletonStopwatchCollection.getElapsedMilliseconds("join") + " : " + CallCounterCollection.getCallCount("join"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("projection") + " : " + CallCounterCollection.getCallCount("projection"));
         System.out.println(SingletonStopwatchCollection.getElapsedMilliseconds("difference") + " : " + CallCounterCollection.getCallCount("difference"));
 

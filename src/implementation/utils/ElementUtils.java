@@ -18,9 +18,9 @@ import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Several static methods to do various things with Jena {@link Element}
@@ -37,9 +37,9 @@ public class ElementUtils {
      * @param elements The List of Jena Elements to be put in the body of the Query
      * @return The String for the SPARQL Query
      */
-    public static String getSelectStringFrom(List<Var> vars, List<Element> elements) {
+    public static String getSelectStringFrom(Set<Var> vars, Set<Element> elements) {
         StringBuilder queryString = new StringBuilder("SELECT DISTINCT");
-        for (Var v : ListUtils.removeDuplicates(vars)) {
+        for (Var v : vars) {
             queryString.append(" ").append(v.toString());
         }
         queryString.append(" WHERE {");
@@ -80,8 +80,8 @@ public class ElementUtils {
     /**
      * @return null if the element is completely disconnected from the Cluster
      */
-    public static List<Var> mentioned(Element element) {
-        List<Var> varE = new ArrayList<>();
+    public static Set<Var> mentioned(Element element) {
+        Set<Var> varE = new HashSet<>();
         if (element instanceof ElementFilter) {
             varE.addAll(((ElementFilter) element).getExpr().getVarsMentioned());
         } else // if (element instanceof ElementPathBlock)
@@ -99,9 +99,9 @@ public class ElementUtils {
      * @param keys   The keys used until now to describe certain uris
      * @return A list of all the new Query elements obtained from relaxing the filter (relax(e))
      */
-    public static List<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys, int descriptionDepth) {
+    public static Set<Element> relaxFilter(ElementFilter filter, CollectionsModel model, Map<String, Var> keys, int descriptionDepth) {
         ExprFunction f = filter.getExpr().getFunction();
-        List<Element> list = new ArrayList<>();
+        Set<Element> list = new HashSet<>();
         if (f instanceof E_Equals) {
             for (Expr expr : f.getArgs()) {
                 if (expr instanceof NodeValueNode) {
@@ -115,7 +115,7 @@ public class ElementUtils {
             logger.info(f + " not E_Equals");
         }
 
-        List<Element> res = new ArrayList<>();
+        Set<Element> res = new HashSet<>();
         for (Element e : list) {
             if (!(e instanceof ElementFilter)) {
                 if (descriptionDepth > 2) {
@@ -134,8 +134,8 @@ public class ElementUtils {
      * @param varsOccupied The keys used until now to describe certain uris
      * @return A list of Query elements (triple pattern and Filters) describing the Nodes known properties
      */
-    public static List<Element> describeNode(String uri, CollectionsModel model, Map<String, Var> varsOccupied) {
-        final List<Element> res = new ArrayList<>();
+    public static Set<Element> describeNode(String uri, CollectionsModel model, Map<String, Var> varsOccupied) {
+        final Set<Element> res = new HashSet<>();
         Resource node = new ResourceImpl(uri);
         StmtIterator triplesFrom = model.triplesFrom(node);
         triplesFrom.forEachRemaining(statement -> {
@@ -165,18 +165,18 @@ public class ElementUtils {
             Resource subject = statement.getSubject();
             Property property = statement.getPredicate();
             if (!property.equals(RDF.type)) {
-                        Var var;
-                        if (subject.isURIResource()) {
-                            var = varKey(subject.asResource().getURI(), varsOccupied);
-                        } else {
-                            var = varKey(subject.asLiteral().toString(), varsOccupied);
-                        }
-                        ElementPathBlock triple = new ElementPathBlock();
-                        triple.addTriple(Triple.create(var, property.asNode(), varKey(uri, varsOccupied)));
-                        res.add(triple);
-                        ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
-                        res.add(filter);
-                    }
+                Var var;
+                if (subject.isURIResource()) {
+                    var = varKey(subject.asResource().getURI(), varsOccupied);
+                } else {
+                    var = varKey(subject.asLiteral().toString(), varsOccupied);
+                }
+                ElementPathBlock triple = new ElementPathBlock();
+                triple.addTriple(Triple.create(var, property.asNode(), varKey(uri, varsOccupied)));
+                res.add(triple);
+                ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
+                res.add(filter);
+            }
         });
         return res;
     }
@@ -188,10 +188,10 @@ public class ElementUtils {
      * @param model  The model in which to search for successors
      * @return A list of all the new Query elements obtained from relaxing the triple pattern (relax(e))
      */
-    public static List<Element> relaxClass(TriplePath triple, CollectionsModel model) {
+    public static Set<Element> relaxClass(TriplePath triple, CollectionsModel model) {
         logger.info("Relaxing " + triple);
         ResIterator iter = model.subClassesOf(triple.getObject());
-        List<Element> res = new ArrayList<>();
+        Set<Element> res = new HashSet<>();
         iter.forEachRemaining(resource -> {
             ElementPathBlock pathBlock = new ElementPathBlock();
             pathBlock.addTriple(Triple.create(triple.getSubject(), RDF.type.asNode(), resource.asNode()));
@@ -206,14 +206,16 @@ public class ElementUtils {
      * @param model  The model in which to search for successors
      * @return A list of all the new Query elements obtained from relaxing the triple pattern (relax(e))
      */
-    public static List<Element> relaxProperty(TriplePath triple, CollectionsModel model) {
+    public static Set<Element> relaxProperty(TriplePath triple, CollectionsModel model) {
+        logger.info("Relaxing " + triple);
         ResIterator iter = model.subPropertiesOf(triple.getPredicate());
-        List<Element> res = new ArrayList<>();
+        Set<Element> res = new HashSet<>();
         iter.forEachRemaining(resource -> {
             ElementPathBlock pathBlock = new ElementPathBlock();
             pathBlock.addTriple(Triple.create(triple.getSubject(), resource.asNode(), triple.getObject()));
             res.add(pathBlock);
         });
+        logger.info("Relaxed to " + res);
         return res;
     }
 

@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A Button linked to a uri to start the Similarity Search on it
- *
+ * <p>
  * TODO : Ultimately, this should just change a parameter somewhere and the partition will be run by something else
  */
 public class NeighborButton extends Button {
@@ -33,7 +33,7 @@ public class NeighborButton extends Button {
             TitledPane loading = new TitledPane();
             loading.setText("Loading neighbors for " + this.uri.get() + " please wait");
             resultsContainer.getPanes().add(loading);
-            Runnable algo = new PartitionRun(graph, this.uri.get(), resultsContainer, available, cut, controller, loading,descriptionDepth);
+            Runnable algo = new PartitionRun(graph, this.uri.get(), resultsContainer, available, cut, controller, loading, descriptionDepth);
             Thread thread = new Thread(algo);
             if (timeLimit > 0) {
                 Thread timeOut = timeOut(timeLimit, controller, thread);
