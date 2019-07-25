@@ -1,5 +1,6 @@
 package implementation.utils.elements;
 
+import implementation.algorithms.Cluster;
 import implementation.utils.CollectionsModel;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.core.Var;
@@ -11,6 +12,7 @@ import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Logger;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -91,33 +93,22 @@ public abstract class QueryElement implements Comparable {
     }
 
     public int compareTo(QueryElement other) {
-        int otherFilter;
-        if (other instanceof FilterElement) otherFilter = 1;
-        else otherFilter = 0;
-        int thisFilter;
-        if (other instanceof FilterElement) thisFilter = 1;
-        else thisFilter = 0;
-        int compareFilter = otherFilter-thisFilter;
-        if (compareFilter == 0){
-            int otherClass;
-            if (other instanceof ClassElement) otherClass = 1;
-            else otherClass = 0;
-            int thisClass;
-            if (other instanceof ClassElement) thisClass = 1;
-            else thisClass = 0;
-            int compareClass = otherClass-thisClass;
-            if (compareClass == 0){
-                int compareDepth = getDepth() - other.getDepth();
-                if (compareDepth == 0){
-                    return this.toString().compareTo(other.toString());
-                }else {
-                    return compareDepth;
-                }
-            } else {
-                return compareClass;
-            }
-        } else {
-            return compareFilter;
-        }
+        int res = Comparator.comparingInt(queryElement -> {
+            if (queryElement instanceof FilterElement)
+                return -1;
+            else
+                return 1;
+        })
+                .thenComparingInt(queryElement -> ((QueryElement)queryElement).getDepth())
+                .thenComparingInt(queryElement -> {
+            if (queryElement instanceof ClassElement)
+                return -1;
+            else
+                return 1;
+        })
+                .thenComparing(Object::toString)
+                .compare(this, other);
+
+        return res;
     }
 }

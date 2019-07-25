@@ -197,9 +197,12 @@ public class MatchTreeNode {
         SingletonStopwatchCollection.stop("copy self");
         boolean modified = false;
 
+        SingletonStopwatchCollection.resume("recursion");
         for (MatchTreeNode nc : children) {
             logger.debug("recur in");
+            SingletonStopwatchCollection.stop("recursion");
             LazyJoin recur = nc.lazyJoin(tree, node);
+            SingletonStopwatchCollection.resume("recursion");
             logger.debug("recur out");
             copy.replace(nc, recur.copy);
             deltaplus.addAll(recur.deltaplus);
@@ -224,6 +227,8 @@ public class MatchTreeNode {
                 modified = (!(rowsBefore == rowsAfter && colsBefore == colsAfter));
             }
         }
+        SingletonStopwatchCollection.stop("recursion");
+        SingletonStopwatchCollection.resume("insert");
         if (!Collections.disjoint(this.D, node.delta)) {
             logger.debug(node.elementString() + " connected to " + elementString());
             if (!node.isInserted()) {
@@ -252,16 +257,14 @@ public class MatchTreeNode {
                 deltaplus.addAll(addplus);
             }
         }
+        SingletonStopwatchCollection.stop("insert");
 
         deltaplus.removeAll(deltaminus);
-
         deltaminus.removeAll(deltaplus);
-
         if (!copy.delta.containsAll(deltaplus)) {
             copy.delta.addAll(deltaplus);
             modified = true;
         }
-
         if (!copy.delta.containsAll(deltaminus)) {
             copy.delta.addAll(deltaminus);
             modified = true;

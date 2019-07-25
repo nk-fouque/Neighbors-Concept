@@ -10,21 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/implementation/utils/elements/ClassElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/implementation/utils/elements/FilterElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/implementation/utils/elements/QueryElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/utils/elements/ClassElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/elements/ClassElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/utils/elements/QueryElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/elements/QueryElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="-629">
+              <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -53,28 +46,41 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="125" column="53" lean-forward="true" selection-start-line="125" selection-start-column="53" selection-end-line="125" selection-end-column="53" />
+            <state relative-caret-position="224">
+              <caret line="148" column="50" selection-start-line="148" selection-start-column="50" selection-end-line="148" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3621#3635#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/QueryElement.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+            <state relative-caret-position="156">
+              <caret line="161" column="48" lean-forward="true" selection-start-line="161" selection-start-column="48" selection-end-line="161" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="89" column="36" lean-forward="true" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="266" column="9" lean-forward="true" selection-start-line="266" selection-start-column="9" selection-end-line="266" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1115#1116#0" expanded="true" />
-                <element signature="e#1055#1056#0" expanded="true" />
-                <element signature="e#1104#1105#0" expanded="true" />
-                <element signature="e#1155#1156#0" expanded="true" />
-                <element signature="e#1200#1201#0" expanded="true" />
-                <element signature="e#2538#2539#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,20 +89,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="55" column="9" lean-forward="true" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-8">
+              <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/NeighborsImplementation.java">
+        <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/QueryElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="45" column="97" selection-start-line="45" selection-start-column="97" selection-end-line="45" selection-end-column="97" />
+            <state relative-caret-position="196">
+              <caret line="97" column="18" lean-forward="true" selection-start-line="97" selection-start-column="18" selection-end-line="110" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1236#1237#0" expanded="true" />
+                <element signature="e#1055#1056#0" expanded="true" />
+                <element signature="e#1104#1105#0" expanded="true" />
+                <element signature="e#1155#1156#0" expanded="true" />
+                <element signature="e#1200#1201#0" expanded="true" />
+                <element signature="e#2659#2660#0" expanded="true" />
+                <element signature="e#2581#2582#0" expanded="true" />
+                <element signature="e#2622#2623#0" expanded="true" />
+                <element signature="e#3931#3932#0" expanded="true" />
+                <element signature="e#3975#3976#0" expanded="true" />
+                <element signature="e#3685#3686#0" expanded="true" />
+                <element signature="e#3723#3724#0" expanded="true" />
+                <element signature="e#4122#4123#0" expanded="true" />
+                <element signature="e#4142#4143#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,8 +124,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/FilterElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="55" column="66" selection-start-line="55" selection-start-column="66" selection-end-line="55" selection-end-column="66" />
+            <state relative-caret-position="9">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,22 +136,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/ClassElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="64" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
+            <state relative-caret-position="816">
+              <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#497#498#0" expanded="true" />
-                <element signature="e#520#521#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="108" column="36" lean-forward="true" selection-start-line="108" selection-start-column="36" selection-end-line="108" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -139,26 +148,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="733">
-              <caret line="155" column="47" lean-forward="true" selection-start-line="155" selection-start-column="47" selection-end-line="155" selection-end-column="47" />
+            <state relative-caret-position="519">
+              <caret line="175" column="9" lean-forward="true" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5267#5268#0" expanded="true" />
                 <element signature="e#5312#5313#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="120" column="55" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7840#7841#0" expanded="true" />
-                <element signature="e#7867#7868#0" expanded="true" />
+                <element signature="e#5585#5586#0" expanded="true" />
+                <element signature="e#5614#5615#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -177,8 +174,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>thread</find>
-      <find>error</find>
       <find>projjoin</find>
       <find>recursion</find>
       <find>matchtreenode</find>
@@ -207,6 +202,8 @@
       <find>elaxed t</find>
       <find>import org.apache.jena.sparql.syntax.Element;</find>
       <find>Filter</find>
+      <find>system</find>
+      <find>element</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -287,17 +284,17 @@
         <option value="$PROJECT_DIR$/src/implementation/utils/elements/ElementTriplePattern.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" />
         <option value="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" />
-        <option value="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" />
-        <option value="$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java" />
-        <option value="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" />
         <option value="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" />
-        <option value="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" />
-        <option value="$PROJECT_DIR$/src/implementation/utils/elements/ClassElement.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/elements/FilterElement.java" />
-        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
-        <option value="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/elements/ClassElement.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/elements/QueryElement.java" />
+        <option value="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" />
+        <option value="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" />
+        <option value="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" />
+        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
       </list>
     </option>
   </component>
@@ -586,13 +583,6 @@
       <workItem from="1563953174650" duration="9358000" />
       <workItem from="1563966544154" duration="11617000" />
       <workItem from="1564038647643" duration="241000" />
-    </task>
-    <task id="LOCAL-00015" summary="Refonte anytime Interface">
-      <created>1562147510802</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1562147510802</updated>
     </task>
     <task id="LOCAL-00016" summary="Readme Update + Datasets used in RDF Resources">
       <created>1562153473321</created>
@@ -930,7 +920,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563979434033</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Replaced org.apache.jena.sparql.syntax.Element with my own Element type&#10;&#10;Features depth, comparison,&#10;Direct methods to avoid calling ElementUtils&#10;Adapted all code to use them">
+      <created>1564060632197</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1564060632197</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -966,7 +963,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="459630000" />
+    <option name="totallyTimeSpent" value="467534000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -999,7 +996,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49801114" weight="0.3299373" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49801114" weight="0.3299373" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5214797" side_tool="true" visible="true" weight="0.39106584" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5214797" side_tool="true" weight="0.39106584" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.47454256" weight="0.3299373" />
       <window_info anchor="bottom" id="Profiler" order="13" sideWeight="0.4988067" weight="0.3299373" />
       <window_info anchor="bottom" id="Statistic" order="14" weight="0.3299373" />
@@ -1105,7 +1102,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Javadoc in NeighborsController" />
     <MESSAGE value="Fixed 0 extensional distance cluster" />
     <MESSAGE value="Display number of clusters during Partition" />
     <MESSAGE value="Prevented unwanted interactions&#10;Inttrupt activating while no partition is running&#10;Launching partition before model in completely loaded" />
@@ -1130,7 +1126,8 @@
     <MESSAGE value="Replaced many Arraylists by Hashsets&#10;&#10;Lost unnecessary List ordering and gained Hashsets' computational speed&#10;Particularly significant gains on &quot;contains&quot; function" />
     <MESSAGE value="Moved key map in collections model, replaced RandomString by a counter for determinism" />
     <MESSAGE value="Refreshing Javadoc&#10;&#10;Deleting obsolete files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refreshing Javadoc&#10;&#10;Deleting obsolete files" />
+    <MESSAGE value="Replaced org.apache.jena.sparql.syntax.Element with my own Element type&#10;&#10;Features depth, comparison,&#10;Direct methods to avoid calling ElementUtils&#10;Adapted all code to use them" />
+    <option name="LAST_COMMIT_MESSAGE" value="Replaced org.apache.jena.sparql.syntax.Element with my own Element type&#10;&#10;Features depth, comparison,&#10;Direct methods to avoid calling ElementUtils&#10;Adapted all code to use them" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1433,23 +1430,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="89" column="36" lean-forward="true" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="632">
@@ -1462,23 +1442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="108" column="36" lean-forward="true" selection-start-line="108" selection-start-column="36" selection-end-line="108" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="55" column="9" lean-forward="true" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/NeighborsImplementation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -1486,69 +1449,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/FilterElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="733">
-          <caret line="155" column="47" lean-forward="true" selection-start-line="155" selection-start-column="47" selection-end-line="155" selection-end-column="47" />
+        <state relative-caret-position="9">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5267#5268#0" expanded="true" />
-            <element signature="e#5312#5313#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/ClassElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="64" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-            <element signature="e#520#521#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/FilterElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="55" column="66" selection-start-line="55" selection-start-column="66" selection-end-line="55" selection-end-column="66" />
+        <state relative-caret-position="816">
+          <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="125" column="53" lean-forward="true" selection-start-line="125" selection-start-column="53" selection-end-line="125" selection-end-column="53" />
+        <state relative-caret-position="519">
+          <caret line="175" column="9" lean-forward="true" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5267#5268#0" expanded="true" />
+            <element signature="e#5312#5313#0" expanded="true" />
+            <element signature="e#5585#5586#0" expanded="true" />
+            <element signature="e#5614#5615#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/QueryElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+        <state relative-caret-position="196">
+          <caret line="97" column="18" lean-forward="true" selection-start-line="97" selection-start-column="18" selection-end-line="110" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1115#1116#0" expanded="true" />
+            <element signature="e#1236#1237#0" expanded="true" />
             <element signature="e#1055#1056#0" expanded="true" />
             <element signature="e#1104#1105#0" expanded="true" />
             <element signature="e#1155#1156#0" expanded="true" />
             <element signature="e#1200#1201#0" expanded="true" />
-            <element signature="e#2538#2539#0" expanded="true" />
+            <element signature="e#2659#2660#0" expanded="true" />
+            <element signature="e#2581#2582#0" expanded="true" />
+            <element signature="e#2622#2623#0" expanded="true" />
+            <element signature="e#3931#3932#0" expanded="true" />
+            <element signature="e#3975#3976#0" expanded="true" />
+            <element signature="e#3685#3686#0" expanded="true" />
+            <element signature="e#3723#3724#0" expanded="true" />
+            <element signature="e#4122#4123#0" expanded="true" />
+            <element signature="e#4142#4143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/elements/TriplePatternElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="89" column="36" lean-forward="true" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="161" column="48" lean-forward="true" selection-start-line="161" selection-start-column="48" selection-end-line="161" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="148" column="50" selection-start-line="148" selection-start-column="50" selection-end-line="148" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3621#3635#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-629">
+          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="266" column="9" lean-forward="true" selection-start-line="266" selection-start-column="9" selection-end-line="266" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -3,6 +3,8 @@ package implementation.algorithms;
 import implementation.algorithms.matchTree.MatchTreeRoot;
 import implementation.utils.CollectionsModel;
 import implementation.utils.PartitionException;
+import implementation.utils.elements.ClassElement;
+import implementation.utils.elements.FilterElement;
 import implementation.utils.elements.QueryElement;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
@@ -31,12 +33,14 @@ public class Cluster implements Comparable<Cluster> {
     private Set<Var> proj;
     private Set<QueryElement> relaxQueryElements;
     private int relaxDistance;
-    private TreeSet<QueryElement> availableQueryElements;
+    protected TreeSet<QueryElement> availableQueryElements;
     private MatchTreeRoot mapping;
     private Table answers;
     private Set<Var> connectedVars;
     private Set<QueryElement> removedQueryElements;
     private int extensionDistance;
+
+    private Comparator<QueryElement> comparator;
 
     /**
      * The head of the query
@@ -63,7 +67,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * The query elements that have yet to be tested in this cluster
      */
-    public Set<QueryElement> getAvailableQueryElements() {
+    public TreeSet<QueryElement> getAvailableQueryElements() {
         return availableQueryElements;
     }
 
@@ -115,25 +119,40 @@ public class Cluster implements Comparable<Cluster> {
      * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph
      */
     public Cluster(Query qry, CollectionsModel graph) {
+        //TODO Heuristique de choix
+        this.comparator = Comparator
+                .<QueryElement>comparingInt(queryElement -> {
+                    if (queryElement instanceof FilterElement)
+                        return -1;
+                    else
+                        return 1;
+                })
+                .thenComparingInt(QueryElement::getDepth)
+                .thenComparingInt(queryElement -> {
+                    if (queryElement instanceof ClassElement)
+                        return -1;
+                    else
+                        return 1;
+                })
+                .thenComparingInt(queryElement -> queryElement.getUsage(this))
+                .thenComparing(QueryElement::toString);
         this.proj = new HashSet<>(qry.getProjectVars());
         this.relaxQueryElements = new HashSet<>();
         this.relaxDistance = 0;
-        this.availableQueryElements = new TreeSet<>();
+        this.availableQueryElements = new TreeSet<>(comparator);
         List<Element> list = (((ElementGroup) qry.getQueryPattern()).getElements());
         for (Element e : list) {
             if (e instanceof ElementPathBlock) {
                 List<TriplePath> triplelist = (((ElementPathBlock) e).getPattern().getList());
-                System.out.println(triplelist);//TODO
                 triplelist.forEach(triplePath -> {
                     ElementPathBlock element = new ElementPathBlock();
                     element.addTriple(triplePath);
-                    System.out.println(element);
-                    QueryElement qe = QueryElement.create(element,graph,1);
+                    QueryElement qe = QueryElement.create(element, graph, 1);
                     availableQueryElements.add(qe);
                 });
             } else if (e instanceof ElementFilter) {
-                QueryElement qe = QueryElement.create(e,graph,1);
-                graph.getDepth().put(qe,1);
+                QueryElement qe = QueryElement.create(e, graph, 1);
+                graph.getDepth().put(qe, 1);
                 availableQueryElements.add(qe);
             }
         }
@@ -142,21 +161,19 @@ public class Cluster implements Comparable<Cluster> {
         answers = mapping.getMatchSet();
         extensionDistance = answers.size();
         this.connectedVars = new HashSet<>(qry.getProjectVars());
-        System.out.println(availableQueryElements);//TODO
     }
 
     /**
      * Creates a cluster with the same values as an other but different Mapping ext Answers
      */
     public Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance) {
+        this.comparator = c.comparator;
         this.proj = new HashSet<>(c.getProj());
-        this.relaxQueryElements = new HashSet<>();
-        this.relaxQueryElements.addAll(c.getRelaxQueryElements());
+        this.relaxQueryElements = new HashSet<>(c.getRelaxQueryElements());
         this.relaxDistance = c.relaxDistance;
-        this.availableQueryElements = new TreeSet<>();
+        this.availableQueryElements = new TreeSet<>(comparator);
         this.availableQueryElements.addAll(c.getAvailableQueryElements());
-        this.removedQueryElements = new HashSet<>();
-        this.removedQueryElements.addAll(c.getRemovedQueryElements());
+        this.removedQueryElements = new HashSet<>(c.getRemovedQueryElements());
         this.mapping = Me;
         this.answers = Ae;
         this.extensionDistance = extensionDistance;
@@ -210,7 +227,7 @@ public class Cluster implements Comparable<Cluster> {
      * @throws PartitionException
      */
     public void relax(QueryElement element, int descriptionDepth) throws PartitionException {
-        logger.debug("relaxing "+element);
+        logger.debug("relaxing " + element);
         boolean removed = availableQueryElements.remove(element);
         if (!removed) {
             throw new PartitionException("Could not relax " + element.toString() + " : Element not found when trying to remove");
@@ -307,6 +324,7 @@ public class Cluster implements Comparable<Cluster> {
 
     /**
      * TODO ProperString
+     *
      * @param colMd The CollectionsModel in which to search prefix mappings
      */
     public String relaxQueryElementsString(CollectionsModel colMd) {

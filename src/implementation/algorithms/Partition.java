@@ -85,7 +85,9 @@ public class Partition {
         String querySting = initialQueryString(uriTarget, colMd);
         Query q = QueryFactory.create(querySting);
         clusters = new ArrayList<>();
-        clusters.add(new Cluster(q, colMd));
+        Cluster init = new Cluster(q, colMd);
+        clusters.add(init);
+        graph.getUsages().put(init,new HashMap<>());
 
         neighbors = new ArrayList<>();
 
@@ -104,6 +106,7 @@ public class Partition {
         CallCounterCollection.call("iterate");
 
         Cluster c = clusters.remove(0);
+        c.availableQueryElements = new TreeSet<>(c.availableQueryElements);
         QueryElement e = null;
         Set<Var> varE = null;
         for (QueryElement element : c.getAvailableQueryElements()) {
@@ -161,9 +164,13 @@ public class Partition {
 
             SingletonStopwatchCollection.resume("reste");
             Cluster Ce = new Cluster(c, me, ae, extensionDistance);
+            graph.getUsages().put(Ce,new HashMap<>(graph.getUsages().getOrDefault(c,new HashMap<>())));
+            //TODO dans la copy du cluster copier les usages
+            e.use(Ce);
             Ce.move(e, varE);
 
             Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
+            graph.getUsages().put(Ce,graph.getUsages().getOrDefault(c,new HashMap<>()));
             CeOpp.relax(e, depth);
 
             boolean ceEmpty = Ce.noAnswers();

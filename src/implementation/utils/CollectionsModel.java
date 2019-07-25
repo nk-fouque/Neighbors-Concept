@@ -1,5 +1,6 @@
 package implementation.utils;
 
+import implementation.algorithms.Cluster;
 import implementation.utils.elements.QueryElement;
 import org.apache.jena.graph.Node;
 import org.apache.jena.rdf.model.*;
@@ -29,6 +30,8 @@ public class CollectionsModel {
     private Map<QueryElement, Table> ans = new HashMap<>();
     private Map<String, Var> keys = new HashMap<>();
     private int nextKey = 1;
+
+    private Map<Cluster,Map<QueryElement,Integer>> usages = new HashMap<>();
 
     /**
      * @param md    The model to get informations from
@@ -154,5 +157,28 @@ public class CollectionsModel {
 
     public void setDepth(QueryElement element, Integer depth) {
         this.depth.putIfAbsent(element, depth);
+    }
+
+    public void copy(Cluster original,Cluster copy){
+
+    }
+
+    public Map<Cluster, Map<QueryElement, Integer>> getUsages() {
+        return usages;
+    }
+
+    public int getUsage(QueryElement qe,Cluster c){
+        Map<QueryElement,Integer> usageMap = usages.getOrDefault(c,null);
+        if (usageMap!=null){
+            return usageMap.getOrDefault(qe,0);
+        } else {
+            return 0;
+        }
+    }
+
+    public void use(QueryElement qe, Cluster c){
+        Map<QueryElement,Integer> usageMap = usages.computeIfAbsent(c, m -> new HashMap<>());
+        int uses = usageMap.getOrDefault(qe,0);
+        usageMap.put(qe,uses+1);
     }
 }
