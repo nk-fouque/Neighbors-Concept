@@ -34,14 +34,16 @@ public class NeighborsImplementation {
                 Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.DEBUG);
                 Logger.getLogger("implementation.utils").setLevel(Level.INFO);
                 Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.TRACE);
+                Logger.getLogger("implementation.utils.elements.QueryElement").setLevel(Level.DEBUG);
                 break;
             }
             case "silent": {
                 Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
                 Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.INFO);
                 Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.INFO);
-                Logger.getLogger("implementation.utils").setLevel(Level.OFF);
+                Logger.getLogger("implementation.utils").setLevel(Level.OFF );
                 Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.OFF);
+                Logger.getLogger("implementation.utils.elements.QueryElement").setLevel(Level.OFF);
             }
         }
     }

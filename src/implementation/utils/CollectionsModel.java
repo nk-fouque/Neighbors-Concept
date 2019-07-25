@@ -1,5 +1,6 @@
 package implementation.utils;
 
+import implementation.utils.elements.QueryElement;
 import org.apache.jena.graph.Node;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.rdf.model.impl.ResourceImpl;
@@ -7,7 +8,6 @@ import org.apache.jena.rdf.model.impl.SelectorImpl;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.core.Var;
-import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.vocabulary.RDFS;
 
 import java.util.*;
@@ -25,7 +25,8 @@ public class CollectionsModel {
     private Map<String, Map<Property, List<RDFNode>>> triplesSimple = new HashMap<>();
     private Map<String, Map<Property, List<RDFNode>>> triplesSimpleReversed = new HashMap<>();
 
-    private Map<Element, Table> ans = new HashMap<>();
+    private Map<QueryElement, Integer> depth = new HashMap<>();
+    private Map<QueryElement, Table> ans = new HashMap<>();
     private Map<String, Var> keys = new HashMap<>();
     private int nextKey = 1;
 
@@ -65,15 +66,15 @@ public class CollectionsModel {
     /**
      * @return An iterator on resources that are subclasses of the one in parameter
      */
-    public ResIterator subClassesOf(Node node) {
-        return getGraph().listSubjectsWithProperty(RDFS.subClassOf, new ResourceImpl(node.toString()));
+    public NodeIterator subClassesOf(Node node) {
+        return getGraph().listObjectsOfProperty(new ResourceImpl(node.toString()),RDFS.subClassOf);
     }
 
     /**
      * @return An iterator on resources that are subproperties of the one in parameter
      */
-    public ResIterator subPropertiesOf(Node node) {
-        return getGraph().listSubjectsWithProperty(RDFS.subPropertyOf, new ResourceImpl(node.toString()));
+    public NodeIterator subPropertiesOf(Node node) {
+        return getGraph().listObjectsOfProperty(new ResourceImpl(node.toString()),RDFS.subPropertyOf);
     }
 
     /**
@@ -116,7 +117,7 @@ public class CollectionsModel {
      * @param element
      * @return All the answers to a query containing the element as only selector
      */
-    public Table ans(Element element) {
+    public Table ans(QueryElement element) {
         Table res = ans.getOrDefault(element, null);
         return res;
     }
@@ -124,7 +125,7 @@ public class CollectionsModel {
     /**
      * Adds an element and the corresponding table of answers to the model
      */
-    public void addAns(Element element, Table table) {
+    public void addAns(QueryElement element, Table table) {
         ans.put(element, table);
     }
 
@@ -147,4 +148,11 @@ public class CollectionsModel {
         return ("\n\n" + triplesSimple + "\n\n" + triplesSimpleReversed);
     }
 
+    public Map<QueryElement, Integer> getDepth() {
+        return depth;
+    }
+
+    public void setDepth(QueryElement element, Integer depth) {
+        this.depth.putIfAbsent(element, depth);
+    }
 }

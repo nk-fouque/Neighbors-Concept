@@ -5,6 +5,7 @@ import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
 import implementation.utils.PartitionException;
 import implementation.utils.TableUtils;
+import implementation.utils.elements.QueryElement;
 import implementation.utils.profiling.CallCounterCollection;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.Query;
@@ -13,7 +14,6 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.core.Var;
-import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -104,10 +104,10 @@ public class Partition {
         CallCounterCollection.call("iterate");
 
         Cluster c = clusters.remove(0);
-        Element e = null;
+        QueryElement e = null;
         Set<Var> varE = null;
-        for (Element element : c.getAvailableQueryElements()) {
-            varE = ElementUtils.mentioned(element);
+        for (QueryElement element : c.getAvailableQueryElements()) {
+            varE = element.mentionedVars();
             if (c.connected(varE)) {
                 logger.debug(varE + " connected to " + c);
                 e = element;
@@ -119,9 +119,6 @@ public class Partition {
         SingletonStopwatchCollection.stop("connect");
         if (e != null) {
 //            logger.debug(e.toString());
-            List<Element> list = new ArrayList<>(c.getRelaxQueryElements());
-            list.add(e);
-
 
             MatchTreeRoot me = new MatchTreeRoot(c.getMatchTree());
             SingletonStopwatchCollection.resume("newans");
@@ -167,7 +164,7 @@ public class Partition {
             Ce.move(e, varE);
 
             Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
-            CeOpp.relax(e, graph, depth);
+            CeOpp.relax(e, depth);
 
             boolean ceEmpty = Ce.noAnswers();
             boolean ceOppEmpty = CeOpp.noAnswers();

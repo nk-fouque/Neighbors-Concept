@@ -1,14 +1,13 @@
 package implementation.algorithms.matchTree;
 
 import implementation.utils.CollectionsModel;
-import implementation.utils.ElementUtils;
 import implementation.utils.TableUtils;
+import implementation.utils.elements.QueryElement;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.core.Var;
-import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -26,7 +25,7 @@ import java.util.Set;
 public class MatchTreeNode {
     private static Logger logger = Logger.getLogger(MatchTreeNode.class);
 
-    Element element;
+    QueryElement element;
     Set<Var> varE;
     Set<Var> D;
 
@@ -40,12 +39,12 @@ public class MatchTreeNode {
     /**
      * e : the Element defined by this node
      */
-    public Element getElement() {
+    public QueryElement getElement() {
         return element;
     }
 
     /**
-     * var(e) : the variables mentioned by e
+     * var(e) : the variables mentionedVars by e
      */
     public Set<Var> getVarE() {
         return varE;
@@ -80,7 +79,7 @@ public class MatchTreeNode {
     }
 
     /**
-     * Same as {@link Element#toString()} except for the top element, expressed as T(X)
+     * Same as {@link QueryElement#toString()} except for the top element, expressed as T(X)
      */
     public String elementString() {
         if (element == null) {
@@ -130,15 +129,15 @@ public class MatchTreeNode {
      * @param colmd     The graph to work in
      * @param varPprime The variables already defined in the cluster
      */
-    public MatchTreeNode(Element element, CollectionsModel colmd, Set<Var> varPprime) {
+    public MatchTreeNode(QueryElement element, CollectionsModel colmd, Set<Var> varPprime) {
         children = new HashSet<>();
 
         this.element = element;
-        varE = ElementUtils.mentioned(element);
+        varE = element.mentionedVars();
         D = new HashSet<>(varE);
         D.removeAll(varPprime);
 
-        matchSet = ElementUtils.ans(this.element, colmd);
+        matchSet = this.element.ans();
         delta = new HashSet<>(varE);
         delta.retainAll(varPprime);
 

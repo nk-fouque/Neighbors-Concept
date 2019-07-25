@@ -1,6 +1,7 @@
 package implementation.algorithms.matchTree;
 
 import implementation.utils.CollectionsModel;
+import implementation.utils.elements.QueryElement;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
@@ -8,7 +9,6 @@ import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.BindingFactory;
-import org.apache.jena.sparql.syntax.Element;
 import org.apache.log4j.Logger;
 
 import java.util.HashSet;
@@ -87,7 +87,7 @@ public class MatchTreeRoot extends MatchTreeNode {
      * @return A copy of this tree with the new element
      * @see MatchTreeNode#lazyJoin(MatchTreeRoot, MatchTreeNode)
      */
-    public MatchTreeRoot lazyJoin(Element element, CollectionsModel colMd, Set<Var> varPprime) {
+    public MatchTreeRoot lazyJoin(QueryElement element, CollectionsModel colMd, Set<Var> varPprime) {
         MatchTreeNode newnode = new MatchTreeNode(element, colMd, varPprime);
 //        ResultSetFormatter.out(System.out,newnode.matchSet.toResultSet());
         SingletonStopwatchCollection.resume("lazyjoin");

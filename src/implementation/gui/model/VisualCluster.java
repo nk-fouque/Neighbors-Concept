@@ -2,7 +2,7 @@ package implementation.gui.model;
 
 import implementation.algorithms.Cluster;
 import implementation.utils.CollectionsModel;
-import implementation.utils.ElementUtils;
+import implementation.utils.elements.QueryElement;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import org.apache.jena.sparql.syntax.Element;
 
 import java.util.Set;
 
@@ -34,11 +33,11 @@ public class VisualCluster extends TitledPane {
         super();
         cluster = c;
         this.setText("Extensional distance : " + c.getExtensionDistance());
-        Set<Element> remaining = c.getAvailableQueryElements();
+        Set<QueryElement> remaining = c.getAvailableQueryElements();
         boolean finished = true;
         if (remaining.size() != 0) {
-            for (Element e : remaining) {
-                if (c.connected(ElementUtils.mentioned(e))) {
+            for (QueryElement e : remaining) {
+                if (c.connected(e.mentionedVars())) {
                     finished = false;
                     break;
                 }

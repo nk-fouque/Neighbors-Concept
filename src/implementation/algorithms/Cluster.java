@@ -2,8 +2,8 @@ package implementation.algorithms;
 
 import implementation.algorithms.matchTree.MatchTreeRoot;
 import implementation.utils.CollectionsModel;
-import implementation.utils.ElementUtils;
 import implementation.utils.PartitionException;
+import implementation.utils.elements.QueryElement;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.ResultSetFormatter;
@@ -17,7 +17,6 @@ import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.sparql.syntax.ElementFilter;
 import org.apache.jena.sparql.syntax.ElementGroup;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
-import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -30,13 +29,13 @@ import java.util.*;
 public class Cluster implements Comparable<Cluster> {
     private static Logger logger = Logger.getLogger(Cluster.class);
     private Set<Var> proj;
-    private Set<Element> relaxQueryElements;
+    private Set<QueryElement> relaxQueryElements;
     private int relaxDistance;
-    private Set<Element> availableQueryElements;
+    private TreeSet<QueryElement> availableQueryElements;
     private MatchTreeRoot mapping;
     private Table answers;
     private Set<Var> connectedVars;
-    private Set<Element> removedQueryElements;
+    private Set<QueryElement> removedQueryElements;
     private int extensionDistance;
 
     /**
@@ -50,7 +49,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * The body of the relaxed Query
      */
-    public Set<Element> getRelaxQueryElements() {
+    public Set<QueryElement> getRelaxQueryElements() {
         return relaxQueryElements;
     }
 
@@ -64,7 +63,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * The query elements that have yet to be tested in this cluster
      */
-    public Set<Element> getAvailableQueryElements() {
+    public Set<QueryElement> getAvailableQueryElements() {
         return availableQueryElements;
     }
 
@@ -85,7 +84,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Query elements that have been tested and thrown away/relaxed, to avoid putting them twice
      */
-    public Set<Element> getRemovedQueryElements() {
+    public Set<QueryElement> getRemovedQueryElements() {
         return removedQueryElements;
     }
 
@@ -119,18 +118,23 @@ public class Cluster implements Comparable<Cluster> {
         this.proj = new HashSet<>(qry.getProjectVars());
         this.relaxQueryElements = new HashSet<>();
         this.relaxDistance = 0;
-        this.availableQueryElements = new HashSet<>();
+        this.availableQueryElements = new TreeSet<>();
         List<Element> list = (((ElementGroup) qry.getQueryPattern()).getElements());
         for (Element e : list) {
             if (e instanceof ElementPathBlock) {
                 List<TriplePath> triplelist = (((ElementPathBlock) e).getPattern().getList());
-                for (TriplePath t : triplelist) {
+                System.out.println(triplelist);//TODO
+                triplelist.forEach(triplePath -> {
                     ElementPathBlock element = new ElementPathBlock();
-                    element.addTriple(t);
-                    availableQueryElements.add(element);
-                }
+                    element.addTriple(triplePath);
+                    System.out.println(element);
+                    QueryElement qe = QueryElement.create(element,graph,1);
+                    availableQueryElements.add(qe);
+                });
             } else if (e instanceof ElementFilter) {
-                availableQueryElements.add(e);
+                QueryElement qe = QueryElement.create(e,graph,1);
+                graph.getDepth().put(qe,1);
+                availableQueryElements.add(qe);
             }
         }
         this.removedQueryElements = new HashSet<>();
@@ -138,6 +142,7 @@ public class Cluster implements Comparable<Cluster> {
         answers = mapping.getMatchSet();
         extensionDistance = answers.size();
         this.connectedVars = new HashSet<>(qry.getProjectVars());
+        System.out.println(availableQueryElements);//TODO
     }
 
     /**
@@ -148,7 +153,7 @@ public class Cluster implements Comparable<Cluster> {
         this.relaxQueryElements = new HashSet<>();
         this.relaxQueryElements.addAll(c.getRelaxQueryElements());
         this.relaxDistance = c.relaxDistance;
-        this.availableQueryElements = new HashSet<>();
+        this.availableQueryElements = new TreeSet<>();
         this.availableQueryElements.addAll(c.getAvailableQueryElements());
         this.removedQueryElements = new HashSet<>();
         this.removedQueryElements.addAll(c.getRemovedQueryElements());
@@ -171,9 +176,9 @@ public class Cluster implements Comparable<Cluster> {
      * Substract an element from the available query elements to mark it as used and adds it to the elements distinctive of this Cluster's neighbors
      *
      * @param element The Element to be moved
-     * @param vars    The Jena Variables mentioned to the element
+     * @param vars    The Jena Variables mentionedVars to the element
      */
-    public void move(Element element, Set<Var> vars) throws PartitionException {
+    public void move(QueryElement element, Set<Var> vars) throws PartitionException {
         boolean removed = availableQueryElements.remove(element);
         if (!removed) {
             throw new PartitionException("Could not move :" + element.toString());
@@ -204,28 +209,13 @@ public class Cluster implements Comparable<Cluster> {
      * @param element The element to relax
      * @throws PartitionException
      */
-    public void relax(Element element, CollectionsModel graph, int descriptionDepth) throws PartitionException {
+    public void relax(QueryElement element, int descriptionDepth) throws PartitionException {
+        logger.debug("relaxing "+element);
         boolean removed = availableQueryElements.remove(element);
         if (!removed) {
             throw new PartitionException("Could not relax " + element.toString() + " : Element not found when trying to remove");
         } else {
-            Set<Element> list = new HashSet<>();
-            if (element instanceof ElementFilter) {
-                ElementFilter e = (ElementFilter) element;
-                if (descriptionDepth > 1) {
-
-                    list = ElementUtils.relaxFilter(e, graph, descriptionDepth);
-                }
-
-            } else {
-                ElementPathBlock e = (ElementPathBlock) element;
-                TriplePath t = e.getPattern().get(0);
-                if (t.getPredicate().equals(RDF.type.asNode())) {
-                    list = ElementUtils.relaxClass(t, graph);
-                } else {
-                    list = ElementUtils.relaxProperty(t, graph);
-                }
-            }
+            Set<QueryElement> list = element.relax(descriptionDepth);
             list.removeAll(availableQueryElements);
             list.removeAll(relaxQueryElements);
             list.removeAll(removedQueryElements);
@@ -245,9 +235,9 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * @return The string for the relaxed Query corresponding to this Cluster
      */
-    public String queryString() {
-        return ElementUtils.getSelectStringFrom(this.proj, relaxQueryElements);
-    }
+//    public String queryString() { TODO
+//        return ElementUtils.getSelectStringFrom(this.proj, relaxQueryElements);
+//    }
 
     /**
      * @return the answers as a string formatted by Jena
@@ -267,7 +257,7 @@ public class Cluster implements Comparable<Cluster> {
             res += "Debug removed : " + removedQueryElements + "\n";
             res += "Connected variables : " + connectedVars + "\n";
         }
-        res += "Query :" + queryString() + "\n";
+//        res += "Query :" + queryString() + "\n"; TODO
         if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mapping.toString() + "\n";
         res += "Answers :\n" + answersString() + "\n";
         return res;
@@ -288,7 +278,7 @@ public class Cluster implements Comparable<Cluster> {
             res += "Debug removed : " + removedQueryElements + "\n";
             res += "Connected variables : " + connectedVars + "\n";
         }
-        res += "Query :" + queryString() + "\n";
+//        res += "Query :" + queryString() + "\n"; TODO
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mapping.toString() + "\n";
         res += "Answers :\n" + answersListString(colMd) + "\n";
         return res;
@@ -316,12 +306,14 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
+     * TODO ProperString
      * @param colMd The CollectionsModel in which to search prefix mappings
      */
     public String relaxQueryElementsString(CollectionsModel colMd) {
         List<String[]> pathBlocks = new ArrayList<>();
         Map<String, String> filters = new HashMap<>();
-        for (Element e : relaxQueryElements) {
+        for (QueryElement element : relaxQueryElements) {
+            Element e = element.getElement();
             if (e instanceof ElementPathBlock) {
                 TriplePath t = ((ElementPathBlock) e).getPattern().get(0);
                 String s0 = colMd.getGraph().shortForm(t.getSubject().toString()
