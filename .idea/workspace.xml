@@ -9,7 +9,122 @@
     <bookmark url="file://$PROJECT_DIR$/src/implementation/gui/model/ObservablePartition.java" line="42" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="" />
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/constant-values.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/deprecated-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/element-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/Main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/NeighborsImplementation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/Cluster.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/Partition.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/LazyJoin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeNode.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeRoot.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/NeighborsInterface.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/ModelLoad.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/NeighborsController.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/PartitionRun.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/CopyButton.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/NeighborButton.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/ObservablePartition.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCandidate.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCluster.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualPrefixes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/CollectionsModel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/ElementUtils.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/ListUtils.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/PartitionException.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/RandomString.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/TableUtils.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/TimeOut.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounterCollection.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/SingletonStopwatchCollection.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/Stopwatch.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-18.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-19.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-20.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/external/jquery/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_65_dadada_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_75_dadada_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_222222_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_2e83ff_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_454545_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_888888_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_cd0a0a_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-3.3.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-migrate-3.0.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.structure.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.structure.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils-ie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils-ie.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip/dist/jszip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip/dist/jszip.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/member-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/glass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/serialized-form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/type-search-index.zip" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,17 +143,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="699">
-              <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+            <state relative-caret-position="1666">
+              <caret line="110" selection-start-line="110" selection-end-line="110" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="68" column="16" lean-forward="true" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
+            <state relative-caret-position="447">
+              <caret line="68" column="16" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,7 +165,7 @@
         <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+              <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -59,34 +174,41 @@
         <entry file="file://$PROJECT_DIR$/src/implementation/utils/TableUtils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="29" lean-forward="true" selection-start-column="29" selection-end-column="29" />
+              <caret column="29" selection-start-column="29" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="442">
               <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
+            <state relative-caret-position="2040">
+              <caret line="142" column="5" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2203#2204#0" expanded="true" />
                 <element signature="e#2231#2232#0" expanded="true" />
+                <element signature="e#2349#2350#0" expanded="true" />
                 <element signature="e#2386#2387#0" expanded="true" />
+                <element signature="e#3996#3997#0" expanded="true" />
                 <element signature="e#4032#4033#0" expanded="true" />
+                <element signature="e#4115#4116#0" expanded="true" />
                 <element signature="e#4159#4160#0" expanded="true" />
+                <element signature="e#4546#4547#0" expanded="true" />
                 <element signature="e#4585#4586#0" expanded="true" />
+                <element signature="e#4626#4627#0" expanded="true" />
                 <element signature="e#4653#4654#0" expanded="true" />
+                <element signature="e#4964#4965#0" expanded="true" />
                 <element signature="e#5044#5045#0" expanded="true" />
               </folding>
             </state>
@@ -96,7 +218,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="510">
               <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -105,11 +227,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="615">
-              <caret line="253" column="93" selection-start-line="253" selection-start-column="93" selection-end-line="253" selection-end-column="93" />
+              <caret line="79" selection-start-line="79" selection-end-line="79" />
             </state>
           </provider>
         </entry>
@@ -117,8 +239,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="216" column="42" lean-forward="true" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="51" />
+            <state relative-caret-position="2958">
+              <caret line="216" column="42" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -279,12 +401,25 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
               <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="implementation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
@@ -354,8 +489,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -530,6 +663,7 @@
       <workItem from="1563879859534" duration="14003000" />
       <workItem from="1563953174650" duration="9358000" />
       <workItem from="1563966544154" duration="11617000" />
+      <workItem from="1564038647643" duration="241000" />
     </task>
     <task id="LOCAL-00015" summary="Refonte anytime Interface">
       <created>1562147510802</created>
@@ -910,7 +1044,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="451747000" />
+    <option name="totallyTimeSpent" value="451988000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -924,7 +1058,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28560063" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28798726" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -933,7 +1067,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4884646" weight="0.3299373" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47891805" weight="0.39106584" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47852027" visible="true" weight="0.39106584" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4956245" weight="0.39890283" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -942,7 +1076,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49801114" weight="0.3299373" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49801114" weight="0.3299373" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5210819" side_tool="true" visible="true" weight="0.3299373" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5214797" side_tool="true" visible="true" weight="0.39106584" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.47454256" weight="0.3299373" />
       <window_info anchor="bottom" id="Profiler" order="13" sideWeight="0.4988067" weight="0.3299373" />
       <window_info anchor="bottom" id="Statistic" order="14" weight="0.3299373" />
@@ -1048,7 +1182,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Small corrections in README" />
     <MESSAGE value="Javadoc in NeighborsController" />
     <MESSAGE value="Fixed 0 extensional distance cluster" />
     <MESSAGE value="Display number of clusters during Partition" />
@@ -1073,7 +1206,8 @@
     <MESSAGE value="Using Jena indexes statements instead of homemade indexed maps" />
     <MESSAGE value="Replaced many Arraylists by Hashsets&#10;&#10;Lost unnecessary List ordering and gained Hashsets' computational speed&#10;Particularly significant gains on &quot;contains&quot; function" />
     <MESSAGE value="Moved key map in collections model, replaced RandomString by a counter for determinism" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved key map in collections model, replaced RandomString by a counter for determinism" />
+    <MESSAGE value="Refreshing Javadoc&#10;&#10;Deleting obsolete files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refreshing Javadoc&#10;&#10;Deleting obsolete files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1300,13 +1434,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/results">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="9761" column="27" lean-forward="true" selection-start-line="9761" selection-start-column="27" selection-end-line="9761" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/results" />
     <entry file="jar://$PROJECT_DIR$/../jdk-12.0.1_linux-x64_bin/jdk-12.0.1/lib/src.zip!/java.base/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -1324,13 +1452,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ListUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ListUtils.java" />
     <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/LazyJoin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1349,13 +1471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3878">
           <caret line="270" column="17" selection-start-line="270" selection-start-column="17" selection-end-line="270" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1387,17 +1502,84 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/RandomString.java" />
+    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1666">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/utils/TableUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="29" lean-forward="true" selection-start-column="29" selection-end-column="29" />
+          <caret column="29" selection-start-column="29" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="142" column="5" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2203#2204#0" expanded="true" />
+            <element signature="e#2231#2232#0" expanded="true" />
+            <element signature="e#2349#2350#0" expanded="true" />
+            <element signature="e#2386#2387#0" expanded="true" />
+            <element signature="e#3996#3997#0" expanded="true" />
+            <element signature="e#4032#4033#0" expanded="true" />
+            <element signature="e#4115#4116#0" expanded="true" />
+            <element signature="e#4159#4160#0" expanded="true" />
+            <element signature="e#4546#4547#0" expanded="true" />
+            <element signature="e#4585#4586#0" expanded="true" />
+            <element signature="e#4626#4627#0" expanded="true" />
+            <element signature="e#4653#4654#0" expanded="true" />
+            <element signature="e#4964#4965#0" expanded="true" />
+            <element signature="e#5044#5045#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="216" column="42" lean-forward="true" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="51" />
+        <state relative-caret-position="2958">
+          <caret line="216" column="42" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="68" column="16" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1407,66 +1589,7 @@
     <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
-          <caret line="253" column="93" selection-start-line="253" selection-start-column="93" selection-end-line="253" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2231#2232#0" expanded="true" />
-            <element signature="e#2386#2387#0" expanded="true" />
-            <element signature="e#4032#4033#0" expanded="true" />
-            <element signature="e#4159#4160#0" expanded="true" />
-            <element signature="e#4585#4586#0" expanded="true" />
-            <element signature="e#4653#4654#0" expanded="true" />
-            <element signature="e#5044#5045#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/RandomString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="68" column="16" lean-forward="true" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
         </state>
       </provider>
     </entry>
