@@ -111,4 +111,16 @@ public abstract class QueryElement implements Comparable {
 
         return res;
     }
+
+    public Set<FilterElement> separate(){
+        return Collections.emptySet();
+    }
+
+    public int getUsage(Cluster c){
+        return model.getUsage(this,c);
+    }
+
+    public void use(Cluster c){
+        model.use(this,c);
+    }
 }

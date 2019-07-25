@@ -2,6 +2,7 @@ package implementation.utils.elements;
 
 import implementation.utils.CollectionsModel;
 import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Triple;
 import org.apache.jena.rdf.model.NodeIterator;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -12,10 +13,17 @@ import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.algebra.table.TableN;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.BindingHashMap;
+import org.apache.jena.sparql.expr.E_Equals;
+import org.apache.jena.sparql.expr.ExprVar;
+import org.apache.jena.sparql.expr.nodevalue.NodeValueNode;
+import org.apache.jena.sparql.syntax.ElementFilter;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class TriplePatternElement extends QueryElement {
-    public TriplePatternElement(ElementPathBlock elementPathBlock, CollectionsModel colMd){
+    public TriplePatternElement(ElementPathBlock elementPathBlock, CollectionsModel colMd) {
         element = elementPathBlock;
         model = colMd;
     }
@@ -54,6 +62,46 @@ public class TriplePatternElement extends QueryElement {
                 res.addBinding(bind);
             });
         }
+        return res;
+    }
+
+    @Override
+    public Set<FilterElement> separate() {
+        Set<FilterElement> res = new HashSet<>();
+        Triple triple = ((ElementPathBlock) element).getPattern().get(0).asTriple();
+        Node subject = triple.getSubject();
+        Var varSubj;
+        if (!subject.isVariable()) {
+            if (subject.isURI()) {
+                varSubj = model.varKey(subject.getURI());
+            } else {
+                varSubj = model.varKey(subject.toString());
+            }
+            ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(varSubj), new NodeValueNode(subject)));
+
+            res.add(new FilterElement(filter,model));
+        } else {
+            varSubj = (Var) subject;
+        }
+
+        Node object = triple.getObject();
+        Var varObj;
+        if (!object.isVariable()) {
+            if (object.isURI()) {
+                varObj = model.varKey(object.getURI());
+            } else {
+                varObj = model.varKey(object.toString());
+            }
+            ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(varObj), new NodeValueNode(object)));
+            res.add(new FilterElement(filter,model));
+        } else {
+            varObj = (Var) object;
+        }
+
+        ElementPathBlock eFiltered = new ElementPathBlock();
+        eFiltered.addTriple(Triple.create(varSubj, triple.getPredicate(), varObj));
+        element = eFiltered;
+
         return res;
     }
 }
