@@ -73,6 +73,8 @@ public class Partition {
         return graph;
     }
 
+    private int nextCluster;
+
     /**
      * @param colMd            A preexisting CollectionsModel in which to describe the node and search for its neighbors
      * @param uriTarget        The full length uri of the node to describe
@@ -80,12 +82,13 @@ public class Partition {
      *                         (for now any number n>2 makes it pseudo-infinite and at some point the whole graph becomes a description of your node)
      */
     public Partition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
+        nextCluster = 0;
         graph = colMd;
 
         String querySting = initialQueryString(uriTarget, colMd);
         Query q = QueryFactory.create(querySting);
         clusters = new ArrayList<>();
-        clusters.add(new Cluster(q, colMd));
+        clusters.add(new Cluster(q, colMd, getNextClusterId()));
 
         neighbors = new ArrayList<>();
 
@@ -139,7 +142,7 @@ public class Partition {
             Table piMe;
             Table ae;
             try {
-                piMe = me.getMatchSet();
+                piMe = TableUtils.projection(me.getMatchSet(),c.getProj());
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ResultSet rs = piMe.toResultSet();
@@ -163,10 +166,10 @@ public class Partition {
 
 
             SingletonStopwatchCollection.resume("reste");
-            Cluster Ce = new Cluster(c, me, ae, extensionDistance);
+            Cluster Ce = new Cluster(c, me, ae, extensionDistance, getNextClusterId());
             Ce.move(e, varE);
 
-            Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance());
+            Cluster CeOpp = new Cluster(c, c.getMatchTree(), TableUtils.difference(c.getAnswers(), ae), c.getExtensionDistance(), getNextClusterId());
             CeOpp.relax(e, graph, depth);
 
             boolean ceEmpty = Ce.noAnswers();
@@ -251,9 +254,12 @@ public class Partition {
         Set<Var> x = new HashSet<>();
         x.add(neighbor);
 
-        String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, colMd));
+        String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, colMd,1));
         return res;
     }
 
-
+    public int getNextClusterId() {
+        nextCluster++;
+        return nextCluster;
+    }
 }

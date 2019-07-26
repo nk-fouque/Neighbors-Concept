@@ -28,6 +28,7 @@ public class CollectionsModel {
     private Map<Element, Table> ans = new HashMap<>();
     private Map<String, Var> keys = new HashMap<>();
     private int nextKey = 1;
+    private Map<Element,Integer> depth = new HashMap<>();
 
     /**
      * @param md    The model to get informations from
@@ -65,15 +66,15 @@ public class CollectionsModel {
     /**
      * @return An iterator on resources that are subclasses of the one in parameter
      */
-    public ResIterator subClassesOf(Node node) {
-        return getGraph().listSubjectsWithProperty(RDFS.subClassOf, new ResourceImpl(node.toString()));
+    public NodeIterator subClassesOf(Node node) {
+        return getGraph().listObjectsOfProperty( new ResourceImpl(node.getURI()), RDFS.subClassOf);
     }
 
     /**
      * @return An iterator on resources that are subproperties of the one in parameter
      */
-    public ResIterator subPropertiesOf(Node node) {
-        return getGraph().listSubjectsWithProperty(RDFS.subPropertyOf, new ResourceImpl(node.toString()));
+    public NodeIterator subPropertiesOf(Node node) {
+        return getGraph().listObjectsOfProperty( new ResourceImpl(node.getURI()), RDFS.subPropertyOf);
     }
 
     /**
@@ -140,6 +141,15 @@ public class CollectionsModel {
             nextKey++;
             return key;
         }
+    }
+
+    public int getDepth(Element element) {
+        return depth.get(element);
+    }
+
+    public int setDepth(Element element,int i){
+        depth.putIfAbsent(element,i);
+        return depth.get(element);
     }
 
     @Override

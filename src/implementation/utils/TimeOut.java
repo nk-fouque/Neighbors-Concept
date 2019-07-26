@@ -33,11 +33,11 @@ public class TimeOut implements Runnable {
     public void run() {
         try {
             Thread.sleep(millis);
+            System.out.println("Timeout");
+            cut.set(true);
+            Thread.currentThread().interrupt();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Ended before Timeout");
         }
-        System.out.println("Timeout");
-        cut.set(true);
-        Thread.currentThread().interrupt();
     }
 }

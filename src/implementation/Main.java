@@ -48,8 +48,8 @@ public class Main {
 
         AtomicBoolean cut = new AtomicBoolean(false);
         //Defining Timeout for anytime implementation
-        Thread timer = TimeOut.planTimeOut(cut, 30);
-//        timer.start();
+        Thread timer = TimeOut.planTimeOut(cut, 300);
+        timer.start();
         // Defining Signal Handler for anytime implementation
         SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
         Signal.handle(new Signal("INT"), handler);

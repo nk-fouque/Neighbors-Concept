@@ -38,6 +38,7 @@ public class Cluster implements Comparable<Cluster> {
     private Set<Var> connectedVars;
     private Set<Element> removedQueryElements;
     private int extensionDistance;
+    private int id;
 
     /**
      * The head of the query
@@ -115,7 +116,8 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph
      */
-    public Cluster(Query qry, CollectionsModel graph) {
+    public Cluster(Query qry, CollectionsModel graph,int id) {
+        this.id = id;
         this.proj = new HashSet<>(qry.getProjectVars());
         this.relaxQueryElements = new HashSet<>();
         this.relaxDistance = 0;
@@ -143,7 +145,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates a cluster with the same values as an other but different Mapping ext Answers
      */
-    public Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance) {
+    public Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance,int id) {
         this.proj = new HashSet<>(c.getProj());
         this.relaxQueryElements = new HashSet<>();
         this.relaxQueryElements.addAll(c.getRelaxQueryElements());
@@ -156,6 +158,7 @@ public class Cluster implements Comparable<Cluster> {
         this.answers = Ae;
         this.extensionDistance = extensionDistance;
         this.connectedVars = new HashSet<>(c.connectedVars);
+        this.id = id;
     }
 
     /**
@@ -211,6 +214,7 @@ public class Cluster implements Comparable<Cluster> {
         } else {
             Set<Element> list = new HashSet<>();
             if (element instanceof ElementFilter) {
+                logger.debug(element + " is filter");
                 ElementFilter e = (ElementFilter) element;
                 if (descriptionDepth > 1) {
 
@@ -221,12 +225,13 @@ public class Cluster implements Comparable<Cluster> {
                 ElementPathBlock e = (ElementPathBlock) element;
                 TriplePath t = e.getPattern().get(0);
                 if (t.getPredicate().equals(RDF.type.asNode())) {
+                    logger.debug(element + " is class");
                     list = ElementUtils.relaxClass(t, graph);
                 } else {
+                    logger.debug(element + " is triple pattern");
                     list = ElementUtils.relaxProperty(t, graph);
                 }
             }
-            list.removeAll(availableQueryElements);
             list.removeAll(relaxQueryElements);
             list.removeAll(removedQueryElements);
             availableQueryElements.addAll(list);
@@ -260,7 +265,8 @@ public class Cluster implements Comparable<Cluster> {
 
     @Override
     public String toString() {
-        String res = "Extentional Distance : " + relaxDistance + "\n";
+        String res = "Cluster n°"+id+"\n";
+        res += "Extentional Distance : " + relaxDistance + "\n";
         res += "Elements : " + relaxQueryElements + "\n";
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
             res += "Debug available: " + availableQueryElements + "\n";
@@ -280,7 +286,8 @@ public class Cluster implements Comparable<Cluster> {
      * @param colMd the model to use for prefixes
      */
     public String toString(CollectionsModel colMd) {
-        String res = "Number of relaxation : " + relaxDistance + "\n";
+        String res = "Cluster n°"+id+"\n";
+        res += "Number of relaxation : " + relaxDistance + "\n";
         res += "Extensional Distance : " + extensionDistance + "\n";
         res += "Elements : " + relaxQueryElements + "\n";
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {

@@ -78,7 +78,7 @@ public class ElementUtils {
             for (Expr expr : f.getArgs()) {
                 if (expr instanceof NodeValueNode) {
                     logger.info("Relaxing : " + expr);
-                    list.addAll(describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model));
+                    list.addAll(describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model,model.getDepth(filter)+1));
                 } else {
                     logger.info(expr + " not NodeValueNode");
                 }
@@ -89,11 +89,8 @@ public class ElementUtils {
 
         Set<Element> res = new HashSet<>();
         for (Element e : list) {
-            if (!(e instanceof ElementFilter)) {
-                if (descriptionDepth > 2) {
-                    // TODO For now any number>2 = infinite
-                    res.add(e);
-                }
+            if (!(e instanceof ElementFilter) || model.getDepth(filter)< descriptionDepth) {
+                res.add(e);
             }
         }
         logger.info("relaxed to " + res);
@@ -105,10 +102,10 @@ public class ElementUtils {
      * @param model        The Model to use to describe the Node
      * @return A list of Query elements (triple pattern and Filters) describing the Nodes known properties
      */
-    public static Set<Element> describeNode(String uri, CollectionsModel model) {
+    public static Set<Element> describeNode(String uri, CollectionsModel model,int depth) {
         final Set<Element> res = new HashSet<>();
         Resource node = new ResourceImpl(uri);
-        StmtIterator triplesFrom = model.triplesFrom(node);
+        StmtIterator triplesFrom = model.simpleTriplesFrom(node);
         triplesFrom.forEachRemaining(statement -> {
             Property property = statement.getPredicate();
             RDFNode object = statement.getObject();
@@ -127,11 +124,12 @@ public class ElementUtils {
                 triple.addTriple(Triple.create(model.varKey(uri), property.asNode(), var));
                 res.add(triple);
                 ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(object.asNode())));
+                model.setDepth(filter,depth);
                 res.add(filter);
             }
         });
 
-        StmtIterator triplesTo = model.triplesTo(node);
+        StmtIterator triplesTo = model.simpleTriplesTo(node);
         triplesTo.forEachRemaining(statement -> {
             Resource subject = statement.getSubject();
             Property property = statement.getPredicate();
@@ -146,6 +144,7 @@ public class ElementUtils {
                 triple.addTriple(Triple.create(var, property.asNode(), model.varKey(uri)));
                 res.add(triple);
                 ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
+                model.setDepth(filter,depth);
                 res.add(filter);
             }
         });
@@ -161,11 +160,12 @@ public class ElementUtils {
      */
     public static Set<Element> relaxClass(TriplePath triple, CollectionsModel model) {
         logger.info("Relaxing " + triple);
-        ResIterator iter = model.subClassesOf(triple.getObject());
+        NodeIterator iter = model.subClassesOf(triple.getObject());
         Set<Element> res = new HashSet<>();
-        iter.forEachRemaining(resource -> {
+        iter.forEachRemaining(node -> {
+            logger.info(node.toString());
             ElementPathBlock pathBlock = new ElementPathBlock();
-            pathBlock.addTriple(Triple.create(triple.getSubject(), RDF.type.asNode(), resource.asNode()));
+            pathBlock.addTriple(Triple.create(triple.getSubject(), RDF.type.asNode(), node.asNode()));
             res.add(pathBlock);
         });
         logger.info("Relaxed to " + res);
@@ -179,11 +179,11 @@ public class ElementUtils {
      */
     public static Set<Element> relaxProperty(TriplePath triple, CollectionsModel model) {
         logger.info("Relaxing " + triple);
-        ResIterator iter = model.subPropertiesOf(triple.getPredicate());
+        NodeIterator iter = model.subPropertiesOf(triple.getPredicate());
         Set<Element> res = new HashSet<>();
-        iter.forEachRemaining(resource -> {
+        iter.forEachRemaining(node -> {
             ElementPathBlock pathBlock = new ElementPathBlock();
-            pathBlock.addTriple(Triple.create(triple.getSubject(), resource.asNode(), triple.getObject()));
+            pathBlock.addTriple(Triple.create(triple.getSubject(), node.asNode(), triple.getObject()));
             res.add(pathBlock);
         });
         logger.info("Relaxed to " + res);

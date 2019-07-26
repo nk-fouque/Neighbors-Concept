@@ -30,7 +30,7 @@ public class NeighborsImplementation {
         switch (level) {
             case "verbous": {
                 Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
-                Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.DEBUG);
+                Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.TRACE);
                 Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.DEBUG);
                 Logger.getLogger("implementation.utils").setLevel(Level.INFO);
                 Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.TRACE);
