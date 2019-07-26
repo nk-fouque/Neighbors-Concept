@@ -2,11 +2,14 @@ package implementation.gui.controller;
 
 import implementation.algorithms.Partition;
 import implementation.gui.NeighborsInterface;
-import implementation.gui.model.NeighborButton;
 import implementation.gui.model.VisualCandidate;
+import implementation.gui.model.VisualPrefixes;
 import implementation.utils.CollectionsModel;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -16,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -49,6 +53,10 @@ public class NeighborsController implements Initializable {
     Button filterSubjectsButton;
     @FXML
     CheckBox caseSensBox;
+    @FXML
+    CheckBox safeModeBox;
+    @FXML
+    Spinner<Integer> safeModeLimit;
 
     @FXML
     BorderPane partitionCandidates;
@@ -70,6 +78,8 @@ public class NeighborsController implements Initializable {
     Label cutLabel;
     @FXML
     Label finalState;
+    @FXML
+    Spinner<Integer> depthLimit;
 
     @FXML
     TextField selectedNodeField;
@@ -90,9 +100,7 @@ public class NeighborsController implements Initializable {
 
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
 
-
-    //TODO Make this a setting in the interface
-    private int descriptionDepth = 1;
+    private StringProperty loadingState = new SimpleStringProperty("");
 
     /**
      * @return List of Jena supported RDF formats
@@ -131,8 +139,9 @@ public class NeighborsController implements Initializable {
             modelLoaded.setValue(false);
             ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded);
             Thread load = new Thread(loader);
+            loader.stateProperty().bindBidirectional(loadingState);
             Label modelState = new Label();
-            modelState.textProperty().bindBidirectional(loader.stateProperty());
+            modelState.textProperty().bindBidirectional(loadingState);
             partitionCandidates.setTop(new ToolBar(modelState));
             candidates.getChildren().clear();
             load.start();
@@ -151,6 +160,9 @@ public class NeighborsController implements Initializable {
         filterSubjectsButton.disableProperty().bind(modelLoaded.not());
         caseSensBox.disableProperty().bind(modelLoaded.not());
 
+        safeModeLimit.setPromptText("25");
+        safeModeBox.setSelected(true);
+
         cutLabel.setVisible(false);
         cutLabel.setText("/!\\ Algorithm will stop early /!\\");
         cutButton.disableProperty().bind(partitionAvailable);
@@ -163,6 +175,22 @@ public class NeighborsController implements Initializable {
         });
 
         finalState.visibleProperty().bind(partitionAvailable);
+
+        selectedNodeField.autosize();
+        partitionButton.disableProperty().bind(partitionAvailable.not());
+        partitionButton.setOnMouseClicked(mouseEvent -> {
+            partitionAccordion.getPanes().clear();
+            TitledPane loading = new TitledPane();
+            loading.setText("Loading neighbors for " + selectedNodeField.textProperty().get() + " please wait");
+            partitionAccordion.getPanes().add(loading);
+            Runnable algo = new PartitionRun(md, selectedNodeField.textProperty().get(), partitionAccordion, partitionAvailable, anytimeCut, this, loading, depthLimit);
+            Thread thread = new Thread(algo);
+            if (timeLimit.getValue() > 0) {
+                Thread timeOut = timeOut(timeLimit.getValue().intValue());
+                timeOut.start();
+            }
+            thread.start();
+        });
 
         NeighborsInterface.exit.addListener(changeListener -> {
             if (NeighborsInterface.exit.get()) anytimeCut.set(true);
@@ -192,12 +220,7 @@ public class NeighborsController implements Initializable {
                 filteredList.add(s);
             }
         }
-        PriorityQueue<String> queue = new PriorityQueue<>(filteredList);
-        while (!queue.isEmpty()) {
-            BorderPane visual = NeighborsController.this.candidateVisual(queue.poll());
-            visual.minWidthProperty().bind((scrollPane.widthProperty()));
-            candidates.getChildren().add(visual);
-        }
+        safePrompt(filteredList);
     }
 
     /**
@@ -205,7 +228,12 @@ public class NeighborsController implements Initializable {
      * @return A Border pane with the uri on the left and a button on the right
      */
     public BorderPane candidateVisual(String uri) {
-        NeighborButton button = new NeighborButton(uri, partitionAccordion, md, partitionAvailable, anytimeCut, this, timeLimit.getValue(), descriptionDepth);
+        Button button = new Button();
+        button.textProperty().setValue("Select this node");
+        button.setOnMouseClicked(mouseEvent -> {
+            selectedNodeField.setText(uri);
+            selectedNodeField.autosize();
+        });
         VisualCandidate res = new VisualCandidate(uri, colMd, button, filterSubjectsField);
         return res;
     }
@@ -231,5 +259,46 @@ public class NeighborsController implements Initializable {
         cutButton.setStyle("");
         cutLabel.setVisible(false);
     }
+    private Thread timeOut(int timeLimit) {
+        Thread res = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(timeLimit * 1000);
+                    cutActivate();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return res;
+    }
+
+
+    public void safePrompt(List<String> subjectsList){
+        if (subjectsList.size() < safeModeLimit.getValue() || !safeModeBox.isSelected()){
+            PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
+
+            Platform.runLater(() -> loadingState.setValue("Building Visuals"));
+            while (!queue.isEmpty()) {
+                String uri = queue.poll();
+                BorderPane visual = candidateVisual(uri);
+                Platform.runLater(() -> visual.minWidthProperty().bind((scrollPane.widthProperty())));
+                Platform.runLater(() -> candidates.getChildren().add(visual));
+            }
+            Platform.runLater(() -> partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded)));
+
+            Platform.runLater(() -> partitionAvailable.setValue(true));
+        } else {
+            TitledPane err = new TitledPane();
+            err.setText("Too many results");
+            err.setContent(new Text("Search gave "+subjectsList.size()+" results, current Safe Mode limit is "+safeModeLimit+" results, try refining your filter or disabling/increasing Safe Mode limit" +
+                    "\n /!\\ Disabling Safe Mode can make the application slow /!\\"));
+            Platform.runLater(() -> candidates.getChildren().add(err));
+        }
+
+
+    }
+
 
 }

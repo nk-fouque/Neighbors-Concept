@@ -106,21 +106,11 @@ public class ModelLoad implements Runnable {
             while (iter.hasNext()) {
                 subjectsList.add(iter.nextResource().getURI());
             }
-            PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
+
             controller.colMd = new CollectionsModel(md, null);
-
-            Platform.runLater(() -> state.setValue("Building Visuals"));
-            while (!queue.isEmpty()) {
-                String uri = queue.poll();
-                BorderPane visual = controller.candidateVisual(uri);
-                Platform.runLater(() -> visual.minWidthProperty().bind((controller.scrollPane.widthProperty())));
-                Platform.runLater(() -> controller.candidates.getChildren().add(visual));
-            }
-            Platform.runLater(() -> controller.partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded)));
-
+            controller.safePrompt(subjectsList);
             Platform.runLater(() -> state.setValue("Model Loaded"));
             Platform.runLater(() -> modelLoaded.setValue(true));
-            Platform.runLater(() -> controller.partitionAvailable.setValue(true));
 
         } catch (FileNotFoundException e) {
             TitledPane err = new TitledPane();

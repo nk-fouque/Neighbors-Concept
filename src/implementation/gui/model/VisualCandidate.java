@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 public class VisualCandidate extends BorderPane {
     private BooleanProperty detailsOnScreen = new SimpleBooleanProperty(false);
 
-    public VisualCandidate(String uri, CollectionsModel colMd, NeighborButton button, TextField textField) {
+    public VisualCandidate(String uri, CollectionsModel colMd, Button button, TextField textField) {
         super();
         Label text = new Label(colMd.getGraph().shortForm(uri));
         BorderPane topPane = new BorderPane();

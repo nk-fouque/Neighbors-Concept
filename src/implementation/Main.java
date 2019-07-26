@@ -39,7 +39,7 @@ public class Main {
 //        String uriTarget = "http://example.org/royal/Charlotte";
 
         // Preparing Partition
-        Partition p = new Partition(model, uriTarget, 1);
+        Partition p = new Partition(model, uriTarget, 2);
 //        System.out.println(p.getClusters().get(0));
 //        System.out.println("Printing graph" + model);
 

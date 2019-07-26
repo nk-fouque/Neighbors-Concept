@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
@@ -68,7 +69,7 @@ public class PartitionRun implements Runnable {
      * @param cut        {@link #cut}
      * @param controller {@link #mainController}
      */
-    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane, int descriptionDepth) {
+    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane, Spinner<Integer> descriptionDepth) {
         super();
         graph = md;
         uriTarget = uri;
@@ -77,7 +78,7 @@ public class PartitionRun implements Runnable {
         this.cut = cut;
         mainController = controller;
         this.loadingPane = loadingPane;
-        depth = descriptionDepth;
+        depth = descriptionDepth.getValue().intValue();
     }
 
     @Override

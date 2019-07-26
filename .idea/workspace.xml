@@ -9,121 +9,16 @@
     <bookmark url="file://$PROJECT_DIR$/src/implementation/gui/model/ObservablePartition.java" line="42" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="Improved Interface&#10;&#10;Added depth control&#10;Fixed third toolbar&#10;Set columns width to percentage&#10;Implemented Safe Mode">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/constant-values.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/deprecated-list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/Main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/NeighborsImplementation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/Cluster.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/Partition.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/LazyJoin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeNode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeRoot.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/NeighborsInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/ModelLoad.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/NeighborsController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/PartitionRun.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/CopyButton.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/NeighborButton.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/ObservablePartition.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCandidate.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCluster.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualPrefixes.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/CollectionsModel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/ElementUtils.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/ListUtils.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/PartitionException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/RandomString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/TableUtils.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/TimeOut.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounter.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounterCollection.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/SingletonStopwatchCollection.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/Stopwatch.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-18.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-19.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-20.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/external/jquery/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_65_dadada_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_75_dadada_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_222222_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_2e83ff_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_454545_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_888888_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/images/ui-icons_cd0a0a_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-3.3.1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-migrate-3.0.1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.structure.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jquery-ui.structure.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils-ie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils-ie.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip-utils/dist/jszip-utils.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip/dist/jszip.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/jquery/jszip/dist/jszip.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/member-search-index.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-search-index.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/serialized-form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/type-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -141,40 +36,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1666">
-              <caret line="110" selection-start-line="110" selection-end-line="110" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="68" column="16" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
+            <state relative-caret-position="570">
+              <caret line="298" column="9" lean-forward="true" selection-start-line="298" selection-start-column="9" selection-end-line="298" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/utils/TableUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="29" selection-start-column="29" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -183,43 +51,17 @@
         <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
           <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+            <state relative-caret-position="83">
+              <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
+        <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="142" column="5" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2203#2204#0" expanded="true" />
-                <element signature="e#2231#2232#0" expanded="true" />
-                <element signature="e#2349#2350#0" expanded="true" />
-                <element signature="e#2386#2387#0" expanded="true" />
-                <element signature="e#3996#3997#0" expanded="true" />
-                <element signature="e#4032#4033#0" expanded="true" />
-                <element signature="e#4115#4116#0" expanded="true" />
-                <element signature="e#4159#4160#0" expanded="true" />
-                <element signature="e#4546#4547#0" expanded="true" />
-                <element signature="e#4585#4586#0" expanded="true" />
-                <element signature="e#4626#4627#0" expanded="true" />
-                <element signature="e#4653#4654#0" expanded="true" />
-                <element signature="e#4964#4965#0" expanded="true" />
-                <element signature="e#5044#5045#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+            <state relative-caret-position="-93">
+              <caret line="80" column="54" selection-start-line="80" selection-start-column="54" selection-end-line="80" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -228,22 +70,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
+        <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2958">
-              <caret line="216" column="42" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="978">
+              <caret line="110" column="41" selection-start-line="110" selection-start-column="41" selection-end-line="110" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -261,14 +91,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>e_eq</find>
-      <find>replacea</find>
-      <find>solutionsList</find>
-      <find>Something went Wrong with the partition</find>
-      <find>children.add</find>
-      <find>logger</find>
-      <find>depre</find>
-      <find>seeAlso</find>
       <find>@see</find>
       <find>@author nfouque</find>
       <find>thread</find>
@@ -291,6 +113,14 @@
       <find>contains</find>
       <find>compute</find>
       <find>keys</find>
+      <find>kept</find>
+      <find>n°3[2-4]</find>
+      <find>is</find>
+      <find>is</find>
+      <find>is clas</find>
+      <find>is class</find>
+      <find>TRACE</find>
+      <find>trace</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -344,8 +174,6 @@
         <option value="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" />
         <option value="$PROJECT_DIR$/LICENSE.md" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/CopyButton.java" />
-        <option value="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" />
-        <option value="$PROJECT_DIR$/src/implementation/utils/TimeOut.java" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/ConsoleObserver.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/CallsCounter.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/profiling/CallsCounter.java" />
@@ -358,10 +186,6 @@
         <option value="$PROJECT_DIR$/src/implementation/gui/model/ObservablePartition.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/profiling/CallCounter.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/profiling/CallCounterCollection.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" />
         <option value="$PROJECT_DIR$/config" />
         <option value="$PROJECT_DIR$/run_interface.sh" />
         <option value="$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java" />
@@ -369,15 +193,21 @@
         <option value="$PROJECT_DIR$/src/results" />
         <option value="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" />
         <option value="$PROJECT_DIR$/src/implementation/algorithms/matchTree/LazyJoin.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" />
         <option value="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" />
-        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/TableUtils.java" />
-        <option value="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" />
+        <option value="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" />
         <option value="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" />
-        <option value="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" />
         <option value="$PROJECT_DIR$/src/implementation/utils/ElementUtils.java" />
+        <option value="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" />
+        <option value="$PROJECT_DIR$/src/implementation/utils/TimeOut.java" />
+        <option value="$PROJECT_DIR$/src/implementation/Main.java" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" />
+        <option value="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" />
       </list>
     </option>
   </component>
@@ -402,7 +232,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -413,17 +242,6 @@
             <path>
               <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
               <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-              <item name="implementation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -438,14 +256,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="implementation" type="462c0819:PsiDirectoryNode" />
               <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Similarity_Search" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="implementation" type="462c0819:PsiDirectoryNode" />
-              <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-              <item name="matchTree" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Similarity_Search" type="b2602c69:ProjectViewProjectNode" />
@@ -489,6 +299,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -554,7 +365,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.NeighborsInterface">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="implementation.Main" />
       <module name="Similarity_Search" />
@@ -664,13 +475,6 @@
       <workItem from="1563953174650" duration="9358000" />
       <workItem from="1563966544154" duration="11617000" />
       <workItem from="1564038647643" duration="241000" />
-    </task>
-    <task id="LOCAL-00015" summary="Refonte anytime Interface">
-      <created>1562147510802</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1562147510802</updated>
     </task>
     <task id="LOCAL-00016" summary="Readme Update + Datasets used in RDF Resources">
       <created>1562153473321</created>
@@ -1008,7 +812,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563979434033</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Implemented description depth &#10;&#10;Improved debug&#10;Fixed subclasses, subproperties">
+      <created>1564149195881</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1564149195882</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1044,7 +855,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="451988000" />
+    <option name="totallyTimeSpent" value="467327000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1058,7 +869,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28798726" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2903739" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1182,7 +993,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Javadoc in NeighborsController" />
     <MESSAGE value="Fixed 0 extensional distance cluster" />
     <MESSAGE value="Display number of clusters during Partition" />
     <MESSAGE value="Prevented unwanted interactions&#10;Inttrupt activating while no partition is running&#10;Launching partition before model in completely loaded" />
@@ -1207,19 +1017,8 @@
     <MESSAGE value="Replaced many Arraylists by Hashsets&#10;&#10;Lost unnecessary List ordering and gained Hashsets' computational speed&#10;Particularly significant gains on &quot;contains&quot; function" />
     <MESSAGE value="Moved key map in collections model, replaced RandomString by a counter for determinism" />
     <MESSAGE value="Refreshing Javadoc&#10;&#10;Deleting obsolete files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refreshing Javadoc&#10;&#10;Deleting obsolete files" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/implementation/Main.java</url>
-          <line>74</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Implemented description depth &#10;&#10;Improved debug&#10;Fixed subclasses, subproperties" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented description depth &#10;&#10;Improved debug&#10;Fixed subclasses, subproperties" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$Main.ic" NAME="Main Coverage Results" MODIFIED="1561385313536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -1242,9 +1041,6 @@
     </SUITE>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/implementation/gui/model/VisualCluster.java" />
-    <entry file="file:///tmp/modules.uml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/implementation/gui/controller/PartitionRun.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/implementation/gui/controller/ModelLoad.java" />
     <entry file="file://$PROJECT_DIR$/out/production/Similarity_Search/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor" />
@@ -1368,34 +1164,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="104" selection-start-line="18" selection-start-column="104" selection-end-line="18" selection-end-column="104" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/CopyButton.java" />
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/NeighborsImplementation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="41" column="91" selection-start-line="41" selection-start-column="91" selection-end-line="41" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../jdk-12.0.1_linux-x64_bin/jdk-12.0.1/lib/src.zip!/java.base/java/util/List.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -1417,38 +1186,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="37" column="9" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/results" />
     <entry file="jar://$PROJECT_DIR$/../jdk-12.0.1_linux-x64_bin/jdk-12.0.1/lib/src.zip!/java.base/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
           <caret line="107" column="13" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="227" column="4" selection-start-line="227" selection-start-column="4" selection-end-line="227" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1469,15 +1211,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3878">
-          <caret line="270" column="17" selection-start-line="270" selection-start-column="17" selection-end-line="270" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="107" column="13" lean-forward="true" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
+        <state relative-caret-position="4250">
+          <caret line="264" selection-start-line="264" selection-end-line="264" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1488,28 +1226,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/TimeOut.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/utils/RandomString.java" />
-    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="110" selection-start-line="110" selection-end-line="110" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1524,58 +1241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="142" column="5" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2203#2204#0" expanded="true" />
-            <element signature="e#2231#2232#0" expanded="true" />
-            <element signature="e#2349#2350#0" expanded="true" />
-            <element signature="e#2386#2387#0" expanded="true" />
-            <element signature="e#3996#3997#0" expanded="true" />
-            <element signature="e#4032#4033#0" expanded="true" />
-            <element signature="e#4115#4116#0" expanded="true" />
-            <element signature="e#4159#4160#0" expanded="true" />
-            <element signature="e#4546#4547#0" expanded="true" />
-            <element signature="e#4585#4586#0" expanded="true" />
-            <element signature="e#4626#4627#0" expanded="true" />
-            <element signature="e#4653#4654#0" expanded="true" />
-            <element signature="e#4964#4965#0" expanded="true" />
-            <element signature="e#5044#5045#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2958">
-          <caret line="216" column="42" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
@@ -1586,10 +1251,158 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sages">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1428" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../javafx-sdk-12.0.1/lib/javafx.controls.jar!/javafx/scene/control/Spinner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="217" selection-start-line="217" selection-end-line="217" />
+          <folding>
+            <element signature="e#9262#9263#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/TimeOut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/NeighborButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/NeighborsImplementation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="68" column="23" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Partition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="146">
+          <caret line="144" column="61" lean-forward="true" selection-start-line="144" selection-start-column="61" selection-end-line="144" selection-end-column="61" />
+          <folding>
+            <element signature="e#1805#1806#0" expanded="true" />
+            <element signature="e#1836#1837#0" expanded="true" />
+            <element signature="e#1997#1998#0" expanded="true" />
+            <element signature="e#2029#2030#0" expanded="true" />
+            <element signature="e#2167#2168#0" expanded="true" />
+            <element signature="e#2195#2196#0" expanded="true" />
+            <element signature="e#8272#8273#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/ElementUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="164" column="34" selection-start-line="164" selection-start-column="34" selection-end-line="164" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/algorithms/Cluster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="230" column="45" selection-start-line="230" selection-start-column="45" selection-end-line="230" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/utils/TimeOut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="39" column="52" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-93">
+          <caret line="80" column="54" selection-start-line="80" selection-start-column="54" selection-end-line="80" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="298" column="9" lean-forward="true" selection-start-line="298" selection-start-column="9" selection-end-line="298" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="978">
+          <caret line="110" column="41" selection-start-line="110" selection-start-column="41" selection-end-line="110" selection-end-column="41" />
         </state>
       </provider>
     </entry>
