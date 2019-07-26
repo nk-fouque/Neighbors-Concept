@@ -50,30 +50,32 @@ public class VisualCluster extends TitledPane {
         else
             this.textFillProperty().setValue(Paint.valueOf("#cd7777"));
 
-
-        // A HBox containing several VBox is like a BorderPane but it's better in case more information become useful and we need more columns
-        HBox box = new HBox();
+        // A VBox containing several HBox is like a BorderPane but it's better in case more information become useful and we need more columns/lines and in case we don't want them aligned
+        VBox box = new VBox(10);
         this.setContent(box);
 
+
+
+
         // Left side of the Pane
-        VBox texts = new VBox();
+        HBox texts = new HBox(20);
         Text similitude = new Text("Similitude : \n" + c.relaxQueryElementsString(md));
         Text neighbors = new Text("\nNeighbors : \n" + c.answersListString(md));
         texts.getChildren().addAll(similitude, neighbors);
         texts.autosize();
 
         // Right Side of the Pane
-        VBox gadgets = new VBox();
+        HBox gadgets = new HBox(10);
         CopyButton copy = new CopyButton(texts);
         Label extensional = new Label("Extensional distance : " + c.getExtensionDistance());
         Label intensional = new Label("Intensional similitude : " + c.getRelaxQueryElements().size());
         Label relax = new Label("Number of relaxations : " + c.getRelaxDistance());
-        gadgets.getChildren().addAll(copy, extensional, intensional, relax);
+        gadgets.getChildren().addAll(extensional, intensional, relax, copy);
         gadgets.autosize();
 
         // Whole Pane
-        box.getChildren().add(texts);
         box.getChildren().add(gadgets);
+        box.getChildren().add(texts);
         HBox.setMargin(texts, new Insets(10));
         HBox.setMargin(gadgets, new Insets(10));
         box.autosize();
@@ -88,9 +90,9 @@ public class VisualCluster extends TitledPane {
         /**
          * VBox containing the information to copy
          */
-        private VBox copyTarget;
+        private HBox copyTarget;
 
-        private CopyButton(VBox texts) {
+        private CopyButton(HBox texts) {
             super("Copy to clipboard");
             copyTarget = texts;
 
