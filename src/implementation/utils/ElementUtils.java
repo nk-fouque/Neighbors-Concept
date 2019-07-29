@@ -19,7 +19,6 @@ import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Logger;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -78,7 +77,7 @@ public class ElementUtils {
             for (Expr expr : f.getArgs()) {
                 if (expr instanceof NodeValueNode) {
                     logger.info("Relaxing : " + expr);
-                    list.addAll(describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model,model.getDepth(filter)+1));
+                    list.addAll(describeNode((expr).toString().replaceAll("<", "").replaceAll(">", ""), model, model.getDepth(filter) + 1));
                 } else {
                     logger.info(expr + " not NodeValueNode");
                 }
@@ -89,7 +88,7 @@ public class ElementUtils {
 
         Set<Element> res = new HashSet<>();
         for (Element e : list) {
-            if (!(e instanceof ElementFilter) || model.getDepth(filter)< descriptionDepth) {
+            if (!(e instanceof ElementFilter) || model.getDepth(filter) < descriptionDepth) {
                 res.add(e);
             }
         }
@@ -98,11 +97,11 @@ public class ElementUtils {
     }
 
     /**
-     * @param uri          The uri of the Node to be described
-     * @param model        The Model to use to describe the Node
+     * @param uri   The uri of the Node to be described
+     * @param model The Model to use to describe the Node
      * @return A list of Query elements (triple pattern and Filters) describing the Nodes known properties
      */
-    public static Set<Element> describeNode(String uri, CollectionsModel model,int depth) {
+    public static Set<Element> describeNode(String uri, CollectionsModel model, int depth) {
         final Set<Element> res = new HashSet<>();
         Resource node = new ResourceImpl(uri);
         StmtIterator triplesFrom = model.simpleTriplesFrom(node);
@@ -117,7 +116,7 @@ public class ElementUtils {
                 Var var;
                 if (object.isURIResource()) {
                     var = model.varKey(object.asResource().getURI());
-                } else if (object.isLiteral()){
+                } else if (object.isLiteral()) {
                     var = model.varKey(object.asLiteral().toString());
                 } else {
                     var = model.varKey(object.toString());
@@ -126,7 +125,7 @@ public class ElementUtils {
                 triple.addTriple(Triple.create(model.varKey(uri), property.asNode(), var));
                 res.add(triple);
                 ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(object.asNode())));
-                model.setDepth(filter,depth);
+                model.setDepth(filter, depth);
                 res.add(filter);
             }
         });
@@ -139,7 +138,7 @@ public class ElementUtils {
                 Var var;
                 if (subject.isURIResource()) {
                     var = model.varKey(subject.asResource().getURI());
-                } else if (subject.isLiteral()){
+                } else if (subject.isLiteral()) {
                     var = model.varKey(subject.asLiteral().toString());
                 } else {
                     var = model.varKey(subject.toString());
@@ -148,7 +147,7 @@ public class ElementUtils {
                 triple.addTriple(Triple.create(var, property.asNode(), model.varKey(uri)));
                 res.add(triple);
                 ElementFilter filter = new ElementFilter(new E_Equals(new ExprVar(var), new NodeValueNode(subject.asNode())));
-                model.setDepth(filter,depth);
+                model.setDepth(filter, depth);
                 res.add(filter);
             }
         });

@@ -7,8 +7,6 @@ import implementation.utils.PartitionException;
 import implementation.utils.TableUtils;
 import implementation.utils.profiling.CallCounterCollection;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
-import org.apache.jena.query.Query;
-import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.algebra.Table;
@@ -90,10 +88,10 @@ public class Partition {
         Set<Var> x = new HashSet<>();
         x.add(neighbor);
 
-        Set<Element> elements = ElementUtils.describeNode(uriTarget, colMd,1);
+        Set<Element> elements = ElementUtils.describeNode(uriTarget, colMd, 1);
 
         clusters = new ArrayList<>();
-        clusters.add(new Cluster(elements,x, colMd, getNextClusterId()));
+        clusters.add(new Cluster(elements, x, colMd, getNextClusterId()));
 
         neighbors = new ArrayList<>();
 
@@ -147,7 +145,7 @@ public class Partition {
             Table piMe;
             Table ae;
             try {
-                piMe = TableUtils.projection(me.getMatchSet(),c.getProj());
+                piMe = TableUtils.projection(me.getMatchSet(), c.getProj());
                 if (Level.TRACE.isGreaterOrEqual(logger.getLevel())) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ResultSet rs = piMe.toResultSet();

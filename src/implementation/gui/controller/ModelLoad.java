@@ -109,7 +109,7 @@ public class ModelLoad implements Runnable {
                     System.out.println(resource.isResource());
                     subjectsList.add(resource.getURI());
                 }
-                });
+            });
 
             controller.colMd = new CollectionsModel(md, null);
             controller.safePrompt(subjectsList);

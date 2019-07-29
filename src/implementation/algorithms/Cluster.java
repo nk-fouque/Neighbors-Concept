@@ -357,9 +357,8 @@ public class Cluster implements Comparable<Cluster> {
                     if (strings[2].contains("Neighbor")) return -2;
                     else return -1;
                 })
-                .thenComparingInt(strings -> (StringUtils.countMatches(strings[0], "?")+StringUtils.countMatches(strings[2], "?")))
-                .thenComparing(strings -> strings[1])
-        ;
+                .thenComparingInt(strings -> (StringUtils.countMatches(strings[0], "?") + StringUtils.countMatches(strings[2], "?")))
+                .thenComparing(strings -> strings[1]);
         pathBlocks.sort(order);
         List<String> res = new ArrayList<>();
         for (String[] strings : pathBlocks) {

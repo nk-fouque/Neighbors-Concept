@@ -13,6 +13,32 @@ in **Jena** A Java library for Semantic Web
 * https://jena.apache.org/documentation/javadoc/jena/ : Jena Documentation for Base RDF Graphs
 * https://jena.apache.org/documentation/javadoc/arq/ : Jena Documentation for ARQ, the SPARQL Engine
 * https://openjfx.io/javadoc/12/ : JavaFX Documentation
+## User Documentation
+### Using the Interface
+* Execute `implementation.gui.NeighborsInterface.main()` (done by the run_interface.sh script)
+* Find your RDF File
+  * Click on the *Browse* button and find your RDF file in the file explorer      
+  * **or** directly type the absolute path of the file on your system in the text field next to the button  
+* Select the right format for your file
+* Click on *Load RDF File*
+* In the choice box that appears on the right, select the uri of the node you want to find the neighbors of
+  * If there are too many possible nodes, you can narrow it down by typing part of the uri you want in the text field next to the *Filter* Button
+
+### Redistributable
+Jena and JavaFX are not included in this repository.  
+To use the launcher scripts, change variables in `config` to set up the path to your JDK, Jena and JavaFX  
+**This project was developed using JDK 12.0.1, Jena 3.12.0 and JavaFX 12.0.1**, make sure to use versions that are compatible with these  
+
+Two datasets are included in the repository : 
+  * royal.ttl describes basic info about the british royal family
+  * mondial.ttl (actually is a .nt file, only uses turtle for prefixes) describes many geographical items
+### Main Class
+* Every part of the main is explained in comments in the code
+* The lines you might want to change are : 
+  * The one setting up the String `filename` which is the absolute path of the file containing the RDF data
+  * The one setting up  the String `format` change the format to the format of your file (see Jena Documentation for supported formats) 
+  * The one setting up the String `uriTarget` which is the uri of the node you want to find the neighbors of
+  * The few ones at the beginning, defining the log4j logging levels
 ## Current Version  
 Javadoc at https://nk-fouque.github.io/Neighbors-Concept/  
 Run run_interface.sh to open interface
@@ -48,31 +74,6 @@ The Main class uses a back thread that cuts the algorithm after a certain amount
   
 The Interface has a field to select a time limit for the algorithm (also done in a back thread), 
 this limit cannot be set after starting the algorithm, the user will have to use the interrupt button
-### Notes
 ### Results
 * Works perfectly with any item of royal
-* Works with mondial
-   * Works to the end with any item when maximum heap size is 4096Mb
-   * Small freezes when the heap space is redefined, if startup heap space and maximum heap space are different
-## User Documentation
-### Redistributable
-Jena and JavaFX are not included in this repository.  
-To use the launcher scripts, change variables in `config` to set up the path to your JDK, Jena and JavaFX  
-**This project was developed using JDK 12.0.1, Jena 3.12.0 and JavaFX 12.0.1**, make sure to use versions that are compatible with these
-### Main Class
-* Every part of the main is explained in comments in the code
-* The lines you might want to change are : 
-  * The one setting up the String `filename` which is the absolute path of the file containing the RDF data
-  * The one setting up  the String `format` change the format to the format of your file (see Jena Documentation for supported formats) 
-  * The one setting up the String `uriTarget` which is the uri of the node you want to find the neighbors of
-  * The few ones at the beginning, defining the log4j logging levels
-### Using the Interface
-* Execute `implementation.gui.NeighborsInterface.main()`  
-* Find your RDF File
-  * Click on the *Browse* button and find your RDF file in the file explorer      
-  * **or** directly type the absolute path of the file on your system in the text field next to the button  
-* Select the right format for your file
-* Click on *Load RDF File*
-* In the choice box that appears on the right, select the uri of the node you want to find the neighbors of
-  * If there are too many possible nodes, you can narrow it down by typing part of the uri you want in the text field next to the *Filter* Button
-
+* Works with mondial at depth 1 or with timeout

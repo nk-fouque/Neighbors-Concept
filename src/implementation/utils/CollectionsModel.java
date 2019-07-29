@@ -28,7 +28,7 @@ public class CollectionsModel {
     private Map<Element, Table> ans = new HashMap<>();
     private Map<String, Var> keys = new HashMap<>();
     private int nextKey = 1;
-    private Map<Element,Integer> depth = new HashMap<>();
+    private Map<Element, Integer> depth = new HashMap<>();
 
     /**
      * @param md    The model to get informations from
@@ -67,14 +67,14 @@ public class CollectionsModel {
      * @return An iterator on resources that are subclasses of the one in parameter
      */
     public NodeIterator subClassesOf(Node node) {
-        return getGraph().listObjectsOfProperty( new ResourceImpl(node.getURI()), RDFS.subClassOf);
+        return getGraph().listObjectsOfProperty(new ResourceImpl(node.getURI()), RDFS.subClassOf);
     }
 
     /**
      * @return An iterator on resources that are subproperties of the one in parameter
      */
     public NodeIterator subPropertiesOf(Node node) {
-        return getGraph().listObjectsOfProperty( new ResourceImpl(node.getURI()), RDFS.subPropertyOf);
+        return getGraph().listObjectsOfProperty(new ResourceImpl(node.getURI()), RDFS.subPropertyOf);
     }
 
     /**
@@ -133,11 +133,11 @@ public class CollectionsModel {
         return keys;
     }
 
-    public Var varKey(String uri){
-        if (keys.containsKey(uri)){
+    public Var varKey(String uri) {
+        if (keys.containsKey(uri)) {
             return keys.get(uri);
         } else {
-            Var key = keys.computeIfAbsent(uri,var -> Var.alloc("x"+nextKey));
+            Var key = keys.computeIfAbsent(uri, var -> Var.alloc("x" + nextKey));
             nextKey++;
             return key;
         }
@@ -147,8 +147,8 @@ public class CollectionsModel {
         return depth.get(element);
     }
 
-    public int setDepth(Element element,int i){
-        depth.putIfAbsent(element,i);
+    public int setDepth(Element element, int i) {
+        depth.putIfAbsent(element, i);
         return depth.get(element);
     }
 
