@@ -1,6 +1,5 @@
 package implementation.gui.controller;
 
-import implementation.gui.model.VisualPrefixes;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -9,7 +8,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ResIterator;
@@ -18,7 +16,6 @@ import org.apache.jena.riot.RiotException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  * Runnable for back thread loading the Model, to avoid unresponsive interface during the loading

@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -30,7 +31,7 @@ public class VisualCluster extends TitledPane {
      */
     private Cluster cluster;
 
-    public VisualCluster(Cluster c, CollectionsModel md) {
+    public VisualCluster(Cluster c, CollectionsModel md, TextField filterField) {
         super();
         cluster = c;
         this.setText("Extensional distance : " + c.getExtensionDistance());
@@ -54,17 +55,18 @@ public class VisualCluster extends TitledPane {
         VBox box = new VBox(10);
         this.setContent(box);
 
-
-
-
-        // Left side of the Pane
+        // Bottom of the Pane
         HBox texts = new HBox(20);
         Text similitude = new Text("Similitude : \n" + c.relaxQueryElementsString(md));
-        Text neighbors = new Text("\nNeighbors : \n" + c.answersListString(md));
-        texts.getChildren().addAll(similitude, neighbors);
+        VBox neighbors = new VBox();
+        neighbors.getChildren().add(new Label("Neighbors"));
+        c.answersListString(md).lines().forEach(s -> {
+            neighbors.getChildren().add(new SubjectLink(s, filterField));
+        });
+        texts.getChildren().addAll(neighbors, similitude);
         texts.autosize();
 
-        // Right Side of the Pane
+        // Top of the Pane
         HBox gadgets = new HBox(10);
         CopyButton copy = new CopyButton(texts);
         Label extensional = new Label("Extensional distance : " + c.getExtensionDistance());

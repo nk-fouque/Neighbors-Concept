@@ -37,7 +37,6 @@ public class VisualCandidate extends BorderPane {
             }
         });
 
-
         setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
@@ -45,8 +44,7 @@ public class VisualCandidate extends BorderPane {
     private void promptDetails(Button details, String uri, CollectionsModel colMd, TextField textField) {
         Thread thread = new Thread(() -> {
             VisualGraphNode visualDetails = new VisualGraphNode(uri, colMd, textField);
-            Platform.runLater(() -> setCenter(visualDetails.predicatesFrom));
-            Platform.runLater(() -> setBottom(visualDetails.predicatesTo));
+            Platform.runLater(() -> setBottom(visualDetails.dbPrompt));
             Platform.runLater(() -> details.setText("Less Details"));
             detailsOnScreen.setValue(true);
             Thread.currentThread().interrupt();
@@ -55,7 +53,6 @@ public class VisualCandidate extends BorderPane {
     }
 
     private void clearDetails(Button details) {
-        Platform.runLater(() -> setCenter(null));
         Platform.runLater(() -> setBottom(null));
         Platform.runLater(() -> details.setText("More Details"));
         detailsOnScreen.setValue(false);

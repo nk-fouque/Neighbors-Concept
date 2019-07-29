@@ -4,6 +4,7 @@ import implementation.algorithms.matchTree.MatchTreeRoot;
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
 import implementation.utils.PartitionException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.ResultSetFormatter;
@@ -116,7 +117,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph
      */
-    public Cluster(Query qry, CollectionsModel graph,int id) {
+    public Cluster(Query qry, CollectionsModel graph, int id) {
         this.id = id;
         this.proj = new HashSet<>(qry.getProjectVars());
         this.relaxQueryElements = new HashSet<>();
@@ -145,7 +146,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates a cluster with the same values as an other but different Mapping ext Answers
      */
-    public Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance,int id) {
+    public Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance, int id) {
         this.proj = new HashSet<>(c.getProj());
         this.relaxQueryElements = new HashSet<>();
         this.relaxQueryElements.addAll(c.getRelaxQueryElements());
@@ -265,7 +266,7 @@ public class Cluster implements Comparable<Cluster> {
 
     @Override
     public String toString() {
-        String res = "Cluster n°"+id+"\n";
+        String res = "Cluster n°" + id + "\n";
         res += "Extentional Distance : " + relaxDistance + "\n";
         res += "Elements : " + relaxQueryElements + "\n";
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
@@ -286,7 +287,7 @@ public class Cluster implements Comparable<Cluster> {
      * @param colMd the model to use for prefixes
      */
     public String toString(CollectionsModel colMd) {
-        String res = "Cluster n°"+id+"\n";
+        String res = "Cluster n°" + id + "\n";
         res += "Number of relaxation : " + relaxDistance + "\n";
         res += "Extensional Distance : " + extensionDistance + "\n";
         res += "Elements : " + relaxQueryElements + "\n";
@@ -352,6 +353,10 @@ public class Cluster implements Comparable<Cluster> {
                 }
             }
         }
+        pathBlocks.sort(Comparator.<String[]>comparingInt(string -> {
+            if(string[0].contains("Neighbor")) return -1;
+            else return 1;
+        }));
         List<String> res = new ArrayList<>();
         for (String[] strings : pathBlocks) {
             String s = "";
@@ -374,6 +379,10 @@ public class Cluster implements Comparable<Cluster> {
             }
             res.add(s);
         }
+        Comparator<String> order = Comparator
+                .<String>comparingInt(string -> StringUtils.countMatches(string, "?"))
+                .thenComparingInt(string -> StringUtils.countMatches(string, "?Neighbor"));
+        res.sort(order);
         return res.toString()
                 .replace("[", "")
                 .replace("]", "")

@@ -258,6 +258,7 @@ public class NeighborsController implements Initializable {
         cutButton.setStyle("");
         cutLabel.setVisible(false);
     }
+
     private Thread timeOut(int timeLimit) {
         Thread res = new Thread(new Runnable() {
             @Override
@@ -274,8 +275,8 @@ public class NeighborsController implements Initializable {
     }
 
 
-    public void safePrompt(List<String> subjectsList){
-        if (subjectsList.size() < safeModeLimit.getValue() || !safeModeBox.isSelected()){
+    public void safePrompt(List<String> subjectsList) {
+        if (subjectsList.size() <= safeModeLimit.getValue() || !safeModeBox.isSelected()) {
             PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
 
             Platform.runLater(() -> loadingState.setValue("Building Visuals"));
@@ -291,8 +292,8 @@ public class NeighborsController implements Initializable {
         } else {
             TitledPane err = new TitledPane();
             err.setText("Too many results");
-            err.setContent(new Text("Search gave "+subjectsList.size()+" results " +
-                    "\nCurrent Safe Mode limit is "+safeModeLimit.getValue()+" results" +
+            err.setContent(new Text("Search gave " + subjectsList.size() + " results " +
+                    "\nCurrent Safe Mode limit is " + safeModeLimit.getValue() + " results" +
                     "\nTry refining your filter or disabling/increasing Safe Mode limit" +
                     "\n \n/!\\ Disabling Safe Mode can make the application slow /!\\"));
             Platform.runLater(() -> candidates.getChildren().add(err));
