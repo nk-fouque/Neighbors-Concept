@@ -83,6 +83,7 @@ public class VisualCluster extends TitledPane {
         box.autosize();
 
         this.autosize();
+        this.setExpanded(false);
     }
 
     /**

@@ -6,10 +6,10 @@ import implementation.gui.model.VisualCluster;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
 
@@ -33,9 +33,9 @@ public class PartitionRun implements Runnable {
      */
     private String uriTarget;
     /**
-     * Accordion to put the resulting clusters in
+     * VBox to put the resulting clusters in
      */
-    private Accordion resultsContainer;
+    private VBox resultsContainer;
     /**
      * Boolean property to indicate that no other partition should be run at the same time
      */
@@ -69,7 +69,7 @@ public class PartitionRun implements Runnable {
      * @param cut        {@link #cut}
      * @param controller {@link #mainController}
      */
-    public PartitionRun(Model md, String uri, Accordion container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane, Spinner<Integer> descriptionDepth) {
+    public PartitionRun(Model md, String uri, VBox container, BooleanProperty available, AtomicBoolean cut, NeighborsController controller, TitledPane loadingPane, Spinner<Integer> descriptionDepth) {
         super();
         graph = md;
         uriTarget = uri;
@@ -100,20 +100,20 @@ public class PartitionRun implements Runnable {
         partition.cut();
 
         if (algoRun >= 0) {
-            Platform.runLater(() -> resultsContainer.getPanes().clear());
+            Platform.runLater(() -> resultsContainer.getChildren().clear());
             PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
                 TitledPane cluster = new VisualCluster(c, partition.getGraph(), mainController.filterSubjectsField);
-                Platform.runLater(() -> resultsContainer.getPanes().add(cluster));
+                Platform.runLater(() -> resultsContainer.getChildren().add(cluster));
             }
             Platform.runLater(() -> resultsContainer.autosize());
         } else {
-            Platform.runLater(() -> resultsContainer.getPanes().clear());
+            Platform.runLater(() -> resultsContainer.getChildren().clear());
             TitledPane error = new TitledPane();
             error.setText("Something went wrong :/");
             error.setContent(new Text("Error details in Java Console"));
-            Platform.runLater(() -> resultsContainer.getPanes().add(error));
+            Platform.runLater(() -> resultsContainer.getChildren().add(error));
         }
         available.setValue(true);
         mainController.cutDeactivate();

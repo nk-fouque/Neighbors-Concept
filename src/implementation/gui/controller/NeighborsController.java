@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
@@ -68,7 +69,7 @@ public class NeighborsController implements Initializable {
     @FXML
     BorderPane partitionResults;
     @FXML
-    Accordion partitionAccordion;
+    VBox partitionAccordion;
 
     @FXML
     Spinner<Integer> timeLimit;
@@ -178,10 +179,10 @@ public class NeighborsController implements Initializable {
         selectedNodeField.autosize();
         partitionButton.disableProperty().bind(partitionAvailable.not());
         partitionButton.setOnMouseClicked(mouseEvent -> {
-            partitionAccordion.getPanes().clear();
+            partitionAccordion.getChildren().clear();
             TitledPane loading = new TitledPane();
             loading.setText("Loading neighbors for " + selectedNodeField.textProperty().get() + " please wait");
-            partitionAccordion.getPanes().add(loading);
+            partitionAccordion.getChildren().add(loading);
             Runnable algo = new PartitionRun(md, selectedNodeField.textProperty().get(), partitionAccordion, partitionAvailable, anytimeCut, this, loading, depthLimit);
             Thread thread = new Thread(algo);
             if (timeLimit.getValue() > 0) {
@@ -287,8 +288,6 @@ public class NeighborsController implements Initializable {
                 Platform.runLater(() -> candidates.getChildren().add(visual));
             }
             Platform.runLater(() -> partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded)));
-
-            Platform.runLater(() -> partitionAvailable.setValue(true));
         } else {
             TitledPane err = new TitledPane();
             err.setText("Too many results");

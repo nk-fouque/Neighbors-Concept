@@ -14,6 +14,7 @@ public class SubjectLink extends Hyperlink {
             KeyEvent trigger = new KeyEvent(KeyEvent.KEY_PRESSED, "", "",
                     KeyCode.ENTER, false, false, false, false);
             Platform.runLater(() -> filter.getOnKeyPressed().handle(trigger));
+            Platform.runLater(() -> this.visitedProperty().setValue(false));
         });
     }
 }

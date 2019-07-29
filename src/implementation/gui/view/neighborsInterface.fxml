@@ -81,7 +81,7 @@
                             </top>
                             <center>
                                 <ScrollPane>
-                                    <Accordion fx:id="partitionAccordion"/>
+                                    <VBox fx:id="partitionAccordion"/>
                                 </ScrollPane>
                             </center>
                         </BorderPane>
