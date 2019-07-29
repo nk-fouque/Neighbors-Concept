@@ -21,11 +21,11 @@ public class VisualCandidate extends BorderPane {
         Label text = new Label(colMd.getGraph().shortForm(uri));
         BorderPane topPane = new BorderPane();
 
-        topPane.setLeft(button);
+        topPane.setRight(button);
         topPane.setCenter(text);
 
         Button detailsButton = new Button("More Details");
-        topPane.setRight(detailsButton);
+        topPane.setLeft(detailsButton);
 
         setTop(topPane);
 

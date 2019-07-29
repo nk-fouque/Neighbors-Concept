@@ -163,7 +163,7 @@ public class NeighborsController implements Initializable {
         safeModeBox.setSelected(true);
 
         cutLabel.setVisible(false);
-        cutLabel.setText("/!\\ Algorithm will stop early /!\\");
+        cutLabel.setText("/!\\ Algorithm will stop soon /!\\");
         cutButton.disableProperty().bind(partitionAvailable);
         cutButton.setOnMouseClicked(mouseEvent -> {
             if (!anytimeCut.get()) {
