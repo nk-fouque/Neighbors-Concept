@@ -117,8 +117,10 @@ public class ElementUtils {
                 Var var;
                 if (object.isURIResource()) {
                     var = model.varKey(object.asResource().getURI());
-                } else {
+                } else if (object.isLiteral()){
                     var = model.varKey(object.asLiteral().toString());
+                } else {
+                    var = model.varKey(object.toString());
                 }
                 ElementPathBlock triple = new ElementPathBlock();
                 triple.addTriple(Triple.create(model.varKey(uri), property.asNode(), var));
@@ -137,8 +139,10 @@ public class ElementUtils {
                 Var var;
                 if (subject.isURIResource()) {
                     var = model.varKey(subject.asResource().getURI());
-                } else {
+                } else if (subject.isLiteral()){
                     var = model.varKey(subject.asLiteral().toString());
+                } else {
+                    var = model.varKey(subject.toString());
                 }
                 ElementPathBlock triple = new ElementPathBlock();
                 triple.addTriple(Triple.create(var, property.asNode(), model.varKey(uri)));

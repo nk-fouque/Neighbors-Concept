@@ -6,7 +6,6 @@ import implementation.utils.ElementUtils;
 import implementation.utils.PartitionException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.graph.Node;
-import org.apache.jena.query.Query;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.algebra.Table;
 import org.apache.jena.sparql.core.TriplePath;
@@ -16,7 +15,6 @@ import org.apache.jena.sparql.expr.E_Equals;
 import org.apache.jena.sparql.expr.Expr;
 import org.apache.jena.sparql.syntax.Element;
 import org.apache.jena.sparql.syntax.ElementFilter;
-import org.apache.jena.sparql.syntax.ElementGroup;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Level;
@@ -24,6 +22,7 @@ import org.apache.log4j.Logger;
 
 import java.io.ByteArrayOutputStream;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author nk-fouque
@@ -117,30 +116,17 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph
      */
-    public Cluster(Query qry, CollectionsModel graph, int id) {
+    public Cluster(Set<Element> elements, Set<Var> vars, CollectionsModel graph, int id) {
         this.id = id;
-        this.proj = new HashSet<>(qry.getProjectVars());
+        this.proj = new HashSet<>(vars);
         this.relaxQueryElements = new HashSet<>();
         this.relaxDistance = 0;
-        this.availableQueryElements = new HashSet<>();
-        List<Element> list = (((ElementGroup) qry.getQueryPattern()).getElements());
-        for (Element e : list) {
-            if (e instanceof ElementPathBlock) {
-                List<TriplePath> triplelist = (((ElementPathBlock) e).getPattern().getList());
-                for (TriplePath t : triplelist) {
-                    ElementPathBlock element = new ElementPathBlock();
-                    element.addTriple(t);
-                    availableQueryElements.add(element);
-                }
-            } else if (e instanceof ElementFilter) {
-                availableQueryElements.add(e);
-            }
-        }
+        this.availableQueryElements = new HashSet<>(elements);
         this.removedQueryElements = new HashSet<>();
         mapping = new MatchTreeRoot(getProj(), graph);
         answers = mapping.getMatchSet();
         extensionDistance = answers.size();
-        this.connectedVars = new HashSet<>(qry.getProjectVars());
+        this.connectedVars = new HashSet<>(vars);
     }
 
     /**
@@ -318,9 +304,18 @@ public class Cluster implements Comparable<Cluster> {
      * @param colMd The model in which to search prefix mappings
      */
     public String answersListString(CollectionsModel colMd) {
-        List<String> res = new ArrayList<>();
-        getAnswersList().forEach(n -> res.add(colMd.getGraph().shortForm(n.toString())));
-        return res.toString().replace("[", "").replace("]", "").replaceAll(", ", "\n");
+        List<String> list = new ArrayList<>();
+        AtomicInteger blankCounter = new AtomicInteger();
+        getAnswersList().forEach(n -> {
+            if (!n.isBlank()) {
+                list.add(colMd.getGraph().shortForm(n.toString()));
+            } else {
+                blankCounter.getAndIncrement();
+            }
+        });
+        String res = list.toString().replace("[", "").replace("]", "").replaceAll(", ", "\n");
+        if (blankCounter.get() != 0) res += "\n" + blankCounter + " blank nodes";
+        return res;
     }
 
     /**
@@ -353,10 +348,19 @@ public class Cluster implements Comparable<Cluster> {
                 }
             }
         }
-        pathBlocks.sort(Comparator.<String[]>comparingInt(string -> {
-            if(string[0].contains("Neighbor")) return -1;
-            else return 1;
-        }));
+        Comparator<String[]> order = Comparator
+                .<String[]>comparingInt(strings -> {
+                    if (strings[0].contains("Neighbor")) return -2;
+                    else return -1;
+                })
+                .thenComparingInt(strings -> {
+                    if (strings[2].contains("Neighbor")) return -2;
+                    else return -1;
+                })
+                .thenComparingInt(strings -> (StringUtils.countMatches(strings[0], "?")+StringUtils.countMatches(strings[2], "?")))
+                .thenComparing(strings -> strings[1])
+        ;
+        pathBlocks.sort(order);
         List<String> res = new ArrayList<>();
         for (String[] strings : pathBlocks) {
             String s = "";
@@ -379,10 +383,6 @@ public class Cluster implements Comparable<Cluster> {
             }
             res.add(s);
         }
-        Comparator<String> order = Comparator
-                .<String>comparingInt(string -> StringUtils.countMatches(string, "?"))
-                .thenComparingInt(string -> StringUtils.countMatches(string, "?Neighbor"));
-        res.sort(order);
         return res.toString()
                 .replace("[", "")
                 .replace("]", "")

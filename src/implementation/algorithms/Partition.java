@@ -85,10 +85,15 @@ public class Partition {
         nextCluster = 0;
         graph = colMd;
 
-        String querySting = initialQueryString(uriTarget, colMd);
-        Query q = QueryFactory.create(querySting);
+        Var neighbor = Var.alloc("Neighbor");
+        graph.getKeys().put(uriTarget, neighbor);
+        Set<Var> x = new HashSet<>();
+        x.add(neighbor);
+
+        Set<Element> elements = ElementUtils.describeNode(uriTarget, colMd,1);
+
         clusters = new ArrayList<>();
-        clusters.add(new Cluster(q, colMd, getNextClusterId()));
+        clusters.add(new Cluster(elements,x, colMd, getNextClusterId()));
 
         neighbors = new ArrayList<>();
 
@@ -240,22 +245,6 @@ public class Partition {
             res.append(queue.poll().toString(graph)).append("\n\n");
         }
         return res.toString();
-    }
-
-    /**
-     * @param uri   The full length uri of the node to describe
-     * @param colMd The CollectionsModel in which to describe the node
-     * @return A String in the form of a SPARQL Query that "describes" the node (i.e. looks to return the exact same object)
-     */
-    public String initialQueryString(String uri, CollectionsModel colMd) {
-        Var neighbor = Var.alloc("Neighbor");
-        graph.getKeys().put(uri, neighbor);
-
-        Set<Var> x = new HashSet<>();
-        x.add(neighbor);
-
-        String res = ElementUtils.getSelectStringFrom(x, ElementUtils.describeNode(uri, colMd,1));
-        return res;
     }
 
     public int getNextClusterId() {

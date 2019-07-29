@@ -95,19 +95,28 @@ public class ModelLoad implements Runnable {
             Platform.runLater(() -> state.setValue("Reading File"));
             md.removeAll();
             md.read(new FileInputStream(file), null, format);
-            md.write(System.out, format);
+//            md.write(System.out, format);
 
             Platform.runLater(() -> state.setValue("Building List"));
             subjectsList.clear();
             ResIterator iter = md.listSubjects();
-            while (iter.hasNext()) {
-                subjectsList.add(iter.nextResource().getURI());
-            }
+            iter.forEachRemaining(resource -> {
+                if (resource.isURIResource()) {
+                    System.out.println(resource.toString());
+                    System.out.println(resource.isURIResource());
+                    System.out.println(resource.isAnon());
+                    System.out.println(resource.isLiteral());
+                    System.out.println(resource.isResource());
+                    subjectsList.add(resource.getURI());
+                }
+                });
 
             controller.colMd = new CollectionsModel(md, null);
             controller.safePrompt(subjectsList);
             Platform.runLater(() -> state.setValue("Model Loaded"));
             Platform.runLater(() -> modelLoaded.setValue(true));
+
+            Platform.runLater(() -> controller.partitionAvailable.setValue(true));
 
         } catch (FileNotFoundException e) {
             TitledPane err = new TitledPane();
