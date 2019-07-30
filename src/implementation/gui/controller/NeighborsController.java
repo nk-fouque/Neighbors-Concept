@@ -6,10 +6,7 @@ import implementation.gui.model.VisualCandidate;
 import implementation.gui.model.VisualPrefixes;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -24,13 +21,12 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.ResIterator;
+import org.apache.jena.rdf.model.Resource;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NeighborsController implements Initializable {
@@ -54,6 +50,12 @@ public class NeighborsController implements Initializable {
     Button filterSubjectsButton;
     @FXML
     CheckBox caseSensBox;
+
+    @FXML
+    CheckBox anonBox;
+
+    @FXML
+    Button previousNavigation;
     @FXML
     CheckBox safeModeBox;
     @FXML
@@ -138,7 +140,7 @@ public class NeighborsController implements Initializable {
             filterSubjectsField.setText("");
             String filename = filenameField.getText();
             modelLoaded.setValue(false);
-            ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded);
+            ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded,blankNodesCounter);
             Thread load = new Thread(loader);
             loader.stateProperty().bindBidirectional(loadingState);
             Label modelState = new Label();
@@ -152,12 +154,12 @@ public class NeighborsController implements Initializable {
 
         filterSubjectsField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                filter(filterSubjectsField.getText());
+                filter(filterSubjectsField.getText(),true);
             }
         });
         filterSubjectsField.prefWidthProperty().setValue(300);
         filterSubjectsField.disableProperty().bind(modelLoaded.not());
-        filterSubjectsButton.setOnMouseClicked(mouseEvent -> filter(filterSubjectsField.getText()));
+        filterSubjectsButton.setOnMouseClicked(mouseEvent -> filter(filterSubjectsField.getText(),true));
         filterSubjectsButton.disableProperty().bind(modelLoaded.not());
         caseSensBox.disableProperty().bind(modelLoaded.not());
 
@@ -204,17 +206,24 @@ public class NeighborsController implements Initializable {
      */
     private void filter(String filter) {
         candidates.getChildren().clear();
+        blankNodesCounter.set(0);
         List<String> filteredList = new ArrayList<>();
         if (!caseSensBox.isSelected()) filter = filter.toLowerCase();
-        for (String s : subjectsList) {
+        for (ResIterator it = md.listSubjects(); it.hasNext(); ) {
+            Resource resource = it.nextResource();
+            if (resource.isAnon()){
+                if (anonBox.isSelected()) continue;
+                else blankNodesCounter.set(blankNodesCounter.get()+1);
+            }
+            String s = resource.toString();
             String s2;
             String s3;
             if (!caseSensBox.isSelected()) {
                 s2 = s.toLowerCase();
-                s3 = colMd.getGraph().shortForm(s).toLowerCase();
+                s3 = colMd.shortform(s).toLowerCase();
             } else {
                 s2 = s;
-                s3 = colMd.getGraph().shortForm(s);
+                s3 = colMd.shortform(s);
             }
             if (s2.contains(filter) || s3.contains(filter)) {
                 filteredList.add(s);
@@ -291,10 +300,15 @@ public class NeighborsController implements Initializable {
         } else {
             TitledPane err = new TitledPane();
             err.setText("Too many results");
-            err.setContent(new Text("Search gave " + subjectsList.size() + " results " +
-                    "\nCurrent Safe Mode limit is " + safeModeLimit.getValue() + " results" +
+            String text = "Search gave " + subjectsList.size() + " results";
+            if (blankNodesCounter.get()!=0){
+                text += "\n("+blankNodesCounter.get()+" anonymous nodes)";
+            }
+            text += "\nCurrent Safe Mode limit is " + safeModeLimit.getValue() + " results" +
                     "\nTry refining your filter or disabling/increasing Safe Mode limit" +
-                    "\n \n/!\\ Disabling Safe Mode can make the application slow /!\\"));
+                    "\n \n/!\\ Disabling Safe Mode can make the application slow /!\\";
+
+            err.setContent(new Text(text));
             Platform.runLater(() -> candidates.getChildren().add(err));
         }
 

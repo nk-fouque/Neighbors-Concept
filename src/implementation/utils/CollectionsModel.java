@@ -157,4 +157,15 @@ public class CollectionsModel {
         return ("\n\n" + triplesSimple + "\n\n" + triplesSimpleReversed);
     }
 
+    public String shortform(String s){
+        String res = getGraph().shortForm(s);
+        if (res.contains("^^")){
+            String[] temp = res.split("\\^\\^",2);
+            String val = temp[0];
+            String type = getGraph().shortForm(temp[1]);
+            res = (val+"^^"+type);
+        }
+        return res;
+    }
+
 }

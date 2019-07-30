@@ -22,13 +22,15 @@ public class VisualGraphNode {
         int propertiesRow = 0;
         Map<Property, List<RDFNode>> propertiesFrom = colMd.getTriplesSimple().get(uri);
         for (Property property : propertiesFrom.keySet()) {
-            dbPrompt.add(new Label("\t" + colMd.getGraph().shortForm(property.getURI())), 0, propertiesRow);
+            dbPrompt.add(new Label("\t" + colMd.shortform(property.getURI())), 0, propertiesRow);
             for (RDFNode node : propertiesFrom.get(property)) {
                 Node object;
                 if (node.isURIResource()) {
-                    object = new SubjectLink(colMd.getGraph().shortForm(node.toString()), textField);
+                    object = new SubjectLink(colMd.shortform(node.toString()), textField);
+                } else if (node.isAnon()) {
+                    object = new BlankNodeLink(node.toString(),textField);
                 } else {
-                    object = new Label(" " + node.toString());
+                    object = new Label(" " + colMd.shortform(node.toString()));
                 }
                 dbPrompt.add(object, 1, propertiesRow);
                 propertiesRow++;
@@ -38,11 +40,12 @@ public class VisualGraphNode {
         Map<Property, List<RDFNode>> propertiesTo = colMd.getTriplesSimpleReversed().get(uri);
         if (propertiesTo != null) {
             for (Property property : propertiesTo.keySet()) {
-                dbPrompt.add(new Label("\tis " + colMd.getGraph().shortForm(property.getURI()) + " of"), 0, propertiesRow);
+                dbPrompt.add(new Label("\tis " + colMd.shortform(property.getURI()) + " of"), 0, propertiesRow);
                 for (RDFNode node : propertiesTo.get(property)) {
-                    Node subjectClickable = new SubjectLink(colMd.getGraph().shortForm(node.toString()), textField);
-                    dbPrompt.add(subjectClickable, 1, propertiesRow);
-                    propertiesRow++;
+                        SubjectLink subjectClickable = new SubjectLink(colMd.shortform(node.toString()), textField);
+                        dbPrompt.add(subjectClickable, 1, propertiesRow);
+                        propertiesRow++;
+
                 }
             }
         }

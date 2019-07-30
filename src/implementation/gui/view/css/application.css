@@ -52,3 +52,10 @@
 .flowpane {
     -fx-vgap: 15;
 }
+
+.spinner .increment-arrow-button {
+    -fx-padding: 1 2 1 2; /*caspian.css values are 4 8 4 8 */
+}
+.spinner .decrement-arrow-button {
+    -fx-padding: 1 2 1 2; /*caspian.css values are 3 8 6 8 */
+}

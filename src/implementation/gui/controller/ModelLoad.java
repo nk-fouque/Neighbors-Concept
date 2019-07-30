@@ -2,15 +2,12 @@ package implementation.gui.controller;
 
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.riot.RiotException;
 
 import java.io.FileInputStream;
@@ -59,16 +56,22 @@ public class ModelLoad implements Runnable {
     private BooleanProperty modelLoaded;
 
     /**
+     * Property used by the controller to know how many blank nodes there are
+     */
+    private IntegerProperty blankNodesCounter;
+
+    /**
      * Base constructor
      *
-     * @param filename The absolute path of the RDF file on the system
-     * @param format   The format of the RDF file as a Jena-understandable string
-     * @param md       The Model to be modified inside the Controller
-     * @param origin   The Controller the loader has been called by
-     * @param subjects The list of subjects stored in the controller
-     * @param loaded   Property used by the controller to know if a controller has been loaded
+     * @param filename          The absolute path of the RDF file on the system
+     * @param format            The format of the RDF file as a Jena-understandable string
+     * @param md                The Model to be modified inside the Controller
+     * @param origin            The Controller the loader has been called by
+     * @param subjects          The list of subjects stored in the controller
+     * @param loaded            Property used by the controller to know if a controller has been loaded
+     * @param blankNodesCounter
      */
-    public ModelLoad(String filename, String format, Model md, NeighborsController origin, List<String> subjects, BooleanProperty loaded) {
+    public ModelLoad(String filename, String format, Model md, NeighborsController origin, List<String> subjects, BooleanProperty loaded, IntegerProperty blankNodesCounter) {
         super();
         file = filename;
         this.format = format;
@@ -77,6 +80,8 @@ public class ModelLoad implements Runnable {
         this.modelLoaded = loaded;
         state = new SimpleStringProperty("");
         controller = origin;
+        this.blankNodesCounter = new SimpleIntegerProperty();
+        this.blankNodesCounter.bindBidirectional(blankNodesCounter);
     }
 
     /**
@@ -99,23 +104,11 @@ public class ModelLoad implements Runnable {
 
             Platform.runLater(() -> state.setValue("Building List"));
             subjectsList.clear();
-            ResIterator iter = md.listSubjects();
-            iter.forEachRemaining(resource -> {
-                if (resource.isURIResource()) {
-                    System.out.println(resource.toString());
-                    System.out.println(resource.isURIResource());
-                    System.out.println(resource.isAnon());
-                    System.out.println(resource.isLiteral());
-                    System.out.println(resource.isResource());
-                    subjectsList.add(resource.getURI());
-                }
-            });
-
+            blankNodesCounter.set(0);
             controller.colMd = new CollectionsModel(md, null);
-            controller.safePrompt(subjectsList);
+            Platform.runLater(() -> controller.filter("",true));
             Platform.runLater(() -> state.setValue("Model Loaded"));
             Platform.runLater(() -> modelLoaded.setValue(true));
-
             Platform.runLater(() -> controller.partitionAvailable.setValue(true));
 
         } catch (FileNotFoundException e) {

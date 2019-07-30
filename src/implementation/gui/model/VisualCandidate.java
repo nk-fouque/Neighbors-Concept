@@ -18,7 +18,7 @@ public class VisualCandidate extends BorderPane {
 
     public VisualCandidate(String uri, CollectionsModel colMd, Button button, TextField textField) {
         super();
-        Label text = new Label(colMd.getGraph().shortForm(uri));
+        Label text = new Label(colMd.shortform(uri));
         BorderPane topPane = new BorderPane();
 
         topPane.setRight(button);

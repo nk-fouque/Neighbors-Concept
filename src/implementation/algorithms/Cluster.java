@@ -308,7 +308,7 @@ public class Cluster implements Comparable<Cluster> {
         AtomicInteger blankCounter = new AtomicInteger();
         getAnswersList().forEach(n -> {
             if (!n.isBlank()) {
-                list.add(colMd.getGraph().shortForm(n.toString()));
+                list.add(colMd.shortform(n.toString()));
             } else {
                 blankCounter.getAndIncrement();
             }
@@ -327,15 +327,15 @@ public class Cluster implements Comparable<Cluster> {
         for (Element e : relaxQueryElements) {
             if (e instanceof ElementPathBlock) {
                 TriplePath t = ((ElementPathBlock) e).getPattern().get(0);
-                String s0 = colMd.getGraph().shortForm(t.getSubject().toString()
+                String s0 = colMd.shortform(t.getSubject().toString()
                         .replaceAll(">", "")
                         .replaceAll("<", ""));
-                String s1 = colMd.getGraph().shortForm(t.getPredicate().toString()
+                String s1 = colMd.shortform(t.getPredicate().toString()
                         .replaceAll(">", "")
                         .replaceAll("<", ""))
                         .replaceAll("rdf:type", "a")
                         .replaceAll("http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "a");
-                String s2 = colMd.getGraph().shortForm(t.getObject().toString()
+                String s2 = colMd.shortform(t.getObject().toString()
                         .replaceAll(">", "")
                         .replaceAll("<", ""));
                 pathBlocks.add(new String[]{s0, s1, s2});
@@ -344,7 +344,7 @@ public class Cluster implements Comparable<Cluster> {
                 if (expr instanceof E_Equals) {
                     String var = (((E_Equals) expr).getArg1()).toString();
                     String node = (((E_Equals) expr).getArg2()).toString().replaceAll(">", "").replaceAll("<", "");
-                    filters.put(var, colMd.getGraph().shortForm(node));
+                    filters.put(var, colMd.shortform(node));
                 }
             }
         }
@@ -358,7 +358,8 @@ public class Cluster implements Comparable<Cluster> {
                     else return -1;
                 })
                 .thenComparingInt(strings -> (StringUtils.countMatches(strings[0], "?") + StringUtils.countMatches(strings[2], "?")))
-                .thenComparing(strings -> strings[1]);
+                .thenComparing(strings -> strings[1])
+                .thenComparing(strings -> strings[2]);
         pathBlocks.sort(order);
         List<String> res = new ArrayList<>();
         for (String[] strings : pathBlocks) {
