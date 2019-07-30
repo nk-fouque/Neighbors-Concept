@@ -10,83 +10,75 @@
     <children>
         <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="0">
             <top>
-                <ToolBar>
-                    <Button text="Browse" fx:id="fileFindButton"/>
-                    <Label text="RDF File path :" styleClass="grey"/>
-                    <TextField fx:id="filenameField" prefWidth="250"/>
-                    <ChoiceBox fx:id="format"/>
-                    <Button fx:id="modelLoadButton" text="Load RDF File"/>
-                </ToolBar>
+                <VBox>
+                    <ToolBar>
+                        <Button text="Browse" fx:id="fileFindButton"/>
+                        <Label text="RDF File path :" styleClass="grey"/>
+                        <TextField fx:id="filenameField" prefWidth="250"/>
+                        <ChoiceBox fx:id="format"/>
+                        <Button fx:id="modelLoadButton" text="Load RDF File"/>
+                    </ToolBar>
+                    <ToolBar>
+                        <TextField fx:id="filterSubjectsField"/>
+                        <Button text="Filter" fx:id="filterSubjectsButton"/>
+                        <CheckBox fx:id="caseSensBox" text="Case Sensitive"/>
+
+                        <CheckBox fx:id="bNodeBox" text="Ignore BNodes"/>
+                    </ToolBar>
+                    <ToolBar>
+                        <Button fx:id="previousNavigation" text="⇐ Back" />
+                        <CheckBox fx:id="safeModeBox" text="Safe Mode"/>
+                        <Spinner fx:id="safeModeLimit" editable="true" prefWidth="75">
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="25" min="1"
+                                                                                max="9999"/>
+                            </valueFactory>
+                        </Spinner>
+                    </ToolBar>
+
+                </VBox>
             </top>
             <center>
-                <BorderPane>
-                    <top>
-                        <ToolBar>
-                            <TextField fx:id="filterSubjectsField"/>
-                            <Button text="Filter" fx:id="filterSubjectsButton"/>
-                            <CheckBox fx:id="caseSensBox" text="Case Sensitive"/>
-                            <CheckBox fx:id="safeModeBox" text="Safe Mode"/>
-                            <Spinner fx:id="safeModeLimit" editable="true" prefWidth="100">
-                                <valueFactory>
-                                    <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="25" min="1"
-                                                                                    max="9999"/>
-                                </valueFactory>
-                            </Spinner>
-                        </ToolBar>
-                    </top>
+                <BorderPane fx:id="partitionCandidates">
                     <center>
-                        <BorderPane fx:id="partitionCandidates">
-                            <center>
-                                <ScrollPane fx:id="scrollPane">
-                                    <FlowPane fx:id="candidates"/>
-                                </ScrollPane>
-                            </center>
-                        </BorderPane>
+                        <ScrollPane fx:id="scrollPane">
+                            <FlowPane fx:id="candidates"/>
+                        </ScrollPane>
                     </center>
                 </BorderPane>
             </center>
         </BorderPane>
         <BorderPane fx:id="partitionResults" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
             <top>
-                <ToolBar>
-                    <Label text="Time limit :"/>
-                    <Spinner fx:id="timeLimit" min="0" max="3600" initialValue="0" editable="true" prefWidth="100"/>
-                    <Label text=" seconds"/>
-                    <Label text="(0 = no time limit)"/>
-                    <Label text="Depth Limit :"/>
-                    <Spinner fx:id="depthLimit" initialValue="1" editable="true" prefWidth="100">
-                        <valueFactory>
-                            <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="9999"/>
-                        </valueFactory>
-                    </Spinner>
-                </ToolBar>
+                <VBox>
+                    <ToolBar>
+                        <Label text="Time limit :"/>
+                        <Spinner fx:id="timeLimit" min="0" max="3600" initialValue="0" editable="true" prefWidth="100"/>
+                        <Label text=" seconds"/>
+                        <Label text="(0 = no time limit)"/>
+                        <Label text="Depth Limit :"/>
+                        <Spinner fx:id="depthLimit" initialValue="1" editable="true" prefWidth="100">
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="9999"/>
+                            </valueFactory>
+                        </Spinner>
+                    </ToolBar>
+                    <ToolBar>
+                        <Button fx:id="cutButton" text="Interrupt Partition"/>
+                        <Label fx:id="cutLabel"/>
+                        <Label fx:id="finalState"/>
+                    </ToolBar>
+                    <ToolBar>
+                        <Label text="Node selected : "/>
+                        <TextField editable="false" fx:id="selectedNodeField" prefWidth="500"/>
+                        <Button fx:id="partitionButton" text="Start Similarity Search"/>
+                    </ToolBar>
+                </VBox>
             </top>
             <center>
-                <BorderPane>
-                    <top>
-                        <ToolBar>
-                            <Button fx:id="cutButton" text="Interrupt Partition"/>
-                            <Label fx:id="cutLabel"/>
-                            <Label fx:id="finalState"/>
-                        </ToolBar>
-                    </top>
-                    <center>
-                        <BorderPane>
-                            <top>
-                                <ToolBar>
-                                    <Label text="Node selected : "/>
-                                    <TextField editable="false" fx:id="selectedNodeField" prefWidth="500"/>
-                                    <Button fx:id="partitionButton" text="Start Similarity Search"/>
-                                </ToolBar>
-                            </top>
-                            <center>
-                                <ScrollPane>
-                                    <VBox fx:id="partitionAccordion"/>
-                                </ScrollPane>
-                            </center>
-                        </BorderPane>
-                    </center>
-                </BorderPane>
+                <ScrollPane>
+                    <VBox fx:id="partitionAccordion"/>
+                </ScrollPane>
             </center>
         </BorderPane>
     </children>

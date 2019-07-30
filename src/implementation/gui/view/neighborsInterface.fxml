@@ -23,7 +23,7 @@
                         <Button text="Filter" fx:id="filterSubjectsButton"/>
                         <CheckBox fx:id="caseSensBox" text="Case Sensitive"/>
 
-                        <CheckBox fx:id="anonBox" text="Ignore BNodes"/>
+                        <CheckBox fx:id="bNodeBox" text="Ignore BNodes"/>
                     </ToolBar>
                     <ToolBar>
                         <Button fx:id="previousNavigation" text="⇐ Back" />

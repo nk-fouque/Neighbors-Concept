@@ -2,6 +2,7 @@ package implementation.gui.controller;
 
 import implementation.algorithms.Partition;
 import implementation.gui.NeighborsInterface;
+import implementation.gui.model.SearchHistoryElement;
 import implementation.gui.model.VisualCandidate;
 import implementation.gui.model.VisualPrefixes;
 import implementation.utils.CollectionsModel;
@@ -52,7 +53,7 @@ public class NeighborsController implements Initializable {
     CheckBox caseSensBox;
 
     @FXML
-    CheckBox anonBox;
+    CheckBox bNodeBox;
 
     @FXML
     Button previousNavigation;
@@ -105,6 +106,12 @@ public class NeighborsController implements Initializable {
 
     private StringProperty loadingState = new SimpleStringProperty("");
 
+    private IntegerProperty blankNodesCounter = new SimpleIntegerProperty(0);
+
+    private Stack<SearchHistoryElement> history = new Stack<>();
+
+    private SearchHistoryElement currentSearch = new SearchHistoryElement(false,true,false,"");
+
     /**
      * @return List of Jena supported RDF formats
      */
@@ -154,16 +161,24 @@ public class NeighborsController implements Initializable {
 
         filterSubjectsField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                filter(filterSubjectsField.getText(),true);
+                search(filterSubjectsField.getText());
             }
         });
         filterSubjectsField.prefWidthProperty().setValue(300);
         filterSubjectsField.disableProperty().bind(modelLoaded.not());
-        filterSubjectsButton.setOnMouseClicked(mouseEvent -> filter(filterSubjectsField.getText(),true));
+        filterSubjectsButton.setOnMouseClicked(mouseEvent -> search(filterSubjectsField.getText()));
         filterSubjectsButton.disableProperty().bind(modelLoaded.not());
         caseSensBox.disableProperty().bind(modelLoaded.not());
 
         safeModeBox.setSelected(true);
+
+        previousNavigation.setOnMouseClicked(mouseEvent -> {
+            if (!history.empty()) {
+                SearchHistoryElement search = history.pop();
+                currentSearch = search;
+                filter(search);
+            }
+        });
 
         cutLabel.setVisible(false);
         cutLabel.setText("/!\\ Algorithm will stop soon /!\\");
@@ -212,8 +227,8 @@ public class NeighborsController implements Initializable {
         for (ResIterator it = md.listSubjects(); it.hasNext(); ) {
             Resource resource = it.nextResource();
             if (resource.isAnon()){
-                if (anonBox.isSelected()) continue;
-                else blankNodesCounter.set(blankNodesCounter.get()+1);
+                if (bNodeBox.isSelected()) continue;
+
             }
             String s = resource.toString();
             String s2;
@@ -227,9 +242,23 @@ public class NeighborsController implements Initializable {
             }
             if (s2.contains(filter) || s3.contains(filter)) {
                 filteredList.add(s);
+                if (resource.isAnon()) blankNodesCounter.set(blankNodesCounter.get()+1);
             }
         }
         safePrompt(filteredList);
+    }
+
+    protected void search(String filter){
+        history.push(new SearchHistoryElement(currentSearch));
+        currentSearch = new SearchHistoryElement(caseSensBox.isSelected(),safeModeBox.isSelected(), bNodeBox.isSelected(),filter);
+        filter(filter);
+    }
+
+    private void filter(SearchHistoryElement search){
+        caseSensBox.setSelected(search.isCaseSens());
+        safeModeBox.setSelected(search.isSafeMode());
+        bNodeBox.setSelected(search.isbNode());
+        filter(search.getFilter());
     }
 
     /**

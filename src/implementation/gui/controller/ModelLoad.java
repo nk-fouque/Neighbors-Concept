@@ -106,7 +106,7 @@ public class ModelLoad implements Runnable {
             subjectsList.clear();
             blankNodesCounter.set(0);
             controller.colMd = new CollectionsModel(md, null);
-            Platform.runLater(() -> controller.filter("",true));
+            Platform.runLater(() -> controller.search(""));
             Platform.runLater(() -> state.setValue("Model Loaded"));
             Platform.runLater(() -> modelLoaded.setValue(true));
             Platform.runLater(() -> controller.partitionAvailable.setValue(true));
