@@ -17,6 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Static methods for a basic implementation
  *
  * @see Main#main(String[])
+ * @author nk-fouque
  */
 public class NeighborsImplementation {
 

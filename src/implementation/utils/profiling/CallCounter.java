@@ -1,6 +1,8 @@
 package implementation.utils.profiling;
 
 /**
+ * Small profiling functions to count the number of times a function has been called
+ *
  * @author nk-fouque
  */
 public class CallCounter {
@@ -19,6 +21,10 @@ public class CallCounter {
      */
     public void call() {
         count++;
+    }
+
+    public void reset() {
+        count = 0;
     }
 
     public int getCount() {

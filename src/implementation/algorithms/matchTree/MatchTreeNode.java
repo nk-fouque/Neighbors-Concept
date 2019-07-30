@@ -119,6 +119,7 @@ public class MatchTreeNode {
 
     /**
      * Initialize everything to null
+     * (Needed by {@link MatchTreeRoot#MatchTreeRoot(MatchTreeNode)} )} as super() constructor)
      */
     public MatchTreeNode() {
     }
@@ -189,7 +190,7 @@ public class MatchTreeNode {
      * @param tree T : The match-tree we are working in
      * @param node n* : The node to insert
      */
-    public LazyJoin lazyJoin(MatchTreeRoot tree, MatchTreeNode node) {
+    LazyJoin lazyJoin(MatchTreeRoot tree, MatchTreeNode node) {
         logger.debug("trying " + node.elementString() + " under " + elementString());
         HashSet<Var> deltaplus = new HashSet<>();
         HashSet<Var> deltaminus = new HashSet<>();

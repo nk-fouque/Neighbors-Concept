@@ -15,6 +15,9 @@ public class LazyJoin {
     HashSet<Var> deltaminus;
     boolean modified;
 
+    /**
+     * Base constructor with every attributes needed
+     */
     public LazyJoin(MatchTreeNode node, HashSet<Var> plus, HashSet<Var> minus, boolean update) {
         copy = node;
         deltaplus = plus;

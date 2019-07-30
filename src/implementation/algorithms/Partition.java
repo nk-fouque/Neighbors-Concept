@@ -26,26 +26,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class Partition {
     private static Logger logger = Logger.getLogger(Partition.class);
-    /**
-     * Jena Model containing the RDF Graph in which the search must be done
-     */
     private CollectionsModel graph;
-
-    /**
-     * List of clusters that are still partitionable
-     */
     private ArrayList<Cluster> clusters;
-
-    /**
-     * List of clusters that are not partitionable any further and contain at least one answer
-     * It's when a cluster is here that it represents the actual 'Neighbor concept'
-     */
     private List<Cluster> neighbors;
+    private int depth;
+    private int nextCluster;
 
     /**
-     * The depth of description
+     * Used for numbering clusters, makes debugging easier
+     * @return
      */
-    private int depth;
+    private int getNextClusterId() {
+        nextCluster++;
+        return nextCluster;
+    }
 
     /**
      * @return A list containing all the clusters that are still partitionable
@@ -71,8 +65,6 @@ public class Partition {
         return graph;
     }
 
-    private int nextCluster;
-
     /**
      * @param colMd            A preexisting CollectionsModel in which to describe the node and search for its neighbors
      * @param uriTarget        The full length uri of the node to describe
@@ -97,7 +89,6 @@ public class Partition {
 
         depth = descriptionDepth;
     }
-
 
     /**
      * Applies one iteration of the Partition algorithm
@@ -133,12 +124,12 @@ public class Partition {
             SingletonStopwatchCollection.resume("newans");
             try {
                 me = me.lazyJoin(e, graph, c.getConnectedVars());
+                SingletonStopwatchCollection.stop("newans");
             } catch (OutOfMemoryError err) {
                 clusters.add(c);
+                SingletonStopwatchCollection.stop("newans");
                 SingletonStopwatchCollection.stop("iterate");
                 throw err;
-            } finally {
-                SingletonStopwatchCollection.stop("newans");
             }
 
             SingletonStopwatchCollection.resume("projjoin");
@@ -158,12 +149,12 @@ public class Partition {
                     ResultSetFormatter.out(baos, ae.toResultSet());
                     logger.trace(baos.toString());
                 }
+                SingletonStopwatchCollection.stop("projjoin");
             } catch (OutOfMemoryError err) {
                 clusters.add(c);
+                SingletonStopwatchCollection.stop("projjoin");
                 SingletonStopwatchCollection.stop("iterate");
                 throw err;
-            } finally {
-                SingletonStopwatchCollection.stop("projjoin");
             }
             int extensionDistance = piMe.size();
 
@@ -245,8 +236,4 @@ public class Partition {
         return res.toString();
     }
 
-    public int getNextClusterId() {
-        nextCluster++;
-        return nextCluster;
-    }
 }

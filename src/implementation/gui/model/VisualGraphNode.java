@@ -13,10 +13,20 @@ import org.apache.jena.rdf.model.RDFNode;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Visualization for the details of a node
+ *
+ * @author nk-fouque
+ */
 public class VisualGraphNode {
-
     GridPane dbPrompt;
 
+    /**
+     * Base constructor
+     * @param uri the uri of the node to describe
+     * @param colMd The model in which to describe
+     * @param textField the filter textfield to use for navigation
+     */
     public VisualGraphNode(String uri, CollectionsModel colMd, TextField textField) {
         dbPrompt = new GridPane();
         int propertiesRow = 0;

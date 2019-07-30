@@ -16,7 +16,6 @@ import java.util.List;
 
 /**
  * Runnable for back thread loading the Model, to avoid unresponsive interface during the loading
- * TODO : It is unreasonable to prompt the entire list, should not prompt anything and wait for a filter
  *
  * @author nk-fouque
  */

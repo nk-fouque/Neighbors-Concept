@@ -8,6 +8,8 @@ import java.util.Map;
 
 /**
  * TitledPane Summarizing the PrefixMapping
+ *
+ * @author nk-fouque
  */
 public class VisualPrefixes extends TitledPane {
 

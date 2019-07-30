@@ -3,6 +3,8 @@ package implementation.utils.profiling;
 import java.util.HashMap;
 
 /**
+ * Collection of CallCounter with static methods to call from anywhere in code
+ *
  * @author nk-fouque
  */
 public class CallCounterCollection {
@@ -10,12 +12,22 @@ public class CallCounterCollection {
 
     /**
      * Increments the call count of the function in parameter, creates a new counter if not already done
-     *
-     * @param functionName
      */
     public static void call(String functionName) {
         counters.putIfAbsent(functionName, new CallCounter(functionName));
         counters.get(functionName).call();
+    }
+
+    /**
+     * Sets the counter for said function to zero
+     */
+    public static void reset(String functionName){
+        CallCounter counter = counters.getOrDefault(functionName,null);
+        if (counter != null) counter.reset();
+    }
+
+    public static void resetAll(){
+        counters.keySet().forEach(s -> counters.get(s).reset());
     }
 
     /**

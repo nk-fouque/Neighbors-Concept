@@ -30,9 +30,12 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Main controller
+ *
+ * @author nk-fouque
+ */
 public class NeighborsController implements Initializable {
-
-
     @FXML
     GridPane pane;
 
@@ -266,13 +269,7 @@ public class NeighborsController implements Initializable {
      * @return A Border pane with the uri on the left and a button on the right
      */
     public BorderPane candidateVisual(String uri) {
-        Button button = new Button();
-        button.textProperty().setValue("Select this node");
-        button.setOnMouseClicked(mouseEvent -> {
-            selectedNodeField.setText(uri);
-            selectedNodeField.autosize();
-        });
-        VisualCandidate res = new VisualCandidate(uri, colMd, button, filterSubjectsField);
+        VisualCandidate res = new VisualCandidate(uri, colMd, selectedNodeField, filterSubjectsField);
         return res;
     }
 
@@ -313,7 +310,10 @@ public class NeighborsController implements Initializable {
         return res;
     }
 
-
+    /**
+     * Prompts candidates for partitioning respecting the safe mode limit
+     * @param subjectsList
+     */
     public void safePrompt(List<String> subjectsList) {
         if (subjectsList.size() <= safeModeLimit.getValue() || !safeModeBox.isSelected()) {
             PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);

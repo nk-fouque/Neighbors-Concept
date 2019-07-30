@@ -40,7 +40,7 @@ Two datasets are included in the repository :
   * The one setting up the String `uriTarget` which is the uri of the node you want to find the neighbors of
   * The few ones at the beginning, defining the log4j logging levels
 ## Current Version  
-Javadoc at https://nk-fouque.github.io/Neighbors-Concept/  
+Javadoc at https://nk-fouque.github.io/Neighbors-Concept/allclasses-index.html
 Run run_interface.sh to open interface
 
 ### Content

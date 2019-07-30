@@ -18,6 +18,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Runnable for back thread running the Partition Algorithm
+ *
+ * @author nk-fouque
  */
 public class PartitionRun implements Runnable {
     /**

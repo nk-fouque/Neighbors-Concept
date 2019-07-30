@@ -49,6 +49,13 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
+     * The Variables that are connected to this Cluster
+     */
+    public Set<Var> getConnectedVars() {
+        return connectedVars;
+    }
+
+    /**
      * The body of the relaxed Query
      */
     public Set<Element> getRelaxQueryElements() {
@@ -56,17 +63,31 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * The number of relaxation done to obtain this cluster
+     * The query elements that have yet to be tested in this cluster
+     */
+    public Set<Element> getAvailableQueryElements() {
+        return availableQueryElements;
+    }
+
+    /**
+     * Query elements that have been tested and thrown away/relaxed, to avoid putting them twice
+     */
+    public Set<Element> getRemovedQueryElements() {
+        return removedQueryElements;
+    }
+
+    /**
+     * The number of relaxations done to obtain this cluster
      */
     public int getRelaxDistance() {
         return relaxDistance;
     }
 
     /**
-     * The query elements that have yet to be tested in this cluster
+     * The size of the extension of this Cluster's query (i.e. the number of answers
      */
-    public Set<Element> getAvailableQueryElements() {
-        return availableQueryElements;
+    public int getExtensionDistance() {
+        return extensionDistance;
     }
 
     /**
@@ -84,27 +105,6 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * Query elements that have been tested and thrown away/relaxed, to avoid putting them twice
-     */
-    public Set<Element> getRemovedQueryElements() {
-        return removedQueryElements;
-    }
-
-    /**
-     * The size of the extension of this Cluster's query (i.e. the number of answers
-     */
-    public int getExtensionDistance() {
-        return extensionDistance;
-    }
-
-    /**
-     * The Variables that are connected to this Cluster
-     */
-    public Set<Var> getConnectedVars() {
-        return connectedVars;
-    }
-
-    /**
      * This Cluster's Match-Tree
      *
      * @see implementation.algorithms.matchTree.MatchTreeNode
@@ -116,7 +116,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates the initial Cluster for the Partition Algorithm from the Query qry and the RDF Graph graph
      */
-    public Cluster(Set<Element> elements, Set<Var> vars, CollectionsModel graph, int id) {
+    Cluster(Set<Element> elements, Set<Var> vars, CollectionsModel graph, int id) {
         this.id = id;
         this.proj = new HashSet<>(vars);
         this.relaxQueryElements = new HashSet<>();
@@ -132,7 +132,7 @@ public class Cluster implements Comparable<Cluster> {
     /**
      * Creates a cluster with the same values as an other but different Mapping ext Answers
      */
-    public Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance, int id) {
+    Cluster(Cluster c, MatchTreeRoot Me, Table Ae, int extensionDistance, int id) {
         this.proj = new HashSet<>(c.getProj());
         this.relaxQueryElements = new HashSet<>();
         this.relaxQueryElements.addAll(c.getRelaxQueryElements());
@@ -158,6 +158,21 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
+     * @param vars A list of Variables
+     * @return true if this cluster is connected to an element mentioning these variables
+     */
+    public boolean connected(Set<Var> vars) {
+        boolean connect = false;
+        for (Var v : vars) {
+            if (this.connectedVars.contains(v)) {
+                connect = true;
+                break;
+            }
+        }
+        return connect;
+    }
+
+    /**
      * Substract an element from the available query elements to mark it as used and adds it to the elements distinctive of this Cluster's neighbors
      *
      * @param element The Element to be moved
@@ -174,18 +189,10 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * @param vars A list of Variables
-     * @return true if this cluster is connected to an element mentioning these variables
+     * @return true if this cluster has nothing in its answers
      */
-    public boolean connected(Set<Var> vars) {
-        boolean connect = false;
-        for (Var v : vars) {
-            if (this.connectedVars.contains(v)) {
-                connect = true;
-                break;
-            }
-        }
-        return connect;
+    boolean noAnswers() {
+        return (this.getAnswers().size() == 0);
     }
 
     /**
@@ -225,13 +232,6 @@ public class Cluster implements Comparable<Cluster> {
             removedQueryElements.add(element);
             relaxDistance++;
         }
-    }
-
-    /**
-     * @return true if this cluster has nothing in its answers
-     */
-    boolean noAnswers() {
-        return (this.getAnswers().size() == 0);
     }
 
     /**
@@ -289,7 +289,7 @@ public class Cluster implements Comparable<Cluster> {
     }
 
     /**
-     * @return This cluster's answers as a Java List
+     * @return This cluster's answers as a List of RDF Nodes
      */
     public List<Node> getAnswersList() {
         Iterator<Binding> iter = answers.rows();

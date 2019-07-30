@@ -9,6 +9,8 @@ import javafx.beans.property.StringProperty;
 
 /**
  * Partition with some observable properties for the interface
+ *
+ * @author nk-fouque
  */
 public class ObservablePartition extends Partition {
 

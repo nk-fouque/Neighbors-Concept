@@ -22,12 +22,14 @@ import java.util.Set;
 
 /**
  * TitledPane Tailored to a Cluster
+ *
+ * @author nk-fouque
  */
 public class VisualCluster extends TitledPane {
 
     /**
      * The final cluster resulting in this answer
-     * TODO : Get more informations from the cluster
+     * TODO : More informations could be extracted from the cluster, open to suggestions
      */
     private Cluster cluster;
 

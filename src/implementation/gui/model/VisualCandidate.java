@@ -11,17 +11,35 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 /**
- * Pane visualizing a "candidate for partition" and the button to
+ * Pane visualizing a potential nodes to be partitioned
+ * Able to display details about the node for navigation
+ *
+ * @author nk-fouque
  */
 public class VisualCandidate extends BorderPane {
     private BooleanProperty detailsOnScreen = new SimpleBooleanProperty(false);
 
-    public VisualCandidate(String uri, CollectionsModel colMd, Button button, TextField textField) {
+    /**
+     * Base constructor
+     * @param uri The uri of the node to be visualized
+     * @param colMd The Model in which the node is to be described
+     * @param selectedNodeField The field to update when the node is selected
+     * @param filterField The field to update with the filters for navigation
+     */
+    public VisualCandidate(String uri, CollectionsModel colMd,TextField selectedNodeField, TextField filterField) {
         super();
         Label text = new Label(colMd.shortform(uri));
         BorderPane topPane = new BorderPane();
 
+
+        Button button = new Button();
+        button.textProperty().setValue("Select this node");
+        button.setOnMouseClicked(mouseEvent -> {
+            selectedNodeField.setText(uri);
+            selectedNodeField.autosize();
+        });
         topPane.setRight(button);
+
         topPane.setCenter(text);
 
         Button detailsButton = new Button("More Details");
@@ -31,7 +49,7 @@ public class VisualCandidate extends BorderPane {
 
         detailsButton.setOnMouseClicked(mouseEvent -> {
             if (!detailsOnScreen.getValue()) {
-                this.promptDetails(detailsButton, uri, colMd, textField);
+                this.displayDetails(detailsButton, uri, colMd, filterField);
             } else {
                 this.clearDetails(detailsButton);
             }
@@ -41,7 +59,10 @@ public class VisualCandidate extends BorderPane {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
-    private void promptDetails(Button details, String uri, CollectionsModel colMd, TextField textField) {
+    /**
+     * Displays a details about the node
+     */
+    private void displayDetails(Button details, String uri, CollectionsModel colMd, TextField textField) {
         Thread thread = new Thread(() -> {
             VisualGraphNode visualDetails = new VisualGraphNode(uri, colMd, textField);
             Platform.runLater(() -> setBottom(visualDetails.dbPrompt));
@@ -52,6 +73,9 @@ public class VisualCandidate extends BorderPane {
         thread.start();
     }
 
+    /**
+     * Hides details about the node
+     */
     private void clearDetails(Button details) {
         Platform.runLater(() -> setBottom(null));
         Platform.runLater(() -> details.setText("More Details"));
