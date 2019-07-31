@@ -6,6 +6,8 @@ import implementation.gui.model.VisualCluster;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
@@ -13,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -61,6 +64,8 @@ public class PartitionRun implements Runnable {
      */
     private int depth;
 
+    private StringProperty sortMode;
+
     /**
      * Base Constructor
      *
@@ -81,6 +86,8 @@ public class PartitionRun implements Runnable {
         mainController = controller;
         this.loadingPane = loadingPane;
         depth = descriptionDepth.getValue().intValue();
+        sortMode = new SimpleStringProperty();
+        sortMode.bind(controller.sortMode.valueProperty());
     }
 
     @Override
@@ -102,8 +109,11 @@ public class PartitionRun implements Runnable {
         partition.cut();
 
         if (algoRun >= 0) {
+            Comparator<Cluster> comparator = new ClusterComparator(sortMode.get());
+
             Platform.runLater(() -> resultsContainer.getChildren().clear());
-            PriorityQueue<Cluster> queue = new PriorityQueue<>(partition.getNeighbors());
+            PriorityQueue<Cluster> queue = new PriorityQueue<>(comparator);
+            queue.addAll(partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
                 TitledPane cluster = new VisualCluster(c, partition.getGraph(), mainController.filterSubjectsField);

@@ -4,10 +4,13 @@ import implementation.algorithms.Partition;
 import implementation.gui.NeighborsInterface;
 import implementation.gui.model.SearchHistoryElement;
 import implementation.gui.model.VisualCandidate;
+import implementation.gui.model.VisualCluster;
 import implementation.gui.model.VisualPrefixes;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -92,6 +95,8 @@ public class NeighborsController implements Initializable {
     TextField selectedNodeField;
     @FXML
     Button partitionButton;
+    @FXML
+    ChoiceBox<String> sortMode;
 
     private Model md;
 
@@ -125,6 +130,13 @@ public class NeighborsController implements Initializable {
         res.add("N3");
         res.add("RDFXML");
         res.add("RDFJSON");
+        return res;
+    }
+
+    private static List<String> sortModes() {
+        List<String> res = new ArrayList<>();
+        res.add("Extensional Distance");
+        res.add("Number of Relaxations");
         return res;
     }
 
@@ -182,6 +194,27 @@ public class NeighborsController implements Initializable {
                 filter(search);
             }
         });
+
+        sortMode.setItems(new SortedList<>(FXCollections.observableList(sortModes())));
+        sortMode.setValue("Extensional Distance");
+        sortMode.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (partitionAvailable.get()) {
+                    PriorityQueue<VisualCluster> queue = new PriorityQueue<>(new VisualClusterComparator(sortMode.getValue()));
+                    partitionAccordion.getChildren().forEach(node -> {
+                        if (node instanceof VisualCluster) {
+                            queue.add((VisualCluster) node);
+                        }
+                    });
+                    partitionAccordion.getChildren().clear();
+                    while (!queue.isEmpty()) {
+                        partitionAccordion.getChildren().add(queue.poll());
+                    }
+                }
+            }
+        });
+        sortMode.autosize();
 
         cutLabel.setVisible(false);
         cutLabel.setText("/!\\ Algorithm will stop soon /!\\");
@@ -245,19 +278,19 @@ public class NeighborsController implements Initializable {
             }
             if (s2.contains(filter) || s3.contains(filter)) {
                 filteredList.add(s);
-                if (resource.isAnon()) blankNodesCounter.set(blankNodesCounter.get()+1);
+                if (resource.isAnon()) blankNodesCounter.set(blankNodesCounter.get() + 1);
             }
         }
         safePrompt(filteredList);
     }
 
-    protected void search(String filter){
+    protected void search(String filter) {
         history.push(new SearchHistoryElement(currentSearch));
-        currentSearch = new SearchHistoryElement(caseSensBox.isSelected(),safeModeBox.isSelected(), bNodeBox.isSelected(),filter);
+        currentSearch = new SearchHistoryElement(caseSensBox.isSelected(), safeModeBox.isSelected(), bNodeBox.isSelected(), filter);
         filter(filter);
     }
 
-    private void filter(SearchHistoryElement search){
+    private void filter(SearchHistoryElement search) {
         caseSensBox.setSelected(search.isCaseSens());
         safeModeBox.setSelected(search.isSafeMode());
         bNodeBox.setSelected(search.isbNode());
@@ -312,6 +345,7 @@ public class NeighborsController implements Initializable {
 
     /**
      * Prompts candidates for partitioning respecting the safe mode limit
+     *
      * @param subjectsList
      */
     public void safePrompt(List<String> subjectsList) {
@@ -330,8 +364,8 @@ public class NeighborsController implements Initializable {
             TitledPane err = new TitledPane();
             err.setText("Too many results");
             String text = "Search gave " + subjectsList.size() + " results";
-            if (blankNodesCounter.get()!=0){
-                text += "\n("+blankNodesCounter.get()+" anonymous nodes)";
+            if (blankNodesCounter.get() != 0) {
+                text += "\n(" + blankNodesCounter.get() + " anonymous nodes)";
             }
             text += "\nCurrent Safe Mode limit is " + safeModeLimit.getValue() + " results" +
                     "\nTry refining your filter or disabling/increasing Safe Mode limit" +

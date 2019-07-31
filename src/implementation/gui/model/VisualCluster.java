@@ -25,13 +25,13 @@ import java.util.Set;
  *
  * @author nk-fouque
  */
-public class VisualCluster extends TitledPane {
+public class VisualCluster extends TitledPane implements Comparable{
 
     /**
      * The final cluster resulting in this answer
      * TODO : More informations could be extracted from the cluster, open to suggestions
      */
-    private Cluster cluster;
+    public Cluster cluster;
 
     public VisualCluster(Cluster c, CollectionsModel colMd, TextField filterField) {
         super();
@@ -86,6 +86,15 @@ public class VisualCluster extends TitledPane {
 
         this.autosize();
         this.setExpanded(false);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    public int compareTo(VisualCluster other){
+        return cluster.compareTo(other.cluster);
     }
 
     /**

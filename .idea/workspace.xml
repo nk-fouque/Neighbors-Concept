@@ -6,31 +6,38 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="Now uses full RDF graph&#10;&#10;With reasoning&#10;Downside - lots of rdf:something now navigable for no reason&#10;Upside - some classes to navigate between members">
+      <change afterPath="$PROJECT_DIR$/src/implementation/gui/controller/ClusterComparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/implementation/gui/controller/VisualClusterComparator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/NeighborsInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/NeighborsInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/FieldTyper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/FieldTyper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/BlankNodeLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/BlankNodeLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/ObservablePartition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/ObservablePartition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/SubjectLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/SubjectLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCandidate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCandidate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualGraphNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualGraphNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualPrefixes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualPrefixes.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/PartitionException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/PartitionException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/profiling/CallCounter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/profiling/CallCounter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/profiling/CallCounterCollection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/profiling/CallCounterCollection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/LazyJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/LazyJoin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/FieldTyper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/FieldTyper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/BlankNodeLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/BlankNodeLink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/ObservablePartition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/ObservablePartition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/SearchHistoryElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/SearchHistoryElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/SubjectLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/SubjectLink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualGraphNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualPrefixes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/utils/PartitionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/PartitionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/utils/profiling/CallCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/profiling/CallCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/utils/profiling/CallCounterCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/profiling/CallCounterCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/CollectionsModel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,62 +59,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>for (</find>
-      <find>clusters f</find>
-      <find>will s</find>
-      <find>.sh</find>
-      <find>From</find>
-      <find>autosize</find>
-      <find>plat</find>
-      <find>hgro</find>
-      <find>arraylist</find>
-      <find>contains</find>
-      <find>compute</find>
-      <find>keys</find>
-      <find>kept</find>
-      <find>n°3[2-4]</find>
-      <find>is</find>
-      <find>is clas</find>
-      <find>is class</find>
-      <find>TRACE</find>
-      <find>trace</find>
-      <find>comparat</find>
-      <find>safe</find>
-      <find>earl</find>
-      <find>h</find>
-      <find>compa</find>
-      <find>accor</find>
-      <find>selector</find>
-      <find>system.out.println</find>
-      <find>getgraph().shortform</find>
-      <find>desciben</find>
-      <find>describen</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>logger.debug</replace>
-      <replace>(Level.DEBUG.isGreaterOrEqual(logger.getLevel()))</replace>
-      <replace>equals</replace>
-      <replace>Extentional Distance</replace>
-      <replace>equal</replace>
-      <replace>*</replace>
-      <replace>see</replace>
-      <replace>@author nk-fouque</replace>
-      <replace>To</replace>
-      <replace>shortform</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$/src/v2/utils</dir>
-      <dir>$PROJECT_DIR$/src/v2</dir>
-      <dir>$PROJECT_DIR$/src/implementation/gui/controller</dir>
-      <dir>$PROJECT_DIR$/src</dir>
-      <dir>$PROJECT_DIR$/src/implementation/algorithms</dir>
-      <dir>$PROJECT_DIR$/src/implementation</dir>
-      <dir>$PROJECT_DIR$/src/implementation/gui</dir>
-    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="REBASE" />
@@ -309,14 +260,9 @@
       <workItem from="1564470943889" duration="8303000" />
       <workItem from="1564479459250" duration="618000" />
       <workItem from="1564485598795" duration="5664000" />
-      <workItem from="1564493524861" duration="772000" />
-    </task>
-    <task id="LOCAL-00025" summary="New Runnable Class for planned anytime">
-      <created>1562935804407</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1562935804407</updated>
+      <workItem from="1564493524861" duration="1684000" />
+      <workItem from="1564557607648" duration="5075000" />
+      <workItem from="1564572512130" duration="9747000" />
     </task>
     <task id="LOCAL-00026" summary="New way of working extension, more efficient">
       <created>1562935936818</created>
@@ -654,40 +600,15 @@
       <option name="project" value="LOCAL" />
       <updated>1564479129631</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Javadoc for new classes">
+      <created>1564494566220</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1564494566220</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="ClusterTest - 2019.06.14 at 15h 35m 43s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest - 2019.06.14 at 15h 36m 02s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest_testConstr - 2019.06.14 at 15h 36m 59s.xml">
-      <configuration name="ClusterTest.testConstr" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest_testConstr - 2019.06.14 at 15h 37m 08s.xml">
-      <configuration name="ClusterTest.testConstr" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest - 2019.06.14 at 15h 37m 45s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest - 2019.06.14 at 15h 39m 23s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest - 2019.06.14 at 15h 41m 07s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest - 2019.06.14 at 16h 04m 52s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest - 2019.06.14 at 17h 05m 21s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ClusterTest - 2019.06.17 at 09h 32m 41s.xml">
-      <configuration name="ClusterTest" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -732,7 +653,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Implemented description depth, for now always 1" />
     <MESSAGE value="More description depth available&#10;For now &gt;2 = infinite" />
     <MESSAGE value="Profiling enhancements&#10;&#10;New CallCounter class&#10;Latest version of Stopwatches" />
     <MESSAGE value="Optimizations&#10;&#10;Removing duplicates during Projection&#10;Copying MatchTreeNode without Copying Match-set&#10;Condition for considering self as modified" />
@@ -757,7 +677,8 @@
     <MESSAGE value="New docs&#10;&#10;README update&#10;New dataset mondial-europe&#10;Reformat code &amp; imports" />
     <MESSAGE value="Improved navigation with blank nodes" />
     <MESSAGE value="Added &quot;Back&quot; Button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added &quot;Back&quot; Button" />
+    <MESSAGE value="Javadoc for new classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadoc for new classes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

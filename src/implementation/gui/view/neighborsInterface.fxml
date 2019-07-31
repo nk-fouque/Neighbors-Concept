@@ -62,6 +62,8 @@
                                 <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="9999"/>
                             </valueFactory>
                         </Spinner>
+                        <Label text="Sort cluster by : "/>
+                        <ChoiceBox fx:id="sortMode" />
                     </ToolBar>
                     <ToolBar>
                         <Button fx:id="cutButton" text="Interrupt Partition"/>
