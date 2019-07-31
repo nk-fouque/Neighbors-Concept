@@ -17,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -118,7 +120,8 @@ public class NeighborsController implements Initializable {
 
     private Stack<SearchHistoryElement> history = new Stack<>();
 
-    private SearchHistoryElement currentSearch = new SearchHistoryElement(false,true,false,"");
+    private SearchHistoryElement currentSearch = new SearchHistoryElement(false, true, false, "");
+
 
     /**
      * @return List of Jena supported RDF formats
@@ -162,7 +165,7 @@ public class NeighborsController implements Initializable {
             filterSubjectsField.setText("");
             String filename = filenameField.getText();
             modelLoaded.setValue(false);
-            ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded,blankNodesCounter);
+            ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded, blankNodesCounter);
             Thread load = new Thread(loader);
             loader.stateProperty().bindBidirectional(loadingState);
             Label modelState = new Label();
@@ -176,14 +179,20 @@ public class NeighborsController implements Initializable {
 
         filterSubjectsField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                search(filterSubjectsField.getText());
+                click(filterSubjectsButton);
             }
         });
         filterSubjectsField.prefWidthProperty().setValue(300);
         filterSubjectsField.disableProperty().bind(modelLoaded.not());
-        filterSubjectsButton.setOnMouseClicked(mouseEvent -> search(filterSubjectsField.getText()));
+        filterSubjectsButton.setOnMouseClicked(mouseEvent -> {
+            if (!filterSubjectsButton.isDisabled())
+                search(filterSubjectsField.getText());
+        });
         filterSubjectsButton.disableProperty().bind(modelLoaded.not());
         caseSensBox.disableProperty().bind(modelLoaded.not());
+        caseSensBox.setOnMouseClicked(mouseEvent -> click(filterSubjectsButton));
+        bNodeBox.setOnMouseClicked(mouseEvent -> click(filterSubjectsButton));
+        bNodeBox.setSelected(true);
 
         safeModeBox.setSelected(true);
 
@@ -260,9 +269,9 @@ public class NeighborsController implements Initializable {
         blankNodesCounter.set(0);
         List<String> filteredList = new ArrayList<>();
         if (!caseSensBox.isSelected()) filter = filter.toLowerCase();
-        for (ResIterator it = md.listSubjects(); it.hasNext(); ) {
+        for (ResIterator it = colMd.getSaturatedGraph().listSubjects(); it.hasNext(); ) {
             Resource resource = it.nextResource();
-            if (resource.isAnon()){
+            if (resource.isAnon()) {
                 if (bNodeBox.isSelected()) continue;
 
             }
@@ -369,13 +378,25 @@ public class NeighborsController implements Initializable {
             }
             text += "\nCurrent Safe Mode limit is " + safeModeLimit.getValue() + " results" +
                     "\nTry refining your filter or disabling/increasing Safe Mode limit" +
-                    "\n \n/!\\ Disabling Safe Mode can make the application slow /!\\";
+                    "\n \n/!\\ Disabling Safe Mode can make the application freeze /!\\";
 
             err.setContent(new Text(text));
             Platform.runLater(() -> candidates.getChildren().add(err));
+
+            Button firstResults = new Button("Show first " + safeModeLimit.getValue() + " results");
+            firstResults.setOnMouseClicked(mouseEvent -> {
+                List<String> truncated = subjectsList.subList(0, safeModeLimit.getValue() - 1);
+                safePrompt(truncated);
+                firstResults.setVisible(false);
+            });
+            Platform.runLater(() -> candidates.getChildren().add(firstResults));
         }
+    }
 
-
+    public static void click(Button button){
+        button.getOnMouseClicked().handle(
+                new MouseEvent(MouseEvent.MOUSE_CLICKED,0,0,0,0, MouseButton.NONE,
+                        1,false,false, false, false, false, false, false, false, false, false, null));
     }
 
 

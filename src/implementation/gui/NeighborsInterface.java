@@ -20,7 +20,7 @@ public class NeighborsInterface extends Application {
      */
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        NeighborsImplementation.myLogsLevels("silent");
+        NeighborsImplementation.myLogsLevels("off");
         launch(args);
     }
 

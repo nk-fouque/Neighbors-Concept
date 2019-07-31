@@ -16,8 +16,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Static methods for a basic implementation
  *
- * @see Main#main(String[])
  * @author nk-fouque
+ * @see Main#main(String[])
  */
 public class NeighborsImplementation {
 
@@ -26,6 +26,7 @@ public class NeighborsImplementation {
      *
      * @param level "verbous" : Gives almost every details possible
      *              "silent" : Only shows how far the partition algorithm is, to be able to tell i
+     *              "off" : Nothing
      */
     public static void myLogsLevels(String level) {
         switch (level) {
@@ -34,13 +35,21 @@ public class NeighborsImplementation {
                 Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.TRACE);
                 Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.DEBUG);
                 Logger.getLogger("implementation.utils").setLevel(Level.INFO);
-                Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.TRACE);
+                Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.DEBUG);
                 break;
             }
             case "silent": {
                 Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
                 Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.INFO);
                 Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.INFO);
+                Logger.getLogger("implementation.utils").setLevel(Level.OFF);
+                Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.OFF);
+                break;
+            }
+            case "off": {
+                Logger.getLogger("org.apache.jena").setLevel(Level.OFF);
+                Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.OFF);
+                Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.OFF);
                 Logger.getLogger("implementation.utils").setLevel(Level.OFF);
                 Logger.getLogger("implementation.algorithms.matchTree.MatchTreeNode").setLevel(Level.OFF);
             }
