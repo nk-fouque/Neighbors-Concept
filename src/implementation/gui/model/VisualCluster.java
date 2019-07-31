@@ -33,7 +33,7 @@ public class VisualCluster extends TitledPane {
      */
     private Cluster cluster;
 
-    public VisualCluster(Cluster c, CollectionsModel md, TextField filterField) {
+    public VisualCluster(Cluster c, CollectionsModel colMd, TextField filterField) {
         super();
         cluster = c;
         this.setText("Extensional distance : " + c.getExtensionDistance());
@@ -59,10 +59,10 @@ public class VisualCluster extends TitledPane {
 
         // Bottom of the Pane
         HBox texts = new HBox(20);
-        Text similitude = new Text("Similitude : \n" + c.relaxQueryElementsString(md));
+        Text similitude = new Text("Similitude : \n" + c.relaxQueryElementsString(colMd));
         VBox neighbors = new VBox();
         neighbors.getChildren().add(new Label("Neighbors"));
-        c.answersListString(md).lines().forEach(s -> {
+        c.answersListString(colMd).lines().forEach(s -> {
             neighbors.getChildren().add(new SubjectLink(s, filterField));
         });
         texts.getChildren().addAll(neighbors, similitude);

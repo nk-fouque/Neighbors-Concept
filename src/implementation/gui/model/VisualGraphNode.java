@@ -30,7 +30,7 @@ public class VisualGraphNode {
     public VisualGraphNode(String uri, CollectionsModel colMd, TextField textField) {
         dbPrompt = new GridPane();
         int propertiesRow = 0;
-        Map<Property, List<RDFNode>> propertiesFrom = colMd.getTriplesSimple().get(uri);
+        Map<Property, List<RDFNode>> propertiesFrom = colMd.getTriples().get(uri);
         for (Property property : propertiesFrom.keySet()) {
             dbPrompt.add(new Label("\t" + colMd.shortform(property.getURI())), 0, propertiesRow);
             for (RDFNode node : propertiesFrom.get(property)) {
@@ -47,7 +47,7 @@ public class VisualGraphNode {
             }
         }
 
-        Map<Property, List<RDFNode>> propertiesTo = colMd.getTriplesSimpleReversed().get(uri);
+        Map<Property, List<RDFNode>> propertiesTo = colMd.getTriplesReversed().get(uri);
         if (propertiesTo != null) {
             for (Property property : propertiesTo.keySet()) {
                 dbPrompt.add(new Label("\tis " + colMd.shortform(property.getURI()) + " of"), 0, propertiesRow);

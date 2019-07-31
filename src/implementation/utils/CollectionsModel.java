@@ -22,8 +22,8 @@ public class CollectionsModel {
     private Model graph;
     private Model saturatedGraph;
 
-    private Map<String, Map<Property, List<RDFNode>>> triplesSimple = new HashMap<>();
-    private Map<String, Map<Property, List<RDFNode>>> triplesSimpleReversed = new HashMap<>();
+    private Map<String, Map<Property, List<RDFNode>>> triples = new HashMap<>();
+    private Map<String, Map<Property, List<RDFNode>>> triplesReversed = new HashMap<>();
 
     private Map<Element, Table> ans = new HashMap<>();
     private Map<String, Var> keys = new HashMap<>();
@@ -38,12 +38,12 @@ public class CollectionsModel {
         graph = md;
         saturatedGraph = Objects.requireNonNullElseGet(mdInf, () -> ModelFactory.createInfModel(ReasonerRegistry.getRDFSReasoner(), md));
 
-        StmtIterator iter = graph.listStatements();
+        StmtIterator iter = saturatedGraph.listStatements();
         iter.forEachRemaining(stmt -> {
-            Map<Property, List<RDFNode>> propertiesFrom = triplesSimple.computeIfAbsent(stmt.getSubject().toString(), m -> new HashMap<>());
+            Map<Property, List<RDFNode>> propertiesFrom = triples.computeIfAbsent(stmt.getSubject().toString(), m -> new HashMap<>());
             List<RDFNode> thatPropertyFrom = propertiesFrom.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyFrom.add(stmt.getObject());
-            Map<Property, List<RDFNode>> propertiesTo = triplesSimpleReversed.computeIfAbsent(stmt.getObject().toString(), m -> new HashMap<>());
+            Map<Property, List<RDFNode>> propertiesTo = triplesReversed.computeIfAbsent(stmt.getObject().toString(), m -> new HashMap<>());
             List<RDFNode> thatPropertyTo = propertiesTo.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyTo.add(stmt.getSubject());
         });
@@ -105,12 +105,12 @@ public class CollectionsModel {
         return getGraph().listStatements(new SelectorImpl(null, null, node));
     }
 
-    public Map<String, Map<Property, List<RDFNode>>> getTriplesSimple() {
-        return triplesSimple;
+    public Map<String, Map<Property, List<RDFNode>>> getTriples() {
+        return triples;
     }
 
-    public Map<String, Map<Property, List<RDFNode>>> getTriplesSimpleReversed() {
-        return triplesSimpleReversed;
+    public Map<String, Map<Property, List<RDFNode>>> getTriplesReversed() {
+        return triplesReversed;
     }
 
     /**
@@ -154,7 +154,7 @@ public class CollectionsModel {
 
     @Override
     public String toString() {
-        return ("\n\n" + triplesSimple + "\n\n" + triplesSimpleReversed);
+        return ("\n\n" + triples + "\n\n" + triplesReversed);
     }
 
     public String shortform(String s){
