@@ -35,6 +35,8 @@ public class MatchTreeRoot extends MatchTreeNode {
         D = new HashSet<>(top);
 
         Table init = new TableN();
+        // Note that it is getGraph() and not getGraphSaturated() because we don't want things such as rdf:object, rdfs:property as potential neighbors and those appear after the inference model is applied
+        // Use a model that has those items from the beginning if you want to apply similarity search on them
         ResIterator data = colMd.getGraph().listSubjects();
         data.forEachRemaining((Resource resource) -> {
             for (Var var : top) {

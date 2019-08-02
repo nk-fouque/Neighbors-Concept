@@ -58,7 +58,7 @@ public class NeighborsController implements Initializable {
     CheckBox caseSensBox;
 
     @FXML
-    CheckBox bNodeBox;
+    CheckBox ignoreBNodeBox;
 
     @FXML
     Button previousNavigation;
@@ -185,8 +185,8 @@ public class NeighborsController implements Initializable {
         filterSubjectsButton.disableProperty().bind(modelLoaded.not());
         caseSensBox.disableProperty().bind(modelLoaded.not());
         caseSensBox.setOnMouseClicked(mouseEvent -> click(filterSubjectsButton));
-        bNodeBox.setOnMouseClicked(mouseEvent -> click(filterSubjectsButton));
-        bNodeBox.setSelected(true);
+        ignoreBNodeBox.setOnMouseClicked(mouseEvent -> click(filterSubjectsButton));
+        ignoreBNodeBox.setSelected(true);
 
         safeModeBox.setSelected(true);
 
@@ -262,41 +262,40 @@ public class NeighborsController implements Initializable {
         candidates.getChildren().clear();
         blankNodesCounter.set(0);
         List<Resource> filteredList = new ArrayList<>();
-        if (!caseSensBox.isSelected()) filter = filter.toLowerCase();
-        for (ResIterator it = colMd.getSaturatedGraph().listSubjects(); it.hasNext(); ) {
-            Resource resource = it.nextResource();
-            if (resource.isAnon()) {
-                if (bNodeBox.isSelected()) continue;
-
+        final String actualFilter;
+        if (!caseSensBox.isSelected()) actualFilter = filter.toLowerCase();
+        else actualFilter = filter;
+        colMd.getSaturatedGraph().listSubjects().toList().parallelStream().forEachOrdered(resource -> {
+            if (!resource.isAnon() || !ignoreBNodeBox.isSelected()) {
+                String s = resource.toString();
+                String s2;
+                String s3;
+                if (!caseSensBox.isSelected()) {
+                    s2 = s.toLowerCase();
+                    s3 = colMd.shortform(s).toLowerCase();
+                } else {
+                    s2 = s;
+                    s3 = colMd.shortform(s);
+                }
+                if (s2.contains(actualFilter) || s3.contains(actualFilter)) {
+                    filteredList.add(resource);
+                    if (resource.isAnon()) blankNodesCounter.set(blankNodesCounter.get() + 1);
+                }
             }
-            String s = resource.toString();
-            String s2;
-            String s3;
-            if (!caseSensBox.isSelected()) {
-                s2 = s.toLowerCase();
-                s3 = colMd.shortform(s).toLowerCase();
-            } else {
-                s2 = s;
-                s3 = colMd.shortform(s);
-            }
-            if (s2.contains(filter) || s3.contains(filter)) {
-                filteredList.add(resource);
-                if (resource.isAnon()) blankNodesCounter.set(blankNodesCounter.get() + 1);
-            }
-        }
+        });
         safePrompt(filteredList);
     }
 
     protected void search(String filter) {
         history.push(new SearchHistoryElement(currentSearch));
-        currentSearch = new SearchHistoryElement(caseSensBox.isSelected(), safeModeBox.isSelected(), bNodeBox.isSelected(), filter);
+        currentSearch = new SearchHistoryElement(caseSensBox.isSelected(), safeModeBox.isSelected(), ignoreBNodeBox.isSelected(), filter);
         filter(filter);
     }
 
     private void filter(SearchHistoryElement search) {
         caseSensBox.setSelected(search.isCaseSens());
         safeModeBox.setSelected(search.isSafeMode());
-        bNodeBox.setSelected(search.isbNode());
+        ignoreBNodeBox.setSelected(search.isbNode());
         filter(search.getFilter());
     }
 
@@ -361,7 +360,7 @@ public class NeighborsController implements Initializable {
      */
     public void safePrompt(List<Resource> subjectsList) {
         if (subjectsList.size() <= safeModeLimit.getValue() || !safeModeBox.isSelected()) {
-
+            subjectsList.sort(Comparator.comparing(Resource::toString));
             Platform.runLater(() -> loadingState.setValue("Building Visuals"));
             subjectsList.parallelStream().forEachOrdered(resource -> {
                 if (resource.isURIResource()){
@@ -404,6 +403,5 @@ public class NeighborsController implements Initializable {
                 new MouseEvent(MouseEvent.MOUSE_CLICKED,0,0,0,0, MouseButton.NONE,
                         1,false,false, false, false, false, false, false, false, false, false, null));
     }
-
 
 }

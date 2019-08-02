@@ -163,9 +163,9 @@ public class ElementUtils {
      */
     public static Set<Element> relaxClass(TriplePath triple, CollectionsModel model) {
         logger.info("Relaxing " + triple);
-        NodeIterator iter = model.subClassesOf(triple.getObject());
         Set<Element> res = new HashSet<>();
-        iter.forEachRemaining(node -> {
+        NodeIterator iter = model.subClassesOf(triple.getObject());
+        iter.toSet().parallelStream().forEachOrdered(node -> {
             logger.info(node.toString());
             ElementPathBlock pathBlock = new ElementPathBlock();
             pathBlock.addTriple(Triple.create(triple.getSubject(), RDF.type.asNode(), node.asNode()));
@@ -182,9 +182,9 @@ public class ElementUtils {
      */
     public static Set<Element> relaxProperty(TriplePath triple, CollectionsModel model) {
         logger.info("Relaxing " + triple);
-        NodeIterator iter = model.subPropertiesOf(triple.getPredicate());
         Set<Element> res = new HashSet<>();
-        iter.forEachRemaining(node -> {
+        NodeIterator iter = model.subPropertiesOf(triple.getPredicate());
+        iter.toSet().parallelStream().forEachOrdered(node -> {
             ElementPathBlock pathBlock = new ElementPathBlock();
             pathBlock.addTriple(Triple.create(triple.getSubject(), node.asNode(), triple.getObject()));
             res.add(pathBlock);
