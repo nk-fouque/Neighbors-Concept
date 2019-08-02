@@ -135,6 +135,7 @@ public class ElementUtils {
             Resource subject = statement.getSubject();
             Property property = statement.getPredicate();
             if (!property.equals(RDF.type)) {
+                // TODO : this prevents describing of classes by their members but enables the special relaxation of classes, maybe we could find a way to do both
                 Var var;
                 if (subject.isURIResource()) {
                     var = model.varKey(subject.asResource().getURI());
@@ -232,7 +233,7 @@ public class ElementUtils {
                     ResIterator iterSubj = model.getSaturatedGraph().listSubjectsWithProperty(predicate);
 
                     iterSubj.forEachRemaining(subj -> {
-                        NodeIterator iterobj = model.getGraph().listObjectsOfProperty(subj, predicate);
+                        NodeIterator iterobj = model.getSaturatedGraph().listObjectsOfProperty(subj, predicate);
                         iterobj.forEachRemaining(obj -> {
                             BindingHashMap bind = new BindingHashMap();
                             bind.add(subjVar, subj.asNode());
