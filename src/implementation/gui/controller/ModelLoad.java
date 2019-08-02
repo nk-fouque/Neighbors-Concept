@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.riot.RiotException;
 
 import java.io.FileInputStream;
@@ -20,11 +21,6 @@ import java.util.List;
  * @author nk-fouque
  */
 public class ModelLoad implements Runnable {
-
-    /**
-     * The list of subjects stored in the controller
-     */
-    private List<String> subjectsList;
     /**
      * The absolute path of the RDF file to be loaded on the system
      */
@@ -66,16 +62,14 @@ public class ModelLoad implements Runnable {
      * @param format            The format of the RDF file as a Jena-understandable string
      * @param md                The Model to be modified inside the Controller
      * @param origin            The Controller the loader has been called by
-     * @param subjects          The list of subjects stored in the controller
      * @param loaded            Property used by the controller to know if a controller has been loaded
      * @param blankNodesCounter
      */
-    public ModelLoad(String filename, String format, Model md, NeighborsController origin, List<String> subjects, BooleanProperty loaded, IntegerProperty blankNodesCounter) {
+    public ModelLoad(String filename, String format, Model md, NeighborsController origin, BooleanProperty loaded, IntegerProperty blankNodesCounter) {
         super();
         file = filename;
         this.format = format;
         this.md = md;
-        this.subjectsList = subjects;
         this.modelLoaded = loaded;
         state = new SimpleStringProperty("");
         controller = origin;
@@ -102,7 +96,6 @@ public class ModelLoad implements Runnable {
 //            md.write(System.out, format);
 
             Platform.runLater(() -> state.setValue("Building List"));
-            subjectsList.clear();
             blankNodesCounter.set(0);
             controller.colMd = new CollectionsModel(md, null);
             Platform.runLater(() -> controller.search(""));

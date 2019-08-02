@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
  */
 public class VisualCandidate extends BorderPane {
     private BooleanProperty detailsOnScreen = new SimpleBooleanProperty(false);
+    BorderPane topPane;
 
     /**
      * Base constructor
@@ -29,8 +30,7 @@ public class VisualCandidate extends BorderPane {
     public VisualCandidate(String uri, CollectionsModel colMd,TextField selectedNodeField, TextField filterField) {
         super();
         Label text = new Label(colMd.shortform(uri));
-        BorderPane topPane = new BorderPane();
-
+        topPane = new BorderPane();
 
         Button button = new Button();
         button.textProperty().setValue("Select this node");

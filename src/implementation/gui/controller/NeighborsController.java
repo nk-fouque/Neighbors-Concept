@@ -2,10 +2,7 @@ package implementation.gui.controller;
 
 import implementation.algorithms.Partition;
 import implementation.gui.NeighborsInterface;
-import implementation.gui.model.SearchHistoryElement;
-import implementation.gui.model.VisualCandidate;
-import implementation.gui.model.VisualCluster;
-import implementation.gui.model.VisualPrefixes;
+import implementation.gui.model.*;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
 import javafx.beans.property.*;
@@ -108,8 +105,6 @@ public class NeighborsController implements Initializable {
 
     private BooleanProperty modelLoaded = new SimpleBooleanProperty(false);
 
-    private List<String> subjectsList;
-
     BooleanProperty partitionAvailable = new SimpleBooleanProperty(false);
 
     private AtomicBoolean anytimeCut = new AtomicBoolean(false);
@@ -160,12 +155,11 @@ public class NeighborsController implements Initializable {
             }
         });
 
-        subjectsList = new ArrayList<>();
         modelLoadButton.setOnMouseClicked(mouseEvent -> {
             filterSubjectsField.setText("");
             String filename = filenameField.getText();
             modelLoaded.setValue(false);
-            ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, subjectsList, modelLoaded, blankNodesCounter);
+            ModelLoad loader = new ModelLoad(filename, format.getValue(), md, this, modelLoaded, blankNodesCounter);
             Thread load = new Thread(loader);
             loader.stateProperty().bindBidirectional(loadingState);
             Label modelState = new Label();
@@ -267,7 +261,7 @@ public class NeighborsController implements Initializable {
     private void filter(String filter) {
         candidates.getChildren().clear();
         blankNodesCounter.set(0);
-        List<String> filteredList = new ArrayList<>();
+        List<Resource> filteredList = new ArrayList<>();
         if (!caseSensBox.isSelected()) filter = filter.toLowerCase();
         for (ResIterator it = colMd.getSaturatedGraph().listSubjects(); it.hasNext(); ) {
             Resource resource = it.nextResource();
@@ -286,7 +280,7 @@ public class NeighborsController implements Initializable {
                 s3 = colMd.shortform(s);
             }
             if (s2.contains(filter) || s3.contains(filter)) {
-                filteredList.add(s);
+                filteredList.add(resource);
                 if (resource.isAnon()) blankNodesCounter.set(blankNodesCounter.get() + 1);
             }
         }
@@ -307,7 +301,7 @@ public class NeighborsController implements Initializable {
     }
 
     /**
-     * @param uri The uri of the Node we want to represnet in the CandidateVisual
+     * @param uri The uri of the Node we want to represent in the CandidateVisual
      * @return A Border pane with the uri on the left and a button on the right
      */
     public BorderPane candidateVisual(String uri) {
@@ -315,6 +309,14 @@ public class NeighborsController implements Initializable {
         return res;
     }
 
+    /**
+     * @param id The AnonID of the Node we want to represent in the CandidateVisual
+     * @return A Border pane with the uri on the left and a button on the right
+     */
+    public BorderPane bNodeVisual(String id) {
+        VisualCandidate res = new VisualBNode(id, colMd, selectedNodeField, filterSubjectsField);
+        return res;
+    }
     /**
      * Changes everything that needs to be changed when the algorithm stopper is activated
      */
@@ -357,17 +359,21 @@ public class NeighborsController implements Initializable {
      *
      * @param subjectsList
      */
-    public void safePrompt(List<String> subjectsList) {
+    public void safePrompt(List<Resource> subjectsList) {
         if (subjectsList.size() <= safeModeLimit.getValue() || !safeModeBox.isSelected()) {
-            PriorityQueue<String> queue = new PriorityQueue<>(subjectsList);
 
             Platform.runLater(() -> loadingState.setValue("Building Visuals"));
-            while (!queue.isEmpty()) {
-                String uri = queue.poll();
-                BorderPane visual = candidateVisual(uri);
-                Platform.runLater(() -> visual.minWidthProperty().bind((scrollPane.widthProperty())));
-                Platform.runLater(() -> candidates.getChildren().add(visual));
-            }
+            subjectsList.parallelStream().forEachOrdered(resource -> {
+                if (resource.isURIResource()){
+                    BorderPane visual = candidateVisual(resource.getURI());
+                    Platform.runLater(() -> visual.minWidthProperty().bind((scrollPane.widthProperty())));
+                    Platform.runLater(() -> candidates.getChildren().add(visual));
+                } else if (resource.isAnon()){
+                    BorderPane visual = bNodeVisual(resource.getId().toString());
+                    Platform.runLater(() -> visual.minWidthProperty().bind((scrollPane.widthProperty())));
+                    Platform.runLater(() -> candidates.getChildren().add(visual));
+                }
+            });
             Platform.runLater(() -> partitionCandidates.setTop(new VisualPrefixes(md.getNsPrefixMap(), modelLoaded)));
         } else {
             TitledPane err = new TitledPane();
@@ -385,7 +391,7 @@ public class NeighborsController implements Initializable {
 
             Button firstResults = new Button("Show first " + safeModeLimit.getValue() + " results");
             firstResults.setOnMouseClicked(mouseEvent -> {
-                List<String> truncated = subjectsList.subList(0, safeModeLimit.getValue() - 1);
+                List<Resource> truncated = subjectsList.subList(0, safeModeLimit.getValue() - 1);
                 safePrompt(truncated);
                 firstResults.setVisible(false);
             });

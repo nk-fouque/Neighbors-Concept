@@ -6,11 +6,21 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="Now uses full RDF graph&#10;&#10;With reasoning&#10;Downside - lots of rdf:something now navigable for no reason&#10;Upside - some classes to navigate between members">
-      <change beforePath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/NeighborsInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/FieldTyper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/FieldTyper.java" afterDir="false" />
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualBNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeRoot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeRoot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/FakeClick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCandidate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCandidate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/CollectionsModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/ModelLoad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCandidate.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,12 +53,6 @@
     </option>
     <option name="RESET_MODE" value="HARD" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="153" />
-    <option name="y" value="27" />
-    <option name="width" value="2289" />
-    <option name="height" value="1263" />
   </component>
   <component name="ProjectId" id="1Oj83kxGuI97AnagHEvjfKZWZpQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -235,28 +239,8 @@
       <workItem from="1564485598795" duration="5664000" />
       <workItem from="1564493524861" duration="1684000" />
       <workItem from="1564557607648" duration="5075000" />
-      <workItem from="1564572512130" duration="10108000" />
-    </task>
-    <task id="LOCAL-00028" summary="Fixed problem with describeNode and projection">
-      <created>1563289974304</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1563289974304</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Implemented Match-trees">
-      <created>1563290056035</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1563290056035</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Compilation results">
-      <created>1563290073803</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1563290073803</updated>
+      <workItem from="1564572512130" duration="10949000" />
+      <workItem from="1564730692919" duration="4025000" />
     </task>
     <task id="LOCAL-00031" summary="Changed Main functioning">
       <created>1563291234415</created>
@@ -580,7 +564,28 @@
       <option name="project" value="LOCAL" />
       <updated>1564584320513</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Improved interface&#10;&#10;Refreshes if search options changes">
+      <created>1564584377317</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1564584377317</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Improved interface&#10;&#10;Refreshes if search options changes">
+      <created>1564584423600</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1564584423600</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Improved interface&#10;&#10;Refreshes if search options changes">
+      <created>1564584561226</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1564584561226</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -626,7 +631,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Optimizations&#10;&#10;Removing duplicates during Projection&#10;Copying MatchTreeNode without Copying Match-set&#10;Condition for considering self as modified" />
     <MESSAGE value="Optimizations&#10;&#10;Removed &quot;relaxation finalization&quot;&#10;Changed Heap parameters in configuration and script&#10;Economy of a projection, already accounted for in the LazyJoins algorithm" />
     <MESSAGE value="Javadoc and TODO planning" />
     <MESSAGE value="Made some information about nodes accessible from the list&#10;Navigation between nodes and filtering derived from this" />
@@ -651,7 +655,8 @@
     <MESSAGE value="Javadoc for new classes" />
     <MESSAGE value="Now uses full RDF graph&#10;&#10;With reasoning&#10;Downside - lots of rdf:something now navigable for no reason&#10;Upside - some classes to navigate between members" />
     <MESSAGE value="Improved Interface&#10;&#10;Clusters sorting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved Interface&#10;&#10;Clusters sorting" />
+    <MESSAGE value="Improved interface&#10;&#10;Refreshes if search options changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved interface&#10;&#10;Refreshes if search options changes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
