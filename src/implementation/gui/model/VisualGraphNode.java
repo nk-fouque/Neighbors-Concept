@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,9 @@ public class VisualGraphNode {
 
     /**
      * Base constructor
-     * @param uri the uri of the node to describe
-     * @param colMd The model in which to describe
+     *
+     * @param uri       the uri of the node to describe
+     * @param colMd     The model in which to describe
      * @param textField the filter textfield to use for navigation
      */
     public VisualGraphNode(String uri, CollectionsModel colMd, TextField textField) {
@@ -33,12 +35,14 @@ public class VisualGraphNode {
         Map<Property, List<RDFNode>> propertiesFrom = colMd.getTriples().get(uri);
         for (Property property : propertiesFrom.keySet()) {
             dbPrompt.add(new Label("\t" + colMd.shortform(property.getURI())), 0, propertiesRow);
-            for (RDFNode node : propertiesFrom.get(property)) {
+            List<RDFNode> ordered = propertiesFrom.get(property);
+            ordered.sort(Comparator.comparing(RDFNode::toString));
+            for (RDFNode node : ordered) {
                 Node object;
                 if (node.isURIResource()) {
                     object = new SubjectLink(colMd.shortform(node.toString()), textField);
                 } else if (node.isAnon()) {
-                    object = new BlankNodeLink(node.toString(),textField);
+                    object = new BlankNodeLink(node.toString(), textField);
                 } else {
                     object = new Label(" " + colMd.shortform(node.toString()));
                 }
@@ -51,11 +55,12 @@ public class VisualGraphNode {
         if (propertiesTo != null) {
             for (Property property : propertiesTo.keySet()) {
                 dbPrompt.add(new Label("\tis " + colMd.shortform(property.getURI()) + " of"), 0, propertiesRow);
-                for (RDFNode node : propertiesTo.get(property)) {
-                        SubjectLink subjectClickable = new SubjectLink(colMd.shortform(node.toString()), textField);
-                        dbPrompt.add(subjectClickable, 1, propertiesRow);
-                        propertiesRow++;
-
+                List<RDFNode> ordered = propertiesTo.get(property);
+                ordered.sort(Comparator.comparing(RDFNode::toString));
+                for (RDFNode node : ordered) {
+                    SubjectLink subjectClickable = new SubjectLink(colMd.shortform(node.toString()), textField);
+                    dbPrompt.add(subjectClickable, 1, propertiesRow);
+                    propertiesRow++;
                 }
             }
         }

@@ -194,6 +194,7 @@ public class NeighborsController implements Initializable {
             if (!history.empty()) {
                 SearchHistoryElement search = history.pop();
                 currentSearch = search;
+                filterSubjectsField.textProperty().setValue(search.getFilter());
                 filter(search);
             }
         });
@@ -390,6 +391,7 @@ public class NeighborsController implements Initializable {
 
             Button firstResults = new Button("Show first " + safeModeLimit.getValue() + " results");
             firstResults.setOnMouseClicked(mouseEvent -> {
+                subjectsList.sort(Comparator.comparing(Resource::toString));
                 List<Resource> truncated = subjectsList.subList(0, safeModeLimit.getValue() - 1);
                 safePrompt(truncated);
                 firstResults.setVisible(false);
