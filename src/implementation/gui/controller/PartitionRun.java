@@ -105,7 +105,7 @@ public class PartitionRun implements Runnable {
         Platform.runLater(() -> loadingPane.setContent(loadingState));
         Platform.runLater(() -> loadingPane.setExpanded(true));
 
-        int algoRun = partition.partitionAlgorithm(cut);
+        int algoRun = partition.completePartitioning(cut);
         partition.cut();
 
         if (algoRun >= 0) {

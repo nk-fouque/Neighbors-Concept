@@ -68,8 +68,7 @@ public class Partition {
     /**
      * @param colMd            A preexisting CollectionsModel in which to describe the node and search for its neighbors
      * @param uriTarget        The full length uri of the node to describe
-     * @param descriptionDepth The depth of initial node description
-     *                         (for now any number n>2 makes it pseudo-infinite and at some point the whole graph becomes a description of your node)
+     * @param descriptionDepth The depth of initial node description (the maximum distance a node can be to the initial node to describe it)
      */
     public Partition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
         nextCluster = 0;
@@ -95,7 +94,7 @@ public class Partition {
      *
      * @return false if the partitioning is over, true if it can still be iterated
      */
-    public boolean iterate() throws PartitionException, OutOfMemoryError {
+    public boolean oneStepPartitioning() throws PartitionException, OutOfMemoryError {
         SingletonStopwatchCollection.resume("iterate");
         SingletonStopwatchCollection.resume("connect");
         CallCounterCollection.call("iterate");
@@ -197,12 +196,12 @@ public class Partition {
      * @param cut AtomicBoolean to observe, when it is set to false, the algorithm stops and cuts
      * @return 0 if the algorithm went to the end correctly, 1 if the algorithm encountered a memory limit, -1 if it encountered an unexpected error
      */
-    public int partitionAlgorithm(AtomicBoolean cut) {
+    public int completePartitioning(AtomicBoolean cut) {
         boolean run = true;
         boolean stop = false;
         while (run && !stop) {
             try {
-                run = iterate();
+                run = oneStepPartitioning();
             } catch (OutOfMemoryError mem) {
                 mem.printStackTrace();
                 return 1;

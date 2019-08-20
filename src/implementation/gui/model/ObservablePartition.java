@@ -31,8 +31,8 @@ public class ObservablePartition extends Partition {
     }
 
     @Override
-    public boolean iterate() throws PartitionException, OutOfMemoryError {
-        boolean res = super.iterate();
+    public boolean oneStepPartitioning() throws PartitionException, OutOfMemoryError {
+        boolean res = super.oneStepPartitioning();
         if ((getClusters().size() != clusterSize) || (getNeighbors().size() != answerSize)) {
             clusterSize = getClusters().size();
             answerSize = getNeighbors().size();

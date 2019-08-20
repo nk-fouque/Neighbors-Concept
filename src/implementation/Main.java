@@ -58,7 +58,7 @@ public class Main {
         SingletonStopwatchCollection.resume("Main");
 
         // Launching the algorithm
-        int algoRun = p.partitionAlgorithm(cut);
+        int algoRun = p.completePartitioning(cut);
 
         // Processing results
         switch (algoRun) {

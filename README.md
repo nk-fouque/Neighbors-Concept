@@ -14,7 +14,7 @@ in **Jena** A Java library for Semantic Web
 * https://jena.apache.org/documentation/javadoc/arq/ : Jena Documentation for ARQ, the SPARQL Engine
 * https://openjfx.io/javadoc/12/ : JavaFX Documentation
 ## User Documentation
-### Using the Interface
+### Graphical User Interface
 * Execute `implementation.gui.NeighborsInterface.main()` (done by the run_interface.sh script)
 * Find your RDF File
   * Click on the *Browse* button and find your RDF file in the file explorer      
@@ -44,7 +44,8 @@ Javadoc at https://nk-fouque.github.io/Neighbors-Concept/allclasses-index.html
 Run run_interface.sh to open interface
 
 ### Content
-* Class `Main` 
+* Class `Main` gives an example use of the partition algorithm
+  
 * Class `NeighborsImplementation` for some static function useful to `Main`
 ##### package `algorithms`
 * Classes `Partition` and `Cluster` for the first Algorithm described in the publication
