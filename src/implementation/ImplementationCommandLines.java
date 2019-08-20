@@ -15,12 +15,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ImplementationCommandLines {
     public static void main(String[] args) throws IOException {
-        // Jena setup
-        BasicConfigurator.configure();
-
-        // Logger setup
-        NeighborsImplementation.myLogsLevels("silent");
-
         // Checking Parameters
         if (args.length < 3)
             throw new IOException("Missing arguments : required arguments are rdfFilePath, rdfFileFormat and targetNodeUri ");
@@ -29,11 +23,6 @@ public class ImplementationCommandLines {
         String filename = args[0];
         String format = args[1];
         String uriTarget = args[2];
-
-
-        // Loading Model from file
-        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
-
 
         // Setting optional parameters
         String resultsPath = "";
@@ -44,22 +33,28 @@ public class ImplementationCommandLines {
 
         int depth = 1;
 
+        String verboseMode = "silent";
+
         if (args.length > 3) {
             for (int i = 3; i<args.length;i++){
                 String[] arg = args[i].split("=",2);
                 switch (arg[0]){
-                    case "export" : {
+                    case "--e" : {
                         resultsPath = arg[1];
                         export = true;
                         break;
                     }
-                    case "time" : {
+                    case "--t" : {
                         time = Integer.valueOf(arg[1]);
                         timeout = true;
                         break;
                     }
-                    case "depth" : {
+                    case "--d" : {
                         depth = Integer.valueOf(arg[1]);
+                        break;
+                    }
+                    case "--v" : {
+                        verboseMode = arg[1];
                         break;
                     }
                     default: {
@@ -68,6 +63,15 @@ public class ImplementationCommandLines {
                 }
             }
         }
+
+        // Jena setup
+        BasicConfigurator.configure();
+
+        // Logger setup
+        NeighborsImplementation.myLogsLevels(verboseMode);
+
+        // Loading Model from file
+        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
 
         // Preparing Partition
         Partition p = new Partition(model, uriTarget, depth);

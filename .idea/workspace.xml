@@ -6,87 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="Clarifications in documentation">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/constant-values.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/Main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/NeighborsImplementation.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/NeighborsImplementation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/Cluster.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/Cluster.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/Partition.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/Partition.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/LazyJoin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/LazyJoin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeNode.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeNode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeRoot.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/MatchTreeRoot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/matchTree/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/algorithms/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/algorithms/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/NeighborsInterface.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/NeighborsInterface.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/FieldTyper.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/controller/FieldTyper.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/ModelLoad.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/controller/ModelLoad.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/NeighborsController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/controller/NeighborsController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/PartitionRun.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/controller/PartitionRun.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/controller/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/controller/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/controller/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/BlankNodeLink.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/BlankNodeLink.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/ObservablePartition.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/ObservablePartition.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/SearchHistoryElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/SearchHistoryElement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/SubjectLink.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/SubjectLink.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCandidate.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCandidate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCluster.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/VisualCluster.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualGraphNode.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/VisualGraphNode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/VisualPrefixes.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/VisualPrefixes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/model/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/gui/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/gui/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/CollectionsModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/CollectionsModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/ElementUtils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/ElementUtils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/PartitionException.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/PartitionException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/TableUtils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/TableUtils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/TimeOut.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/TimeOut.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounter.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounterCollection.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/CallCounterCollection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/SingletonStopwatchCollection.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/SingletonStopwatchCollection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/Stopwatch.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/Stopwatch.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/utils/profiling/stopwatches/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-14.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-15.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-16.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-17.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-18.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/docs/member-search-index.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-search-index.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/serialized-form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/type-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/docs/type-search-index.zip" afterDir="false" />
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationCommandLines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationCommandLines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/ImplementationCommandLines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ImplementationCommandLines.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -193,11 +116,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ImplementationExample">
+  <component name="RunManager" selected="Application.ImplementationCommandLines">
     <configuration name="ImplementationCommandLines" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="implementation.ImplementationCommandLines" />
       <module name="Similarity_Search" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/RDF_Resources/default_mondial.ttl TTL http://www.semwebtech.org/mondial/10/sea/PacificOcean/ export=$USER_HOME$/Documents/results.txt time=300 depth=2" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/RDF_Resources/default_mondial.ttl TTL http://www.semwebtech.org/mondial/10/sea/PacificOcean/ --e=$USER_HOME$/Documents/results.txt --t=300 --d=2 --v=silent" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="implementation.*" />
@@ -328,14 +251,7 @@
       <workItem from="1564572512130" duration="10949000" />
       <workItem from="1564730692919" duration="7493000" />
       <workItem from="1564744692670" duration="6560000" />
-      <workItem from="1566285120868" duration="7228000" />
-    </task>
-    <task id="LOCAL-00039" summary="Added .gitignore, ignore artifacts">
-      <created>1563455196470</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1563455196470</updated>
+      <workItem from="1566285120868" duration="9318000" />
     </task>
     <task id="LOCAL-00040" summary="Updated README and run script">
       <created>1563456840821</created>
@@ -673,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566295123573</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Refreshed Javadoc">
+      <created>1566295325214</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1566295325214</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -719,7 +642,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Replaced many Arraylists by Hashsets&#10;&#10;Lost unnecessary List ordering and gained Hashsets' computational speed&#10;Particularly significant gains on &quot;contains&quot; function" />
     <MESSAGE value="Moved key map in collections model, replaced RandomString by a counter for determinism" />
     <MESSAGE value="Refreshing Javadoc&#10;&#10;Deleting obsolete files" />
     <MESSAGE value="Implemented description depth &#10;&#10;Improved debug&#10;Fixed subclasses, subproperties" />
@@ -744,7 +666,8 @@
     <MESSAGE value="Partition can now use rdfs:range and rdfs:domain as similitude points" />
     <MESSAGE value="Clarifications in documentation" />
     <MESSAGE value="Changed Main name to reflect its nature of example. &#10;Created a new main using command lines parameters instead of hard-coded values" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed Main name to reflect its nature of example. &#10;Created a new main using command lines parameters instead of hard-coded values" />
+    <MESSAGE value="Refreshed Javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refreshed Javadoc" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
