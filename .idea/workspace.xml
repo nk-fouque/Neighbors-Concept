@@ -7,11 +7,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/ObservablePartition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/ObservablePartition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/implementation/ImplementationCommandLines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/implementation/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/ObservablePartition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/ObservablePartition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,9 +125,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.NeighborsInterface">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="implementation.Main" />
+  <component name="RunManager" selected="Application.ImplementationExample">
+    <configuration name="ImplementationCommandLines" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="implementation.ImplementationCommandLines" />
+      <module name="Similarity_Search" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/RDF_Resources/default_mondial.ttl TTL http://www.semwebtech.org/mondial/10/sea/PacificOcean/ export=$USER_HOME$/Documents/results.txt time=300 depth=2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="implementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImplementationExample" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="implementation.ImplementationExample" />
       <module name="Similarity_Search" />
       <extension name="coverage">
         <pattern>
@@ -147,8 +168,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.ImplementationExample" />
       <item itemvalue="Application.NeighborsInterface" />
+      <item itemvalue="Application.ImplementationCommandLines" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -238,14 +260,7 @@
       <workItem from="1564572512130" duration="10949000" />
       <workItem from="1564730692919" duration="7493000" />
       <workItem from="1564744692670" duration="6560000" />
-      <workItem from="1566285120868" duration="2200000" />
-    </task>
-    <task id="LOCAL-00037" summary="Added MIT License">
-      <created>1563438266786</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1563438266786</updated>
+      <workItem from="1566285120868" duration="6985000" />
     </task>
     <task id="LOCAL-00038" summary="Made Application runnable from command prompt and configured shell script to do it">
       <created>1563455019386</created>
@@ -583,7 +598,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566287021287</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Clarifications in documentation">
+      <created>1566287352820</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1566287352820</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +651,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Element answers stored for future usage" />
     <MESSAGE value="Using Jena indexes statements instead of homemade indexed maps" />
     <MESSAGE value="Replaced many Arraylists by Hashsets&#10;&#10;Lost unnecessary List ordering and gained Hashsets' computational speed&#10;Particularly significant gains on &quot;contains&quot; function" />
     <MESSAGE value="Moved key map in collections model, replaced RandomString by a counter for determinism" />
@@ -654,7 +675,8 @@
     <MESSAGE value="Added directions commentaries about class descriptions" />
     <MESSAGE value="Small tweaks to interface&#10;&#10;Details of a node shown in alphabetic order&#10;&quot;First results&quot; are actually the first results in alphabetical order&#10;&quot;Previous&quot; Button chnages back the filter" />
     <MESSAGE value="Partition can now use rdfs:range and rdfs:domain as similitude points" />
-    <option name="LAST_COMMIT_MESSAGE" value="Partition can now use rdfs:range and rdfs:domain as similitude points" />
+    <MESSAGE value="Clarifications in documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Clarifications in documentation" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

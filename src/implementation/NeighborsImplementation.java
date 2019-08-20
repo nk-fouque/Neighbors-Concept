@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Static methods for a basic implementation
  *
  * @author nk-fouque
- * @see Main#main(String[])
+ * @see ImplementationExample#main(String[])
  */
 public class NeighborsImplementation {
 
@@ -91,7 +91,7 @@ public class NeighborsImplementation {
         SignalHandler handler = sig -> {
             System.out.println("Captured " + sig.getName());
             for (Thread thread : toInterrupt) {
-                thread.interrupt();
+                if (!thread.isInterrupted()) thread.interrupt();
             }
             interrupted.set(true);
         };

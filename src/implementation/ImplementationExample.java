@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @author nk-fouque
  */
-public class Main {
+public class ImplementationExample {
 
     public static void main(String[] args) throws IOException {
 
