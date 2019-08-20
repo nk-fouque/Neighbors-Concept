@@ -47,6 +47,16 @@ public class CollectionsModel {
             List<RDFNode> thatPropertyTo = propertiesTo.computeIfAbsent(stmt.getPredicate(), (l) -> new ArrayList<>());
             thatPropertyTo.add(stmt.getSubject());
         });
+
+        iter = saturatedGraph.listStatements(new SelectorImpl(null , RDFS.range, (RDFNode) null));
+        iter.forEachRemaining(statement -> {
+            graph.add(statement);
+        });
+
+        iter = saturatedGraph.listStatements(new SelectorImpl(null , RDFS.domain, (RDFNode) null));
+        iter.forEachRemaining(statement -> {
+            graph.add(statement);
+        });
     }
 
     /**
