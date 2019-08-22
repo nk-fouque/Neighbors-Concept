@@ -7,10 +7,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualError.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionAdditional.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionAdditional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionAdditional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionAdditional.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -254,21 +265,7 @@
       <workItem from="1564744692670" duration="6560000" />
       <workItem from="1566285120868" duration="9382000" />
       <workItem from="1566371363312" duration="6730000" />
-      <workItem from="1566457832585" duration="5477000" />
-    </task>
-    <task id="LOCAL-00042" summary="Javadoc in NeighborsController">
-      <created>1563460629410</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1563460629410</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Fixed 0 extensional distance cluster">
-      <created>1563529850153</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1563529850153</updated>
+      <workItem from="1566457832585" duration="7599000" />
     </task>
     <task id="LOCAL-00044" summary="Display number of clusters during Partition">
       <created>1563536434284</created>
@@ -599,7 +596,21 @@
       <option name="project" value="LOCAL" />
       <updated>1566462978173</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Abstracted error handling in interface">
+      <created>1566463370616</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1566463370616</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Script for running with parameters&#10;&#10;Usage instructions coming later">
+      <created>1566463499052</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1566463499052</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,8 +656,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Implemented description depth &#10;&#10;Improved debug&#10;Fixed subclasses, subproperties" />
-    <MESSAGE value="Improved Interface&#10;&#10;Added depth control&#10;Fixed third toolbar&#10;Set columns width to percentage&#10;Implemented Safe Mode" />
     <MESSAGE value="Small fixings to Safe Mode, Reformatted VisualCluster" />
     <MESSAGE value="Improved Interface&#10;&#10;Clickable links to navigate the dataset&#10;VisualCluster easier to read&#10;Graph Nodes details visualization like dbpedia&#10;Similitude elements ordered" />
     <MESSAGE value="Small tweaks to interface" />
@@ -670,7 +679,9 @@
     <MESSAGE value="Refreshed Javadoc" />
     <MESSAGE value="Included verboseMode in parameters" />
     <MESSAGE value="Now able to resume search on whole partition via interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now able to resume search on whole partition via interface" />
+    <MESSAGE value="Abstracted error handling in interface" />
+    <MESSAGE value="Script for running with parameters&#10;&#10;Usage instructions coming later" />
+    <option name="LAST_COMMIT_MESSAGE" value="Script for running with parameters&#10;&#10;Usage instructions coming later" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

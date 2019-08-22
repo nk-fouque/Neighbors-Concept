@@ -1,6 +1,8 @@
 package implementation.gui.model;
 
 import implementation.algorithms.Cluster;
+import implementation.gui.controller.NeighborsController;
+import implementation.gui.controller.PartitionAdditional;
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
 import javafx.application.Platform;
@@ -18,6 +20,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import org.apache.jena.sparql.syntax.Element;
 
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -33,7 +36,7 @@ public class VisualCluster extends TitledPane implements Comparable{
      */
     public Cluster cluster;
 
-    public VisualCluster(Cluster c, CollectionsModel colMd, TextField filterField) {
+    public VisualCluster(Cluster c, CollectionsModel colMd, TextField filterField, NeighborsController mainController) {
         super();
         cluster = c;
         this.setText("Extensional distance : " + c.getExtensionDistance());
@@ -69,11 +72,19 @@ public class VisualCluster extends TitledPane implements Comparable{
 
         // Top of the Pane
         HBox gadgets = new HBox(10);
-        CopyButton copy = new CopyButton(texts);
         Label extensional = new Label("Extensional distance : " + c.getExtensionDistance());
         Label intensional = new Label("Intensional similitude : " + c.getRelaxQueryElements().size());
         Label relax = new Label("Number of relaxations : " + c.getRelaxDistance());
+        CopyButton copy = new CopyButton(texts);
         gadgets.getChildren().addAll(extensional, intensional, relax, copy);
+        if (!finished) {
+            Button further = new Button();
+            further.setText("Further partition this cluster");
+            further.setOnMouseClicked(mouseEvent -> {
+                mainController.furtherPartition(Collections.singleton(cluster));
+            });
+            gadgets.getChildren().add(further);
+        }
         gadgets.autosize();
 
         // Whole Pane

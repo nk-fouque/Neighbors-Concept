@@ -86,7 +86,7 @@
         </BorderPane>
     </children>
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="49.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="49.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="49.9"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="49.9"/>
     </columnConstraints>
 </GridPane>

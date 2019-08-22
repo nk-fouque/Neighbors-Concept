@@ -1,5 +1,6 @@
 package implementation.gui.controller;
 
+import implementation.algorithms.Cluster;
 import implementation.gui.NeighborsInterface;
 import implementation.gui.model.*;
 import implementation.utils.CollectionsModel;
@@ -256,16 +257,10 @@ public class NeighborsController implements Initializable {
                 Platform.runLater(() -> partitionResultsBox.getChildren().clear());
                 TitledPane error = new TitledPane();
                 error.setText("No Partition to resume");
-                error.setContent(new Text(""));
+                error.setContent(new Text("A partition must have been interrupted manually or by time limit to be resumed"));
                 Platform.runLater(() -> partitionResultsBox.getChildren().add(error));
             } else {
-                Runnable algo = new PartitionAdditional(this, partition.furtherPartitioningcandidates(), partitionResultsBox, anytimeCut);
-                Thread thread = new Thread(algo);
-                if (timeLimit.getValue() > 0) {
-                    Thread timeOut = timeOut(timeLimit.getValue().intValue());
-                    timeOut.start();
-                }
-                thread.start();
+                furtherPartition(partition.furtherPartitioningcandidates());
             }
         });
 
@@ -424,6 +419,16 @@ public class NeighborsController implements Initializable {
         button.getOnMouseClicked().handle(
                 new MouseEvent(MouseEvent.MOUSE_CLICKED,0,0,0,0, MouseButton.NONE,
                         1,false,false, false, false, false, false, false, false, false, false, null));
+    }
+
+    public void furtherPartition(Collection<Cluster> clusters){
+        Runnable algo = new PartitionAdditional(this, clusters, partitionResultsBox, anytimeCut);
+        Thread thread = new Thread(algo);
+        if (timeLimit.getValue() > 0) {
+            Thread timeOut = timeOut(timeLimit.getValue().intValue());
+            timeOut.start();
+        }
+        thread.start();
     }
 
 }

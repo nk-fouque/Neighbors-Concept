@@ -34,7 +34,6 @@ public class PartitionAdditional implements Runnable {
         int algoRun = -2;
         try {
             algoRun = mainController.partition.targetedFurtherPartitioning(clusters,cut);
-            clusters.clear();
             mainController.partition.cut();
         } catch (PartitionException e) {
             Platform.runLater(() -> resultsContainer.getChildren().clear());
@@ -49,7 +48,7 @@ public class PartitionAdditional implements Runnable {
             queue.addAll(mainController.partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
-                TitledPane cluster = new VisualCluster(c, mainController.partition.getGraph(), mainController.filterSubjectsField);
+                TitledPane cluster = new VisualCluster(c, mainController.partition.getGraph(), mainController.filterSubjectsField, mainController);
                 Platform.runLater(() -> resultsContainer.getChildren().add(cluster));
             }
             Platform.runLater(() -> resultsContainer.autosize());

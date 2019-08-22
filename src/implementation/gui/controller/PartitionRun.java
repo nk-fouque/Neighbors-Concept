@@ -112,7 +112,7 @@ public class PartitionRun implements Runnable {
             queue.addAll(partition.getNeighbors());
             while (!queue.isEmpty()) {
                 Cluster c = queue.poll();
-                TitledPane cluster = new VisualCluster(c, partition.getGraph(), mainController.filterSubjectsField);
+                TitledPane cluster = new VisualCluster(c, partition.getGraph(), mainController.filterSubjectsField, mainController);
                 Platform.runLater(() -> resultsContainer.getChildren().add(cluster));
             }
             Platform.runLater(() -> resultsContainer.autosize());
