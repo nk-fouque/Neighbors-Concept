@@ -1,12 +1,11 @@
 package implementation.gui.controller;
 
 import implementation.algorithms.Cluster;
-import implementation.algorithms.Partition;
 import implementation.gui.model.ObservablePartition;
 import implementation.gui.model.VisualCluster;
+import implementation.gui.model.VisualError;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -14,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import org.apache.jena.rdf.model.Model;
 
 import java.util.Comparator;
@@ -120,10 +118,7 @@ public class PartitionRun implements Runnable {
             Platform.runLater(() -> resultsContainer.autosize());
         } else {
             Platform.runLater(() -> resultsContainer.getChildren().clear());
-            TitledPane error = new TitledPane();
-            error.setText("Something went wrong :/");
-            error.setContent(new Text("Error details in Java Console"));
-            Platform.runLater(() -> resultsContainer.getChildren().add(error));
+            Platform.runLater(() -> resultsContainer.getChildren().add(VisualError.partitionError()));
         }
         available.setValue(true);
         mainController.cutDeactivate();

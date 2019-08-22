@@ -2,12 +2,11 @@ package implementation.gui.controller;
 
 import implementation.algorithms.Cluster;
 import implementation.gui.model.VisualCluster;
+import implementation.gui.model.VisualError;
 import implementation.utils.PartitionException;
 import javafx.application.Platform;
-import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,12 +37,8 @@ public class PartitionAdditional implements Runnable {
             clusters.clear();
             mainController.partition.cut();
         } catch (PartitionException e) {
-            e.printStackTrace();
             Platform.runLater(() -> resultsContainer.getChildren().clear());
-            TitledPane error = new TitledPane();
-            error.setText("Something went wrong :/");
-            error.setContent(new Text("Error details in Java Console"));
-            Platform.runLater(() -> resultsContainer.getChildren().add(error));
+            Platform.runLater(() -> resultsContainer.getChildren().add(VisualError.standardError(e)));
         }
 
         if (algoRun >= 0) {
@@ -60,10 +55,7 @@ public class PartitionAdditional implements Runnable {
             Platform.runLater(() -> resultsContainer.autosize());
         } else {
             Platform.runLater(() -> resultsContainer.getChildren().clear());
-            TitledPane error = new TitledPane();
-            error.setText("Something went wrong :/");
-            error.setContent(new Text("Error details in Java Console"));
-            Platform.runLater(() -> resultsContainer.getChildren().add(error));
+            Platform.runLater(() -> resultsContainer.getChildren().add(VisualError.partitionError()));
         }
         mainController.partitionAvailable.setValue(true);
         mainController.cutDeactivate();
