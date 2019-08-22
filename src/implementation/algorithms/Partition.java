@@ -219,6 +219,35 @@ public class Partition {
 
     public void cut() {
         this.neighbors.addAll(clusters);
+        clusters.clear();
+    }
+
+    public List<Cluster> furtherPartitioningcandidates(){
+        List<Cluster> list = new ArrayList<>();
+        for (Cluster c : neighbors){
+            Set<Element> remaining = c.getAvailableQueryElements();
+            boolean finished = true;
+            if (remaining.size() != 0) {
+                for (Element e : remaining) {
+                    if (c.connected(ElementUtils.mentioned(e))) {
+                        finished = false;
+                        break;
+                    }
+                }
+            }
+            if (!finished) list.add(c) ;
+        }
+        return list;
+    }
+
+    public int targetedFurtherPartitioning (Collection<Cluster> clusterCollection, AtomicBoolean cut) throws PartitionException {
+        boolean remove = true;
+        for(Cluster cluster : clusterCollection){
+            remove = neighbors.remove(cluster);
+            if (!remove) throw new PartitionException("designated cluster was not in this partition : "+cluster.toString(graph));
+        }
+        clusters.addAll(clusterCollection);
+        return completePartitioning(cut);
     }
 
     @Override

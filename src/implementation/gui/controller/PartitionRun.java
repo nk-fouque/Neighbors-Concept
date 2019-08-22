@@ -1,10 +1,12 @@
 package implementation.gui.controller;
 
 import implementation.algorithms.Cluster;
+import implementation.algorithms.Partition;
 import implementation.gui.model.ObservablePartition;
 import implementation.gui.model.VisualCluster;
 import implementation.utils.CollectionsModel;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -29,10 +31,6 @@ public class PartitionRun implements Runnable {
      * RDF Model stored in the controller
      */
     private Model graph;
-    /**
-     * The Partition stored by the controller
-     */
-    private ObservablePartition partition;
     /**
      * The (full) uri of the node to apply similarity search
      */
@@ -96,8 +94,8 @@ public class PartitionRun implements Runnable {
         available.setValue(false);
 
         CollectionsModel colMd = mainController.colMd;
-
-        partition = new ObservablePartition(colMd, uriTarget, depth);
+        mainController.partition = new ObservablePartition(colMd, uriTarget, depth);
+        ObservablePartition partition = mainController.partition;
 
         Label loadingState = new Label();
         loadingState.textProperty().bind(partition.stateProperty());

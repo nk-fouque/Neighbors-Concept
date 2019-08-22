@@ -1,6 +1,5 @@
 package implementation.gui.controller;
 
-import implementation.algorithms.Partition;
 import implementation.gui.NeighborsInterface;
 import implementation.gui.model.*;
 import implementation.utils.CollectionsModel;
@@ -24,7 +23,6 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
 
 import java.io.File;
@@ -77,10 +75,12 @@ public class NeighborsController implements Initializable {
     @FXML
     BorderPane partitionResults;
     @FXML
-    VBox partitionAccordion;
+    VBox partitionResultsBox;
 
     @FXML
     Spinner<Integer> timeLimit;
+    @FXML
+    Spinner<Integer> depthLimit;
     @FXML
     Button cutButton;
     @FXML
@@ -88,7 +88,7 @@ public class NeighborsController implements Initializable {
     @FXML
     Label finalState;
     @FXML
-    Spinner<Integer> depthLimit;
+    Button furtherButton;
 
     @FXML
     TextField selectedNodeField;
@@ -101,7 +101,7 @@ public class NeighborsController implements Initializable {
 
     public CollectionsModel colMd;
 
-    private Partition partition;
+    public ObservablePartition partition;
 
     private BooleanProperty modelLoaded = new SimpleBooleanProperty(false);
 
@@ -206,14 +206,14 @@ public class NeighborsController implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if (partitionAvailable.get()) {
                     PriorityQueue<VisualCluster> queue = new PriorityQueue<>(new VisualClusterComparator(sortMode.getValue()));
-                    partitionAccordion.getChildren().forEach(node -> {
+                    partitionResultsBox.getChildren().forEach(node -> {
                         if (node instanceof VisualCluster) {
                             queue.add((VisualCluster) node);
                         }
                     });
-                    partitionAccordion.getChildren().clear();
+                    partitionResultsBox.getChildren().clear();
                     while (!queue.isEmpty()) {
-                        partitionAccordion.getChildren().add(queue.poll());
+                        partitionResultsBox.getChildren().add(queue.poll());
                     }
                 }
             }
@@ -236,17 +236,37 @@ public class NeighborsController implements Initializable {
         selectedNodeField.autosize();
         partitionButton.disableProperty().bind(partitionAvailable.not());
         partitionButton.setOnMouseClicked(mouseEvent -> {
-            partitionAccordion.getChildren().clear();
+            partitionResultsBox.getChildren().clear();
             TitledPane loading = new TitledPane();
             loading.setText("Loading neighbors for " + selectedNodeField.textProperty().get() + " please wait");
-            partitionAccordion.getChildren().add(loading);
-            Runnable algo = new PartitionRun(md, selectedNodeField.textProperty().get(), partitionAccordion, partitionAvailable, anytimeCut, this, loading, depthLimit);
+            partitionResultsBox.getChildren().add(loading);
+            Runnable algo = new PartitionRun(md, selectedNodeField.textProperty().get(), partitionResultsBox, partitionAvailable, anytimeCut, this, loading, depthLimit);
             Thread thread = new Thread(algo);
             if (timeLimit.getValue() > 0) {
                 Thread timeOut = timeOut(timeLimit.getValue().intValue());
                 timeOut.start();
             }
             thread.start();
+        });
+
+        furtherButton.visibleProperty().bind(partitionAvailable);
+        furtherButton.setOnMouseClicked(mouseEvent -> {
+            partitionResultsBox.getChildren().clear();
+            if (partition==null){
+                Platform.runLater(() -> partitionResultsBox.getChildren().clear());
+                TitledPane error = new TitledPane();
+                error.setText("No Partition to resume");
+                error.setContent(new Text(""));
+                Platform.runLater(() -> partitionResultsBox.getChildren().add(error));
+            } else {
+                Runnable algo = new PartitionAdditional(this, partition.furtherPartitioningcandidates(), partitionResultsBox, anytimeCut);
+                Thread thread = new Thread(algo);
+                if (timeLimit.getValue() > 0) {
+                    Thread timeOut = timeOut(timeLimit.getValue().intValue());
+                    timeOut.start();
+                }
+                thread.start();
+            }
         });
 
         NeighborsInterface.exit.addListener(changeListener -> {

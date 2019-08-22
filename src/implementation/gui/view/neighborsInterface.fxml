@@ -69,6 +69,7 @@
                         <Button fx:id="cutButton" text="Interrupt Partition"/>
                         <Label fx:id="cutLabel"/>
                         <Label fx:id="finalState"/>
+                        <Button fx:id="furtherButton" text="Resume Similarity Search" />
                     </ToolBar>
                     <ToolBar>
                         <Label text="Node selected : "/>
@@ -79,7 +80,7 @@
             </top>
             <center>
                 <ScrollPane>
-                    <VBox fx:id="partitionAccordion"/>
+                    <VBox fx:id="partitionResultsBox"/>
                 </ScrollPane>
             </center>
         </BorderPane>

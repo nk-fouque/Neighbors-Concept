@@ -47,7 +47,6 @@ public class VisualCluster extends TitledPane implements Comparable{
                 }
             }
         }
-
         if (finished)
             this.textFillProperty().setValue(Paint.valueOf("#484848"));
         else
