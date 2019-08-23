@@ -7,21 +7,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/implementation/utils/SetUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Cluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Cluster.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionAdditional.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionAdditional.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionRun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionAdditional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionAdditional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionRun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeRoot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeRoot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +125,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.NeighborsInterface">
+  <component name="RunManager" selected="Application.ImplementationExample">
     <configuration name="ImplementationCommandLines" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="implementation.ImplementationCommandLines" />
       <module name="Similarity_Search" />
@@ -170,11 +167,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test" />
+      <module name="Similarity_Search" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.ImplementationExample" />
       <item itemvalue="Application.NeighborsInterface" />
       <item itemvalue="Application.ImplementationCommandLines" />
+      <item itemvalue="Application.test" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -265,14 +275,9 @@
       <workItem from="1564744692670" duration="6560000" />
       <workItem from="1566285120868" duration="9382000" />
       <workItem from="1566371363312" duration="6730000" />
-      <workItem from="1566457832585" duration="7599000" />
-    </task>
-    <task id="LOCAL-00044" summary="Display number of clusters during Partition">
-      <created>1563536434284</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1563536434284</updated>
+      <workItem from="1566457832585" duration="10742000" />
+      <workItem from="1566544608240" duration="3583000" />
+      <workItem from="1566558246740" duration="6731000" />
     </task>
     <task id="LOCAL-00045" summary="Prevented unwanted interactions&#10;Intterupt activating while no partition is running&#10;Launching partition before model in completely loaded&#10;Filterin before model is completely loaded">
       <created>1563543415584</created>
@@ -610,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566463499052</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Now able to resume partition with only one of the clusters">
+      <created>1566465560391</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1566465560391</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,7 +668,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Small fixings to Safe Mode, Reformatted VisualCluster" />
     <MESSAGE value="Improved Interface&#10;&#10;Clickable links to navigate the dataset&#10;VisualCluster easier to read&#10;Graph Nodes details visualization like dbpedia&#10;Similitude elements ordered" />
     <MESSAGE value="Small tweaks to interface" />
     <MESSAGE value="Issues with blank nodes solved" />
@@ -681,7 +692,8 @@
     <MESSAGE value="Now able to resume search on whole partition via interface" />
     <MESSAGE value="Abstracted error handling in interface" />
     <MESSAGE value="Script for running with parameters&#10;&#10;Usage instructions coming later" />
-    <option name="LAST_COMMIT_MESSAGE" value="Script for running with parameters&#10;&#10;Usage instructions coming later" />
+    <MESSAGE value="Now able to resume partition with only one of the clusters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now able to resume partition with only one of the clusters" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

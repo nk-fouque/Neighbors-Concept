@@ -3,6 +3,7 @@ package implementation.algorithms;
 import implementation.algorithms.matchTree.MatchTreeRoot;
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
+import implementation.utils.SetUtils;
 import implementation.utils.PartitionException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.graph.Node;
@@ -281,10 +282,27 @@ public class Cluster implements Comparable<Cluster> {
             res += "Debug available: " + availableQueryElements + "\n";
             res += "Debug removed : " + removedQueryElements + "\n";
             res += "Connected variables : " + connectedVars + "\n";
+            res += "Query :" + queryString() + "\n";
         }
-        res += "Query :" + queryString() + "\n";
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mapping.toString() + "\n";
         res += "Answers :\n" + answersListString(colMd) + "\n";
+        return res;
+    }
+
+    public String toJson(CollectionsModel colMd) {
+        String res = "{\n";
+        res += "\"id\":" + id + ",\n";
+        res += "\"number_of_relaxation\":" + relaxDistance + ",\n";
+        res += "\"extensional Distance\":" + extensionDistance + ",\n";
+        res += "\"elements\":" + SetUtils.toSimpleJson(relaxQueryElements) + ",\n";
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
+            res += "\"elements_available\":" + SetUtils.toSimpleJson(availableQueryElements) + ",\n";
+            res += "\"elements_removed\":" + SetUtils.toSimpleJson(removedQueryElements) + ",\n";
+            res += "\"connected_variables\": " + SetUtils.toSimpleJson(connectedVars) + ",\n";
+        }
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) res += "\"match_tree\" :\n" + mapping.toJson() + ",\n";
+        res += "\"answers\":" + answersListJson(colMd);
+        res += "\n}";
         return res;
     }
 
@@ -315,6 +333,17 @@ public class Cluster implements Comparable<Cluster> {
         });
         String res = list.toString().replace("[", "").replace("]", "").replaceAll(", ", "\n");
         if (blankCounter.get() != 0) res += "\n" + blankCounter + " blank nodes";
+        return res;
+    }
+
+    public String answersListJson(CollectionsModel colMd) {
+        List<String> list = new ArrayList<>();
+        getAnswersList().forEach(n -> {
+            if (!n.isBlank()) {
+                list.add(colMd.shortform(n.toString()));
+            }
+        });
+        String res = list.toString().replace("[", "[\"").replace("]", "\"]").replaceAll(", ", "\",\"");
         return res;
     }
 

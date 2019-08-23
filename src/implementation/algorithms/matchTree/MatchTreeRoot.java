@@ -72,6 +72,10 @@ public class MatchTreeRoot extends MatchTreeNode {
         return super.toString(0);
     }
 
+    public String toJson() {
+        return super.toJson(0);
+    }
+
     /**
      * @return A Table containing all the proper answers for the Cluster
      */

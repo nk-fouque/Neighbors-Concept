@@ -44,11 +44,11 @@ public class ImplementationExample {
 //        System.out.println("Printing graph" + model);
 
         // Preparing file export
-        FileWriter writer = new FileWriter("/udd/nfouque/Documents/results.txt");
+        FileWriter writer = new FileWriter("/udd/nfouque/Documents/results.json");
 
         AtomicBoolean cut = new AtomicBoolean(false);
         //Defining Timeout for anytime implementation
-        Thread timer = TimeOut.planTimeOut(cut, 300);
+        Thread timer = TimeOut.planTimeOut(cut, 30);
         timer.start();
         // Defining Signal Handler for anytime implementation
         SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
@@ -79,7 +79,7 @@ public class ImplementationExample {
                 System.out.println("Anytime algorithm cut");
                 p.cut();
                 try {
-                    String results = p.toString();
+                    String results = p.toJson();
                     System.out.println(results);
                     writer.write(results);
                 } catch (OutOfMemoryError err) {

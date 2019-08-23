@@ -31,6 +31,7 @@ public class Partition {
     private List<Cluster> neighbors;
     private int depth;
     private int nextCluster;
+    private String target;
 
     /**
      * Used for numbering clusters, makes debugging easier
@@ -71,6 +72,7 @@ public class Partition {
      * @param descriptionDepth The depth of initial node description (the maximum distance a node can be to the initial node to describe it)
      */
     public Partition(CollectionsModel colMd, String uriTarget, int descriptionDepth) {
+        target = uriTarget;
         nextCluster = 0;
         graph = colMd;
 
@@ -249,7 +251,6 @@ public class Partition {
         clusters.addAll(clusterCollection);
         return completePartitioning(cut);
     }
-
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -261,6 +262,19 @@ public class Partition {
         while (!queue.isEmpty()) {
             res.append(queue.poll().toString(graph)).append("\n\n");
         }
+        return res.toString();
+    }
+
+    public String toJson() {
+        StringBuilder res = new StringBuilder();
+        res.append("{\n\"target\":\""+target+"\",\n");
+        res.append("\"clusters\":[\n\t");
+        PriorityQueue<Cluster> queue = new PriorityQueue<>(neighbors);
+        while (!queue.isEmpty()) {
+            res.append("\t").append(queue.poll().toJson(graph).replaceAll("\n","\n\t").replaceAll("\"\",",""));
+            if(!queue.isEmpty()) res.append(",\n");
+        }
+        res.append("]\n}");
         return res.toString();
     }
 
