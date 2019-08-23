@@ -1,10 +1,7 @@
 package implementation.algorithms;
 
 import implementation.algorithms.matchTree.MatchTreeRoot;
-import implementation.utils.CollectionsModel;
-import implementation.utils.ElementUtils;
-import implementation.utils.PartitionException;
-import implementation.utils.TableUtils;
+import implementation.utils.*;
 import implementation.utils.profiling.CallCounterCollection;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.ResultSet;
@@ -24,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author nk-fouque
  */
-public class Partition {
+public class Partition extends JSONable {
     private static Logger logger = Logger.getLogger(Partition.class);
     private CollectionsModel graph;
     private ArrayList<Cluster> clusters;
@@ -35,6 +32,7 @@ public class Partition {
 
     /**
      * Used for numbering clusters, makes debugging easier
+     *
      * @return
      */
     private int getNextClusterId() {
@@ -224,9 +222,9 @@ public class Partition {
         clusters.clear();
     }
 
-    public List<Cluster> furtherPartitioningcandidates(){
+    public List<Cluster> furtherPartitioningcandidates() {
         List<Cluster> list = new ArrayList<>();
-        for (Cluster c : neighbors){
+        for (Cluster c : neighbors) {
             Set<Element> remaining = c.getAvailableQueryElements();
             boolean finished = true;
             if (remaining.size() != 0) {
@@ -237,20 +235,22 @@ public class Partition {
                     }
                 }
             }
-            if (!finished) list.add(c) ;
+            if (!finished) list.add(c);
         }
         return list;
     }
 
-    public int targetedFurtherPartitioning (Collection<Cluster> clusterCollection, AtomicBoolean cut) throws PartitionException {
+    public int targetedFurtherPartitioning(Collection<Cluster> clusterCollection, AtomicBoolean cut) throws PartitionException {
         boolean remove = true;
-        for(Cluster cluster : clusterCollection){
+        for (Cluster cluster : clusterCollection) {
             remove = neighbors.remove(cluster);
-            if (!remove) throw new PartitionException("designated cluster was not in this partition : "+cluster.toString(graph));
+            if (!remove)
+                throw new PartitionException("designated cluster was not in this partition : " + cluster.toString(graph));
         }
         clusters.addAll(clusterCollection);
         return completePartitioning(cut);
     }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -265,14 +265,15 @@ public class Partition {
         return res.toString();
     }
 
+    @Override
     public String toJson() {
         StringBuilder res = new StringBuilder();
-        res.append("{\n\"target\":\""+target+"\",\n");
+        res.append("{\n\"target\":\"" + target + "\",\n");
         res.append("\"clusters\":[\n\t");
         PriorityQueue<Cluster> queue = new PriorityQueue<>(neighbors);
         while (!queue.isEmpty()) {
-            res.append("\t").append(queue.poll().toJson(graph).replaceAll("\n","\n\t").replaceAll("\"\",",""));
-            if(!queue.isEmpty()) res.append(",\n");
+            res.append("\t").append(queue.poll().toJson(graph).replaceAll("\n", "\n\t").replaceAll("\"\",", ""));
+            if (!queue.isEmpty()) res.append(",\n");
         }
         res.append("]\n}");
         return res.toString();

@@ -1,6 +1,7 @@
 package implementation.gui.model;
 
 import implementation.algorithms.Cluster;
+import implementation.gui.controller.JSONButton;
 import implementation.gui.controller.NeighborsController;
 import implementation.gui.controller.PartitionAdditional;
 import implementation.utils.CollectionsModel;
@@ -70,28 +71,37 @@ public class VisualCluster extends TitledPane implements Comparable{
         texts.getChildren().addAll(neighbors, similitude);
         texts.autosize();
 
-        // Top of the Pane
-        HBox gadgets = new HBox(10);
-        Label extensional = new Label("Extensional distance : " + c.getExtensionDistance());
-        Label intensional = new Label("Intensional similitude : " + c.getRelaxQueryElements().size());
-        Label relax = new Label("Number of relaxations : " + c.getRelaxDistance());
+        // Middle of the Pane
+        HBox buttons = new HBox(10);
         CopyButton copy = new CopyButton(texts);
-        gadgets.getChildren().addAll(extensional, intensional, relax, copy);
+        JSONButton copyJson = new JSONButton(cluster);
+        buttons.getChildren().addAll(copy,copyJson);
         if (!finished) {
             Button further = new Button();
             further.setText("Further partition this cluster");
             further.setOnMouseClicked(mouseEvent -> {
                 mainController.furtherPartition(Collections.singleton(cluster));
             });
-            gadgets.getChildren().add(further);
+            buttons.getChildren().add(further);
         }
-        gadgets.autosize();
+        buttons.autosize();
+
+        // Top of the Pane
+        HBox watchers = new HBox(10);
+        Label extensional = new Label("Extensional distance : " + c.getExtensionDistance());
+        Label intensional = new Label("Intensional similitude : " + c.getRelaxQueryElements().size());
+        Label relax = new Label("Number of relaxations : " + c.getRelaxDistance());
+
+        watchers.getChildren().addAll(extensional, intensional, relax);
+        watchers.autosize();
 
         // Whole Pane
-        box.getChildren().add(gadgets);
+        box.getChildren().add(watchers);
+        box.getChildren().add(buttons);
         box.getChildren().add(texts);
         HBox.setMargin(texts, new Insets(10));
-        HBox.setMargin(gadgets, new Insets(10));
+        HBox.setMargin(buttons, new Insets(10));
+        HBox.setMargin(watchers, new Insets(10));
         box.autosize();
 
         this.autosize();

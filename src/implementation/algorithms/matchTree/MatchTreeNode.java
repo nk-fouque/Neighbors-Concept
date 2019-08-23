@@ -2,6 +2,7 @@ package implementation.algorithms.matchTree;
 
 import implementation.utils.CollectionsModel;
 import implementation.utils.ElementUtils;
+import implementation.utils.JSONable;
 import implementation.utils.TableUtils;
 import implementation.utils.profiling.stopwatches.SingletonStopwatchCollection;
 import org.apache.jena.query.ResultSet;
@@ -23,7 +24,7 @@ import java.util.Set;
  *
  * @author nk-fouque
  */
-public class MatchTreeNode {
+public class MatchTreeNode extends JSONable {
     private static Logger logger = Logger.getLogger(MatchTreeNode.class);
 
     Element element;
@@ -115,6 +116,11 @@ public class MatchTreeNode {
         res.append("\t".repeat(Math.max(0, tab + 1)));
         res.append("]");
         return res.toString();
+    }
+
+    @Override
+    public String toJson(){
+        return toJson(0);
     }
 
     public String toJson(int tab) {

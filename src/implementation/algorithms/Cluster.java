@@ -1,10 +1,7 @@
 package implementation.algorithms;
 
 import implementation.algorithms.matchTree.MatchTreeRoot;
-import implementation.utils.CollectionsModel;
-import implementation.utils.ElementUtils;
-import implementation.utils.SetUtils;
-import implementation.utils.PartitionException;
+import implementation.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.ResultSetFormatter;
@@ -28,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author nk-fouque
  */
-public class Cluster implements Comparable<Cluster> {
+public class Cluster extends JSONable implements Comparable<Cluster> {
     private static Logger logger = Logger.getLogger(Cluster.class);
     private Set<Var> proj;
     private Set<Element> relaxQueryElements;
@@ -286,6 +283,24 @@ public class Cluster implements Comparable<Cluster> {
         }
         if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) res += "Mapping :\n" + mapping.toString() + "\n";
         res += "Answers :\n" + answersListString(colMd) + "\n";
+        return res;
+    }
+
+    @Override
+    public String toJson() {
+        String res = "{\n";
+        res += "\"id\":" + id + ",\n";
+        res += "\"number_of_relaxation\":" + relaxDistance + ",\n";
+        res += "\"extensional Distance\":" + extensionDistance + ",\n";
+        res += "\"elements\":" + SetUtils.toSimpleJson(relaxQueryElements) + ",\n";
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) {
+            res += "\"elements_available\":" + SetUtils.toSimpleJson(availableQueryElements) + ",\n";
+            res += "\"elements_removed\":" + SetUtils.toSimpleJson(removedQueryElements) + ",\n";
+            res += "\"connected_variables\": " + SetUtils.toSimpleJson(connectedVars) + ",\n";
+        }
+        if (Level.DEBUG.isGreaterOrEqual(logger.getLevel())) res += "\"match_tree\" :\n" + mapping.toJson() + ",\n";
+        res += "\"answers\":" + SetUtils.toSimpleJson(new HashSet(getAnswersList()));
+        res += "\n}";
         return res;
     }
 

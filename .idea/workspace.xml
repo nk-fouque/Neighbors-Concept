@@ -6,19 +6,22 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/implementation/utils/SetUtils.java" afterDir="false" />
+    <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="Ground for JSON in gui">
+      <change afterPath="$PROJECT_DIR$/src/implementation/gui/controller/JSONButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/implementation/utils/JSONable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Cluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Cluster.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeRoot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeRoot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster$CopyButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/model/VisualCluster.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Cluster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeRoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/model/VisualCluster.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +41,7 @@
         <option value="JUnit5 Test Class" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -125,7 +129,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ImplementationExample">
+  <component name="RunManager" selected="Application.NeighborsInterface">
     <configuration name="ImplementationCommandLines" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="implementation.ImplementationCommandLines" />
       <module name="Similarity_Search" />
@@ -277,14 +281,7 @@
       <workItem from="1566371363312" duration="6730000" />
       <workItem from="1566457832585" duration="10742000" />
       <workItem from="1566544608240" duration="3583000" />
-      <workItem from="1566558246740" duration="6731000" />
-    </task>
-    <task id="LOCAL-00045" summary="Prevented unwanted interactions&#10;Intterupt activating while no partition is running&#10;Launching partition before model in completely loaded&#10;Filterin before model is completely loaded">
-      <created>1563543415584</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1563543415584</updated>
+      <workItem from="1566558246740" duration="9307000" />
     </task>
     <task id="LOCAL-00046" summary="Fixed a few Javadoc issues">
       <created>1563781617497</created>
@@ -622,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566465560391</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="Export results as JSON">
+      <created>1566566824323</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1566566824324</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,8 +672,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Improved Interface&#10;&#10;Clickable links to navigate the dataset&#10;VisualCluster easier to read&#10;Graph Nodes details visualization like dbpedia&#10;Similitude elements ordered" />
-    <MESSAGE value="Small tweaks to interface" />
     <MESSAGE value="Issues with blank nodes solved" />
     <MESSAGE value="Small tweaks to interface&#10;&#10;Several cluster visualized at a time&#10;Hyperlink never change color" />
     <MESSAGE value="New docs&#10;&#10;README update&#10;New dataset mondial-europe&#10;Reformat code &amp; imports" />
@@ -693,7 +695,9 @@
     <MESSAGE value="Abstracted error handling in interface" />
     <MESSAGE value="Script for running with parameters&#10;&#10;Usage instructions coming later" />
     <MESSAGE value="Now able to resume partition with only one of the clusters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now able to resume partition with only one of the clusters" />
+    <MESSAGE value="Export results as JSON" />
+    <MESSAGE value="Ground for JSON in gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ground for JSON in gui" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
