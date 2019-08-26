@@ -31,7 +31,7 @@ public class ImplementationExample {
         String filename = "/home/Similarity_Search/RDF_Resources/default_mondial.ttl";
 //        String filename = "/home/Similarity_Search/RDF_Resources/royal.ttl";
         String format = "TTL";
-        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
+        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename,false);
 
         // Choose node
         String uriTarget = "http://www.semwebtech.org/mondial/10/sea/PacificOcean/";

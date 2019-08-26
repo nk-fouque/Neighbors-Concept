@@ -8,25 +8,37 @@ import org.apache.log4j.BasicConfigurator;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ImplementationCommandLines {
     public static void main(String[] args) throws IOException {
         // Checking Parameters
-        if (args.length < 3)
-            throw new IOException("Missing arguments : required arguments are rdfFilePath, rdfFileFormat and targetNodeUri ");
+        if (args.length < 2)
+            throw new IOException("Missing arguments : required arguments are rdfFilePath and targetNodesFilePath ");
 
         // Setting Parameters
         String filename = args[0];
-        String format = args[1];
-        String uriTarget = args[2];
+        String targetsFile = args[1];
+
+        List<String> uriTargets = Collections.emptyList();
+        try {
+            uriTargets =
+                    Files.readAllLines(Paths.get(targetsFile), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            // TODO do something
+            e.printStackTrace();
+        }
 
         // Setting optional parameters
-        String resultsPath = "";
-        boolean export = false;
+        String resultsPath = "/tmp/cnn/results.json"; //TODO This needs a path
 
         int time = 0;
         boolean timeout = false;
@@ -35,30 +47,25 @@ public class ImplementationCommandLines {
 
         String verboseMode = "silent";
 
-        if (args.length > 3) {
-            for (int i = 3; i<args.length;i++){
-                String[] arg = args[i].split("=",2);
-                switch (arg[0]){
-                    case "--e" : {
-                        resultsPath = arg[1];
-                        export = true;
-                        break;
-                    }
-                    case "--t" : {
+        if (args.length > 2) {
+            for (int i = 2; i < args.length; i++) {
+                String[] arg = args[i].split("=", 2);
+                switch (arg[0]) {
+                    case "--t": {
                         time = Integer.valueOf(arg[1]);
                         timeout = true;
                         break;
                     }
-                    case "--d" : {
+                    case "--d": {
                         depth = Integer.valueOf(arg[1]);
                         break;
                     }
-                    case "--v" : {
+                    case "--v": {
                         verboseMode = arg[1];
                         break;
                     }
                     default: {
-                        System.out.println("Unrecognized parameter : "+args[i]);
+                        System.out.println("Unrecognized parameter : " + args[i]);
                     }
                 }
             }
@@ -71,62 +78,81 @@ public class ImplementationCommandLines {
         NeighborsImplementation.myLogsLevels(verboseMode);
 
         // Loading Model from file
-        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, format, false);
+        CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, false);
 
-        // Preparing Partition
-        Partition p = new Partition(model, uriTarget, depth);
+        for (String uriTarget : uriTargets) {
 
-        // Preparing file export
-        FileWriter writer = null;
-        if (export) writer = new FileWriter(resultsPath);
+            // Preparing Partition
+            Partition p = new Partition(model, uriTarget, depth);
 
-        //Defining Timeout for anytime implementation
-        AtomicBoolean cut = new AtomicBoolean(false);
-        Thread timer = TimeOut.planTimeOut(cut, time);
-        if (timeout){
-            timer.start();
-        }
-        // Defining Signal Handler for anytime implementation
-        SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
-        Signal.handle(new Signal("INT"), handler);
+            // Preparing file export*
+            File file = new File(resultsPath);
+            FileWriter writer;
+            if (file.exists()) {
+                writer = new FileWriter(file, true);
+            } else {
+                System.out.println(resultsPath+" doesn't already exist, will be created");
+                String[] dirs = resultsPath.split("/");
+                String dir = "";
+                for (int i = 0;i<dirs.length-1;i++){
+                    dir+="/"+dirs[i];
+                }
+                File mkdir = new File(dir);
+                mkdir.mkdirs();
 
-        // Starting main Stopwatch
-        SingletonStopwatchCollection.resume("Main");
-
-        // Launching the algorithm
-        int algoRun = p.completePartitioning(cut);
-
-        // Processing results
-        switch (algoRun) {
-            case 0: {
-                System.out.println(p.toString());
-                if (export) writer.write(p.toString());
-                break;
+                writer = new FileWriter(file);
             }
-            case -1: {
-                System.out.println("Something went Wrong with the partition");
-                break;
+
+            //Defining Timeout for anytime implementation
+            AtomicBoolean cut = new AtomicBoolean(false);
+            Thread timer = TimeOut.planTimeOut(cut, time);
+            if (timeout) {
+                timer.start();
             }
-            case 1: {
-                System.out.println("Java Heap went out of memory after " + SingletonStopwatchCollection.getElapsedSeconds("Main") + "s");
-                break;
-            }
-            case 2: {
-                System.out.println("Anytime algorithm cut");
-                p.cut();
-                try {
-                    String results = p.toString();
-                    System.out.println(results);
-                    if (export) writer.write(results);
-                } catch (OutOfMemoryError err) {
-                    System.out.println("Could not recover results, allocate more heap size or use (shorter) timeout");
+            // Defining Signal Handler for anytime implementation
+            SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
+            Signal.handle(new Signal("INT"), handler);
+
+            // Starting main Stopwatch
+            SingletonStopwatchCollection.resume("Main");
+
+            // Launching the algorithm
+            int algoRun = p.completePartitioning(cut);
+
+            // Processing results
+            switch (algoRun) {
+                case 0: {
+                    System.out.println(p.toString());
+                    writer.write(p.toJson());
+                    break;
+                }
+                case -1: {
+                    System.out.println("Something went Wrong with the partition");
+                    break;
+                }
+                case 1: {
+                    System.out.println("Java Heap went out of memory after " + SingletonStopwatchCollection.getElapsedSeconds("Main") + "s");
+                    break;
+                }
+                case 2: {
+                    System.out.println("Anytime algorithm cut");
+                    p.cut();
+                    try {
+                        String results = p.toString();
+                        System.out.println(results);
+                        writer.write(p.toJson());
+                    } catch (OutOfMemoryError err) {
+                        System.out.println("Could not recover results, allocate more heap size or use (shorter) timeout");
+                    }
                 }
             }
+
+            writer.close();
+
+            timer.interrupt();
+
         }
 
-        if (export) writer.close();
-
-        timer.interrupt();
         Thread.currentThread().interrupt();
     }
 }

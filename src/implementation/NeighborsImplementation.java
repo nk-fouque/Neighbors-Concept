@@ -25,7 +25,7 @@ public class NeighborsImplementation {
      * Sets up all the loggers required by the partition algorithm
      *
      * @param level "verbous" : Gives almost every details possible
-     *              "silent" : Only shows how far the partition algorithm is, to be able to tell i
+     *              "silent" : Only shows how far the partition algorithm is, to be able to tell if it's still running or if it's staggering
      *              "off" : Nothing
      */
     public static void myLogsLevels(String level) {
@@ -60,14 +60,14 @@ public class NeighborsImplementation {
      * Creates a {@link CollectionsModel} from a file
      *
      * @param filename The absolute path of the file on the system
-     * @param format   The format the file is written in, see Jena documentation for supported formats
      * @param verbose  Whether the models should be printed on console after loading
      * @return
      * @throws IOException
      */
-    public static CollectionsModel loadModelFromFile(String filename, String format, boolean verbose) throws IOException {
+    public static CollectionsModel loadModelFromFile(String filename, boolean verbose) throws IOException {
         Model md = ModelFactory.createDefaultModel();
-        md.read(new FileInputStream(filename), null, format);
+        md.read(filename);
+
         if (verbose) {
             md.write(System.out, "TURTLE");
         }
