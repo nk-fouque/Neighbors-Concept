@@ -27,9 +27,13 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Main controller
@@ -90,6 +94,8 @@ public class NeighborsController implements Initializable {
     Label finalState;
     @FXML
     Button furtherButton;
+    @FXML
+    Button fullExportButton;
 
     @FXML
     TextField selectedNodeField;
@@ -148,9 +154,11 @@ public class NeighborsController implements Initializable {
         format.setItems(new SortedList<>(FXCollections.observableList(formats())));
         format.setValue("TURTLE");
 
-        final FileChooser fileChooser = new FileChooser();
+        final FileChooser loadChooser = new FileChooser();
         fileFindButton.setOnMouseClicked(mouseEvent -> {
-            File file = fileChooser.showOpenDialog(NeighborsInterface.stage);
+
+
+            File file = loadChooser.showOpenDialog(NeighborsInterface.stage);
             if (file != null) {
                 filenameField.textProperty().setValue(file.getAbsolutePath());
             }
@@ -253,7 +261,7 @@ public class NeighborsController implements Initializable {
         furtherButton.visibleProperty().bind(partitionAvailable);
         furtherButton.setOnMouseClicked(mouseEvent -> {
             partitionResultsBox.getChildren().clear();
-            if (partition==null){
+            if (partition == null) {
                 Platform.runLater(() -> partitionResultsBox.getChildren().clear());
                 TitledPane error = new TitledPane();
                 error.setText("No Partition to resume");
@@ -264,10 +272,42 @@ public class NeighborsController implements Initializable {
             }
         });
 
+        FileChooser saveChooser = new FileChooser();
+        FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON Files (*.json)", "*.json");
+        saveChooser.getExtensionFilters().add(jsonFilter);
+        saveChooser.setInitialFileName("partition_results.json");
+        fullExportButton.setOnMouseClicked(mouseEvent -> {
+            if (partition!=null){
+                //Show save file dialog
+                File file = saveChooser.showSaveDialog(NeighborsInterface.stage);
+
+                if (file != null) {
+                    try {
+                        PrintWriter writer;
+                        writer = new PrintWriter(file);
+                        writer.println(partition.toJson());
+                        writer.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(NeighborsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+                Platform.runLater(() -> partitionResultsBox.getChildren().clear());
+                TitledPane error = new TitledPane();
+                error.setText("No results to export");
+                error.setContent(new Text("Start a partition to be able to export its results"));
+                Platform.runLater(() -> partitionResultsBox.getChildren().add(error));
+            }
+
+
+        });
+        fullExportButton.visibleProperty().bind(partitionAvailable);
+
         NeighborsInterface.exit.addListener(changeListener -> {
             if (NeighborsInterface.exit.get()) anytimeCut.set(true);
         });
     }
+
 
     /**
      * Only shows subjects with a certain text in them
@@ -332,6 +372,7 @@ public class NeighborsController implements Initializable {
         VisualCandidate res = new VisualBNode(id, colMd, selectedNodeField, filterSubjectsField);
         return res;
     }
+
     /**
      * Changes everything that needs to be changed when the algorithm stopper is activated
      */
@@ -379,11 +420,11 @@ public class NeighborsController implements Initializable {
             subjectsList.sort(Comparator.comparing(Resource::toString));
             Platform.runLater(() -> loadingState.setValue("Building Visuals"));
             subjectsList.parallelStream().forEachOrdered(resource -> {
-                if (resource.isURIResource()){
+                if (resource.isURIResource()) {
                     BorderPane visual = candidateVisual(resource.getURI());
                     Platform.runLater(() -> visual.minWidthProperty().bind((scrollPane.widthProperty())));
                     Platform.runLater(() -> candidates.getChildren().add(visual));
-                } else if (resource.isAnon()){
+                } else if (resource.isAnon()) {
                     BorderPane visual = bNodeVisual(resource.getId().toString());
                     Platform.runLater(() -> visual.minWidthProperty().bind((scrollPane.widthProperty())));
                     Platform.runLater(() -> candidates.getChildren().add(visual));
@@ -415,13 +456,13 @@ public class NeighborsController implements Initializable {
         }
     }
 
-    public static void click(Button button){
+    public static void click(Button button) {
         button.getOnMouseClicked().handle(
-                new MouseEvent(MouseEvent.MOUSE_CLICKED,0,0,0,0, MouseButton.NONE,
-                        1,false,false, false, false, false, false, false, false, false, false, null));
+                new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, MouseButton.NONE,
+                        1, false, false, false, false, false, false, false, false, false, false, null));
     }
 
-    public void furtherPartition(Collection<Cluster> clusters){
+    public void furtherPartition(Collection<Cluster> clusters) {
         Runnable algo = new PartitionAdditional(this, clusters, partitionResultsBox, anytimeCut);
         Thread thread = new Thread(algo);
         if (timeLimit.getValue() > 0) {

@@ -9,11 +9,12 @@
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationCommandLines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationCommandLines.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/NeighborsImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/ImplementationCommandLines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ImplementationCommandLines.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +122,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ImplementationCommandLines">
+  <component name="RunManager" selected="Application.NeighborsInterface">
     <configuration name="ImplementationCommandLines" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="implementation.ImplementationCommandLines" />
       <module name="Similarity_Search" />
@@ -275,14 +276,7 @@
       <workItem from="1566544608240" duration="3583000" />
       <workItem from="1566558246740" duration="9365000" />
       <workItem from="1566571796552" duration="1028000" />
-      <workItem from="1566803735593" duration="4631000" />
-    </task>
-    <task id="LOCAL-00047" summary="Fixed double License File">
-      <created>1563781706192</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1563781706192</updated>
+      <workItem from="1566803735593" duration="7230000" />
     </task>
     <task id="LOCAL-00048" summary="Compiling Javadoc inside repository to prepare Github Pages">
       <created>1563783855029</created>
@@ -620,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566569622558</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="Fixed exports in JSON in command lines implementation">
+      <created>1566809041305</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1566809041306</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +667,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Small tweaks to interface&#10;&#10;Several cluster visualized at a time&#10;Hyperlink never change color" />
     <MESSAGE value="New docs&#10;&#10;README update&#10;New dataset mondial-europe&#10;Reformat code &amp; imports" />
     <MESSAGE value="Improved navigation with blank nodes" />
     <MESSAGE value="Added &quot;Back&quot; Button" />
@@ -691,7 +691,8 @@
     <MESSAGE value="Export results as JSON" />
     <MESSAGE value="Ground for JSON in gui" />
     <MESSAGE value="JSON obtainable from GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="JSON obtainable from GUI" />
+    <MESSAGE value="Fixed exports in JSON in command lines implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed exports in JSON in command lines implementation" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

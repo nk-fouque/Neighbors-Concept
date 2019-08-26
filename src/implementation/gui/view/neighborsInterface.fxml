@@ -22,7 +22,6 @@
                         <TextField fx:id="filterSubjectsField"/>
                         <Button text="Filter" fx:id="filterSubjectsButton"/>
                         <CheckBox fx:id="caseSensBox" text="Case Sensitive"/>
-
                         <CheckBox fx:id="ignoreBNodeBox" text="Ignore BNodes"/>
                     </ToolBar>
                     <ToolBar>
@@ -35,7 +34,6 @@
                             </valueFactory>
                         </Spinner>
                     </ToolBar>
-
                 </VBox>
             </top>
             <center>
@@ -70,6 +68,7 @@
                         <Label fx:id="cutLabel"/>
                         <Label fx:id="finalState"/>
                         <Button fx:id="furtherButton" text="Resume Similarity Search" />
+                        <Button fx:id="fullExportButton" text="Export results to JSON" />
                     </ToolBar>
                     <ToolBar>
                         <Label text="Node selected : "/>
