@@ -24,13 +24,13 @@ public class NeighborsImplementation {
     /**
      * Sets up all the loggers required by the partition algorithm
      *
-     * @param level "verbous" : Gives almost every details possible
+     * @param level "verbose" : Gives almost every details possible
      *              "silent" : Only shows how far the partition algorithm is, to be able to tell if it's still running or if it's staggering
      *              "off" : Nothing
      */
     public static void myLogsLevels(String level) {
         switch (level) {
-            case "verbous": {
+            case "verbose": {
                 Logger.getLogger("org.apache.jena").setLevel(Level.INFO);
                 Logger.getLogger("implementation.algorithms.Partition").setLevel(Level.TRACE);
                 Logger.getLogger("implementation.algorithms.Cluster").setLevel(Level.DEBUG);

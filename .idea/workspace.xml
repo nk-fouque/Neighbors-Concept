@@ -8,13 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationCommandLines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationCommandLines.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/NeighborsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/NeighborsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/view/neighborsInterface.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +70,7 @@
     <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33707866" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
@@ -276,14 +270,8 @@
       <workItem from="1566544608240" duration="3583000" />
       <workItem from="1566558246740" duration="9365000" />
       <workItem from="1566571796552" duration="1028000" />
-      <workItem from="1566803735593" duration="7230000" />
-    </task>
-    <task id="LOCAL-00048" summary="Compiling Javadoc inside repository to prepare Github Pages">
-      <created>1563783855029</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1563783855029</updated>
+      <workItem from="1566803735593" duration="7924000" />
+      <workItem from="1566890583931" duration="3040000" />
     </task>
     <task id="LOCAL-00049" summary="Moved workspace">
       <created>1563783889161</created>
@@ -621,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566809041306</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Export JSON in interface">
+      <created>1566811782262</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1566811782262</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="New docs&#10;&#10;README update&#10;New dataset mondial-europe&#10;Reformat code &amp; imports" />
     <MESSAGE value="Improved navigation with blank nodes" />
     <MESSAGE value="Added &quot;Back&quot; Button" />
     <MESSAGE value="Javadoc for new classes" />
@@ -692,7 +686,8 @@
     <MESSAGE value="Ground for JSON in gui" />
     <MESSAGE value="JSON obtainable from GUI" />
     <MESSAGE value="Fixed exports in JSON in command lines implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed exports in JSON in command lines implementation" />
+    <MESSAGE value="Export JSON in interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Export JSON in interface" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -713,100 +708,5 @@
     <SUITE FILE_PATH="coverage/Similarity_Search$Main.ic" NAME="Main Coverage Results" MODIFIED="1561385313536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>v2.gui.*</FILTER>
     </SUITE>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor>
-            <show-content>
-              <type id="artifact" />
-              <type id="javaee-facet-resources" />
-              <type id="library" />
-              <type id="jpa-descriptors" />
-            </show-content>
-          </artifact-editor>
-          <last-edited>Similarity_Search:jar</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.33707866" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="Copyright.UI">
-        <settings>
-          <last-edited>Libre</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.33707866" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.33707866" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>12</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.33707866" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Similarity_Search</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.33707866" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>javafx-sdk-12.0.1</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.33707866" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
