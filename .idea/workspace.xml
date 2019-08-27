@@ -8,7 +8,13 @@
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/NeighborsImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/ImplementationExample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/matchTree/MatchTreeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/SetUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/utils/SetUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ImplementationExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/matchTree/MatchTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/utils/SetUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/utils/SetUtils.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -271,21 +277,7 @@
       <workItem from="1566558246740" duration="9365000" />
       <workItem from="1566571796552" duration="1028000" />
       <workItem from="1566803735593" duration="7924000" />
-      <workItem from="1566890583931" duration="3040000" />
-    </task>
-    <task id="LOCAL-00049" summary="Moved workspace">
-      <created>1563783889161</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1563783889161</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Implemented description depth, for now always 1">
-      <created>1563785644879</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1563785644880</updated>
+      <workItem from="1566890583931" duration="7575000" />
     </task>
     <task id="LOCAL-00051" summary="More description depth available&#10;For now &gt;2 = infinite">
       <created>1563785829919</created>
@@ -616,7 +608,21 @@
       <option name="project" value="LOCAL" />
       <updated>1566811782262</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Rectified an error&#10;&#10;Word verbous doesn't exist, changed to verbose">
+      <created>1566895569963</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1566895569964</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Rectified an error&#10;&#10;Word verbous doesn't exist, changed to verbose">
+      <created>1566895632384</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1566895632384</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,7 +668,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Improved navigation with blank nodes" />
     <MESSAGE value="Added &quot;Back&quot; Button" />
     <MESSAGE value="Javadoc for new classes" />
     <MESSAGE value="Now uses full RDF graph&#10;&#10;With reasoning&#10;Downside - lots of rdf:something now navigable for no reason&#10;Upside - some classes to navigate between members" />
@@ -687,7 +692,8 @@
     <MESSAGE value="JSON obtainable from GUI" />
     <MESSAGE value="Fixed exports in JSON in command lines implementation" />
     <MESSAGE value="Export JSON in interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Export JSON in interface" />
+    <MESSAGE value="Rectified an error&#10;&#10;Word verbous doesn't exist, changed to verbose" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rectified an error&#10;&#10;Word verbous doesn't exist, changed to verbose" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

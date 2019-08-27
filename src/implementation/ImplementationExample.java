@@ -25,18 +25,21 @@ public class ImplementationExample {
         BasicConfigurator.configure();
 
         // Logger setup
-        NeighborsImplementation.myLogsLevels("silent");
+        NeighborsImplementation.myLogsLevels("verbose");
 
         // Loading Model from file
-        String filename = "/home/Similarity_Search/RDF_Resources/default_mondial.ttl";
+//        String filename = "/home/Similarity_Search/RDF_Resources/default_mondial.ttl";
 //        String filename = "/home/Similarity_Search/RDF_Resources/royal.ttl";
-        String format = "TTL";
+        String filename = "/home/Similarity_Search/RDF_Resources/mondial.n3";
+
         CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename,false);
 
         // Choose node
-        String uriTarget = "http://www.semwebtech.org/mondial/10/sea/PacificOcean/";
+//        String uriTarget = "http://www.semwebtech.org/mondial/10/sea/PacificOcean/";
 //        String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
 //        String uriTarget = "http://example.org/royal/Charlotte";
+        String uriTarget = "http://www.semwebtech.org/mondial/10/countries/F/provinces/Bretagne/cities/Rennes/";
+
 
         // Preparing Partition
         Partition p = new Partition(model, uriTarget, 2);
@@ -44,7 +47,7 @@ public class ImplementationExample {
 //        System.out.println("Printing graph" + model);
 
         // Preparing file export
-        FileWriter writer = new FileWriter("/udd/nfouque/Documents/results.json");
+        FileWriter writer = new FileWriter("/tmp/cnn/results.json");
 
         AtomicBoolean cut = new AtomicBoolean(false);
         //Defining Timeout for anytime implementation
@@ -64,7 +67,7 @@ public class ImplementationExample {
         switch (algoRun) {
             case 0: {
                 System.out.println(p.toString());
-                writer.write(p.toString());
+                writer.write(p.toJson());
                 break;
             }
             case -1: {

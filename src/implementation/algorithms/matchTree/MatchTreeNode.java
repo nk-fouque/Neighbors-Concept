@@ -126,7 +126,7 @@ public class MatchTreeNode extends JSONable {
     public String toJson(int tab) {
         StringBuilder res = new StringBuilder();
         res.append("\t".repeat(Math.max(0, tab)));
-        res.append("{\"element\":\"").append(elementString()).append("\"");
+        res.append("{\"element\":\"").append(elementString().replaceAll("\"", "\\\\\"")).append("\"");
         if (children.size()>0) {
             res.append(",\n");
             res.append("\t".repeat(Math.max(0, tab + 1)));

@@ -7,7 +7,7 @@ public class SetUtils {
         StringBuilder res = new StringBuilder("[\"\"");
         for (Object o : set) {
             res.append(",\"");
-            res.append(o.toString().replaceAll("\"", "\\\\\""));
+            res.append(o.toString().replaceAll("[^\\\\]\"", "\\\\\""));
             res.append("\"");
         }
         set.forEach(o -> {
