@@ -98,8 +98,15 @@ public class Partition extends JSONable {
         SingletonStopwatchCollection.resume("iterate");
         SingletonStopwatchCollection.resume("connect");
         CallCounterCollection.call("iterate");
+        Cluster c;
+        try {
+            c = clusters.remove(0);
+        } catch (IndexOutOfBoundsException ex){
+            SingletonStopwatchCollection.stop("iterate");
+            SingletonStopwatchCollection.stop("connect");
+            throw new PartitionException("Tried to resume finished partition");
+        }
 
-        Cluster c = clusters.remove(0);
         Element e = null;
         Set<Var> varE = null;
         for (Element element : c.getAvailableQueryElements()) {

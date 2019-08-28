@@ -5,6 +5,7 @@ import implementation.gui.model.VisualCluster;
 import implementation.gui.model.VisualError;
 import implementation.utils.PartitionException;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 
@@ -30,6 +31,13 @@ public class PartitionAdditional implements Runnable {
         mainController.partitionAvailable.setValue(false);
 
         Platform.runLater(() -> resultsContainer.getChildren().clear());
+        Label loadingState = new Label();
+        loadingState.textProperty().bind(mainController.partition.stateProperty());
+        Platform.runLater(() -> mainController.finalState.textProperty().bind(mainController.partition.getNbNeighbors()));
+        TitledPane loadingPane = new TitledPane();
+        Platform.runLater(() -> loadingPane.setContent(loadingState));
+        Platform.runLater(() -> loadingPane.setExpanded(true));
+        Platform.runLater(() -> resultsContainer.getChildren().add(loadingPane));
 
         int algoRun = -2;
         try {
