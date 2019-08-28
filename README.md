@@ -29,9 +29,9 @@ Jena and JavaFX are not included in this repository.
 To use the launcher scripts, change variables in `config` to set up the path to your JDK, Jena and JavaFX  
 **This project was developed using JDK 12.0.1, Jena 3.12.0 and JavaFX 12.0.1**, make sure to use versions that are compatible with these  
 
-Two datasets are included in the repository : 
-  * royal.ttl describes basic info about the british royal family
-  * mondial.ttl (actually is a .nt file, only uses turtle for prefixes) describes many geographical items
+Four datasets are included in the repository : 
+  * royal.ttl is a small sample dataset that describes basic familial links in the british royal family
+  * mondial.ttl, mondial.n3 and mondial-europe.n3 describe many geographical items (downloaded from https://www.dbis.informatik.uni-goettingen.de/Mondial/)
 ### Main Class
 * Every part of the main is explained in comments in the code
 * The lines you might want to change are : 

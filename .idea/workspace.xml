@@ -8,10 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/algorithms/Partition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionAdditional.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/PartitionAdditional.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/algorithms/Partition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionAdditional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/PartitionAdditional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -275,14 +272,7 @@
       <workItem from="1566571796552" duration="1028000" />
       <workItem from="1566803735593" duration="7924000" />
       <workItem from="1566890583931" duration="8578000" />
-      <workItem from="1566976903637" duration="5176000" />
-    </task>
-    <task id="LOCAL-00053" summary="Optimizations&#10;&#10;Removing duplicates during Projection&#10;Copying MatchTreeNode without Copying Match-set&#10;Condition for considering self as modified">
-      <created>1563808291347</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1563808291347</updated>
+      <workItem from="1566976903637" duration="6597000" />
     </task>
     <task id="LOCAL-00054" summary="Optimizations&#10;&#10;Removed &quot;relaxation finalization&quot;&#10;Changed Heap parameters in configuration and script&#10;Economy of a projection, already accounted for in the LazyJoins algorithm">
       <created>1563880734936</created>
@@ -620,7 +610,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566985457348</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Fixed issue when trying to resume partition that had already ended&#10;Added same trackers in resumed partitioning as in initial">
+      <created>1566997312576</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1566997312576</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +663,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Now uses full RDF graph&#10;&#10;With reasoning&#10;Downside - lots of rdf:something now navigable for no reason&#10;Upside - some classes to navigate between members" />
     <MESSAGE value="Improved Interface&#10;&#10;Clusters sorting" />
     <MESSAGE value="Improved interface&#10;&#10;Refreshes if search options changes" />
     <MESSAGE value="No button to select bnodes for similarity search" />
@@ -691,7 +687,8 @@
     <MESSAGE value="Rectified an error&#10;&#10;Word verbous doesn't exist, changed to verbose" />
     <MESSAGE value="Rectified a few situations leading to malformed JSON" />
     <MESSAGE value="Rectified a few situations leading to malformed JSON&#10;&#10;Problems with multiple targets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rectified a few situations leading to malformed JSON&#10;&#10;Problems with multiple targets" />
+    <MESSAGE value="Fixed issue when trying to resume partition that had already ended&#10;Added same trackers in resumed partitioning as in initial" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue when trying to resume partition that had already ended&#10;Added same trackers in resumed partitioning as in initial" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
