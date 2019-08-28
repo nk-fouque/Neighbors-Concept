@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -37,9 +39,8 @@ public class ImplementationCommandLines {
             e.printStackTrace();
         }
 
-        // Setting optional parameters
-        String resultsPath = "/tmp/cnn/results.json"; //TODO This needs a path
 
+        // Setting optional parameters
         int time = 0;
         boolean timeout = false;
 
@@ -80,28 +81,35 @@ public class ImplementationCommandLines {
         // Loading Model from file
         CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename, false);
 
+        // Preparing file export
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyyMMdd-HHmmss");
+        Date now = new Date(System.currentTimeMillis());
+        String resultsPath = "/tmp/cnn/results"+formatter.format(now)+".json";
+
+        File file = new File(resultsPath);
+        FileWriter writer;
+        if (file.exists()) {
+            writer = new FileWriter(file, true);
+        } else {
+            System.out.println(resultsPath+" doesn't already exist, will be created");
+            String[] dirs = resultsPath.split("/");
+            String dir = "";
+            for (int i = 0;i<dirs.length-1;i++){
+                dir+="/"+dirs[i];
+            }
+            File mkdir = new File(dir);
+            mkdir.mkdirs();
+
+            writer = new FileWriter(file);
+        }
+        writer.write("[\n");
+        writer.close();
+
         for (String uriTarget : uriTargets) {
+            writer = new FileWriter(file,true);
 
             // Preparing Partition
             Partition p = new Partition(model, uriTarget, depth);
-
-            // Preparing file export*
-            File file = new File(resultsPath);
-            FileWriter writer;
-            if (file.exists()) {
-                writer = new FileWriter(file, true);
-            } else {
-                System.out.println(resultsPath+" doesn't already exist, will be created");
-                String[] dirs = resultsPath.split("/");
-                String dir = "";
-                for (int i = 0;i<dirs.length-1;i++){
-                    dir+="/"+dirs[i];
-                }
-                File mkdir = new File(dir);
-                mkdir.mkdirs();
-
-                writer = new FileWriter(file);
-            }
 
             //Defining Timeout for anytime implementation
             AtomicBoolean cut = new AtomicBoolean(false);
@@ -124,6 +132,7 @@ public class ImplementationCommandLines {
                 case 0: {
                     System.out.println(p.toString());
                     writer.write(p.toJson());
+                    writer.write(",\n");
                     break;
                 }
                 case -1: {
@@ -141,6 +150,7 @@ public class ImplementationCommandLines {
                         String results = p.toString();
                         System.out.println(results);
                         writer.write(p.toJson());
+                        writer.write(",\n");
                     } catch (OutOfMemoryError err) {
                         System.out.println("Could not recover results, allocate more heap size or use (shorter) timeout");
                     }
@@ -148,10 +158,14 @@ public class ImplementationCommandLines {
             }
 
             writer.close();
-
+            SingletonStopwatchCollection.stop("Main");
             timer.interrupt();
-
         }
+
+        writer = new FileWriter(file,true);
+        writer.write("\"\"]");
+        writer.close();
+
 
         Thread.currentThread().interrupt();
     }
