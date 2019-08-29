@@ -30,8 +30,13 @@ To use the launcher scripts, change variables in `config` to set up the path to 
 **This project was developed using JDK 12.0.1, Jena 3.12.0 and JavaFX 12.0.1**, make sure to use versions that are compatible with these  
 
 Four datasets are included in the repository : 
-  * royal.ttl is a small sample dataset that describes basic familial links in the british royal family
-  * mondial.ttl, mondial.n3 and mondial-europe.n3 describe many geographical items (downloaded from https://www.dbis.informatik.uni-goettingen.de/Mondial/)
+* royal.ttl is a small sample dataset that describes basic familial links in the british royal family
+* mondial.ttl, mondial.n3 and mondial-europe.n3 describe many geographical items (downloaded from https://www.dbis.informatik.uni-goettingen.de/Mondial/)
+
+Downloads section on bitbucket (https://bitbucket.org/sebferre/conceptsofneighbours/downloads/) contains two "bundles" 
+if you're only interested in specific uses and don't want to clone the whole repository  
+* GUI_only : the compiled code and launcher script, you will still need to configure your paths in the ```config``` file
+* lib_only : compiled code in an archive to use as module in java
 ### Main Class
 * Every part of the main is explained in comments in the code
 * The lines you might want to change are : 
@@ -63,13 +68,13 @@ See classes Javadoc for details
 ### Anytime Implementation
 #### Manual Interruption
 Both implementations use a version that cuts the algorithm in case of OutOfMemoryError or under some action of the user
-  * The Main class intercepts the SIGINT signal, naturally sent by IntelliJ when you click on the stop button (the second time it sends SIGKILL)
-  * The Interface has a Button to stop the algorithm
+* The Main class intercepts the SIGINT signal, naturally sent by IntelliJ when you click on the stop button (the second time it sends SIGKILL)
+* The Interface has a Button to stop the algorithm
   
 When the algorithm is interrupted, it finishes the current run of `iterate()` and moves every clusters to neighbors. 
 It considers the algorithm over, printing/displaying everything it was supposed to.
-  * In the Main class, the process then stops
-  * In the interface, the process can be launched for another node
+* In the Main class, the process then stops
+* In the interface, the process can be launched for another node
 #### TimeOut
 The Main class uses a back thread that cuts the algorithm after a certain amount of time  
   

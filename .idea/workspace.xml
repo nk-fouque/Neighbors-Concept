@@ -7,12 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bundle_builders/gui_bundle.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bundle_builders/lib_bundle.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/ClusterComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/ClusterComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/ClusterComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/ClusterComparator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -278,21 +273,8 @@
       <workItem from="1566803735593" duration="7924000" />
       <workItem from="1566890583931" duration="8578000" />
       <workItem from="1566976903637" duration="8554000" />
-      <workItem from="1567062458992" duration="3517000" />
-    </task>
-    <task id="LOCAL-00055" summary="Javadoc and TODO planning">
-      <created>1563882246302</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1563882246302</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Made some information about nodes accessible from the list&#10;Navigation between nodes and filtering derived from this">
-      <created>1563892057936</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1563892057936</updated>
+      <workItem from="1567062458992" duration="3859000" />
+      <workItem from="1567083524700" duration="486000" />
     </task>
     <task id="LOCAL-00057" summary="Improved graph loading">
       <created>1563892232983</created>
@@ -623,7 +605,21 @@
       <option name="project" value="LOCAL" />
       <updated>1567000692145</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="Added third comparison between clusters, higher similitude appears first">
+      <created>1567072757415</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1567072757416</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Added references to bundles in README and script to build them automatically">
+      <created>1567072935652</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1567072935653</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,8 +666,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Improved interface&#10;&#10;Refreshes if search options changes" />
-    <MESSAGE value="No button to select bnodes for similarity search" />
     <MESSAGE value="Late ammend VisualBNode missing in last commit" />
     <MESSAGE value="Using Parallel Streams where possible" />
     <MESSAGE value="Added directions commentaries about class descriptions" />
@@ -695,7 +689,9 @@
     <MESSAGE value="Rectified a few situations leading to malformed JSON&#10;&#10;Problems with multiple targets" />
     <MESSAGE value="Fixed issue when trying to resume partition that had already ended&#10;Added same trackers in resumed partitioning as in initial" />
     <MESSAGE value="Added credits for the Mondial database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added credits for the Mondial database" />
+    <MESSAGE value="Added third comparison between clusters, higher similitude appears first" />
+    <MESSAGE value="Added references to bundles in README and script to build them automatically" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added references to bundles in README and script to build them automatically" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
