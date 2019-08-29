@@ -7,8 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e72dc6-f5da-430b-aa5d-0e6346edfdb1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bundle_builders/gui_bundle.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bundle_builders/lib_bundle.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/ClusterComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Similarity_Search/implementation/gui/controller/ClusterComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/gui/controller/ClusterComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/gui/controller/ClusterComparator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +57,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
@@ -272,14 +277,8 @@
       <workItem from="1566571796552" duration="1028000" />
       <workItem from="1566803735593" duration="7924000" />
       <workItem from="1566890583931" duration="8578000" />
-      <workItem from="1566976903637" duration="6597000" />
-    </task>
-    <task id="LOCAL-00054" summary="Optimizations&#10;&#10;Removed &quot;relaxation finalization&quot;&#10;Changed Heap parameters in configuration and script&#10;Economy of a projection, already accounted for in the LazyJoins algorithm">
-      <created>1563880734936</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1563880734937</updated>
+      <workItem from="1566976903637" duration="8554000" />
+      <workItem from="1567062458992" duration="3517000" />
     </task>
     <task id="LOCAL-00055" summary="Javadoc and TODO planning">
       <created>1563882246302</created>
@@ -617,7 +616,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566997312576</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="Added credits for the Mondial database">
+      <created>1567000692145</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1567000692145</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +669,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Improved Interface&#10;&#10;Clusters sorting" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Improved interface&#10;&#10;Refreshes if search options changes" />
     <MESSAGE value="No button to select bnodes for similarity search" />
     <MESSAGE value="Late ammend VisualBNode missing in last commit" />
@@ -688,7 +694,8 @@
     <MESSAGE value="Rectified a few situations leading to malformed JSON" />
     <MESSAGE value="Rectified a few situations leading to malformed JSON&#10;&#10;Problems with multiple targets" />
     <MESSAGE value="Fixed issue when trying to resume partition that had already ended&#10;Added same trackers in resumed partitioning as in initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue when trying to resume partition that had already ended&#10;Added same trackers in resumed partitioning as in initial" />
+    <MESSAGE value="Added credits for the Mondial database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added credits for the Mondial database" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Similarity_Search$ClusterTest.ic" NAME="ClusterTest Coverage Results" MODIFIED="1560519360086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

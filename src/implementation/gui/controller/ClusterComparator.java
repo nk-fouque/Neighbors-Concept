@@ -17,12 +17,14 @@ public class ClusterComparator implements Comparator<Cluster>{
         switch (mode){
             case "Number of Relaxations" : {
                 comparator = Comparator.comparingInt(Cluster::getRelaxDistance)
-                        .thenComparingInt(Cluster::getExtensionDistance);
+                        .thenComparingInt(Cluster::getExtensionDistance)
+                        .thenComparingInt(cluster -> (-1 * cluster.getRelaxQueryElements().size()));
                 break;
             }
             case "Extensional Distance" : {
                 comparator = Comparator.comparingInt(Cluster::getExtensionDistance)
-                        .thenComparingInt(Cluster::getRelaxDistance);
+                        .thenComparingInt(Cluster::getRelaxDistance)
+                        .thenComparingInt(cluster -> (-1 * cluster.getRelaxQueryElements().size()));
                 break;
             }
             default: comparator = Cluster::compareTo;
