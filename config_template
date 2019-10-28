@@ -1,0 +1,3 @@
+jdk=.redist/jdk-12.0.1
+jena=.redist/apache-jena-3.12.0
+javafx=.redist/javafx-sdk-12.0.1

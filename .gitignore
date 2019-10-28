@@ -1,1 +1,7 @@
 out/artifacts/
+config
+target.*
+targets.*
+.idea/tasks.xml
+.idea/workspace.xml
+.idea/*.iws
