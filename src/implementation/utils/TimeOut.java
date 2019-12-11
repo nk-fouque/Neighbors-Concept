@@ -31,13 +31,17 @@ public class TimeOut implements Runnable {
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(millis);
-            System.out.println("Timeout");
-            cut.set(true);
+        if(millis>0) {
+            try {
+                Thread.sleep(millis);
+                System.out.println("Timeout");
+                cut.set(true);
+                Thread.currentThread().interrupt();
+            } catch (InterruptedException e) {
+                System.out.println("Ended before Timeout");
+            }
+        } else {
             Thread.currentThread().interrupt();
-        } catch (InterruptedException e) {
-            System.out.println("Ended before Timeout");
         }
     }
 }

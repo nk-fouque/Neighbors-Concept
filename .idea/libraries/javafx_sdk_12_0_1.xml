@@ -1,18 +1,18 @@
 <component name="libraryTable">
   <library name="javafx-sdk-12.0.1">
     <CLASSES>
-      <root url="file:///home/javafx-sdk-12.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../.redist/javafx-sdk-12.0.1/lib" />
     </CLASSES>
     <JAVADOC>
       <root url="https://docs.oracle.com/javase/8/javafx/api/index.html" />
     </JAVADOC>
     <NATIVE>
-      <root url="file:///home/javafx-sdk-12.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../.redist/javafx-sdk-12.0.1/lib" />
     </NATIVE>
     <SOURCES>
-      <root url="file:///home/javafx-sdk-12.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../.redist/javafx-sdk-12.0.1/lib" />
     </SOURCES>
-    <jarDirectory url="file:///home/javafx-sdk-12.0.1/lib" recursive="false" />
-    <jarDirectory url="file:///home/javafx-sdk-12.0.1/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/../.redist/javafx-sdk-12.0.1/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../.redist/javafx-sdk-12.0.1/lib" recursive="false" type="SOURCES" />
   </library>
 </component>

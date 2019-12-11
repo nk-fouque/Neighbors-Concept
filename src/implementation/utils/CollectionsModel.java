@@ -175,6 +175,16 @@ public class CollectionsModel {
             String type = getGraph().shortForm(temp[1]);
             res = (val+"^^"+type);
         }
+        if (res.equals(s)){
+            String[] temp = s.split("/");
+//            for (int i = temp.length-1;i>=0;i--){
+//                if(temp[i]!=""){
+//                    res = temp[i];
+//                }
+//            }
+            res = temp[temp.length-1];
+        }
+
         return res;
     }
 

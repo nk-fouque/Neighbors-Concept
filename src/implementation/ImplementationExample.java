@@ -25,12 +25,12 @@ public class ImplementationExample {
         BasicConfigurator.configure();
 
         // Logger setup
-        NeighborsImplementation.myLogsLevels("verbose");
+        NeighborsImplementation.myLogsLevels("silent");
 
         // Loading Model from file
 //        String filename = "/home/Similarity_Search/RDF_Resources/default_mondial.ttl";
 //        String filename = "/home/Similarity_Search/RDF_Resources/royal.ttl";
-        String filename = "/home/Similarity_Search/RDF_Resources/mondial.n3";
+        String filename = "/home/nicolas/Documents/Work/Neighbors/Neighbors-Concept/RDF_Resources/mondial.n3";
 
         CollectionsModel model = NeighborsImplementation.loadModelFromFile(filename,false);
 
@@ -38,11 +38,12 @@ public class ImplementationExample {
 //        String uriTarget = "http://www.semwebtech.org/mondial/10/sea/PacificOcean/";
 //        String uriTarget = "http://www.semwebtech.org/mondial/10/country/PE/";
 //        String uriTarget = "http://example.org/royal/Charlotte";
-        String uriTarget = "http://www.semwebtech.org/mondial/10/countries/F/provinces/Bretagne/cities/Rennes/";
+//        String uriTarget = "http://www.semwebtech.org/mondial/10/countries/F/";
+        String uriTarget = "http://www.semwebtech.org/mondial/10/countries/GB/";
 
 
         // Preparing Partition
-        Partition p = new Partition(model, uriTarget, 2);
+        Partition p = new Partition(model, uriTarget, 1);
 //        System.out.println(p.getClusters().get(0));
 //        System.out.println("Printing graph" + model);
 
@@ -51,7 +52,7 @@ public class ImplementationExample {
 
         AtomicBoolean cut = new AtomicBoolean(false);
         //Defining Timeout for anytime implementation
-        Thread timer = TimeOut.planTimeOut(cut, 30);
+        Thread timer = TimeOut.planTimeOut(cut, 0);
         timer.start();
         // Defining Signal Handler for anytime implementation
         SignalHandler handler = NeighborsImplementation.interruptCutter(cut, Collections.singleton(timer));
